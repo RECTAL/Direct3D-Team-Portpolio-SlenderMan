@@ -1,0 +1,66 @@
+#include "GlobalFunction.h"
+
+DWORD FloatToDWORD(float a_fValue)
+{
+	float *pnValue = &a_fValue;
+	return *((DWORD *)pnValue);
+	return 0;
+}
+
+int RandomIntValue(int a_nMin, int a_nMax)
+{
+	std::random_device oRandomDevice;
+	std::uniform_int_distribution<int> oUniformRandom(a_nMin, a_nMax);
+
+	return oUniformRandom(oRandomDevice);
+}
+
+float RandomFloatValue(float a_fMin, float a_fMax)
+{
+	std::random_device oRandomDevice;
+	std::uniform_real_distribution<float> oUniformRandom(a_fMin, a_fMax);
+
+	return oUniformRandom(oRandomDevice);
+}
+
+void RunEffectLoop(LPD3DXEFFECT a_pEffect, const std::string & a_rTechnique, const std::function<void(int)>& a_rCallback)
+{
+	a_pEffect->SetTechnique(a_rTechnique.c_str());
+
+	UINT nNumPasses = 0;
+	a_pEffect->Begin(&nNumPasses, 0);
+
+	for (int i = 0; i < nNumPasses; ++i) {
+		a_pEffect->BeginPass(i);
+
+		a_rCallback(i);
+		a_pEffect->EndPass();
+	}
+
+	a_pEffect->End();
+}
+
+STRay CreateRay(const POINT & a_rstPoint)
+{
+	return STRay();
+}
+
+LPD3DXMESH CreateMesh(int a_nFaceSize, int a_nVertexSize, DWORD a_nOptions, DWORD a_nFVF)
+{
+	return LPD3DXMESH();
+}
+
+LPD3DXMESH CreateMesh(int a_nFaceSize, int a_nVertexSize, DWORD a_nOptions, D3DVERTEXELEMENT9 * a_pstElements)
+{
+	return LPD3DXMESH();
+}
+
+LPDIRECT3DVERTEXBUFFER9 CreateVertexBuffer(int a_nSize, DWORD a_nOptions, DWORD a_nFVF)
+{
+	return LPDIRECT3DVERTEXBUFFER9();
+}
+
+LPDIRECT3DINDEXBUFFER9 CreateIndexBuffer(int a_nSize, DWORD a_nOptions, D3DFORMAT a_nFormat)
+{
+	return LPDIRECT3DINDEXBUFFER9();
+}

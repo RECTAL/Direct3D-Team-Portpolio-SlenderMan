@@ -1,0 +1,427 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Classes">
+      <UniqueIdentifier>{f69a45f8-c1bc-4795-a2f1-7c3759298b34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global">
+      <UniqueIdentifier>{78f44ecd-0444-423d-b9ff-d42fa28e07a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Define">
+      <UniqueIdentifier>{f01fef5e-067c-4824-b74b-6289602359be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Function">
+      <UniqueIdentifier>{f407375f-86c4-4a67-8dd1-fa2081e0958b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility">
+      <UniqueIdentifier>{d09317aa-12f2-4853-9df6-c7ef6999aca3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Interface">
+      <UniqueIdentifier>{7cb0211d-6a44-4fc8-aedd-b08c24b9febf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Manager">
+      <UniqueIdentifier>{0dc99f85-09b6-4eb6-928d-18cf18c6ada4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object">
+      <UniqueIdentifier>{fc4b68b8-ca2c-493a-a442-ed3c0825c702}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Resources\Datas">
+      <UniqueIdentifier>{72823b64-73fb-432f-a191-cc17b19d0c87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Effects">
+      <UniqueIdentifier>{ac183f0d-6469-4cf9-ba7e-5ee81ed04ea2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Meshes">
+      <UniqueIdentifier>{9e96ce34-4840-4700-b95e-963812290da2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Sounds">
+      <UniqueIdentifier>{ccc81ee2-446d-4aea-9d81-a9fc9398231e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Textures">
+      <UniqueIdentifier>{f79d4c20-5f9f-47d2-9be8-1cfd047395fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Define\KGlobalEnumDefine">
+      <UniqueIdentifier>{6f4850b6-ecab-484d-8b85-a79870270760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Define\KGlobalStructDefine">
+      <UniqueIdentifier>{23f91997-a640-4d6f-a557-d43260ad69a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\CameraObject">
+      <UniqueIdentifier>{9f145890-503d-4ad8-9424-1d14fb9e51d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\LightObject">
+      <UniqueIdentifier>{570ac88d-3850-4c6c-8663-cdad36fdd81b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Base">
+      <UniqueIdentifier>{b86b43bf-ce61-4ab1-977e-7bccbd4c3853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\StaticObject">
+      <UniqueIdentifier>{9ee55dc3-55e5-4638-85f7-a5b219ec1bf5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\GeometryObject">
+      <UniqueIdentifier>{06eda4ec-b928-4ab3-8207-bf793ebe2c6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\SkinnedObject">
+      <UniqueIdentifier>{844a7574-1b88-48c4-97cb-cc7d7c82867c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\ParticleObject">
+      <UniqueIdentifier>{e9eb3c28-e95e-4066-afb4-1a2adcc8e447}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Base\DON%27T TOUCH">
+      <UniqueIdentifier>{a11ca635-8adf-4ed5-a6b1-31338f8c8e31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\System">
+      <UniqueIdentifier>{60d9edfb-c240-4f5b-8d40-5586cdddf07d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\System\AnimationSystem">
+      <UniqueIdentifier>{add95d09-a4b0-4659-b0e5-fb5738040bbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\System\SoundSystem">
+      <UniqueIdentifier>{3d98622e-5cab-4859-a1ed-dd59682d2544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\System\ParticleSystem">
+      <UniqueIdentifier>{3a4beb2a-d235-4374-8a43-4e372f76118f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\SpriteObject">
+      <UniqueIdentifier>{0d956bcb-923d-4fe6-a478-79b227b2e067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\LabelObject">
+      <UniqueIdentifier>{f9c9f1fe-18f6-4dd6-8ff6-4010f93f8079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\System\PickingSystem">
+      <UniqueIdentifier>{8da64d58-6ab6-4e5d-a5c3-b13867386848}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\System\CollisionSystem">
+      <UniqueIdentifier>{06886e05-6263-4666-8f4c-24998cf594a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\LightObject\DirectionalLightObject">
+      <UniqueIdentifier>{51870e5b-d6c4-4e23-9261-2dc9a9200617}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\LightObject\PointLightObject">
+      <UniqueIdentifier>{a4f0583f-7bb8-401c-ac1c-78418358bb25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\LightObject\SpotLightObject">
+      <UniqueIdentifier>{c254b4c8-7478-4de2-99b0-fb90e51c15a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\System\ParticleSystem\ParticleSystem_EmitterKind">
+      <UniqueIdentifier>{657d2aa1-4c19-47d7-8a8a-2204d5c9c485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition">
+      <UniqueIdentifier>{d387ecfb-a9c6-4eeb-99ed-16747abb87c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameScene">
+      <UniqueIdentifier>{90c64b8e-c10b-4254-bf3d-65b0b2119ec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameScene\TitleScene">
+      <UniqueIdentifier>{ce922a8c-8813-4b40-8072-adac74cbb7ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameScene\MapToolScene">
+      <UniqueIdentifier>{502af136-e1fd-4755-8e6f-b4e538cbfc4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameScene\MainPlayScene">
+      <UniqueIdentifier>{5bd352ea-c25f-4c01-81ef-941ac56fb041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameSystem">
+      <UniqueIdentifier>{455e1c97-adae-4546-a3ee-a3b1038d3784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameCharactor">
+      <UniqueIdentifier>{bf90e92a-ab79-4667-bd7a-399ebd09054b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameObject">
+      <UniqueIdentifier>{f18b6a7f-ae30-44ee-8eb2-02dffd4e32e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameSystem\AISystem">
+      <UniqueIdentifier>{0e8de91e-d81f-4f21-9321-792123247972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameSystem\EventSystem">
+      <UniqueIdentifier>{142fa9ce-26ac-42c7-a5ab-4d06a44d2847}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameCharactor\Player">
+      <UniqueIdentifier>{022ff069-1df1-4e06-8c92-122645605dae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameCharactor\AI">
+      <UniqueIdentifier>{40529bb0-f321-4a72-8d0b-226012c0feae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameCharactor\AI\SlenderMan">
+      <UniqueIdentifier>{c5d7a1ae-536b-448b-a37a-f81f70657ab3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameCharactor\AI\NPC">
+      <UniqueIdentifier>{b8cee9c6-639b-4507-a754-eac01e9c92d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameCharactor\AI\Extra">
+      <UniqueIdentifier>{2378e00b-9ede-40c5-afda-c84b6b6cb02f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameCharactor\Player\Player_Inventroy">
+      <UniqueIdentifier>{be134bba-eb2f-4b19-b6ee-764a2f86e2ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameCharactor\Player\Player_Info">
+      <UniqueIdentifier>{9288e2e7-0b51-4b1d-958d-282bc59ba54d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameScene\GameOverScene">
+      <UniqueIdentifier>{99fc2930-0568-40a9-8d30-d2d8b92b2e4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameObject\Decorate">
+      <UniqueIdentifier>{c57c3bce-0f03-40ab-91a4-55cc15fc49e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameStage">
+      <UniqueIdentifier>{2db72262-d9d3-4867-b397-d9a4da0864e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameStage\Stage_1">
+      <UniqueIdentifier>{bca46350-0f8f-47ed-9937-53280e86742e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameSystem\OptionSystem">
+      <UniqueIdentifier>{b4bbde87-50ec-4653-a906-f537e5787cba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameObject\Item">
+      <UniqueIdentifier>{d8a8929a-51da-4970-9ed8-d7de1267dc8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameScene\LoadingScene">
+      <UniqueIdentifier>{30bb80f7-5854-4eac-97c9-8e253a851260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameScene\VictoryScene">
+      <UniqueIdentifier>{27848b4d-4206-4148-95af-45d9e5920b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameSystem\WindowSystem">
+      <UniqueIdentifier>{db19f3f0-36c4-49ff-b563-5de6675f5ceb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameScene\LoadingScene\Loader">
+      <UniqueIdentifier>{817b2db5-f408-4117-b125-afdb2140d562}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind">
+      <UniqueIdentifier>{3b603205-7c31-4c62-ac7d-79b7f3d8b7dd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Classes\Define\KGlobalDefine.h">
+      <Filter>Classes\Global\Define</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Define\KGlobalEnumDefine\KGlobalEnumDefine.h">
+      <Filter>Classes\Global\Define\KGlobalEnumDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Function\GlobalFunction.h">
+      <Filter>Classes\Global\Function</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Interface\IWindowMessageHandler.h">
+      <Filter>Classes\Global\Utility\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Interface\IUpdateable.h">
+      <Filter>Classes\Global\Utility\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Interface\IRenderable.h">
+      <Filter>Classes\Global\Utility\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Manager\CDeviceManager.h">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Manager\CWindowManager.h">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Manager\CSoundManager.h">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Manager\CResourceManager.h">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Manager\CInputManager.h">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Manager\CTimeManager.h">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Define\KGlobalStructDefine\KGlobalStructDefine.h">
+      <Filter>Classes\Global\Define\KGlobalStructDefine</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Base\CDirect3DApplication.h">
+      <Filter>Classes\Global\Utility\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\CameraObject\CCameraObject.h">
+      <Filter>Classes\Global\Utility\Object\CameraObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\LightObject\CLightObject.h">
+      <Filter>Classes\Global\Utility\Object\LightObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\GeometryObject\CGeometryObject.h">
+      <Filter>Classes\Global\Utility\Object\GeometryObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\LabelObject\CLabelObject.h">
+      <Filter>Classes\Global\Utility\Object\LabelObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject.h">
+      <Filter>Classes\Global\Utility\Object\SpriteObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\SkinnedObject\CSkinnedObject.h">
+      <Filter>Classes\Global\Utility\Object\SkinnedObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\StaticObject\CStaticObject.h">
+      <Filter>Classes\Global\Utility\Object\StaticObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\System\AnimationSystem\AnimationSystem_CAllocateHierarchy.h">
+      <Filter>Classes\Global\Utility\System\AnimationSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\System\AnimationSystem\AnimationSystem_CAnimationController.h">
+      <Filter>Classes\Global\Utility\System\AnimationSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleSystem.h">
+      <Filter>Classes\Global\Utility\System\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleEmitter.h">
+      <Filter>Classes\Global\Utility\System\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\System\ParticleSystem\ParticleSystem_EmitterKind\ParticleSystem_EmitterDefault.h">
+      <Filter>Classes\Global\Utility\System\ParticleSystem\ParticleSystem_EmitterKind</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\ParticleObject\CPointParticleObject.h">
+      <Filter>Classes\Global\Utility\Object\ParticleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\ParticleObject\CQuadParticleObject.h">
+      <Filter>Classes\Global\Utility\Object\ParticleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameScene\TitleScene\CTitleScene.h">
+      <Filter>Classes\GameComposition\GameScene\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameScene\MainPlayScene\CMainPlayScene.h">
+      <Filter>Classes\GameComposition\GameScene\MainPlayScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameScene\MapToolScene\CMapToolScene.h">
+      <Filter>Classes\GameComposition\GameScene\MapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameScene\GameOverScene\CGameOverScene.h">
+      <Filter>Classes\GameComposition\GameScene\GameOverScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameScene\VictoryScene\CVictoryScene.h">
+      <Filter>Classes\GameComposition\GameScene\VictoryScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameScene\LoadingScene\Loader\ILoader.h">
+      <Filter>Classes\GameComposition\GameScene\LoadingScene\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Manager\CSceneManager.h">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameScene\LoadingScene\CLoadingScene.h">
+      <Filter>Classes\GameComposition\GameScene\LoadingScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Default.h">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Button.h">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Classes\Function\GlobalFunction.cpp">
+      <Filter>Classes\Global\Function</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Manager\CWindowManager.cpp">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Manager\CDeviceManager.cpp">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Manager\CInputManager.cpp">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Manager\CTimeManager.cpp">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Base\CDirect3DApplication.cpp">
+      <Filter>Classes\Global\Utility\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Base\CObject.cpp">
+      <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Base\CRenderObject.cpp">
+      <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Base\CUIObject.cpp">
+      <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Base\CWindowApplication.cpp">
+      <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\CameraObject\CCameraObject.cpp">
+      <Filter>Classes\Global\Utility\Object\CameraObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\LightObject\CLightObject.cpp">
+      <Filter>Classes\Global\Utility\Object\LightObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Manager\CResourceManager.cpp">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\StaticObject\CStaticObject.cpp">
+      <Filter>Classes\Global\Utility\Object\StaticObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\System\AnimationSystem\AnimationSystem_CAllocateHierarchy.cpp">
+      <Filter>Classes\Global\Utility\System\AnimationSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\SkinnedObject\CSkinnedObject.cpp">
+      <Filter>Classes\Global\Utility\Object\SkinnedObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\System\AnimationSystem\AnimationSystem_CAnimationController.cpp">
+      <Filter>Classes\Global\Utility\System\AnimationSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleSystem.cpp">
+      <Filter>Classes\Global\Utility\System\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleEmitter.cpp">
+      <Filter>Classes\Global\Utility\System\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\System\ParticleSystem\ParticleSystem_EmitterKind\ParticleSystem_EmitterDefault.cpp">
+      <Filter>Classes\Global\Utility\System\ParticleSystem\ParticleSystem_EmitterKind</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\ParticleObject\CPointParticleObject.cpp">
+      <Filter>Classes\Global\Utility\Object\ParticleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Base\CScene.cpp">
+      <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\TitleScene\CTitleScene.cpp">
+      <Filter>Classes\GameComposition\GameScene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\MainPlayScene\CMainPlayScene.cpp">
+      <Filter>Classes\GameComposition\GameScene\MainPlayScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\MapToolScene\CMapToolScene.cpp">
+      <Filter>Classes\GameComposition\GameScene\MapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\GameOverScene\CGameOverScene.cpp">
+      <Filter>Classes\GameComposition\GameScene\GameOverScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\VictoryScene\CVictoryScene.cpp">
+      <Filter>Classes\GameComposition\GameScene\VictoryScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\Loader\TitleSceneLoader.cpp">
+      <Filter>Classes\GameComposition\GameScene\LoadingScene\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\Loader\MapToolSceneLoader.cpp">
+      <Filter>Classes\GameComposition\GameScene\LoadingScene\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\Loader\MainPlaySceneLoader.cpp">
+      <Filter>Classes\GameComposition\GameScene\LoadingScene\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Manager\CSceneManager.cpp">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\CLoadingScene.cpp">
+      <Filter>Classes\GameComposition\GameScene\LoadingScene</Filter>
+    </ClCompile>
+    <ClCompile Include="SlenderMan.cpp">
+      <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject.cpp">
+      <Filter>Classes\Global\Utility\Object\SpriteObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\LabelObject\CLabelObject.cpp">
+      <Filter>Classes\Global\Utility\Object\LabelObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Default.cpp">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Button.cpp">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
