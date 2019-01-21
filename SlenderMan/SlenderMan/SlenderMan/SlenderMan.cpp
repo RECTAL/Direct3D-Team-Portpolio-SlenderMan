@@ -14,4 +14,6 @@ int WINAPI _tWinMain(HINSTANCE a_hInstance,
 }
 
 //hello
+//loading scene
+//hello
 //title scene
