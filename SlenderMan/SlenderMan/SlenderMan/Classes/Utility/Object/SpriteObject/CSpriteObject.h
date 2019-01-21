@@ -10,7 +10,7 @@ public:
 	typedef std::vector<LPDIRECT3DTEXTURE9> oSpriteTexture;
 
 public:
-	CSpriteObject(std::string a_stSpriteTexturePath, int a_nAnimationFrame);
+	CSpriteObject(std::string a_stSpriteTexturePath,std::string a_stExtantion, int a_nAnimationFrame);
 	virtual ~CSpriteObject();
 public:			//interface
 

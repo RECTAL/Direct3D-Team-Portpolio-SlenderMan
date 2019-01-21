@@ -3,14 +3,14 @@
 #include "../../Manager/CDeviceManager.h"
 #include "../../Manager/CResourceManager.h"
 
-CSpriteObject::CSpriteObject(std::string a_stSpriteTexturePath, int a_nAnimationFrame)
+CSpriteObject::CSpriteObject(std::string a_stSpriteTexturePath, std::string a_stExtantion, int a_nAnimationFrame)
 	:m_stSpriteTexturePath(a_stSpriteTexturePath),m_nAnimationCount(a_nAnimationFrame)
 {
 	m_pSprite = this->createSprite();
 	for (int i = 0; i < m_nAnimationCount; i++)
 	{
 		char path[MAX_PATH];
-		sprintf(path, "%s_%d", a_stSpriteTexturePath.c_str(), i);
+		sprintf(path, "%s_%d.%s", a_stSpriteTexturePath.c_str(), i, a_stExtantion.c_str());
 		m_oSpriteTexture.push_back(GET_SPRITE_TEXTURE(path));
 	}
 }
@@ -51,11 +51,15 @@ void CSpriteObject::doDrawUI()
 		this->getPosition().z
 	};
 
-	m_pSprite->Draw(m_oSpriteTexture[m_nTextureOffset],
-		&stTextureRect,
-		&D3DXVECTOR3(stTextureRect.right / 2.0f, stTextureRect.bottom / 2.0f, 0.0f),
-		&stPosition,
-		m_nDiffuseColor);
+	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND | D3DXSPRITE_SORT_DEPTH_BACKTOFRONT);
+	{
+		m_pSprite->Draw(m_oSpriteTexture[m_nTextureOffset],
+			&stTextureRect,
+			&D3DXVECTOR3(stTextureRect.right / 2.0f, stTextureRect.bottom / 2.0f, 0.0f),
+			&stPosition,
+			m_nDiffuseColor);
+	}
+	m_pSprite->End();
 }
 
 LPD3DXSPRITE CSpriteObject::createSprite()

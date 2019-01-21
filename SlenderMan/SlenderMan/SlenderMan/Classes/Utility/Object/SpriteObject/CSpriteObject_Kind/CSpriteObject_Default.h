@@ -4,7 +4,7 @@
 class CSpriteObject_Default :public CSpriteObject
 {
 public:
-	CSpriteObject_Default(std::string a_stSpriteTexturePath, int a_nAnimationFrame);
+	CSpriteObject_Default(std::string a_stSpriteTexturePath,std::string a_stExtantion, int a_nAnimationFrame);
 	virtual ~CSpriteObject_Default();
 public:			//interface
 	virtual void update()override;
