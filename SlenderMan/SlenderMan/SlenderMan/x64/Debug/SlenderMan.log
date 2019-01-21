@@ -1,0 +1,13 @@
+﻿  GlobalFunction.cpp
+c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
+  CGameOverScene.cpp
+c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
+  CLoadingScene.cpp
+c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
+  MainPlaySceneLoader.cpp
+c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
+  MapToolSceneLoader.cpp
+c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
+  TitleSceneLoader.cpp
+c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
+  CMainPlayScene.cpp
