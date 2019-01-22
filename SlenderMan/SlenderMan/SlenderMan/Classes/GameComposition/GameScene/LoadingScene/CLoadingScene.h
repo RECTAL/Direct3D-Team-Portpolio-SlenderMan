@@ -3,6 +3,7 @@
 #include "../../../Utility/Base/CScene.h"
 
 class ILoader;
+class CSpriteObject;
 class CLoadingScene :public CScene
 {
 public:		//constructor , destructor
@@ -46,4 +47,7 @@ private:
 	ILoader*			m_pLoader = nullptr;
 
 	bool				m_bIsAllDownLoad = false;
+
+private:
+	CSpriteObject *m_pBackground;
 };
