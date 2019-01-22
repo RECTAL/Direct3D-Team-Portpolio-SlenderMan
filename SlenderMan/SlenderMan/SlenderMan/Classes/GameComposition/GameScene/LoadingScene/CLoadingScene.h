@@ -50,4 +50,5 @@ private:
 
 private:
 	CSpriteObject *m_pBackground;
+	//Ãæµ¹Áß...
 };
