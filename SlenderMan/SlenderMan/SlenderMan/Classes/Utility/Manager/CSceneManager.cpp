@@ -66,6 +66,11 @@ void CSceneManager::drawUI(void)
 	m_pCurrentScene->drawUI();
 }
 
+LRESULT CSceneManager::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
+{
+	return m_pCurrentScene->handleWindowMessage(a_hWindow,a_nMessage,a_wParam,a_lParam);
+}
+
 CScene * CSceneManager::changeScene_rootDirect(std::string a_stSceneName)
 {
 	if (m_oSceneMapList.find(a_stSceneName) != m_oSceneMapList.end())

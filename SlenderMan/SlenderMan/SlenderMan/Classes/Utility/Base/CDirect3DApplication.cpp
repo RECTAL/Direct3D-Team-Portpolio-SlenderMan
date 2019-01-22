@@ -22,9 +22,9 @@ CDirect3DApplication::~CDirect3DApplication(void)
 
 void CDirect3DApplication::initApplication(void)
 {
+	GET_SCENE_MANAGER()->init();
 	CWindowApplication::initApplication();
 	GET_DEVICE_MANAGER()->init();
-	GET_SCENE_MANAGER()->init();
 	
 }
 
@@ -97,5 +97,7 @@ int CDirect3DApplication::runMessageLoop(void)
 
 LRESULT CDirect3DApplication::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
 {
+	GET_SCENE_MANAGER()->handleWindowMessage(a_hWindow, a_nMessage, a_wParam, a_lParam);
+
 	return CWindowApplication::handleWindowMessage(a_hWindow, a_nMessage, a_wParam, a_lParam);
 }

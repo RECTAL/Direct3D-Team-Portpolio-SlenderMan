@@ -28,3 +28,12 @@ void CGameOverScene::drawUI(void)
 {
 	CScene::drawUI();
 }
+
+LRESULT CGameOverScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
+{
+	switch (a_nMessage)
+	{
+
+	}
+	return S_OK;
+}
