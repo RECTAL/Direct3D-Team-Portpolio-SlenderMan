@@ -1,6 +1,7 @@
 #include "CTitleScene.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Default.h"
 #include "../../../Utility/Manager/CWindowManager.h"
+#include "../../../Utility/Manager/CTimeManager.h"
 CTitleScene::CTitleScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
 {
@@ -17,7 +18,6 @@ void CTitleScene::init()
 	m_pSprite_BackGround = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/background", "png", 1);
 	m_pSprite_BackGround->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 	m_pSprite_BackGround->setScale(D3DXVECTOR3(1.0f, 1.0f, 1.0f));
-	m_pSprite_BackGround->setColor(D3DCOLOR_ARGB(255, 255, 255, 255));
 }
 
 
@@ -25,6 +25,11 @@ void CTitleScene::update(void)
 {
 	CScene::update();
 	m_pSprite_BackGround->update();
+	static int alpha = 100.0f;
+	alpha += 255 * cosf(D3DXToDegree(90 * GET_DELTA_TIME()));
+	alpha = min(alpha, 255);
+	alpha = max(alpha, 100);
+	m_pSprite_BackGround->setColor(D3DCOLOR_ARGB(alpha, 255, 255, 255));
 }
 
 void CTitleScene::draw(void)
