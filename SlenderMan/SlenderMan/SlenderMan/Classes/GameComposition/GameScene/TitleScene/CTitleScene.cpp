@@ -15,7 +15,7 @@ CTitleScene::~CTitleScene()
 void CTitleScene::init()
 {
 	CScene::init();
-	m_pSprite_BackGround = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/background", "png", 1);
+	m_pSprite_BackGround = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/background", "jpg", 1);
 	m_pSprite_BackGround->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 	m_pSprite_BackGround->setScale(D3DXVECTOR3(1.0f, 1.0f, 1.0f));
 }
