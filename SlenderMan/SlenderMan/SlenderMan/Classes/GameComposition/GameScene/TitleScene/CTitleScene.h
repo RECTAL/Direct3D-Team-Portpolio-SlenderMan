@@ -3,6 +3,7 @@
 #include "../../../Utility/Base/CScene.h"
 
 
+class CSpriteObject;
 class CTitleScene :public CScene
 {
 public:		//constructor , destructor
@@ -18,6 +19,7 @@ public:		//public override function
 	virtual void init()override;					//override	: CScene
 
 
-
+private:
+	CSpriteObject*	m_pSprite_BackGround;
 
 };

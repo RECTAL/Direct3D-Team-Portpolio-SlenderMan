@@ -79,10 +79,14 @@ int CDirect3DApplication::runMessageLoop(void)
 			this->update();
 			this->draw();
 
+
+
+
+
+
+			this->drawUI();
 			GET_DEVICE()->EndScene();
 		}
-
-		this->drawUI();
 		// swap chain
 		GET_DEVICE()->Present(NULL, NULL, NULL, NULL);
 	}
