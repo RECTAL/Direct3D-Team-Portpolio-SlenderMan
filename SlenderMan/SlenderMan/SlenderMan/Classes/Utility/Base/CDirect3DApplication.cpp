@@ -64,7 +64,8 @@ int CDirect3DApplication::runMessageLoop(void)
 			TranslateMessage(&stMessage);
 			DispatchMessage(&stMessage);
 		}
-
+		GET_TIME_MANAGER()->update();
+		GET_INPUT_MANAGER()->update();
 		
 		//clear main buffer
 		GET_DEVICE()->Clear(0,

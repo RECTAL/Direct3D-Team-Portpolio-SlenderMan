@@ -26,7 +26,9 @@ void CTitleScene::update(void)
 	CScene::update();
 	m_pSprite_BackGround->update();
 	static int alpha = 100.0f;
-	alpha += 255 * cosf(D3DXToDegree(90 * GET_DELTA_TIME()));
+	static float angle = 0.0f;
+	angle += 90 * GET_DELTA_TIME();
+	alpha = 255 * cosf(D3DXToRadian(angle))+100;
 	alpha = min(alpha, 255);
 	alpha = max(alpha, 100);
 	m_pSprite_BackGround->setColor(D3DCOLOR_ARGB(alpha, 255, 255, 255));
