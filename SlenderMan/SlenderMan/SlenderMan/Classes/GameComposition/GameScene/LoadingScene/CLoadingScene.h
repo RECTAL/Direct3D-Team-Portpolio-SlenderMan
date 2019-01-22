@@ -51,4 +51,5 @@ private:
 private:
 	CSpriteObject *m_pBackground;
 	//충돌중...
+	// 충돌테스트
 };
