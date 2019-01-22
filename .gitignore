@@ -9,3 +9,6 @@
 /SlenderMan/SlenderMan/x64/Debug
 *.db
 *.opendb
+*.suo
+*.idb
+*.pdb
