@@ -12,9 +12,3 @@ int WINAPI _tWinMain(HINSTANCE a_hInstance,
 
 	return oApplication.runApplication();
 }
-
-//hello
-//by
-//test
-//zzzzzzzzzzzzzzz
-//zzzzzzxczczc
