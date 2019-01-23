@@ -10,14 +10,21 @@ CTitleScene::CTitleScene(std::string a_stSceneName)
 CTitleScene::~CTitleScene()
 {
 	SAFE_DELETE(m_pSprite_BackGround);
+	SAFE_DELETE(titleImage);
+	SAFE_DELETE(gameStartImage);
 }
 
 void CTitleScene::init()
 {
 	CScene::init();
-	m_pSprite_BackGround = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/TitleImage", "jpg", 1);
+	m_pSprite_BackGround = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/background", "png", 1);
 	m_pSprite_BackGround->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
-	m_pSprite_BackGround->setScale(D3DXVECTOR3(1.0f, 1.0f, 1.0f));
+	
+	titleImage = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/title", "png", 1);
+	titleImage->setPosition(D3DXVECTOR3(450, 250, 0));
+
+	gameStartImage = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/gameStart", "png", 1);
+	gameStartImage->setPosition(D3DXVECTOR3(300, 500, 0));
 }
 
 
@@ -31,7 +38,9 @@ void CTitleScene::update(void)
 	alpha = 255 * cosf(D3DXToRadian(angle))+100;
 	alpha = min(alpha, 255);
 	alpha = max(alpha, 100);
-	m_pSprite_BackGround->setColor(D3DCOLOR_ARGB(alpha, 255, 255, 255));
+	m_pSprite_BackGround->setColor(D3DCOLOR_ARGB(255, 255, 255, 255));
+	titleImage->update();
+	gameStartImage->update();
 }
 
 void CTitleScene::draw(void)
@@ -43,6 +52,8 @@ void CTitleScene::drawUI(void)
 {
 	CScene::drawUI();
 	m_pSprite_BackGround->drawUI();
+	titleImage->drawUI();
+	gameStartImage->doDrawUI();
 }
 
 LRESULT CTitleScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)

@@ -2,6 +2,7 @@
 #include "../../Base/CDirect3DApplication.h"
 #include "../../Manager/CDeviceManager.h"
 #include "../../Manager/CResourceManager.h"
+#include "../../Manager/CTimeManager.h"
 
 CSpriteObject::CSpriteObject(std::string a_stSpriteTexturePath, std::string a_stExtantion, int a_nAnimationFrame)
 	:m_stSpriteTexturePath(a_stSpriteTexturePath),m_nAnimationCount(a_nAnimationFrame)
@@ -28,6 +29,13 @@ void CSpriteObject::release()
 void CSpriteObject::update()
 {
 	CUIObject::update();
+	/*static float time = 0.0f;
+	time += GET_DELTA_TIME();
+	if (time >= 1.0f) 
+	{
+		m_nTextureOffset++;
+		time = 0;
+	}*/
 	m_nTextureOffset++;
 	if (m_nTextureOffset >= m_oSpriteTexture.size())m_nTextureOffset = 0;
 }
