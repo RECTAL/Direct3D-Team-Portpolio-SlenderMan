@@ -185,14 +185,14 @@
     <Filter Include="Classes\GameComposition\GameScene\VictoryScene">
       <UniqueIdentifier>{27848b4d-4206-4148-95af-45d9e5920b1e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\GameComposition\GameSystem\WindowSystem">
-      <UniqueIdentifier>{db19f3f0-36c4-49ff-b563-5de6675f5ceb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\GameComposition\GameScene\LoadingScene\Loader">
       <UniqueIdentifier>{817b2db5-f408-4117-b125-afdb2140d562}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind">
       <UniqueIdentifier>{3b603205-7c31-4c62-ac7d-79b7f3d8b7dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\System\WindowSystem">
+      <UniqueIdentifier>{787ff7be-7ca2-4b89-8b52-e8b3451790fa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -310,6 +310,15 @@
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Button.h">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Utility\Base\CWindow.h">
+      <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowContainer.h">
+      <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowButton.h">
+      <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -422,6 +431,15 @@
     </ClCompile>
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Button.cpp">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Base\CWindow.cpp">
+      <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowContainer.cpp">
+      <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowButton.cpp">
+      <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

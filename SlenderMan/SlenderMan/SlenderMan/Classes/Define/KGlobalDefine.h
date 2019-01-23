@@ -102,6 +102,8 @@
 #define IS_MOUSE_BUTTON_PRESSED(MOUSE_INPUT)			(GET_INPUT_MANAGER()->isMouseButtonPressed((MOUSE_INPUT)))
 #define IS_MOUSE_BUTTON_RELEASED(MOUSE_INPUT)			(GET_INPUT_MANAGER()->isMouseButtonReleased((MOUSE_INPUT)))
 
+#define GET_MOUSE_POSITION()							(GET_INPUT_MANAGER()->getMousePosition())
+
 //time Option
 #define GET_DELTA_TIME()								(GET_TIME_MANAGER()->getDeltaTime())
 #define GET_RUNNING_TIME()								(GET_TIME_MANAGER()->getRunningTime())
