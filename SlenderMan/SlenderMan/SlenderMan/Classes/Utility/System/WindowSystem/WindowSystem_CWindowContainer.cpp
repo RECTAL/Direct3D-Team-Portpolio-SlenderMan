@@ -1,6 +1,8 @@
 #include "WindowSystem_CWindowContainer.h"
 #include "../../Manager/CInputManager.h"
 #include "../../Object/SpriteObject/CSpriteObject.h"
+#include "../../Manager/CInputManager.h"
+
 CWindowContainer::CWindowContainer(std::string a_stWindowName, CWindowType a_ECWindowType, SIZE a_stActiveSize)
 	:CWindow(a_stWindowName,a_ECWindowType)
 {
