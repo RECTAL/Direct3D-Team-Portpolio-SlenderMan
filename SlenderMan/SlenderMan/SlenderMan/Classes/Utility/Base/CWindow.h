@@ -4,22 +4,20 @@
 #include "../../Utility/Interface/IRenderable.h"
 
 class CSpriteObject;
-class CWindow:public IUpdateable,IRenderable
+class CWindow:public IUpdateable
 {
 public:
-	CWindow(std::string a_stWindowName, CWindowType a_ECWindowType);
+	CWindow(std::string a_stWindowName, CWindowType a_ECWindowType,D3DXVECTOR3 a_stAbsolutePos);
 	virtual ~CWindow();
 
 public:				//interface
 	virtual void update(void)override;			//interface : IUpdateable
-	virtual void draw(void)override;			//interface : IRenderable
 public:				
-	virtual void	init(std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc, CSpriteObject* a_pSpriteObject);
+	virtual void	init(std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc);
 	virtual void	release();
 	virtual void	createBeginCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) = 0;
 	virtual void	createCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) = 0;
 	virtual void	createEndCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) = 0;
-	virtual void	setIsActive(bool isActive, POINT a_stMousePosition) = 0;
 public:				//getter,setter
 	/******************************************************/
 	//getter
@@ -27,7 +25,9 @@ public:				//getter,setter
 	CWindowType		getWindowType() { return m_eCWindowType; }
 	D3DXVECTOR3		getAbsolutePosition() { return m_stAbsolutePosition; }
 	D3DXVECTOR3		getRelativePosition() { return m_stRelativePosition; }
-	SIZE			getActiveSize() { return m_stActiveSize; }
+	SIZE&			getActiveSize() { return m_stActiveSize; }
+	RECT&			getActiveRect() { return m_stActiveRect; }
+
 
 	bool			getIsActive() { return m_bIsActive; }
 
@@ -65,7 +65,7 @@ protected:
 	D3DXVECTOR3				m_stAbsolutePosition;
 	D3DXVECTOR3				m_stRelativePosition;
 	SIZE					m_stActiveSize;
-
+	RECT					m_stActiveRect;
 
 
 	CWindow*				m_pParentWindow = nullptr;
@@ -75,7 +75,6 @@ protected:
 	std::function<void(void)> m_stCallBackFunc = nullptr;
 	std::function<void(void)> m_stEndCallBackFunc = nullptr;
 
-	CSpriteObject*			m_pSpriteObject;
 
 	bool					m_bPreActive = false;
 	bool					m_bIsActive = false;

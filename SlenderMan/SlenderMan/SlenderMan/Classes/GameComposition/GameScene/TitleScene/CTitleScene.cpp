@@ -1,7 +1,9 @@
 #include "CTitleScene.h"
+#include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Button.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Default.h"
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
+#include "../../../Utility/Manager/CSceneManager.h"
 CTitleScene::CTitleScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
 {
@@ -23,8 +25,20 @@ void CTitleScene::init()
 	titleImage = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/title", "png", 1);
 	titleImage->setPosition(D3DXVECTOR3(450, 250, 0));
 
-	gameStartImage = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/gameStart", "png", 1);
+	gameStartImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/gameStart", "png", 1);
 	gameStartImage->setPosition(D3DXVECTOR3(300, 500, 0));
+
+
+	std::function<void(void)>* fptr = new std::function<void(void)>;
+	(*fptr) = [=](void)->void
+	{
+		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY);
+	};
+	gameStartImage->init(
+		nullptr,
+		nullptr,
+		fptr
+	);
 }
 
 

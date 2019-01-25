@@ -4,6 +4,7 @@
 
 
 class CSpriteObject;
+class CSpriteObject_Button;
 class CTitleScene :public CScene
 {
 public:		//constructor , destructor
@@ -27,5 +28,5 @@ public:		//public override function
 private:
 	CSpriteObject*	m_pSprite_BackGround;
 	CSpriteObject* titleImage;
-	CSpriteObject* gameStartImage;
+	CSpriteObject_Button* gameStartImage;
 };

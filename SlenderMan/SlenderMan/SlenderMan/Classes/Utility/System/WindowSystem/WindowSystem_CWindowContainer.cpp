@@ -3,8 +3,8 @@
 #include "../../Object/SpriteObject/CSpriteObject.h"
 #include "../../Manager/CInputManager.h"
 
-CWindowContainer::CWindowContainer(std::string a_stWindowName, CWindowType a_ECWindowType, SIZE a_stActiveSize)
-	:CWindow(a_stWindowName,a_ECWindowType)
+CWindowContainer::CWindowContainer(std::string a_stWindowName, CWindowType a_ECWindowType, SIZE a_stActiveSize, D3DXVECTOR3 a_stAbsolutePos)
+	:CWindow(a_stWindowName,a_ECWindowType, a_stAbsolutePos)
 {
 	m_stActiveSize = a_stActiveSize;
 }
@@ -18,21 +18,17 @@ void CWindowContainer::update(void)
 	CWindow::update();
 }
 
-void CWindowContainer::draw(void)
-{
-	CWindow::draw();
-	m_pSpriteObject->drawUI();
-}
+
 
 void CWindowContainer::init(
-	std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc, CSpriteObject* a_pSpriteObject)
+	std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc)
 {
-	CWindow::init(a_pBeginCallBackFunc, a_pCallBackFunc, a_pEndCallBackFunc, a_pSpriteObject);
+	CWindow::init(a_pBeginCallBackFunc, a_pCallBackFunc, a_pEndCallBackFunc);
 	this->createBeginCallBackFunc(a_pBeginCallBackFunc);
 	this->createCallBackFunc(a_pCallBackFunc);
 	this->createEndCallBackFunc(a_pEndCallBackFunc);
 
-	m_pSpriteObject = a_pSpriteObject;
+
 }
 
 void CWindowContainer::release()
@@ -91,18 +87,3 @@ void CWindowContainer::createEndCallBackFunc(std::function<void(void)>* a_pCallB
 	}
 }
 
-void CWindowContainer::setIsActive(bool isActive, POINT a_stMousePosition)
-{
-	m_bPreActive = m_bIsActive;
-	m_bIsActive = isActive;
-	m_stPreOffset = a_stMousePosition;
-	if (m_bIsActive)
-	{
-		(m_stBeginCallBackFunc)();
-	}
-	else
-	{
-		(m_stEndCallBackFunc)();
-	}
-
-}
