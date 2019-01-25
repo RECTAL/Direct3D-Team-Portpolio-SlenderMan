@@ -14,6 +14,10 @@ void CGameOverScene::init()
 	CScene::init();
 }
 
+void CGameOverScene::createWindowUI()
+{
+}
+
 void CGameOverScene::update(void)
 {
 	CScene::update();

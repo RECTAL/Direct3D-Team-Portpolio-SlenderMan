@@ -177,6 +177,7 @@
     <ClInclude Include="Classes\Utility\Object\SkinnedObject\CSkinnedObject.h" />
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject.h" />
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Button.h" />
+    <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Container.h" />
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Default.h" />
     <ClInclude Include="Classes\Utility\Object\StaticObject\CStaticObject.h" />
     <ClInclude Include="Classes\Utility\System\AnimationSystem\AnimationSystem_CAllocateHierarchy.h" />
@@ -218,6 +219,7 @@
     <ClCompile Include="Classes\Utility\Object\SkinnedObject\CSkinnedObject.cpp" />
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject.cpp" />
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Button.cpp" />
+    <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Container.cpp" />
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Default.cpp" />
     <ClCompile Include="Classes\Utility\Object\StaticObject\CStaticObject.cpp" />
     <ClCompile Include="Classes\Utility\System\AnimationSystem\AnimationSystem_CAllocateHierarchy.cpp" />

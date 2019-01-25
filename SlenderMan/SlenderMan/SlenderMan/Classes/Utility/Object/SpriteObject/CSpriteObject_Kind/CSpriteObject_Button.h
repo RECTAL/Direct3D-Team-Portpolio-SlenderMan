@@ -17,10 +17,13 @@ public:			//getter,setter
 	//getter
 	/******************************************************/
 	CWindow*		getWindow() { return m_pWindow; }
+	D3DXVECTOR3		getRelativePos() { return m_stRelativePos; }
 
 public:
-	virtual void init(std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc);
+	virtual void init(std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc, bool a_bIsChild = false, D3DXVECTOR3 a_rstRelativePos = D3DXVECTOR3(0,0,0));
 	virtual void release();
 private:
 	CWindow*		m_pWindow;
+	bool			m_bIsChild;
+	D3DXVECTOR3		m_stRelativePos;
 };

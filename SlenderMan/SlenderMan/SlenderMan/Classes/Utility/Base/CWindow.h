@@ -23,8 +23,8 @@ public:				//getter,setter
 	//getter
 	/******************************************************/
 	CWindowType		getWindowType() { return m_eCWindowType; }
-	D3DXVECTOR3		getAbsolutePosition() { return m_stAbsolutePosition; }
-	D3DXVECTOR3		getRelativePosition() { return m_stRelativePosition; }
+	D3DXVECTOR3&	getAbsolutePosition() { return m_stAbsolutePosition; }
+	D3DXVECTOR3&	getRelativePosition() { return m_stRelativePosition; }
 	SIZE&			getActiveSize() { return m_stActiveSize; }
 	RECT&			getActiveRect() { return m_stActiveRect; }
 
@@ -49,14 +49,6 @@ public:				//getter,setter
 							m_stRelativePosition.y = max(-a_stParentArea.cy / 2, m_stRelativePosition.y);
 						}
 
-public:
-	void			addParentWindow(CWindow* a_pParentWindow) { m_pParentWindow = a_pParentWindow; }
-	void			addChildWindow(CWindow*	a_pChildWindow)
-					{ 
-						a_pChildWindow->addParentWindow(this);
-						m_oChildWindow.push_back(a_pChildWindow); 
-					}
-
 
 protected:
 	std::string				m_stWindowName;
@@ -68,8 +60,6 @@ protected:
 	RECT					m_stActiveRect;
 
 
-	CWindow*				m_pParentWindow = nullptr;
-	std::vector<CWindow*>	m_oChildWindow;
 
 	std::function<void(void)> m_stBeginCallBackFunc = nullptr;
 	std::function<void(void)> m_stCallBackFunc = nullptr;

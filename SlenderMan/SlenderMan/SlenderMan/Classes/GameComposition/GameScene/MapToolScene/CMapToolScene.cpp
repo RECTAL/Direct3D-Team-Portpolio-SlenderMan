@@ -14,6 +14,10 @@ void CMapToolScene::init()
 	CScene::init();
 }
 
+void CMapToolScene::createWindowUI()
+{
+}
+
 
 void CMapToolScene::update(void)
 {

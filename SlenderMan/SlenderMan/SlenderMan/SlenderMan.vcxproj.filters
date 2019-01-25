@@ -319,6 +319,9 @@
     <ClInclude Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowButton.h">
       <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Container.h">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -440,6 +443,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowButton.cpp">
       <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Container.cpp">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

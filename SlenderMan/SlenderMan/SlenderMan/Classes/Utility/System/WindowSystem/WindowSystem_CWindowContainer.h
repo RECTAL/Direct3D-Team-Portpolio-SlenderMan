@@ -23,4 +23,6 @@ public:			//override
 private:
 	POINT	m_stPreOffset;
 	POINT	m_stOffset;
+	LONG	m_stDeltaX =0;
+	LONG	m_stDeltaY =0;
 };

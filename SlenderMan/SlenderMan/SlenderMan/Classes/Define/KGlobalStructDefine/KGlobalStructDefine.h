@@ -2,6 +2,17 @@
 #include "../KGlobalDefine.h"
 
 
+struct fPOINT
+{
+	float x;
+	float y;
+	void operator=(fPOINT& obj)
+	{
+		x = obj.x;
+		y = obj.y;
+	}
+};
+
 //! Ray Struct Define
 struct STRay
 {

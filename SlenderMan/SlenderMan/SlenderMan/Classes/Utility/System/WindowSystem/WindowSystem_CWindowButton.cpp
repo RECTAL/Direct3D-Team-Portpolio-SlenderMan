@@ -14,8 +14,14 @@ CWindowButton::~CWindowButton()
 
 void CWindowButton::update(void)
 {
-	CWindow::update();
 
+	CWindow::update();
+	m_stActiveRect = RECT{
+		(LONG)(m_stAbsolutePosition.x - m_stActiveSize.cx / 2),
+		(LONG)(m_stAbsolutePosition.y - m_stActiveSize.cy / 2),
+		(LONG)(m_stAbsolutePosition.x + m_stActiveSize.cx / 2),
+		(LONG)(m_stAbsolutePosition.y + m_stActiveSize.cy / 2)
+	};
 }
 
 

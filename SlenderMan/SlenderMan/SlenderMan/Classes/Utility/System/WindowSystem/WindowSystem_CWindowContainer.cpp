@@ -2,6 +2,7 @@
 #include "../../Manager/CInputManager.h"
 #include "../../Object/SpriteObject/CSpriteObject.h"
 #include "../../Manager/CInputManager.h"
+#include "../../Manager/CTimeManager.h"
 
 CWindowContainer::CWindowContainer(std::string a_stWindowName, CWindowType a_ECWindowType, SIZE a_stActiveSize, D3DXVECTOR3 a_stAbsolutePos)
 	:CWindow(a_stWindowName,a_ECWindowType, a_stAbsolutePos)
@@ -16,10 +17,13 @@ CWindowContainer::~CWindowContainer()
 void CWindowContainer::update(void)
 {
 	CWindow::update();
+	m_stActiveRect = RECT{
+		(LONG)(m_stAbsolutePosition.x - m_stActiveSize.cx / 2 - 50- abs(m_stDeltaX)*300),
+		(LONG)(m_stAbsolutePosition.y - m_stActiveSize.cy / 2 - abs(m_stDeltaY)*600),
+		(LONG)(m_stAbsolutePosition.x + m_stActiveSize.cx / 2 + abs(m_stDeltaX)*300),
+		(LONG)(m_stAbsolutePosition.y - m_stActiveSize.cy / 2 + 100 + abs(m_stDeltaY)*600)
+	};
 }
-
-
-
 void CWindowContainer::init(
 	std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc)
 {
@@ -27,8 +31,6 @@ void CWindowContainer::init(
 	this->createBeginCallBackFunc(a_pBeginCallBackFunc);
 	this->createCallBackFunc(a_pCallBackFunc);
 	this->createEndCallBackFunc(a_pEndCallBackFunc);
-
-
 }
 
 void CWindowContainer::release()
@@ -43,6 +45,8 @@ void CWindowContainer::createBeginCallBackFunc(std::function<void(void)>* a_pCal
 		m_stBeginCallBackFunc = [=](void)->void
 		{
 			m_stPreOffset = GET_MOUSE_POSITION();
+			m_stDeltaX = 0;
+			m_stDeltaY = 0;
 		};
 	}
 	else
@@ -58,12 +62,14 @@ void CWindowContainer::createCallBackFunc(std::function<void(void)>* a_pCallBack
 		m_stCallBackFunc = [=](void)->void {
 		
 			m_stOffset = GET_MOUSE_POSITION();
-			LONG stDeltaX = m_stOffset.x - m_stPreOffset.x;
-			LONG stDeltaY = m_stOffset.y - m_stPreOffset.y;
+			m_stDeltaX = m_stOffset.x - m_stPreOffset.x;
+			m_stDeltaY = m_stOffset.y - m_stPreOffset.y;
 
-			m_stAbsolutePosition.x += stDeltaX;
-			m_stAbsolutePosition.y += stDeltaY;
+			m_stAbsolutePosition.x += m_stDeltaX;
+			m_stAbsolutePosition.y += m_stDeltaY;
 
+			m_stPreOffset.x = m_stOffset.x;
+			m_stPreOffset.y = m_stOffset.y;
 		};
 	}
 	else
@@ -78,7 +84,8 @@ void CWindowContainer::createEndCallBackFunc(std::function<void(void)>* a_pCallB
 	{
 		m_stEndCallBackFunc = [=](void)->void
 		{
-			
+			m_stDeltaX = 0;
+			m_stDeltaY = 0;
 		};
 	}
 	else

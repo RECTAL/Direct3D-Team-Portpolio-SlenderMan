@@ -17,6 +17,8 @@ public:			//interface
 	virtual void update()override;
 	virtual void doDrawUI()override;
 
+public:
+	CWindowType	  getWindowType() { return m_ECWindowType; }
 
 private:
 	LPD3DXSPRITE   createSprite();
@@ -28,6 +30,7 @@ protected:
 public:
 	oSpriteTexture m_oSpriteTexture;
 	LPD3DXSPRITE   m_pSprite = nullptr;
+	CWindowType    m_ECWindowType;
 
 	int m_nTextureOffset=0;
 	int m_nAnimationCount = 0;

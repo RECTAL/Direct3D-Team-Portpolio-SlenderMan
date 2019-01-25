@@ -24,6 +24,10 @@ void CLoadingScene::init()
 
 }
 
+void CLoadingScene::createWindowUI()
+{
+}
+
 void CLoadingScene::loadResources()
 {
 	m_stMutex.lock();
