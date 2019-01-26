@@ -18,13 +18,13 @@ public:
 	virtual void	createBeginCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) = 0;
 	virtual void	createCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) = 0;
 	virtual void	createEndCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) = 0;
+	virtual void	createActiveRect() = 0;
 public:				//getter,setter
 	/******************************************************/
 	//getter
 	/******************************************************/
 	CWindowType		getWindowType() { return m_eCWindowType; }
 	D3DXVECTOR3&	getAbsolutePosition() { return m_stAbsolutePosition; }
-	D3DXVECTOR3&	getRelativePosition() { return m_stRelativePosition; }
 	SIZE&			getActiveSize() { return m_stActiveSize; }
 	RECT&			getActiveRect() { return m_stActiveRect; }
 
@@ -39,15 +39,6 @@ public:				//getter,setter
 	//setter
 	/******************************************************/
 	void			setAbsolutePosition(D3DXVECTOR3 a_stPosition) { m_stAbsolutePosition = a_stPosition; }
-	void			setRelativePosition(D3DXVECTOR3 a_stPosition,SIZE a_stParentArea)
-						{
-							m_stRelativePosition = a_stPosition; 
-							m_stRelativePosition.x = min(a_stParentArea.cx/2, m_stRelativePosition.x);
-							m_stRelativePosition.x = max(-a_stParentArea.cx / 2, m_stRelativePosition.x);
-	
-							m_stRelativePosition.y = min(a_stParentArea.cy/2, m_stRelativePosition.y);
-							m_stRelativePosition.y = max(-a_stParentArea.cy / 2, m_stRelativePosition.y);
-						}
 
 
 protected:
@@ -55,7 +46,6 @@ protected:
 	CWindowType				m_eCWindowType;
 
 	D3DXVECTOR3				m_stAbsolutePosition;
-	D3DXVECTOR3				m_stRelativePosition;
 	SIZE					m_stActiveSize;
 	RECT					m_stActiveRect;
 

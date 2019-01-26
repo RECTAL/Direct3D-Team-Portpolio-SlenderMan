@@ -17,12 +17,7 @@ CWindowContainer::~CWindowContainer()
 void CWindowContainer::update(void)
 {
 	CWindow::update();
-	m_stActiveRect = RECT{
-		(LONG)(m_stAbsolutePosition.x - m_stActiveSize.cx / 2 - 50- abs(m_stDeltaX)*300),
-		(LONG)(m_stAbsolutePosition.y - m_stActiveSize.cy / 2 - abs(m_stDeltaY)*600),
-		(LONG)(m_stAbsolutePosition.x + m_stActiveSize.cx / 2 + abs(m_stDeltaX)*300),
-		(LONG)(m_stAbsolutePosition.y - m_stActiveSize.cy / 2 + 100 + abs(m_stDeltaY)*600)
-	};
+	this->createActiveRect();
 }
 void CWindowContainer::init(
 	std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc)
@@ -31,6 +26,7 @@ void CWindowContainer::init(
 	this->createBeginCallBackFunc(a_pBeginCallBackFunc);
 	this->createCallBackFunc(a_pCallBackFunc);
 	this->createEndCallBackFunc(a_pEndCallBackFunc);
+	this->createActiveRect();
 }
 
 void CWindowContainer::release()
@@ -92,5 +88,15 @@ void CWindowContainer::createEndCallBackFunc(std::function<void(void)>* a_pCallB
 	{
 		m_stEndCallBackFunc = (*a_pCallBackFunc);
 	}
+}
+
+void CWindowContainer::createActiveRect()
+{
+	m_stActiveRect = RECT{
+		   (LONG)(m_stAbsolutePosition.x - m_stActiveSize.cx / 2 - 50 - abs(m_stDeltaX) * 300),
+		   (LONG)(m_stAbsolutePosition.y - m_stActiveSize.cy / 2 - abs(m_stDeltaY) * 600),
+		   (LONG)(m_stAbsolutePosition.x + m_stActiveSize.cx / 2 + abs(m_stDeltaX) * 300),
+		   (LONG)(m_stAbsolutePosition.y - m_stActiveSize.cy / 2 + 100 + abs(m_stDeltaY) * 600)
+	};
 }
 

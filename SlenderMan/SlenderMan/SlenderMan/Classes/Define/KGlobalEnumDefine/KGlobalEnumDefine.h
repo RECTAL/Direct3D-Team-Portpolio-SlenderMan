@@ -22,5 +22,7 @@ enum class CWindowType
 	CONTAINER,
 	BUTTON,
 	EDITER,
+	LIST,
+	SCROLLBAR,
 	NONE
 };

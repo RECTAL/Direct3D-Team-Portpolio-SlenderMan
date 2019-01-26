@@ -6,6 +6,8 @@
 class CSpriteObject;
 class CSpriteObject_Button;
 class CSpriteObject_Container;
+class CSpriteObject_List;
+
 class CTitleScene :public CScene
 {
 public:		//constructor , destructor
@@ -30,6 +32,10 @@ private:
 	CSpriteObject*	m_pSprite_BackGround;
 	CSpriteObject* titleImage;
 	CSpriteObject_Button* gameStartImage;
+
 	CSpriteObject_Container* uiContainer;
 	CSpriteObject_Button* gameStartButton;
+
+	CSpriteObject_List*		 uiList;
+	CSpriteObject_Button*	uiButton[5];
 };

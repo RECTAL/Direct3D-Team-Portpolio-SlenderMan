@@ -18,7 +18,7 @@ public:			//override
 	virtual void createBeginCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr)override;
 	virtual void createCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) override;
 	virtual void createEndCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) override;
-
+	virtual void createActiveRect()override;
 
 protected:
 	int m_nButtonOffset;

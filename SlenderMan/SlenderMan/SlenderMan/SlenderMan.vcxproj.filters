@@ -322,6 +322,15 @@
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Container.h">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowScrollBar.h">
+      <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowList.h">
+      <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_List.h">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -445,6 +454,12 @@
       <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Container.cpp">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowList.cpp">
+      <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_List.cpp">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClCompile>
   </ItemGroup>

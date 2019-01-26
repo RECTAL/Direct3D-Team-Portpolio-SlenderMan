@@ -15,30 +15,32 @@ CSpriteObject_Button::~CSpriteObject_Button()
 
 void CSpriteObject_Button::update()
 {
-	CSpriteObject::update();
-	D3DSURFACE_DESC pSurf;
-	LPDIRECT3DTEXTURE9 pTex = m_oSpriteTexture[m_nTextureOffset];
-	pTex->GetLevelDesc(0, &pSurf);
-
-
-	m_pWindow->getActiveSize() = SIZE{ (LONG)pSurf.Width,(LONG)pSurf.Height};
-	m_pWindow->update();
-	setPosition(m_pWindow->getAbsolutePosition());
-
-	if (PtInRect(&m_pWindow->getActiveRect(), GET_MOUSE_POSITION()))
+	if (m_bIsVisible)
 	{
+		CSpriteObject::update();
+		D3DSURFACE_DESC pSurf;
+		LPDIRECT3DTEXTURE9 pTex = m_oSpriteTexture[m_nTextureOffset];
+		pTex->GetLevelDesc(0, &pSurf);
 
-		if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
+
+		m_pWindow->getActiveSize() = SIZE{ (LONG)pSurf.Width,(LONG)pSurf.Height };
+		m_pWindow->update();
+		setPosition(m_pWindow->getAbsolutePosition());
+		if (PtInRect(&m_pWindow->getActiveRect(), GET_MOUSE_POSITION()))
 		{
-			m_pWindow->getBeginCallBackFunc()();
-		}
-		else if (IS_MOUSE_BUTTON_DOWN(EMouseInput::LEFT))
-		{
-			m_pWindow->getCallBackFunc()();
-		}
-		if (IS_MOUSE_BUTTON_RELEASED(EMouseInput::LEFT))
-		{
-			m_pWindow->getEndCallBackFunc()();
+
+			if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
+			{
+				m_pWindow->getBeginCallBackFunc()();
+			}
+			else if (IS_MOUSE_BUTTON_DOWN(EMouseInput::LEFT))
+			{
+				m_pWindow->getCallBackFunc()();
+			}
+			if (IS_MOUSE_BUTTON_RELEASED(EMouseInput::LEFT))
+			{
+				m_pWindow->getEndCallBackFunc()();
+			}
 		}
 	}
 }

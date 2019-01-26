@@ -16,12 +16,7 @@ void CWindowButton::update(void)
 {
 
 	CWindow::update();
-	m_stActiveRect = RECT{
-		(LONG)(m_stAbsolutePosition.x - m_stActiveSize.cx / 2),
-		(LONG)(m_stAbsolutePosition.y - m_stActiveSize.cy / 2),
-		(LONG)(m_stAbsolutePosition.x + m_stActiveSize.cx / 2),
-		(LONG)(m_stAbsolutePosition.y + m_stActiveSize.cy / 2)
-	};
+	this->createActiveRect();
 }
 
 
@@ -34,7 +29,7 @@ void CWindowButton::init(
 	this->createCallBackFunc(a_pCallBackFunc);
 	this->createEndCallBackFunc(a_pEndCallBackFunc);
 
-
+	this->createActiveRect();
 }
 
 void CWindowButton::release()
@@ -82,4 +77,14 @@ void CWindowButton::createEndCallBackFunc(std::function<void(void)>* a_pCallBack
 	{
 		m_stEndCallBackFunc = (*a_pCallBackFunc);
 	}
+}
+
+void CWindowButton::createActiveRect()
+{
+	m_stActiveRect = RECT{
+		   (LONG)(m_stAbsolutePosition.x - m_stActiveSize.cx / 2),
+		   (LONG)(m_stAbsolutePosition.y - m_stActiveSize.cy / 2),
+		   (LONG)(m_stAbsolutePosition.x + m_stActiveSize.cx / 2),
+		   (LONG)(m_stAbsolutePosition.y + m_stActiveSize.cy / 2)
+	};
 }

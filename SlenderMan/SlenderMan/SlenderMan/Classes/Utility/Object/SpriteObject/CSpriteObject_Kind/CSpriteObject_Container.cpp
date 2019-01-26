@@ -1,7 +1,8 @@
 #include "CSpriteObject_Container.h"
+#include "CSpriteObject_Button.h"
+#include "CSpriteObject_List.h"
+
 #include "../../../System/WindowSystem/WindowSystem_CWindowContainer.h"
-#include "../../SpriteObject/CSpriteObject_Kind/CSpriteObject_Button.h"
-#include "../../SpriteObject/CSpriteObject_Kind/CSpriteObject_Container.h"
 #include "../../../Manager/CInputManager.h"
 
 CSpriteObject_Container::CSpriteObject_Container(std::string a_stSpriteTexturePath, std::string a_stExtantion, int a_nAnimationFrame)
@@ -34,6 +35,11 @@ void CSpriteObject_Container::update()
 			if (oIterator.second->getWindowType() == CWindowType::BUTTON)
 			{
 				auto SpriteObj = dynamic_cast<CSpriteObject_Button*>(oIterator.second);
+				SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
+			}
+			if (oIterator.second->getWindowType() == CWindowType::CONTAINER)
+			{
+				auto SpriteObj = dynamic_cast<CSpriteObject_Container*>(oIterator.second);
 				SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
 			}
 			if (oIterator.second->getWindowType() == CWindowType::CONTAINER)
