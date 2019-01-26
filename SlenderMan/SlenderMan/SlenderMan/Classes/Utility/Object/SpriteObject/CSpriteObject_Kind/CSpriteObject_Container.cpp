@@ -17,48 +17,51 @@ CSpriteObject_Container::~CSpriteObject_Container()
 
 void CSpriteObject_Container::update()
 {
-	CSpriteObject::update();
-	D3DSURFACE_DESC pSurf;
-	LPDIRECT3DTEXTURE9 pTex = m_oSpriteTexture[m_nTextureOffset];
-	pTex->GetLevelDesc(0, &pSurf);
+	if (m_bIsVisible)
+	{
+		CSpriteObject::update();
+		D3DSURFACE_DESC pSurf;
+		LPDIRECT3DTEXTURE9 pTex = m_oSpriteTexture[m_nTextureOffset];
+		pTex->GetLevelDesc(0, &pSurf);
 
-	m_pWindow->getActiveSize() = SIZE{ (LONG)pSurf.Width,(LONG)pSurf.Height };
-	m_pWindow->update();
-	
-	setPosition(m_pWindow->getAbsolutePosition());
-	
-	for (auto oIterator : m_oChildSpriteObjectList)
-	{
-		if (oIterator.second->getWindowType() == CWindowType::BUTTON)
-		{
-			auto SpriteObj = dynamic_cast<CSpriteObject_Button*>(oIterator.second);
-			SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
-		}
-		if (oIterator.second->getWindowType() == CWindowType::CONTAINER)
-		{
-			auto SpriteObj = dynamic_cast<CSpriteObject_Container*>(oIterator.second);
-			SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
-		}
-	}
-	if (PtInRect(&m_pWindow->getActiveRect(), GET_MOUSE_POSITION()))
-	{
+		m_pWindow->getActiveSize() = SIZE{ (LONG)pSurf.Width,(LONG)pSurf.Height };
+		m_pWindow->update();
 
-		if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
+		setPosition(m_pWindow->getAbsolutePosition());
+
+		for (auto oIterator : m_oChildSpriteObjectList)
 		{
-			m_pWindow->getBeginCallBackFunc()();
+			if (oIterator.second->getWindowType() == CWindowType::BUTTON)
+			{
+				auto SpriteObj = dynamic_cast<CSpriteObject_Button*>(oIterator.second);
+				SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
+			}
+			if (oIterator.second->getWindowType() == CWindowType::CONTAINER)
+			{
+				auto SpriteObj = dynamic_cast<CSpriteObject_Container*>(oIterator.second);
+				SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
+			}
 		}
-		else if (IS_MOUSE_BUTTON_DOWN(EMouseInput::LEFT))
+		if (PtInRect(&m_pWindow->getActiveRect(), GET_MOUSE_POSITION()))
 		{
-			m_pWindow->getCallBackFunc()();
+
+			if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
+			{
+				m_pWindow->getBeginCallBackFunc()();
+			}
+			else if (IS_MOUSE_BUTTON_DOWN(EMouseInput::LEFT))
+			{
+				m_pWindow->getCallBackFunc()();
+			}
+			if (IS_MOUSE_BUTTON_RELEASED(EMouseInput::LEFT))
+			{
+				m_pWindow->getEndCallBackFunc()();
+			}
 		}
-		if (IS_MOUSE_BUTTON_RELEASED(EMouseInput::LEFT))
+		for (auto oIterator : m_oChildSpriteObjectList)
 		{
-			m_pWindow->getEndCallBackFunc()();
+			oIterator.second->update();
 		}
-	}
-	for (auto oIterator : m_oChildSpriteObjectList)
-	{
-		oIterator.second->update();
 	}
 }
 
@@ -68,6 +71,15 @@ void CSpriteObject_Container::doDrawUI()
 	for (auto oIterator : m_oChildSpriteObjectList)
 	{
 		oIterator.second->doDrawUI();
+	}
+}
+
+void CSpriteObject_Container::setVisible(bool a_bIsVisible)
+{
+	m_bIsVisible = a_bIsVisible;
+	for (auto oIterator : m_oChildSpriteObjectList)
+	{
+		oIterator.second->setVisible(a_bIsVisible);
 	}
 }
 
@@ -89,25 +101,39 @@ void CSpriteObject_Container::release()
 
 void CSpriteObject_Container::addChildSpriteObject(std::string a_stSpriteName,CWindowType a_ECWindowType ,CSpriteObject * a_pSpriteObject)
 {
-	if (m_oChildSpriteObjectList.find(a_stSpriteName) == m_oChildSpriteObjectList.end())
+	auto oIter = std::find_if(m_oChildSpriteObjectList.begin(), m_oChildSpriteObjectList.end(), [=](std::pair<std::string, CSpriteObject*> obj)->bool {
+		if (obj.first == a_stSpriteName)
+			return true;
+		else return false;
+	});
+
+	if (oIter == m_oChildSpriteObjectList.end())
 	{
 		if (a_ECWindowType == CWindowType::BUTTON)
 		{
 			auto pSpriteObject = dynamic_cast<CSpriteObject_Button*>(a_pSpriteObject);
-			m_oChildSpriteObjectList.insert(decltype(m_oChildSpriteObjectList)::value_type(a_stSpriteName, pSpriteObject));
+			m_oChildSpriteObjectList.push_back(decltype(m_oChildSpriteObjectList)::value_type(a_stSpriteName, a_pSpriteObject));
 		}
 		else if (a_ECWindowType == CWindowType::CONTAINER)
 		{
 			auto pSpriteObject = dynamic_cast<CSpriteObject_Container*>(a_pSpriteObject);
-			m_oChildSpriteObjectList.insert(decltype(m_oChildSpriteObjectList)::value_type(a_stSpriteName, pSpriteObject));
+			m_oChildSpriteObjectList.push_back(decltype(m_oChildSpriteObjectList)::value_type(a_stSpriteName, a_pSpriteObject));
 		}
 	}
 }
 
 void CSpriteObject_Container::deleteChildSpriteObject(std::string a_stSpriteName)
 {
-	if (m_oChildSpriteObjectList.find(a_stSpriteName) != m_oChildSpriteObjectList.end())
+
+	auto oIter = std::find_if(m_oChildSpriteObjectList.begin(), m_oChildSpriteObjectList.end(), [=](std::pair<std::string, CSpriteObject*> obj)->bool {
+		if (obj.first == a_stSpriteName)
+			return true;
+		else return false;
+	});
+
+	if (oIter != m_oChildSpriteObjectList.end())
 	{
-		m_oChildSpriteObjectList.erase(a_stSpriteName);
+		m_oChildSpriteObjectList.erase(oIter);
 	}
+
 }

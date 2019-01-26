@@ -5,6 +5,7 @@
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CSceneManager.h"
+#include "../../../Utility/Manager/CInputManager.h"
 CTitleScene::CTitleScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
 {
@@ -91,6 +92,12 @@ void CTitleScene::update(void)
 	titleImage->update();
 	gameStartImage->update();
 	uiContainer->update();
+
+	//Sprite Container 안에 있는 윈도우들의 팝업창 예시
+	if (IS_KEY_PRESSED(DIK_ESCAPE))
+	{
+		uiContainer->setVisible(!uiContainer->getVisible());
+	}
 }
 
 void CTitleScene::draw(void)
@@ -103,8 +110,8 @@ void CTitleScene::drawUI(void)
 	CScene::drawUI();
 	m_pSprite_BackGround->drawUI();
 	titleImage->drawUI();
-	gameStartImage->doDrawUI();
-	uiContainer->doDrawUI();
+	gameStartImage->drawUI();
+	uiContainer->drawUI();
 }
 
 LRESULT CTitleScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)

@@ -29,7 +29,7 @@ public:			// getter, setter
 	/*******************************************/
 	//setter
 	/*******************************************/
-	void setVisible(bool a_bIsVisible);
+	virtual void setVisible(bool a_bIsVisible);
 	void setColor(D3DCOLOR a_nDiffuseColor);		//! changeColor
 
 protected:			

@@ -19,8 +19,12 @@ public:			//getter,setter
 	CWindow*		getWindow() { return m_pWindow; }
 	bool			getIsChild() { return m_bIsChild; }
 	D3DXVECTOR3		getRelativePos() { return m_stRelativePos; }
-	std::unordered_map<std::string, CSpriteObject*>&	getChildSpriteObjectList() { return m_oChildSpriteObjectList; }
+	std::vector<std::pair<std::string, CSpriteObject*>>&	getChildSpriteObjectList() { return m_oChildSpriteObjectList; }
 
+	/******************************************************/
+	//setter
+	/******************************************************/
+	virtual void setVisible(bool a_bIsVisible) override;
 public:			
 	virtual void init(std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc,bool a_bIsChild = false,D3DXVECTOR3 a_rstRelativePos = D3DXVECTOR3(0,0,0));
 	virtual void release();
@@ -32,5 +36,5 @@ private:
 	D3DXVECTOR3		m_stRelativePos;
 
 	bool			m_bIsChild;
-	std::unordered_map<std::string, CSpriteObject*>	m_oChildSpriteObjectList;
+	std::vector<std::pair<std::string, CSpriteObject*>>	m_oChildSpriteObjectList;
 };
