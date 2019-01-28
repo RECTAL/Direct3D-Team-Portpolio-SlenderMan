@@ -25,6 +25,10 @@ public:		//interface
 		WPARAM a_wParam,
 		LPARAM a_lParam) override;					//interface : IWindowMessageHandler
 
+
+public:		//override
+	virtual void createWindowUI() {};
+
 public:		//getter,setter
 	/**********************************************/
 	//getter

@@ -4,6 +4,10 @@
 
 
 class CSpriteObject;
+class CSpriteObject_Button;
+class CSpriteObject_Container;
+class CSpriteObject_List;
+
 class CTitleScene :public CScene
 {
 public:		//constructor , destructor
@@ -22,7 +26,7 @@ public:		//interface
 
 public:		//public override function
 	virtual void init()override;					//override	: CScene
-
+	virtual void createWindowUI()override;
 
 private:
 	CSpriteObject*	m_pSprite_BackGround;
@@ -31,4 +35,11 @@ private:
 	CSpriteObject* gameStartImage;
 	CSpriteObject* optionImage;
 	CSpriteObject* exitImage;
+	CSpriteObject_Button* gameStartImage;
+
+	CSpriteObject_Container* uiContainer;
+	CSpriteObject_Button* gameStartButton;
+
+	CSpriteObject_List*		 uiList;
+	CSpriteObject_Button*	uiButton[5];
 };

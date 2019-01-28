@@ -21,5 +21,8 @@ enum class CWindowType
 {
 	CONTAINER,
 	BUTTON,
-	EDITER
+	EDITER,
+	LIST,
+	SCROLLBAR,
+	NONE
 };

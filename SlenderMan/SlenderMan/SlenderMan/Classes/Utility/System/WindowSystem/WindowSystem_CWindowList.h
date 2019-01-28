@@ -3,11 +3,11 @@
 #include "../../Base/CWindow.h"
 
 
-class CWindowContainer :public CWindow
+class CWindowList :public CWindow
 {
 public:
-	CWindowContainer(std::string a_stWindowName, CWindowType a_ECWindowType,SIZE a_stActiveSize, D3DXVECTOR3 a_stAbsolutePos);
-	virtual ~CWindowContainer();
+	CWindowList(std::string a_stWindowName, CWindowType a_ECWindowType, SIZE a_stActiveSize, D3DXVECTOR3 a_stAbsolutePos);
+	virtual ~CWindowList();
 
 public:			//interface
 	virtual void update(void)override;			//interface : IUpdateable
@@ -21,8 +21,5 @@ public:			//override
 	virtual void createEndCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) override;
 	virtual void createActiveRect()override;
 private:
-	POINT	m_stPreOffset;
-	POINT	m_stOffset;
-	LONG	m_stDeltaX =0;
-	LONG	m_stDeltaY =0;
+	
 };

@@ -14,6 +14,10 @@ void CMainPlayScene::init()
 	CScene::init();
 }
 
+void CMainPlayScene::createWindowUI()
+{
+}
+
 void CMainPlayScene::update(void)
 {
 	CScene::update();
