@@ -1,11 +1,20 @@
 ﻿  CTitleScene.cpp
   c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(20): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(21): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(23): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(26): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(35): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(38): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(64): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(24): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(25): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(27): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(28): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(30): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(33): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(36): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(39): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(48): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(51): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(91): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  CSceneManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  코드를 생성하고 있습니다...
   SlenderMan.vcxproj -> C:\Users\zoddl\Source\Repos\Direct3D-Team-Portpolio-SlenderMan\SlenderMan\SlenderMan\Debug\SlenderMan.exe
   SlenderMan.vcxproj -> C:\Users\zoddl\Source\Repos\Direct3D-Team-Portpolio-SlenderMan\SlenderMan\SlenderMan\Debug\SlenderMan.pdb (Full PDB)

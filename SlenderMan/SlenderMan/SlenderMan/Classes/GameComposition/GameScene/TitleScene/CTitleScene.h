@@ -27,5 +27,8 @@ public:		//public override function
 private:
 	CSpriteObject*	m_pSprite_BackGround;
 	CSpriteObject* titleImage;
+	CSpriteObject* sprite_fire;
 	CSpriteObject* gameStartImage;
+	CSpriteObject* optionImage;
+	CSpriteObject* exitImage;
 };

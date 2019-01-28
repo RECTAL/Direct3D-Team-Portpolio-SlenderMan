@@ -44,7 +44,7 @@ void CWindowContainer::createBeginCallBackFunc(std::function<void(void)>* a_pCal
 	{
 		m_stBeginCallBackFunc = [=](void)->void
 		{
-			m_stPreOffset = GET_MOUSE_POSITION();
+		//	m_stPreOffset = GET_MOUSE_POSITION();
 		};
 	}
 	else
@@ -59,7 +59,7 @@ void CWindowContainer::createCallBackFunc(std::function<void(void)>* a_pCallBack
 	{
 		m_stCallBackFunc = [=](void)->void {
 		
-			m_stOffset = GET_MOUSE_POSITION();
+			//m_stOffset = GET_MOUSE_POSITION();
 			LONG stDeltaX = m_stOffset.x - m_stPreOffset.x;
 			LONG stDeltaY = m_stOffset.y - m_stPreOffset.y;
 
