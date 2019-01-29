@@ -59,5 +59,5 @@ private:	// private ÇÔ¼ö
 private:
 	
 	CSpriteObject_Default * m_pBackGround;
-	
+	float alpha = 0.0f;
 };

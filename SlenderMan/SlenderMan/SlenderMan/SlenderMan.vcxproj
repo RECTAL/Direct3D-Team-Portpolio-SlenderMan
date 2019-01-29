@@ -154,6 +154,7 @@
     <ClInclude Include="Classes\GameComposition\GameScene\LoadingScene\Loader\ILoader.h" />
     <ClInclude Include="Classes\GameComposition\GameScene\MainPlayScene\CMainPlayScene.h" />
     <ClInclude Include="Classes\GameComposition\GameScene\MapToolScene\CMapToolScene.h" />
+    <ClInclude Include="Classes\GameComposition\GameScene\TestScene\CVirtualScene.h" />
     <ClInclude Include="Classes\GameComposition\GameScene\TitleScene\CTitleScene.h" />
     <ClInclude Include="Classes\GameComposition\GameScene\VictoryScene\CVictoryScene.h" />
     <ClInclude Include="Classes\Utility\Base\CDirect3DApplication.h" />
@@ -200,6 +201,7 @@
     <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\Loader\TitleSceneLoader.cpp" />
     <ClCompile Include="Classes\GameComposition\GameScene\MainPlayScene\CMainPlayScene.cpp" />
     <ClCompile Include="Classes\GameComposition\GameScene\MapToolScene\CMapToolScene.cpp" />
+    <ClCompile Include="Classes\GameComposition\GameScene\TestScene\CVirtualScene.cpp" />
     <ClCompile Include="Classes\GameComposition\GameScene\TitleScene\CTitleScene.cpp" />
     <ClCompile Include="Classes\GameComposition\GameScene\VictoryScene\CVictoryScene.cpp" />
     <ClCompile Include="Classes\Utility\Base\CDirect3DApplication.cpp" />

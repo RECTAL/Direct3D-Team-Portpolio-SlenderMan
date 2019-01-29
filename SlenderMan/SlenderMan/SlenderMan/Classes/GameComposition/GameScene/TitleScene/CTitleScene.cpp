@@ -47,6 +47,8 @@ void CTitleScene::init()
 
 	this->createDefaultUI();
 	this->createWindowUI();
+
+	int a = 1;
 }
 
 void CTitleScene::createWindowUI()
@@ -112,7 +114,7 @@ void CTitleScene::createWindowUI()
 		
 		(*endFptr) = [=](void)->void
 		{
-			CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY);
+			CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
 		};
 		uiButton[i]->init(
 			nullptr,
@@ -151,7 +153,7 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
-		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY);
+		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
 	};
 	playImage->init(crashFptr, nullptr, nullptr, endFptr);
 
@@ -177,7 +179,7 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
-		CHANGE_SCENE_LOADING(GAMESCENE_MAPTOOL);
+		CHANGE_SCENE_LOADING(GAMESCENE_MAPTOOL,TRUE);
 	};
 
 	mapToolImage->init(crashFptr, nullptr, nullptr, endFptr);

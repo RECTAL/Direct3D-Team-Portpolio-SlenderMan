@@ -1,12 +1,13 @@
 #include "TitleSceneLoader.h"
+#include "../../TitleScene/CTitleScene.h"
+#include "../../../../Utility/Manager/CSceneManager.h"
 
-void TitleSceneLoader::loadResources_Texture()
+void TitleSceneLoader::loadResources_Init()
 {
-	for (int i = 0; i < 5000; i++) {
-		printf("a");
-	}
-		m_bIsTextureDownLoad = true;
+	auto scene = dynamic_cast<CTitleScene*>(FIND_SCENE(GAMESCENE_TITLE));
+	scene->init();
 	
+	m_bIsInitDownLoad = true;
 }
 
 void TitleSceneLoader::loadResources_Effects()

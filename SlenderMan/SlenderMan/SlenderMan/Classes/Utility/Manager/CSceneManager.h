@@ -30,8 +30,9 @@ public:
 	void init();
 	void release();
 
-	CScene* changeScene_rootDirect(std::string a_stSceneName);
-	CScene* changeScene_rootLoadingScene(std::string a_stNextSceneName);
+	CScene* changeScene_rootDirect(std::string a_stSceneName,bool isInit = true);
+	CScene* changeScene_rootLoadingScene(std::string a_stNextSceneName,bool isInit = true);
+	CScene* findScene(std::string a_stSceneName);
 	HRESULT deleteScene(std::string a_stSceneName);
 
 private:
@@ -43,4 +44,5 @@ private:
 private:
 	SceneMapList m_oSceneMapList;
 	CScene*		 m_pCurrentScene;
+
 };

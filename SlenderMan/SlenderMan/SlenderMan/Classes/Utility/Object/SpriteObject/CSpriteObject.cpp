@@ -7,6 +7,7 @@
 CSpriteObject::CSpriteObject(std::string a_stSpriteTexturePath, std::string a_stExtantion, const float width, const float height, int a_nAnimationFrame)
 	:m_stSpriteTexturePath(a_stSpriteTexturePath),m_nAnimationCount(a_nAnimationFrame)
 {
+	
 	m_pSprite = this->createSprite();
 	for (int i = 0; i < m_nAnimationCount; i++)
 	{

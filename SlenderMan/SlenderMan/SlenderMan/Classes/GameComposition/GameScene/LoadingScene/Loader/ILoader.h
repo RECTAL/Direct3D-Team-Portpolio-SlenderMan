@@ -4,7 +4,7 @@
 class ILoader
 {
 public:
-	virtual void loadResources_Texture()=0;				//텍스쳐	리소스 다운
+	virtual void loadResources_Init()=0;				//초기화 다운
 	virtual void loadResources_Effects()=0;				//이펙트 리소스 다운
 	virtual void loadResources_Sounds()=0;				//사운드 리소스 다운
 	virtual void loadResources_Meshes()=0;				//정적메시,스킨드 메시 다운
@@ -14,7 +14,7 @@ public:
 	{
 		IsAllDownLoad(
 			NULL,
-			m_bIsTextureDownLoad&&m_bIsEffectsDownLoad&&m_bIsSoundsDownLoad&&m_bIsMeshesDownLoad,
+			m_bIsInitDownLoad&&m_bIsEffectsDownLoad&&m_bIsSoundsDownLoad&&m_bIsMeshesDownLoad,
 			false
 		);
 	};
@@ -35,7 +35,7 @@ public:
 	}
 
 protected:
-	bool	m_bIsTextureDownLoad	= false;
+	bool	m_bIsInitDownLoad		= false;
 	bool	m_bIsEffectsDownLoad	= false;
 	bool	m_bIsSoundsDownLoad		= false;
 	bool	m_bIsMeshesDownLoad		= false;

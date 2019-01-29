@@ -194,6 +194,9 @@
     <Filter Include="Classes\Global\Utility\System\WindowSystem">
       <UniqueIdentifier>{787ff7be-7ca2-4b89-8b52-e8b3451790fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\GameComposition\GameScene\TestScene">
+      <UniqueIdentifier>{9ba2e01f-79b0-476a-8ae5-a0f1d693dc32}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\Define\KGlobalDefine.h">
@@ -331,6 +334,9 @@
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_List.h">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameScene\TestScene\CVirtualScene.h">
+      <Filter>Classes\GameComposition\GameScene\TestScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -347,9 +353,6 @@
     </ClCompile>
     <ClCompile Include="Classes\Utility\Manager\CTimeManager.cpp">
       <Filter>Classes\Global\Utility\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Classes\Utility\Base\CDirect3DApplication.cpp">
-      <Filter>Classes\Global\Utility\Base</Filter>
     </ClCompile>
     <ClCompile Include="Classes\Utility\Base\CObject.cpp">
       <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
@@ -461,6 +464,12 @@
     </ClCompile>
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_List.cpp">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\TestScene\CVirtualScene.cpp">
+      <Filter>Classes\GameComposition\GameScene\TestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Base\CDirect3DApplication.cpp">
+      <Filter>Classes\Global\Utility\Base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -69,6 +69,7 @@
 #define GAMESCENE_MAPTOOL					"GameScene_MapTool"
 #define GAMESCENE_GAMEOVER					"GameScene_GameOver"
 #define GAMESCENE_VICTORY					"GameScene_Victory"
+#define GAMESCENE_VIRTUAL					"GameScene_Virtual"
 
 /*Macro GetSingleton*/
 //application
@@ -119,9 +120,9 @@
 
 
 //Scene Option
-#define CHANGE_SCENE_LOADING(NEXTSCENENAME)				(GET_SCENE_MANAGER()->changeScene_rootLoadingScene(NEXTSCENENAME))
-#define CHANGE_SCENE_DIRECT(SCENENAME)					(GET_SCENE_MANAGER()->changeScene_rootDirect(SCENENAME))
-
+#define CHANGE_SCENE_LOADING(NEXTSCENENAME,ISINIT)		(GET_SCENE_MANAGER()->changeScene_rootLoadingScene(NEXTSCENENAME,ISINIT))
+#define CHANGE_SCENE_DIRECT(SCENENAME,ISINIT)			(GET_SCENE_MANAGER()->changeScene_rootDirect(SCENENAME,ISINIT))
+#define FIND_SCENE(SCENE)								(GET_SCENE_MANAGER()->findScene(SCENE))
 
 
 // singleton
