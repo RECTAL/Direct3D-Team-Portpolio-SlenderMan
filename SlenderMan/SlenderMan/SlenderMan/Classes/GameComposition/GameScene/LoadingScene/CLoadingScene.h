@@ -3,7 +3,8 @@
 #include "../../../Utility/Base/CScene.h"
 
 class ILoader;
-class CSpriteObject;
+class CSpriteObject_Default;
+
 class CLoadingScene :public CScene
 {
 public:		//constructor , destructor
@@ -37,7 +38,6 @@ public:		//	getter,setter
 private:	//private function
 	void	loadResources();						//리소스 로딩 함수		자식쓰레드 활용
 
-
 private:	
 	std::thread*		m_pLoadThread;
 	std::mutex			m_stMutex;
@@ -48,8 +48,16 @@ private:
 
 	bool				m_bIsAllDownLoad = false;
 
+private:	// private 함수
+
+	//! 백그라운드를 만든다
+	void createBackGround(void);
+
+	//! 이미지를 업데이트한다
+	void updateImage(void);
+
 private:
-	CSpriteObject *m_pBackground;
-	//충돌중...
-	// 충돌테스트
+	
+	CSpriteObject_Default * m_pBackGround;
+	
 };

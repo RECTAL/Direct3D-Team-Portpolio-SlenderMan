@@ -2,7 +2,11 @@
 
 void TitleSceneLoader::loadResources_Texture()
 {
-	m_bIsTextureDownLoad = true;
+	for (int i = 0; i < 5000; i++) {
+		printf("a");
+	}
+		m_bIsTextureDownLoad = true;
+	
 }
 
 void TitleSceneLoader::loadResources_Effects()

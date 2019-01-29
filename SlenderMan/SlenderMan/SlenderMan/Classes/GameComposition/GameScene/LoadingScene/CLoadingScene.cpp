@@ -4,6 +4,9 @@
 #include "../LoadingScene/Loader/MapToolSceneLoader.h"
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CSceneManager.h"
+#include "../../../Utility/Manager/CTimeManager.h"
+#include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Default.h"
+
 CLoadingScene::CLoadingScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
 {
@@ -11,9 +14,9 @@ CLoadingScene::CLoadingScene(std::string a_stSceneName)
 
 CLoadingScene::~CLoadingScene()
 {
-	
 	SAFE_DELETE(m_pLoadThread);
 	SAFE_DELETE(m_pLoader);
+	SAFE_DELETE(m_pBackGround);
 }
 
 void CLoadingScene::init()
@@ -22,10 +25,8 @@ void CLoadingScene::init()
 	m_pLoadThread = new std::thread(std::bind(&CLoadingScene::loadResources, this));
 	m_bIsAllDownLoad = false;
 
-}
+	this->createBackGround();
 
-void CLoadingScene::createWindowUI()
-{
 }
 
 void CLoadingScene::loadResources()
@@ -57,10 +58,15 @@ void CLoadingScene::loadResources()
 	m_stMutex.unlock();
 }
 
+void CLoadingScene::createWindowUI()
+{
+
+}
 
 void CLoadingScene::update(void)
 {
 	CScene::update();
+	m_pBackGround->update();
 	m_pLoader->IsAllDownLoad(&m_bIsAllDownLoad, 0, true);
 	if (m_bIsAllDownLoad)
 	{
@@ -69,6 +75,7 @@ void CLoadingScene::update(void)
 		SAFE_DELETE(m_pLoader);
 		CHANGE_SCENE_DIRECT(m_stNextSceneName);
 	}
+	//this->updateImage();
 }
 
 void CLoadingScene::draw(void)
@@ -79,6 +86,7 @@ void CLoadingScene::draw(void)
 void CLoadingScene::drawUI(void)
 {
 	CScene::drawUI();
+	m_pBackGround->drawUI();
 }
 
 LRESULT CLoadingScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
@@ -90,3 +98,18 @@ LRESULT CLoadingScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPAR
 	return S_OK;
 }
 
+void CLoadingScene::createBackGround(void)
+{
+	m_pBackGround = new CSpriteObject_Default("Resources\Textures\Scene\LoadingScene\loading", "png", 1366, 768, 1);
+	m_pBackGround->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
+}
+
+void CLoadingScene::updateImage(void)
+{
+	static float fTime;
+	fTime += GET_DELTA_TIME() / 30;
+	if (fTime > 100.0f) {
+		m_pBackGround->update();
+		fTime = 0.0f;
+	}
+}

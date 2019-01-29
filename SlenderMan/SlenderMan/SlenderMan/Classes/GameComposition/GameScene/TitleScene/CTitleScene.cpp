@@ -88,7 +88,7 @@ void CTitleScene::createWindowUI()
 	/********************************************************/
 	//ui ¸®½ºÆ®
 	/********************************************************/
-	uiList = new CSpriteObject_List("Resources/Textures/Scene/TitleScene/ExWindow", "png", 600,619,1);
+	uiList = new CSpriteObject_List("Resources/Textures/Scene/TitleScene/ExWindow", "png", 300,300,1);
 	uiList->setPosition(D3DXVECTOR3(1300, 500, 0));
 	uiList->setVisible(false);
 	uiList->init(nullptr, nullptr, nullptr, nullptr);
@@ -132,7 +132,7 @@ void CTitleScene::createDefaultUI()
 
 void CTitleScene::createButtonUI()
 {
-	playImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/play", "png",425,129, 1);
+	playImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/play", "png",200,60, 1);
 	playImage->setPosition(D3DXVECTOR3(400, 550, 0));
 	std::function<void(void)>* fptr = new std::function<void(void)>;
 	(*fptr) = [=](void) -> void
@@ -141,7 +141,7 @@ void CTitleScene::createButtonUI()
 	};
 	playImage->init(nullptr, nullptr, nullptr, fptr);
 
-	optionImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/option", "png",634,127, 1);
+	optionImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/option", "png",300,60, 1);
 	optionImage->setPosition(D3DXVECTOR3(400, 750, 0));
 	
 	(*fptr) = [=](void) -> void
@@ -155,7 +155,7 @@ void CTitleScene::createButtonUI()
 		SendMessage(GET_WINDOW_HANDLE(), WM_DESTROY, 0, 0);
 	};
 
-	exitImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/exit", "png", 395,130,1);
+	exitImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/exit", "png", 150,80,1);
 	exitImage->setPosition(D3DXVECTOR3(400, 950, 0));
 	exitImage->init(nullptr, nullptr, nullptr, fptr);
 
