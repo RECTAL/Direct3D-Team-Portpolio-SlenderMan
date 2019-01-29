@@ -15,11 +15,17 @@ CTitleScene::CTitleScene(std::string a_stSceneName)
 
 CTitleScene::~CTitleScene()
 {
+	SAFE_DELETE(crashFptr);
+	SAFE_DELETE(beginFptr);
+	SAFE_DELETE(pressFptr);
+	SAFE_DELETE(endFptr);
+
 	SAFE_DELETE(m_pSprite_BackGround);
 	SAFE_DELETE(sprite_fire);
 	SAFE_DELETE(titleImage);
 	SAFE_DELETE(playImage);
 	SAFE_DELETE(optionImage);
+	SAFE_DELETE(mapToolImage);
 	SAFE_DELETE(exitImage);
 	
 	SAFE_DELETE(uiContainer);
@@ -34,6 +40,10 @@ CTitleScene::~CTitleScene()
 void CTitleScene::init()
 {
 	CScene::init();
+	crashFptr = new std::function<void(void)>;
+	beginFptr = new std::function<void(void)>;
+	pressFptr = new std::function<void(void)>;
+	endFptr = new std::function<void(void)>;
 
 	this->createDefaultUI();
 	this->createWindowUI();
@@ -46,7 +56,7 @@ void CTitleScene::createWindowUI()
 	this->createButtonUI();
 	//UI 창 컨테이너
 	/********************************************************/
-	uiContainer = new CSpriteObject_Container("Resources/Textures/Scene/TitleScene/ExWindow", "png",600,619, 1);
+	uiContainer = new CSpriteObject_Container("Resources/Textures/Scene/TitleScene/ExWindow", "png", 300, 310, 1);
 	uiContainer->setPosition(D3DXVECTOR3(600, 500, 0));
 	uiContainer->setVisible(false);
 	uiContainer->init(nullptr, nullptr, nullptr, nullptr);
@@ -88,7 +98,7 @@ void CTitleScene::createWindowUI()
 	/********************************************************/
 	//ui 리스트
 	/********************************************************/
-	uiList = new CSpriteObject_List("Resources/Textures/Scene/TitleScene/ExWindow", "png", 300,300,1);
+	uiList = new CSpriteObject_List("Resources/Textures/Scene/TitleScene/ExWindow", "png", 300, 310, 1);
 	uiList->setPosition(D3DXVECTOR3(1300, 500, 0));
 	uiList->setVisible(false);
 	uiList->init(nullptr, nullptr, nullptr, nullptr);
@@ -99,8 +109,8 @@ void CTitleScene::createWindowUI()
 	{
 		uiButton[i] = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/gameStart", "png", 200,80,1);
 		uiButton[i]->setPosition(uiList->getPosition());
-		std::function<void(void)>* fptr1 = new std::function<void(void)>;
-		(*fptr1) = [=](void)->void
+		
+		(*endFptr) = [=](void)->void
 		{
 			CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY);
 		};
@@ -108,7 +118,7 @@ void CTitleScene::createWindowUI()
 			nullptr,
 			nullptr,
 			nullptr,
-			fptr1,
+			endFptr,
 			true,
 			D3DXVECTOR3(0.0f, 0.0f, 0.0f)
 		);
@@ -120,44 +130,74 @@ void CTitleScene::createWindowUI()
 	 
 void CTitleScene::createDefaultUI()
 {
-	m_pSprite_BackGround = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/background", "png",1366,768, 1);
+	m_pSprite_BackGround = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/background", "png", 1366, 768, 1);
 	m_pSprite_BackGround->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 
-	sprite_fire = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/fire/fire", "png", 1366 ,768 ,33);
+	sprite_fire = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/fire/fire", "png", 1366, 768, 33);
 	sprite_fire->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 
-	titleImage = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/title", "png", 760 , 462, 1);
-	titleImage->setPosition(D3DXVECTOR3(450, 250, 0));
+	titleImage = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/title", "png", 600, 300, 1);
+	titleImage->setPosition(D3DXVECTOR3(380, 200, 0));
 }
 
 void CTitleScene::createButtonUI()
 {
-	playImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/play", "png",200,60, 1);
-	playImage->setPosition(D3DXVECTOR3(400, 550, 0));
-	std::function<void(void)>* fptr = new std::function<void(void)>;
-	(*fptr) = [=](void) -> void
+	playImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/play", "png", 300, 60, 2);
+	playImage->setPosition(D3DXVECTOR3(370, 390, 0));
+	(*crashFptr) = [=](void) -> void
+	{
+		playImage->getTextureOffset() = 1;
+	};
+
+	(*endFptr) = [=](void) -> void
 	{
 		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY);
 	};
-	playImage->init(nullptr, nullptr, nullptr, fptr);
+	playImage->init(crashFptr, nullptr, nullptr, endFptr);
 
-	optionImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/option", "png",300,60, 1);
-	optionImage->setPosition(D3DXVECTOR3(400, 750, 0));
-	
-	(*fptr) = [=](void) -> void
+	optionImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/option", "png", 350, 60, 2);
+	optionImage->setPosition(D3DXVECTOR3(370, 490, 0));
+	(*crashFptr) = [=](void) -> void
+	{
+		optionImage->getTextureOffset() = 1;
+	};
+
+	(*endFptr) = [=](void) -> void
 	{
 		uiContainer->setVisible(!uiContainer->getVisible());
 	};
-	optionImage->init(nullptr, nullptr, nullptr, fptr);
+	optionImage->init(crashFptr, nullptr, nullptr, endFptr);
 
-	(*fptr) = [=](void) -> void
+	mapToolImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/mapTool", "png", 450, 60, 2);
+	mapToolImage->setPosition(D3DXVECTOR3(370, 590, 0));
+	(*crashFptr) = [=](void) -> void
+	{
+		mapToolImage->getTextureOffset() = 1;
+	};
+
+	(*endFptr) = [=](void) -> void
+	{
+		CHANGE_SCENE_LOADING(GAMESCENE_MAPTOOL);
+	};
+
+	mapToolImage->init(crashFptr, nullptr, nullptr, endFptr);
+
+	exitImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/exit", "png", 300, 60, 2);
+	exitImage->setPosition(D3DXVECTOR3(370, 690, 0));
+
+	(*crashFptr) = [=](void) -> void
+	{
+		exitImage->getTextureOffset() = 1;
+	};
+
+	(*endFptr) = [=](void) -> void
 	{
 		SendMessage(GET_WINDOW_HANDLE(), WM_DESTROY, 0, 0);
 	};
 
-	exitImage = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/exit", "png", 150,80,1);
-	exitImage->setPosition(D3DXVECTOR3(400, 950, 0));
-	exitImage->init(nullptr, nullptr, nullptr, fptr);
+	exitImage->init(crashFptr, nullptr, nullptr, endFptr);
+
+	
 
 }
 
@@ -213,6 +253,7 @@ void CTitleScene::buttonImageUpdate()
 {
 	playImage->update();
 	optionImage->update();
+	mapToolImage->update();
 	exitImage->update();
 }
 
@@ -240,9 +281,10 @@ void CTitleScene::defaultImageDrawUI()
 
 void CTitleScene::buttonImageDrawUI()
 {
-	optionImage->drawUI();
-	exitImage->drawUI();
 	playImage->drawUI();
+	optionImage->drawUI();
+	mapToolImage->drawUI();
+	exitImage->drawUI();
 }
 
 LRESULT CTitleScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)

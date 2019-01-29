@@ -11,6 +11,9 @@ class CSpriteObject_Default;
 
 class CTitleScene :public CScene
 {
+private:
+	typedef std::function<void(void)> FPTR;
+
 public:		//constructor , destructor
 	CTitleScene(std::string a_stSceneName);
 	virtual ~CTitleScene();
@@ -46,6 +49,7 @@ private:
 
 	CSpriteObject_Button* playImage;
 	CSpriteObject_Button* optionImage;
+	CSpriteObject_Button* mapToolImage;
 	CSpriteObject_Button* exitImage;
 
 	//CSpriteObject_Button* gameStartImage;
@@ -56,5 +60,9 @@ private:
 	CSpriteObject_List*		 uiList;
 	CSpriteObject_Button*	uiButton[5];
 
-	typedef std::function<void(void)> FPTR;
+	FPTR* crashFptr;
+	FPTR* beginFptr;
+	FPTR* pressFptr;
+	FPTR* endFptr;
+
 };

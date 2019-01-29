@@ -19,6 +19,7 @@ public:			//interface
 
 public:
 	CWindowType	  getWindowType() { return m_ECWindowType; }
+	int& getTextureOffset() { return m_nTextureOffset; }
 
 private:
 	LPD3DXSPRITE   createSprite();
@@ -27,7 +28,7 @@ private:
 protected:
 	void	release();
 
-public:
+protected:
 	oSpriteTexture m_oSpriteTexture;
 	LPD3DXSPRITE   m_pSprite = nullptr;
 	CWindowType    m_ECWindowType;

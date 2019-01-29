@@ -17,7 +17,7 @@ void CSpriteObject_Button::update()
 {
 	if (m_bIsVisible)
 	{
-		CSpriteObject::update();
+		m_nTextureOffset = 0;
 		D3DSURFACE_DESC pSurf;
 		LPDIRECT3DTEXTURE9 pTex = m_oSpriteTexture[m_nTextureOffset];
 		pTex->GetLevelDesc(0, &pSurf);
