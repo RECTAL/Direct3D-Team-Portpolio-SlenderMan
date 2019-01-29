@@ -21,7 +21,7 @@ public:			// getter
 	STWaveSound				getWaveSound(const std::string &a_rKey,bool a_bIsAutoCreate = true);			//! 웨이브 사운드를 반환한다
 	LPD3DXEFFECT			getEffect(const std::string &a_rKey,bool a_bIsAutoCreate = true);				//! 이펙트를 반환한다
 	LPDIRECT3DTEXTURE9		getTexture(const std::string &a_rKey,bool a_bIsAutoCreate = true);				//! 텍스처를 반환한다
-	LPDIRECT3DTEXTURE9		getSpriteTexture(const std::string &a_rKey,bool a_bIsAutoCreate = true);		//! 스프라이트 텍스처를 반환한다
+	LPDIRECT3DTEXTURE9		getSpriteTexture(const std::string &a_rKey, const float width, const float height, bool a_bIsAutoCreate = true);		//! 스프라이트 텍스처를 반환한다
 	LPDIRECT3DCUBETEXTURE9	getCubeTexture(const std::string &a_rKey,bool a_bIsAutoCreate = true);			//! 큐브 텍스처를 반환한다
 
 public:			// public function: Utility
@@ -42,7 +42,7 @@ private:		// private function utility
 	STWaveSound createWaveSound(const std::string &a_rFilepath);						//! 웨이브 사운드를 생성한다
 	LPD3DXEFFECT createEffect(const std::string &a_rFilepath);							//! 이펙트를 생성한다
 	LPDIRECT3DTEXTURE9 createTexture(const std::string &a_rFilepath);					//! 텍스처를 생성한다
-	LPDIRECT3DTEXTURE9 createSpriteTexture(const std::string &a_rFilepath);				//! 스프라이트 텍스처를 생성한다
+	LPDIRECT3DTEXTURE9 createSpriteTexture(const std::string &a_rFilepath,const float width, const float height);				//! 스프라이트 텍스처를 생성한다
 	LPDIRECT3DCUBETEXTURE9 createCubeTexture(const std::string &a_rFilepath);			//! 큐브 텍스처를 생성한다
 
 private:			// private value

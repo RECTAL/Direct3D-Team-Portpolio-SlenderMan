@@ -5,8 +5,8 @@
 #include "../../../System/WindowSystem/WindowSystem_CWindowContainer.h"
 #include "../../../Manager/CInputManager.h"
 
-CSpriteObject_Container::CSpriteObject_Container(std::string a_stSpriteTexturePath, std::string a_stExtantion, int a_nAnimationFrame)
-	:CSpriteObject(a_stSpriteTexturePath,a_stExtantion,a_nAnimationFrame)
+CSpriteObject_Container::CSpriteObject_Container(std::string a_stSpriteTexturePath, std::string a_stExtantion, const float width, const float height, int a_nAnimationFrame)
+	:CSpriteObject(a_stSpriteTexturePath,a_stExtantion, width, height, a_nAnimationFrame)
 {
 	m_ECWindowType = CWindowType::CONTAINER;
 }

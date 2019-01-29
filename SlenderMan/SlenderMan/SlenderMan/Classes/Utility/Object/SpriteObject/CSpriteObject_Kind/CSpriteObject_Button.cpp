@@ -2,8 +2,8 @@
 #include "../../../Manager/CResourceManager.h"
 #include "../../../Manager/CInputManager.h"
 #include "../../../System/WindowSystem/WindowSystem_CWindowButton.h"
-CSpriteObject_Button::CSpriteObject_Button(std::string a_stSpriteTexturePath, std::string a_stExtantion, int a_nAnimationFrame)
-	:CSpriteObject(a_stSpriteTexturePath, a_stExtantion,a_nAnimationFrame)
+CSpriteObject_Button::CSpriteObject_Button(std::string a_stSpriteTexturePath, std::string a_stExtantion, const float width, const float height, int a_nAnimationFrame)
+	:CSpriteObject(a_stSpriteTexturePath, a_stExtantion, width, height, a_nAnimationFrame)
 {
 	m_ECWindowType = CWindowType::BUTTON;
 }

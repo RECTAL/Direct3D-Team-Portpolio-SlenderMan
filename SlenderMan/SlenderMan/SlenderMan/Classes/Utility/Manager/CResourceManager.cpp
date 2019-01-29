@@ -100,7 +100,7 @@ LPDIRECT3DTEXTURE9 CResourceManager::getTexture(const std::string & a_rKey, bool
 	return oIterator->second;
 }
 
-LPDIRECT3DTEXTURE9 CResourceManager::getSpriteTexture(const std::string & a_rKey, bool a_bIsAutoCreate)
+LPDIRECT3DTEXTURE9 CResourceManager::getSpriteTexture(const std::string & a_rKey, const float width, const float height, bool a_bIsAutoCreate)
 {
 	auto oIterator = m_oTextureList.find(a_rKey);
 
@@ -109,7 +109,7 @@ LPDIRECT3DTEXTURE9 CResourceManager::getSpriteTexture(const std::string & a_rKey
 		LPDIRECT3DTEXTURE9 pTexture = nullptr;
 
 		if (a_bIsAutoCreate) {
-			pTexture = this->createSpriteTexture(a_rKey);
+			pTexture = this->createSpriteTexture(a_rKey, width, height);
 			this->addTexture(a_rKey, pTexture);
 		}
 
@@ -316,14 +316,14 @@ LPDIRECT3DTEXTURE9 CResourceManager::createTexture(const std::string & a_rFilepa
 	return pTexture;
 }
 
-LPDIRECT3DTEXTURE9 CResourceManager::createSpriteTexture(const std::string & a_rFilepath)
+LPDIRECT3DTEXTURE9 CResourceManager::createSpriteTexture(const std::string & a_rFilepath, const float width, const float height)
 {
 	LPDIRECT3DTEXTURE9 pTexture = nullptr;
 
 	D3DXCreateTextureFromFileExA(GET_DEVICE(),
 		a_rFilepath.c_str(),
-		D3DX_DEFAULT_NONPOW2,
-		D3DX_DEFAULT_NONPOW2,
+		width,
+		height,
 		1,
 		0,
 		D3DFMT_UNKNOWN,

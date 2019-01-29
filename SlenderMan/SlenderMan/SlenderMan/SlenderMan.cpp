@@ -6,7 +6,7 @@ int WINAPI _tWinMain(HINSTANCE a_hInstance,
 	const int a_nShowOptions)
 {
 	SIZE stWindowSize = {
-		1920,1080 
+		1366  ,768  
 	};
 	CDirect3DApplication oApplication(a_hInstance, stWindowSize, a_nShowOptions);
 

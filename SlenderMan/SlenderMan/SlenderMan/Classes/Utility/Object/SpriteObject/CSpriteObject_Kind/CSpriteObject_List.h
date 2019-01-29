@@ -6,7 +6,7 @@ class CWindow;
 class CSpriteObject_List :public CSpriteObject
 {
 public:
-	CSpriteObject_List(std::string a_stSpriteTexturePath, std::string a_stExtantion, int a_nAnimationFrame);
+	CSpriteObject_List(std::string a_stSpriteTexturePath, std::string a_stExtantion,const float width, const float height, int a_nAnimationFrame);
 	virtual ~CSpriteObject_List();
 public:			//interface
 	virtual void update()override;

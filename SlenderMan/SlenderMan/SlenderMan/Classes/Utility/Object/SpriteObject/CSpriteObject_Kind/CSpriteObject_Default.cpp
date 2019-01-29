@@ -1,7 +1,7 @@
 #include "CSpriteObject_Default.h"
 
-CSpriteObject_Default::CSpriteObject_Default(std::string a_stSpriteTexturePath, std::string a_stExtantion, int a_nAnimationFrame)
-	:CSpriteObject(a_stSpriteTexturePath, a_stExtantion,a_nAnimationFrame)
+CSpriteObject_Default::CSpriteObject_Default(std::string a_stSpriteTexturePath, std::string a_stExtantion, const float width, const float height, int a_nAnimationFrame)
+	:CSpriteObject(a_stSpriteTexturePath, a_stExtantion,width,height, a_nAnimationFrame)
 {
 	m_ECWindowType = CWindowType::NONE;
 }

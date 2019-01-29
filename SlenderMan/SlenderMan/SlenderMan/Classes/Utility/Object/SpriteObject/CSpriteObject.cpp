@@ -1,10 +1,10 @@
 #include "CSpriteObject.h"
 #include "../../Base/CDirect3DApplication.h"
 #include "../../Manager/CDeviceManager.h"
-#include "../../Manager/CResourceManager.h"
 #include "../../Manager/CTimeManager.h"
+#include "../../Manager/CResourceManager.h"
 
-CSpriteObject::CSpriteObject(std::string a_stSpriteTexturePath, std::string a_stExtantion, int a_nAnimationFrame)
+CSpriteObject::CSpriteObject(std::string a_stSpriteTexturePath, std::string a_stExtantion, const float width, const float height, int a_nAnimationFrame)
 	:m_stSpriteTexturePath(a_stSpriteTexturePath),m_nAnimationCount(a_nAnimationFrame)
 {
 	m_pSprite = this->createSprite();
@@ -12,7 +12,7 @@ CSpriteObject::CSpriteObject(std::string a_stSpriteTexturePath, std::string a_st
 	{
 		char path[MAX_PATH];
 		sprintf(path, "%s_%d.%s", a_stSpriteTexturePath.c_str(), i, a_stExtantion.c_str());
-		m_oSpriteTexture.push_back(GET_SPRITE_TEXTURE(path));
+		m_oSpriteTexture.push_back(GET_SPRITE_TEXTURE(path, width, height));
 	}
 }
 
