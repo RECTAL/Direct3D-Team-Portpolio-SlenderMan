@@ -13,8 +13,10 @@ public:
 public:				//interface
 	virtual void update(void)override;			//interface : IUpdateable
 public:				
-	virtual void	init(std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc);
+	virtual void	init(std::function<void(void)>* a_pCrashCallBackFunc, std::function<void(void)>* a_pBeginCallBackFunc,
+		std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc);
 	virtual void	release();
+	virtual void	createCrashCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) = 0;
 	virtual void	createBeginCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) = 0;
 	virtual void	createCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) = 0;
 	virtual void	createEndCallBackFunc(std::function<void(void)>* a_pCallBackFunc = nullptr) = 0;
@@ -31,6 +33,7 @@ public:				//getter,setter
 
 	bool			getIsActive() { return m_bIsActive; }
 
+	std::function<void(void)>&	getCrashCallBackFunc() { return m_stCrashCallBackFunc; }
 	std::function<void(void)>&	getBeginCallBackFunc() { return m_stBeginCallBackFunc; }
 	std::function<void(void)>&	getCallBackFunc() { return m_stCallBackFunc; }
 	std::function<void(void)>&	getEndCallBackFunc() { return m_stEndCallBackFunc; }
@@ -51,6 +54,7 @@ protected:
 
 
 
+	std::function<void(void)> m_stCrashCallBackFunc = nullptr;
 	std::function<void(void)> m_stBeginCallBackFunc = nullptr;
 	std::function<void(void)> m_stCallBackFunc = nullptr;
 	std::function<void(void)> m_stEndCallBackFunc = nullptr;

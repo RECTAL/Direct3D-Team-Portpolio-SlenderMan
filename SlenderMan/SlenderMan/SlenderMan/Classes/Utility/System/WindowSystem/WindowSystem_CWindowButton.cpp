@@ -19,12 +19,10 @@ void CWindowButton::update(void)
 	this->createActiveRect();
 }
 
-
-
-void CWindowButton::init(
-	std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc)
+void CWindowButton::init(std::function<void(void)>* a_pCrashCallBackFunc, std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc)
 {
-	CWindow::init(a_pBeginCallBackFunc, a_pCallBackFunc, a_pEndCallBackFunc);
+	CWindow::init(a_pCrashCallBackFunc, a_pBeginCallBackFunc, a_pCallBackFunc, a_pEndCallBackFunc);
+	this->createCrashCallBackFunc(a_pCrashCallBackFunc);
 	this->createBeginCallBackFunc(a_pBeginCallBackFunc);
 	this->createCallBackFunc(a_pCallBackFunc);
 	this->createEndCallBackFunc(a_pEndCallBackFunc);
@@ -35,6 +33,20 @@ void CWindowButton::init(
 void CWindowButton::release()
 {
 	CWindow::release();
+}
+
+void CWindowButton::createCrashCallBackFunc(std::function<void(void)>* a_pCallBackFunc)
+{
+	if (a_pCallBackFunc == nullptr)
+	{
+		m_stCrashCallBackFunc = [=](void)->void {
+			m_nButtonOffset = 2;
+		};
+	}
+	else
+	{
+		m_stCrashCallBackFunc = (*a_pCallBackFunc);
+	}
 }
 
 void CWindowButton::createBeginCallBackFunc(std::function<void(void)>* a_pCallBackFunc)

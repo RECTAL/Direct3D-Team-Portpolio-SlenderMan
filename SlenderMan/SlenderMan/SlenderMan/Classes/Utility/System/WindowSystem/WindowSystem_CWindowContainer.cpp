@@ -19,10 +19,10 @@ void CWindowContainer::update(void)
 	CWindow::update();
 	this->createActiveRect();
 }
-void CWindowContainer::init(
-	std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc)
+void CWindowContainer::init(std::function<void(void)>* a_pCrashCallBackFunc, std::function<void(void)>* a_pBeginCallBackFunc,
+	std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc)
 {
-	CWindow::init(a_pBeginCallBackFunc, a_pCallBackFunc, a_pEndCallBackFunc);
+	CWindow::init(a_pCrashCallBackFunc, a_pBeginCallBackFunc, a_pCallBackFunc, a_pEndCallBackFunc);
 	this->createBeginCallBackFunc(a_pBeginCallBackFunc);
 	this->createCallBackFunc(a_pCallBackFunc);
 	this->createEndCallBackFunc(a_pEndCallBackFunc);
@@ -32,6 +32,21 @@ void CWindowContainer::init(
 void CWindowContainer::release()
 {
 	CWindow::release();
+}
+
+void CWindowContainer::createCrashCallBackFunc(std::function<void(void)>* a_pCallBackFunc)
+{
+	if (a_pCallBackFunc == nullptr)
+	{
+		m_stCrashCallBackFunc = [=](void)->void
+		{
+			printf("CrashCallBackFunc");
+		};
+	}
+	else
+	{
+		m_stCrashCallBackFunc = (*a_pCallBackFunc);
+	}
 }
 
 void CWindowContainer::createBeginCallBackFunc(std::function<void(void)>* a_pCallBackFunc)
@@ -50,6 +65,7 @@ void CWindowContainer::createBeginCallBackFunc(std::function<void(void)>* a_pCal
 		m_stBeginCallBackFunc = (*a_pCallBackFunc);
 	}
 }
+
 
 void CWindowContainer::createCallBackFunc(std::function<void(void)>* a_pCallBackFunction)
 {

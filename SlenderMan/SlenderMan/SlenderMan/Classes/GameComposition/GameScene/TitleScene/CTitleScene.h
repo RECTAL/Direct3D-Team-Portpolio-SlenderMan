@@ -7,6 +7,7 @@ class CSpriteObject;
 class CSpriteObject_Button;
 class CSpriteObject_Container;
 class CSpriteObject_List;
+class CSpriteObject_Default;
 
 class CTitleScene :public CScene
 {
@@ -27,19 +28,33 @@ public:		//interface
 public:		//public override function
 	virtual void init()override;					//override	: CScene
 	virtual void createWindowUI()override;
+	
+private:
+	void createDefaultUI();
+	void createButtonUI();
+
+	void defaultImageUpdate();
+	void buttonImageUpdate();
+
+	void defaultImageDrawUI();
+	void buttonImageDrawUI();
 
 private:
-	CSpriteObject*	m_pSprite_BackGround;
-	CSpriteObject* titleImage;
-	CSpriteObject* sprite_fire;
-	CSpriteObject* gameStartImage;
-	CSpriteObject* optionImage;
-	CSpriteObject* exitImage;
-	CSpriteObject_Button* gameStartImage;
+	CSpriteObject_Default* m_pSprite_BackGround;
+	CSpriteObject_Default* titleImage;
+	CSpriteObject_Default* sprite_fire;
+
+	CSpriteObject_Button* playImage;
+	CSpriteObject_Button* optionImage;
+	CSpriteObject_Button* exitImage;
+
+	//CSpriteObject_Button* gameStartImage;
 
 	CSpriteObject_Container* uiContainer;
-	CSpriteObject_Button* gameStartButton;
+	//CSpriteObject_Button* gameStartButton;
 
 	CSpriteObject_List*		 uiList;
 	CSpriteObject_Button*	uiButton[5];
+
+	typedef std::function<void(void)> FPTR;
 };
