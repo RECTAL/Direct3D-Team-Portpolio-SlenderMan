@@ -6,6 +6,7 @@ void GameOverSceneLoader::loadResources_Init()
 {
 	auto scene = dynamic_cast<CGameOverScene*>(FIND_SCENE(GAMESCENE_GAMEOVER));
 	scene->init();
+
 	m_bIsInitDownLoad = true;
 }
 

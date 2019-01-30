@@ -21,17 +21,18 @@ void CSpriteObject_Default::update()
 	if (m_bIsLoop) {
 		CUIObject::update();
 
-		if (m_nTextureOffset >= m_oSpriteTexture.size()) {
-			m_bIsLast = true;
-		}
-		if (m_bIsLast && m_nTextureOffset >= 0) {
+		if (m_bIsLast) {
 			m_nTextureOffset--;
+			if (m_nTextureOffset <= 0){
+				m_bIsLast = false;
+			}
 		}
-		if (m_nTextureOffset <= m_oSpriteTexture.size()){
-			m_bIsLast = false;
+		else{
 			m_nTextureOffset++;
+			if (m_nTextureOffset >= m_oSpriteTexture.size() - 1) {
+				m_bIsLast = true;
+			}
 		}
-		
 	}
 	////////////////////////////////////////////
 	// 기본 스프라이트
