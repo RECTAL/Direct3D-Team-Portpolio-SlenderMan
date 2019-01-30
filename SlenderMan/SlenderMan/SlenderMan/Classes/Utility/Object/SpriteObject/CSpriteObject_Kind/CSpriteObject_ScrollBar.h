@@ -39,4 +39,5 @@ private:
 	float			m_fSetVal;
 
 	CSpriteObject_Button*	m_pSpriteButton = nullptr;
+	D3DXVECTOR3		m_stMoveOffset;
 };

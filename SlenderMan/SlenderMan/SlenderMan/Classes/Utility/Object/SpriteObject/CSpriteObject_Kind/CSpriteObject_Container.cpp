@@ -1,6 +1,7 @@
 #include "CSpriteObject_Container.h"
 #include "CSpriteObject_Button.h"
 #include "CSpriteObject_List.h"
+#include "CSpriteObject_ScrollBar.h"
 
 #include "../../../System/WindowSystem/WindowSystem_CWindowContainer.h"
 #include "../../../Manager/CInputManager.h"
@@ -39,9 +40,14 @@ void CSpriteObject_Container::update()
 				auto SpriteObj = dynamic_cast<CSpriteObject_Container*>(oIterator.second);
 				SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
 			}
-			if (oIterator.second->getWindowType() == CWindowType::CONTAINER)
+			if (oIterator.second->getWindowType() == CWindowType::LIST)
 			{
-				auto SpriteObj = dynamic_cast<CSpriteObject_Container*>(oIterator.second);
+				auto SpriteObj = dynamic_cast<CSpriteObject_List*>(oIterator.second);
+				SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
+			}
+			if (oIterator.second->getWindowType() == CWindowType::SCROLLBAR)
+			{
+				auto SpriteObj = dynamic_cast<CSpriteObject_ScrollBar*>(oIterator.second);
 				SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
 			}
 		}
@@ -120,6 +126,16 @@ void CSpriteObject_Container::addChildSpriteObject(std::string a_stSpriteName,CW
 		else if (a_ECWindowType == CWindowType::CONTAINER)
 		{
 			auto pSpriteObject = dynamic_cast<CSpriteObject_Container*>(a_pSpriteObject);
+			m_oChildSpriteObjectList.push_back(decltype(m_oChildSpriteObjectList)::value_type(a_stSpriteName, a_pSpriteObject));
+		}
+		else if (a_ECWindowType == CWindowType::LIST)
+		{
+			auto pSpriteObject = dynamic_cast<CSpriteObject_List*>(a_pSpriteObject);
+			m_oChildSpriteObjectList.push_back(decltype(m_oChildSpriteObjectList)::value_type(a_stSpriteName, a_pSpriteObject));
+		}
+		else if (a_ECWindowType == CWindowType::SCROLLBAR)
+		{
+			auto pSpriteObject = dynamic_cast<CSpriteObject_ScrollBar*>(a_pSpriteObject);
 			m_oChildSpriteObjectList.push_back(decltype(m_oChildSpriteObjectList)::value_type(a_stSpriteName, a_pSpriteObject));
 		}
 	}

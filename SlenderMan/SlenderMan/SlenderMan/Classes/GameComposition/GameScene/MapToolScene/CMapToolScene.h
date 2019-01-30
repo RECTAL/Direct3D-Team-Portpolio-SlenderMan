@@ -6,6 +6,7 @@
 class CSpriteObject_ScrollBar;
 class CSpriteObject_Button;
 class CSpriteObject_List;
+class CSpriteObject_Container;
 class CMapToolScene :public CScene
 {
 public:		//constructor , destructor
@@ -25,6 +26,8 @@ public:		//interface
 public:		//public override function
 	virtual void init()override;					//override	: CScene
 	virtual void createWindowUI()override;
+
+	CSpriteObject_Container* m_pSpriteContainer = nullptr;
 
 	CSpriteObject_ScrollBar* m_pSpriteScrollBar = nullptr;
 	CSpriteObject_Button*	 m_pSpriteButton = nullptr;
