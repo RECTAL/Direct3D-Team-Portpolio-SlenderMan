@@ -83,6 +83,7 @@
 #define GET_TIME_MANAGER()								(CTimeManager::getInstance())
 #define GET_RESOURCE_MANAGER()							(CResourceManager::getInstance())
 #define GET_SCENE_MANAGER()								(CSceneManager::getInstance())
+#define GET_SOUND_MANAGER()								(CSoundManager::getInstance())
 
 //windowOption
 #define GET_WINDOW_SIZE()								(GET_WINDOW_MANAGER()->getWindowSize())
@@ -123,6 +124,13 @@
 #define CHANGE_SCENE_LOADING(NEXTSCENENAME,ISINIT)		(GET_SCENE_MANAGER()->changeScene_rootLoadingScene(NEXTSCENENAME,ISINIT))
 #define CHANGE_SCENE_DIRECT(SCENENAME,ISINIT)			(GET_SCENE_MANAGER()->changeScene_rootDirect(SCENENAME,ISINIT))
 #define FIND_SCENE(SCENE)								(GET_SCENE_MANAGER()->findScene(SCENE))
+
+
+//Sound Option
+#define GET_DIRECT_SOUND()								(GET_SOUND_MANAGER()->getDirectSound())
+#define GET_PRIMARY_BUFFER()							(GET_SOUND_MANAGER()->getPrimaryBuffer())
+#define PLAY_EFFECT_SOUND(FILE_PATH)					(GET_SOUND_MANAGER()->playEffectSound((FILE_PATH)))
+#define PLAY_BACKGROUND_SOUND(FILE_PATH)				(GET_SOUND_MANAGER()->playBackgroundSound((FILE_PATH)))
 
 
 // singleton

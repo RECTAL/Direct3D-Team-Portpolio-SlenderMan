@@ -58,6 +58,6 @@ private:	// private ÇÔ¼ö
 
 private:
 	
-	CSpriteObject_Default * m_pBackGround;
+	CSpriteObject_Default * m_pBackGround = nullptr;
 	float alpha = 0.0f;
 };

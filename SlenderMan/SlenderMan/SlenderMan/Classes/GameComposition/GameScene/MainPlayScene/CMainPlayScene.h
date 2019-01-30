@@ -25,9 +25,9 @@ public:		//public override function
 	virtual void createWindowUI()override;
 
 public:
-	CStaticObject* createStaticMesh();
+
 
 private:
-	CStaticObject* testMesh;
+
 
 };
