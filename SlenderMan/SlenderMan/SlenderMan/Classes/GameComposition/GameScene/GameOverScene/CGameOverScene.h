@@ -25,10 +25,9 @@ public:		//public override function
 
 private:	//private 함수
 	void createScene(void);
-	void spriteUpdate(void);
+	void updateSprite(void);
 
 private:	//private 변수
 	CSpriteObject_Default * m_pGameOverSprite;
-	CScene *m_pChangeScene;
 
 };

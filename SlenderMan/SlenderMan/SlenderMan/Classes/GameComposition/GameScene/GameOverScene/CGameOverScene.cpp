@@ -11,6 +11,7 @@ CGameOverScene::CGameOverScene(std::string a_stSceneName)
 
 CGameOverScene::~CGameOverScene()
 {
+	SAFE_DELETE(m_pGameOverSprite);
 }
 
 void CGameOverScene::init()
@@ -26,7 +27,7 @@ void CGameOverScene::createWindowUI()
 void CGameOverScene::update(void)
 {
 	CScene::update();
-	spriteUpdate();
+	updateSprite();
 }
 
 void CGameOverScene::draw(void)
@@ -37,8 +38,8 @@ void CGameOverScene::draw(void)
 void CGameOverScene::drawUI(void)
 {
 	CScene::drawUI();
-	this->createScene();
-	m_pGameOverSprite->doDrawUI();
+	
+	m_pGameOverSprite->drawUI();
 }
 
 LRESULT CGameOverScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
@@ -52,23 +53,27 @@ LRESULT CGameOverScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPA
 
 void CGameOverScene::createScene(void)
 {
-	m_pGameOverSprite = new CSpriteObject_Default("Resources\Textures\Scene\GameOverScene\GameOver", "png", 1366, 768, 16);
+	m_pGameOverSprite = new CSpriteObject_Default("GameOver", "png", 1366, 768, 11, true);
 	m_pGameOverSprite->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 }
 
-void CGameOverScene::spriteUpdate(void)
+void CGameOverScene::updateSprite(void)
 {
 	static float fTime = 0.0f;
-	static int nCount = 0;
+	static int count = 0;
 
 	fTime += GET_DELTA_TIME();
-
-	if (fTime > 10.0f) {
+	
+	if (fTime > 0.03f) {
 		m_pGameOverSprite->update();
 		fTime = 0.0f;
 	}
-	if (m_pGameOverSprite->getTextureOffset() >= m_pGameOverSprite->getSpriteTexture().size())
+	if (m_pGameOverSprite->getTextureOffset() < 0 && m_pGameOverSprite->getIsLast())
 	{
-		CHANGE_SCENE_DIRECT(GAMESCENE_TITLE);
+		count++;
+	}
+	if (count > 5)
+	{
+		CHANGE_SCENE_DIRECT(GAMESCENE_TITLE, TRUE);
 	}
 }

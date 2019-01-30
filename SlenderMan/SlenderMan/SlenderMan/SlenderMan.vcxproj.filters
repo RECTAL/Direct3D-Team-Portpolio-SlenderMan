@@ -337,6 +337,9 @@
     <ClInclude Include="Classes\GameComposition\GameScene\TestScene\CVirtualScene.h">
       <Filter>Classes\GameComposition\GameScene\TestScene</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameScene\LoadingScene\Loader\GameOverSceneLoader.h">
+      <Filter>Classes\GameComposition\GameScene\LoadingScene\Loader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -470,6 +473,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Utility\Base\CDirect3DApplication.cpp">
       <Filter>Classes\Global\Utility\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\Loader\GameOverSceneLoader.cpp">
+      <Filter>Classes\GameComposition\GameScene\LoadingScene\Loader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
