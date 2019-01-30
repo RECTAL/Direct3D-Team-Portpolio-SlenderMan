@@ -11,5 +11,4 @@ int WINAPI _tWinMain(HINSTANCE a_hInstance,
 	CDirect3DApplication oApplication(a_hInstance, stWindowSize, a_nShowOptions);
 
 	return oApplication.runApplication();
-	//¤»
 }

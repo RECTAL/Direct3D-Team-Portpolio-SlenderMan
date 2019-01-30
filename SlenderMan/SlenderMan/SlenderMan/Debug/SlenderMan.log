@@ -1,11 +1,4 @@
-﻿  CMainPlayScene.cpp
+﻿  CDeviceManager.cpp
   c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(32): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(57): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
-  CSceneManager.cpp
-  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-  코드를 생성하고 있습니다...
   SlenderMan.vcxproj -> C:\Users\zoddl\Source\Repos\Direct3D-Team-Portpolio-SlenderMan\SlenderMan\SlenderMan\Debug\SlenderMan.exe
   SlenderMan.vcxproj -> C:\Users\zoddl\Source\Repos\Direct3D-Team-Portpolio-SlenderMan\SlenderMan\SlenderMan\Debug\SlenderMan.pdb (Full PDB)
