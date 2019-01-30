@@ -2,6 +2,7 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
+class CStaticObject;
 
 class CMainPlayScene :public CScene
 {
@@ -23,6 +24,10 @@ public:		//public override function
 	virtual void init()override;					//override	: CScene
 	virtual void createWindowUI()override;
 
+public:
+	CStaticObject* createStaticMesh();
 
+private:
+	CStaticObject* testMesh;
 
 };
