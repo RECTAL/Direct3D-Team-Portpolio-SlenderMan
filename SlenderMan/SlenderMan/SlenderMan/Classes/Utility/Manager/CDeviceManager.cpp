@@ -38,7 +38,7 @@ LPDIRECT3DDEVICE9 CDeviceManager::createDevice(void)
 	if (stDeviceCaps.DevCaps & D3DDEVCAPS_HWTRANSFORMANDLIGHT) {
 		nVertexProcessing = D3DCREATE_HARDWARE_VERTEXPROCESSING;
 	}
-
+;
 	D3DPRESENT_PARAMETERS stParameters;
 	ZeroMemory(&stParameters, sizeof(stParameters));
 
@@ -55,7 +55,7 @@ LPDIRECT3DDEVICE9 CDeviceManager::createDevice(void)
 	stParameters.AutoDepthStencilFormat = D3DFMT_D24S8;
 
 	stParameters.Flags = 0;
-	stParameters.Windowed = false;
+	stParameters.Windowed = true;
 	stParameters.hDeviceWindow = GET_WINDOW_HANDLE();
 
 	stParameters.FullScreen_RefreshRateInHz = D3DPRESENT_INTERVAL_DEFAULT;
@@ -66,7 +66,7 @@ LPDIRECT3DDEVICE9 CDeviceManager::createDevice(void)
 	m_pDirect3D->CreateDevice(D3DADAPTER_DEFAULT,
 		D3DDEVTYPE_HAL,
 		stParameters.hDeviceWindow,
-		nVertexProcessing,
+		nVertexProcessing| D3DCREATE_MULTITHREADED,
 		&stParameters,
 		&pDevice);
 

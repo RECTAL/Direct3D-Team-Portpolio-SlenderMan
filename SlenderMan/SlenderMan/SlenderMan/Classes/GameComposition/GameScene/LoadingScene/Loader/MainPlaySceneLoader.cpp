@@ -1,11 +1,11 @@
 #include "MainPlaySceneLoader.h"
 
-void MainPlaySceneLoader::loadResources_Texture()
+void MainPlaySceneLoader::loadResources_Init()
 {
 
 
 
-	m_bIsTextureDownLoad = true;
+	m_bIsInitDownLoad = true;
 }
 
 void MainPlaySceneLoader::loadResources_Effects()

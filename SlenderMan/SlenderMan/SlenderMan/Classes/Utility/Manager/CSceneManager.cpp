@@ -1,10 +1,12 @@
 #include "CSceneManager.h"
+#include "../Base/CScene.h"
 #include "../../GameComposition/GameScene/TitleScene/CTitleScene.h"
 #include "../../GameComposition/GameScene/MapToolScene/CMapToolScene.h"
 #include "../../GameComposition/GameScene/MainPlayScene/CMainPlayScene.h"
 #include "../../GameComposition/GameScene/GameOverScene/CGameOverScene.h"
 #include "../../GameComposition/GameScene/VictoryScene/CVictoryScene.h"
 #include "../../GameComposition/GameScene/LoadingScene/CLoadingScene.h"
+#include "../../GameComposition/GameScene/TestScene/CVirtualScene.h"
 
 void CSceneManager::init()
 {
@@ -32,8 +34,11 @@ void CSceneManager::init()
 	{
 		assert("addScene: VictoryScene Failed");
 	}
-
-	this->changeScene_rootDirect(GAMESCENE_TITLE);
+	if (FAILED(this->addScene(GAMESCENE_VIRTUAL, new CVirtualScene(GAMESCENE_VIRTUAL))))
+	{
+		assert("addScene: VirtualScene Failed");
+	}
+	this->changeScene_rootDirect(GAMESCENE_VIRTUAL);
 }
 
 CSceneManager::~CSceneManager()
@@ -71,26 +76,37 @@ LRESULT CSceneManager::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPAR
 	return m_pCurrentScene->handleWindowMessage(a_hWindow,a_nMessage,a_wParam,a_lParam);
 }
 
-CScene * CSceneManager::changeScene_rootDirect(std::string a_stSceneName)
+CScene * CSceneManager::changeScene_rootDirect(std::string a_stSceneName, bool isInit)
 {
 	if (m_oSceneMapList.find(a_stSceneName) != m_oSceneMapList.end())
 	{
-		m_oSceneMapList[a_stSceneName]->init();
+		if(isInit)
+			m_oSceneMapList[a_stSceneName]->init();
 		m_pCurrentScene = m_oSceneMapList[a_stSceneName];
 		return m_oSceneMapList[a_stSceneName];
 	}
 	return nullptr;
 }
 
-CScene * CSceneManager::changeScene_rootLoadingScene(std::string a_stNextSceneName)
+CScene * CSceneManager::changeScene_rootLoadingScene(std::string a_stNextSceneName, bool isInit)
 {
 	if (m_oSceneMapList.find(GAMESCENE_LOADING) != m_oSceneMapList.end())
 	{
 		CLoadingScene* pLoadScene = dynamic_cast<CLoadingScene*>(m_oSceneMapList[GAMESCENE_LOADING]);
 		pLoadScene->setNextSceneName(a_stNextSceneName);
-		pLoadScene->init();
+		if (isInit)
+			pLoadScene->init();
 		m_pCurrentScene = pLoadScene;
 		return pLoadScene;
+	}
+	return nullptr;
+}
+
+CScene * CSceneManager::findScene(std::string a_stSceneName)
+{
+	if (m_oSceneMapList.find(a_stSceneName) != m_oSceneMapList.end())
+	{
+		return m_oSceneMapList[a_stSceneName];
 	}
 	return nullptr;
 }

@@ -22,6 +22,7 @@ CLoadingScene::~CLoadingScene()
 void CLoadingScene::init()
 {
 	CScene::init();
+	
 	m_pLoadThread = new std::thread(std::bind(&CLoadingScene::loadResources, this));
 	m_bIsAllDownLoad = false;
 
@@ -49,10 +50,10 @@ void CLoadingScene::loadResources()
 
 	if (m_pLoader != nullptr)
 	{
-		m_pLoader->loadResources_Texture();
 		m_pLoader->loadResources_Effects();
 		m_pLoader->loadResources_Meshes();
 		m_pLoader->loadResources_Sounds();
+		m_pLoader->loadResources_Init();
 		m_pLoader->CheckAllDownLoad();
 	}
 	m_stMutex.unlock();
@@ -67,15 +68,28 @@ void CLoadingScene::update(void)
 {
 	CScene::update();
 	m_pBackGround->update();
-	m_pLoader->IsAllDownLoad(&m_bIsAllDownLoad, 0, true);
+	if(m_pLoader!=nullptr)
+		m_pLoader->IsAllDownLoad(&m_bIsAllDownLoad, 0, true);
 	if (m_bIsAllDownLoad)
 	{
-		MessageBox(GET_WINDOW_HANDLE(), _T(m_stNextSceneName.c_str()), _T("ok"), S_OK);
-		m_pLoadThread->join();
-		SAFE_DELETE(m_pLoader);
-		CHANGE_SCENE_DIRECT(m_stNextSceneName);
+		//MessageBox(GET_WINDOW_HANDLE(), _T(m_stNextSceneName.c_str()), _T("ok"), S_OK);
+		if (m_pLoader != nullptr)
+		{
+			m_pLoadThread->join();
+			SAFE_DELETE(m_pLoader);
+		}
+		if (alpha <= 0)
+			CHANGE_SCENE_DIRECT(m_stNextSceneName, TRUE);
+		else
+		{
+			alpha -= 60 * GET_DELTA_TIME();
+			m_pBackGround->setColor(D3DCOLOR_ARGB((int)alpha, 255, 255, 255));
+		}
 	}
-	//this->updateImage();
+	else
+	{
+		this->updateImage();
+	}
 }
 
 void CLoadingScene::draw(void)
@@ -100,16 +114,16 @@ LRESULT CLoadingScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPAR
 
 void CLoadingScene::createBackGround(void)
 {
-	m_pBackGround = new CSpriteObject_Default("Resources\Textures\Scene\LoadingScene\loading", "png", 1366, 768, 1);
+	m_pBackGround = new CSpriteObject_Default("Resources/Textures/Scene/LoadingScene/load", "png", 1366, 768, 1);
 	m_pBackGround->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 }
 
 void CLoadingScene::updateImage(void)
 {
-	static float fTime;
-	fTime += GET_DELTA_TIME() / 30;
-	if (fTime > 100.0f) {
-		m_pBackGround->update();
-		fTime = 0.0f;
-	}
+	static float angle = 0.0f;
+	angle += D3DXToRadian(120*GET_DELTA_TIME());
+	alpha = 255 * cosf(angle)+100;
+	alpha = max(alpha, 150);
+	alpha = min(alpha, 255);
+	m_pBackGround->setColor(D3DCOLOR_ARGB((int)alpha, 255, 255, 255));
 }

@@ -19,11 +19,8 @@ void CSpriteObject_List::update()
 	if (m_bIsVisible)
 	{
 		CSpriteObject::update();
-		D3DSURFACE_DESC pSurf;
-		LPDIRECT3DTEXTURE9 pTex = m_oSpriteTexture[m_nTextureOffset];
-		pTex->GetLevelDesc(0, &pSurf);
 
-		m_pWindow->getActiveSize() = SIZE{ (LONG)pSurf.Width,(LONG)pSurf.Height };
+		m_pWindow->getActiveSize() = SIZE{ (LONG)m_fWidth,(LONG)m_fHeight };
 		m_pWindow->update();
 
 		setPosition(m_pWindow->getAbsolutePosition());

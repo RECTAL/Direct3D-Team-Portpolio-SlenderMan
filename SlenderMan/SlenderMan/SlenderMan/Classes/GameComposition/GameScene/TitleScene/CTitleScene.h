@@ -47,18 +47,19 @@ private:
 	CSpriteObject_Default* titleImage;
 	CSpriteObject_Default* sprite_fire;
 
-	CSpriteObject_Button* playImage;
-	CSpriteObject_Button* optionImage;
-	CSpriteObject_Button* mapToolImage;
-	CSpriteObject_Button* exitImage;
+	CSpriteObject_Button* playButton;
+	CSpriteObject_Button* optionButton;
+	CSpriteObject_Button* mapToolButton;
+	CSpriteObject_Button* exitButton;
 
-	//CSpriteObject_Button* gameStartImage;
 
-	CSpriteObject_Container* uiContainer;
-	//CSpriteObject_Button* gameStartButton;
+	CSpriteObject_Container* optionWindow;
+	CSpriteObject_Button* backButton;
 
 	CSpriteObject_List*		 uiList;
 	CSpriteObject_Button*	uiButton[5];
+
+	CSpriteObject*			 m_pCurrentSpriteHandle = nullptr;
 
 	FPTR* crashFptr;
 	FPTR* beginFptr;

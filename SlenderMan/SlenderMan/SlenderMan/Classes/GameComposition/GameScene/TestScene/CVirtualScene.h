@@ -2,13 +2,12 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
-class CStaticObject;
 
-class CMainPlayScene :public CScene
+class CVirtualScene :public CScene
 {
 public:		//constructor , destructor
-	CMainPlayScene(std::string a_stSceneName);
-	virtual ~CMainPlayScene();
+	CVirtualScene(std::string a_stSceneName);
+	virtual ~CVirtualScene();
 
 public:		//interface
 	virtual void update(void)override;				//interface : IUpdateable
@@ -24,10 +23,6 @@ public:		//public override function
 	virtual void init()override;					//override	: CScene
 	virtual void createWindowUI()override;
 
-public:
-	CStaticObject* createStaticMesh();
 
-private:
-	CStaticObject* testMesh;
 
 };

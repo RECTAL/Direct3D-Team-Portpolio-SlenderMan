@@ -1,8 +1,8 @@
 #include "MapToolSceneLoader.h"
 
-void MapToolSceneLoader::loadResources_Texture()
+void MapToolSceneLoader::loadResources_Init()
 {
-	m_bIsTextureDownLoad = true;
+	m_bIsInitDownLoad = true;
 }
 
 void MapToolSceneLoader::loadResources_Effects()

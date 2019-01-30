@@ -36,5 +36,8 @@ protected:
 
 	int m_nTextureOffset=0;
 	int m_nAnimationCount = 0;
+
+	float m_fWidth		= 0;
+	float m_fHeight		= 0;
 	std::string m_stSpriteTexturePath;
 };

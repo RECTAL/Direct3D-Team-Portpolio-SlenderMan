@@ -5,7 +5,7 @@
 #include "../../Manager/CResourceManager.h"
 
 CSpriteObject::CSpriteObject(std::string a_stSpriteTexturePath, std::string a_stExtantion, const float width, const float height, int a_nAnimationFrame)
-	:m_stSpriteTexturePath(a_stSpriteTexturePath),m_nAnimationCount(a_nAnimationFrame)
+	:m_stSpriteTexturePath(a_stSpriteTexturePath),m_fWidth(width),m_fHeight(height),m_nAnimationCount(a_nAnimationFrame)
 {
 	m_pSprite = this->createSprite();
 	for (int i = 0; i < m_nAnimationCount; i++)
@@ -29,13 +29,6 @@ void CSpriteObject::release()
 void CSpriteObject::update()
 {
 	CUIObject::update();
-	/*static float time = 0.0f;
-	time += GET_DELTA_TIME();
-	if (time >= 1.0f) 
-	{
-		m_nTextureOffset++;
-		time = 0;
-	}*/
 	m_nTextureOffset++;
 	if (m_nTextureOffset >= m_oSpriteTexture.size())m_nTextureOffset = 0;
 }
