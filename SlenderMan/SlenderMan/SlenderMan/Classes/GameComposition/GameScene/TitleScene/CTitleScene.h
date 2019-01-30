@@ -60,6 +60,8 @@ private:
 	CSpriteObject_List*		 uiList;
 	CSpriteObject_Button*	uiButton[5];
 
+	CSpriteObject*			 m_pCurrentSpriteHandle =nullptr;
+
 	FPTR* crashFptr;
 	FPTR* beginFptr;
 	FPTR* pressFptr;

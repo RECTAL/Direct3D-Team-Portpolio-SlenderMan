@@ -166,7 +166,8 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
-		uiContainer->setVisible(!uiContainer->getVisible());
+		m_pCurrentSpriteHandle = uiContainer;
+		uiContainer->setVisible(true);
 	};
 	optionImage->init(crashFptr, nullptr, nullptr, endFptr);
 
@@ -207,15 +208,22 @@ void CTitleScene::update(void)
 {
 	CScene::update();
 	this->defaultImageUpdate();
-	this->buttonImageUpdate();
+	if(m_pCurrentSpriteHandle==nullptr)
+	{
+		this->buttonImageUpdate();
 
-	uiContainer->update();
-	uiList->update();
+		uiContainer->update();
+		//uiList->update();
+	}
+	else
+		m_pCurrentSpriteHandle->update();
 
 	//Sprite Container 안에 있는 윈도우들의 팝업창 예시
 	if (IS_KEY_PRESSED(DIK_ESCAPE))
 	{
-		uiContainer->setVisible(!uiContainer->getVisible());
+		m_pCurrentSpriteHandle->setVisible(false);
+		m_pCurrentSpriteHandle = nullptr;
+		//uiContainer->setVisible(!uiContainer->getVisible());
 	}
 
 	//Sprite List 안에 있는 윈도우들의 팝업창 예시

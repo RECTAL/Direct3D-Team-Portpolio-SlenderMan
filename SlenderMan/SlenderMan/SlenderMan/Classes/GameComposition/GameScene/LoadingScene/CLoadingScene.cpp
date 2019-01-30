@@ -114,16 +114,16 @@ LRESULT CLoadingScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPAR
 
 void CLoadingScene::createBackGround(void)
 {
-	m_pBackGround = new CSpriteObject_Default("Resources/Textures/Scene/LoadingScene/loading", "png", 1366, 768, 1);
+	m_pBackGround = new CSpriteObject_Default("Resources/Textures/Scene/LoadingScene/load", "png", 1366, 768, 1);
 	m_pBackGround->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 }
 
 void CLoadingScene::updateImage(void)
 {
 	static float angle = 0.0f;
-	angle += D3DXToRadian(90*GET_DELTA_TIME());
+	angle += D3DXToRadian(120*GET_DELTA_TIME());
 	alpha = 255 * cosf(angle)+100;
-	alpha = max(alpha, 100);
+	alpha = max(alpha, 150);
 	alpha = min(alpha, 255);
 	m_pBackGround->setColor(D3DCOLOR_ARGB((int)alpha, 255, 255, 255));
 }
