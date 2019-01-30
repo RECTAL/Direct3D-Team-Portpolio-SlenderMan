@@ -126,13 +126,13 @@ void CTitleScene::createWindowUI()
 	 
 void CTitleScene::createDefaultUI()
 {
-	m_pSprite_BackGround = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/background", "png", 1366, 768, 1);
+	m_pSprite_BackGround = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/background", "png", 1366, 768, 1, false);
 	m_pSprite_BackGround->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 
-	sprite_fire = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/fire/fire", "png", 1366, 768, 33);
+	sprite_fire = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/fire/fire", "png", 1366, 768, 33, false);
 	sprite_fire->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 
-	titleImage = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/title", "png", 600, 300, 1);
+	titleImage = new CSpriteObject_Default("Resources/Textures/Scene/TitleScene/title", "png", 600, 300, 1, false);
 	titleImage->setPosition(D3DXVECTOR3(380, 200, 0));
 }
 
@@ -147,7 +147,7 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
-		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
+		CHANGE_SCENE_DIRECT(GAMESCENE_MAINPLAY,TRUE);
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
 

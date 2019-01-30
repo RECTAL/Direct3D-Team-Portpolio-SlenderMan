@@ -2,6 +2,7 @@
 #include "../LoadingScene/Loader/TitleSceneLoader.h"
 #include "../LoadingScene/Loader/MainPlaySceneLoader.h"
 #include "../LoadingScene/Loader/MapToolSceneLoader.h"
+#include "../LoadingScene/Loader/GameOverSceneLoader.h"
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CSceneManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
@@ -46,6 +47,10 @@ void CLoadingScene::loadResources()
 	if (m_stNextSceneName == GAMESCENE_MAINPLAY)
 	{
 		m_pLoader = new MainPlaySceneLoader();
+	}
+	if (m_stNextSceneName == GAMESCENE_GAMEOVER)
+	{
+		m_pLoader = new GameOverSceneLoader();
 	}
 
 	if (m_pLoader != nullptr)
