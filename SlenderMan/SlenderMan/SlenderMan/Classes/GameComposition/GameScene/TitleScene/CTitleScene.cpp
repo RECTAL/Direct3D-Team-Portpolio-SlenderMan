@@ -31,10 +31,10 @@ CTitleScene::~CTitleScene()
 	
 	SAFE_DELETE(optionWindow);
 
-	for (int i = 0; i < 5; i++)
+	/*for (int i = 0; i < 5; i++)
 	{
 		SAFE_DELETE(uiButton[i]);
-	}
+	}*/
 }
 
 void CTitleScene::init()

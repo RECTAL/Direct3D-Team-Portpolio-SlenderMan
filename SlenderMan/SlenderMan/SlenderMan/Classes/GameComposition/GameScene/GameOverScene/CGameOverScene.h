@@ -28,6 +28,6 @@ private:	//private 함수
 	void updateSprite(void);
 
 private:	//private 변수
-	CSpriteObject_Default * m_pGameOverSprite;
+	CSpriteObject_Default * m_pGameOverSprite = nullptr;
 
 };

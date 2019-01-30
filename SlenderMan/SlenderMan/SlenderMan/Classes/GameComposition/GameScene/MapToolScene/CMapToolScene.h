@@ -30,6 +30,6 @@ public:		//public override function
 	CSpriteObject_Button*	 m_pSpriteButton = nullptr;
 
 	CSpriteObject_List*		 m_pSpriteList = nullptr;
-	CSpriteObject_Button*	 m_pSpriteListButton[5];
+	CSpriteObject_Button*	 m_pSpriteListButton[5] = {nullptr,};
 
 };

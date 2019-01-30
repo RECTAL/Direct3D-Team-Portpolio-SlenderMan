@@ -16,9 +16,6 @@
     <Filter Include="Classes\Global\Utility">
       <UniqueIdentifier>{d09317aa-12f2-4853-9df6-c7ef6999aca3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\Global\Utility\Interface">
-      <UniqueIdentifier>{7cb0211d-6a44-4fc8-aedd-b08c24b9febf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\Global\Utility\Manager">
       <UniqueIdentifier>{0dc99f85-09b6-4eb6-928d-18cf18c6ada4}</UniqueIdentifier>
     </Filter>
@@ -79,9 +76,6 @@
     </Filter>
     <Filter Include="Classes\Global\Utility\System\AnimationSystem">
       <UniqueIdentifier>{add95d09-a4b0-4659-b0e5-fb5738040bbb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\Global\Utility\System\SoundSystem">
-      <UniqueIdentifier>{3d98622e-5cab-4859-a1ed-dd59682d2544}</UniqueIdentifier>
     </Filter>
     <Filter Include="Classes\Global\Utility\System\ParticleSystem">
       <UniqueIdentifier>{3a4beb2a-d235-4374-8a43-4e372f76118f}</UniqueIdentifier>
@@ -196,6 +190,12 @@
     </Filter>
     <Filter Include="Classes\GameComposition\GameScene\TestScene">
       <UniqueIdentifier>{9ba2e01f-79b0-476a-8ae5-a0f1d693dc32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Interface">
+      <UniqueIdentifier>{7cb0211d-6a44-4fc8-aedd-b08c24b9febf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\Object\SoundObject">
+      <UniqueIdentifier>{f38b478e-0983-4710-b4f1-ffc7fae6990a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -340,6 +340,9 @@
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ScrollBar.h">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\SoundObject\CSoundObject.h">
+      <Filter>Classes\Global\Utility\Object\SoundObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -479,6 +482,15 @@
     </ClCompile>
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ScrollBar.cpp">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Manager\CSoundManager.cpp">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\Loader\GameOverSceneLoader.cpp">
+      <Filter>Classes\GameComposition\GameScene\LoadingScene\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\SoundObject\CSoundObject.cpp">
+      <Filter>Classes\Global\Utility\Object\SoundObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -142,10 +142,8 @@ void CSpriteObject_List::setVisible(bool a_bIsVisible)
 
 void CSpriteObject_List::init(std::function<void(void)>* a_pCrashCallBackFunc, std::function<void(void)>* a_pBeginCallBackFunc, std::function<void(void)>* a_pCallBackFunc, std::function<void(void)>* a_pEndCallBackFunc, bool a_bIsChild, D3DXVECTOR3 a_rstRelativePos)
 {
-	D3DSURFACE_DESC pSurf;
-	LPDIRECT3DTEXTURE9 pTex = m_oSpriteTexture[m_nTextureOffset];
-	pTex->GetLevelDesc(0, &pSurf);
-	m_pWindow = new CWindowList("WindowList", CWindowType::LIST, SIZE{ (LONG)pSurf.Width,(LONG)pSurf.Height }, getPosition());
+
+	m_pWindow = new CWindowList("WindowList", CWindowType::LIST, SIZE{ (LONG)m_fWidth,(LONG)m_fHeight }, getPosition());
 	m_pWindow->init(a_pCrashCallBackFunc, a_pBeginCallBackFunc, a_pCallBackFunc, a_pEndCallBackFunc);
 	m_bIsChild = a_bIsChild;
 	m_stRelativePos = a_rstRelativePos;
