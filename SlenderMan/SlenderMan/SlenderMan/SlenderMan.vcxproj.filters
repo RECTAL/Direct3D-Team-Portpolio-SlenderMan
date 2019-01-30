@@ -337,8 +337,8 @@
     <ClInclude Include="Classes\GameComposition\GameScene\TestScene\CVirtualScene.h">
       <Filter>Classes\GameComposition\GameScene\TestScene</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\GameComposition\GameScene\LoadingScene\Loader\GameOverSceneLoader.h">
-      <Filter>Classes\GameComposition\GameScene\LoadingScene\Loader</Filter>
+    <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ScrollBar.h">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -474,8 +474,11 @@
     <ClCompile Include="Classes\Utility\Base\CDirect3DApplication.cpp">
       <Filter>Classes\Global\Utility\Base</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\Loader\GameOverSceneLoader.cpp">
-      <Filter>Classes\GameComposition\GameScene\LoadingScene\Loader</Filter>
+    <ClCompile Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowScrollBar.cpp">
+      <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ScrollBar.cpp">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
