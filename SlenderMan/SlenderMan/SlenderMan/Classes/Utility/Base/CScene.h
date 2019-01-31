@@ -7,6 +7,9 @@
 class CScene :public IUpdateable,IRenderable,IWindowMessageHandler
 {
 public:
+	typedef std::function<void(void)> FPTR;
+
+public:
 	CScene(std::string a_stSceneName);
 	virtual ~CScene();
 
@@ -34,7 +37,6 @@ public:		//getter,setter
 	//getter
 	/**********************************************/
 	std::string getSceneName() { return m_stSceneName; }
-
 
 
 

@@ -55,11 +55,13 @@ public:
 	//! run MessageLoop
 	virtual int runMessageLoop(void) final override;
 
-protected:			
-
+private:			
+	LPD3DXSPRITE   createSprite();
 
 protected:			
 
 	POINT		m_stPrevMousePosition;
 
+private:
+	LPD3DXSPRITE	m_pSprite = nullptr;
 };
