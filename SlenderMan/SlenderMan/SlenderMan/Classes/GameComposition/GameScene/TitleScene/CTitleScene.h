@@ -10,6 +10,7 @@ class CSpriteObject_List;
 class CSpriteObject_Default;
 class CSpriteObject_ScrollBar;
 
+
 class CTitleScene :public CScene
 {
 private:

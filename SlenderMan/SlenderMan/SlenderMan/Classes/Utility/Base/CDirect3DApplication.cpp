@@ -4,6 +4,7 @@
 #include "../Manager/CTimeManager.h"
 #include "../Manager/CInputManager.h"
 #include "../Manager/CSceneManager.h"
+#include "../Manager/CRendertargetManager.h"
 
 
 
@@ -17,7 +18,7 @@ CDirect3DApplication::CDirect3DApplication(HINSTANCE a_hInstance, const SIZE & a
 
 CDirect3DApplication::~CDirect3DApplication(void)
 {
-
+	SAFE_RELEASE(m_pSprite);
 }
 
 void CDirect3DApplication::initApplication(void)
@@ -25,7 +26,8 @@ void CDirect3DApplication::initApplication(void)
 	GET_SCENE_MANAGER()->init();
 	CWindowApplication::initApplication();
 	GET_DEVICE_MANAGER()->init();
-	
+	GET_RENDERTARGET_MANAGER()->init();
+	m_pSprite = this->createSprite();
 }
 
 void CDirect3DApplication::update(void)
@@ -84,15 +86,28 @@ int CDirect3DApplication::runMessageLoop(void)
 
 
 
-
 			this->drawUI();
 			GET_DEVICE()->EndScene();
 		}
+
+
 		// swap chain
 		GET_DEVICE()->Present(NULL, NULL, NULL, NULL);
 	}
 
 	return (int)stMessage.wParam;
+}
+
+LPD3DXSPRITE CDirect3DApplication::createSprite()
+{
+	LPD3DXSPRITE pSprite = nullptr;
+	
+	D3DXCreateSprite(
+		GET_DEVICE(),
+		&pSprite
+	);
+
+	return pSprite;
 }
 
 LRESULT CDirect3DApplication::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)

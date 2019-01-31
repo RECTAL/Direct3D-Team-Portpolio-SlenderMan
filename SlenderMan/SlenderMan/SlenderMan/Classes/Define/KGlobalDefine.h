@@ -84,6 +84,7 @@
 #define GET_RESOURCE_MANAGER()							(CResourceManager::getInstance())
 #define GET_SCENE_MANAGER()								(CSceneManager::getInstance())
 #define GET_SOUND_MANAGER()								(CSoundManager::getInstance())
+#define GET_RENDERTARGET_MANAGER()						(CRendertargetManager::getInstance())
 
 //windowOption
 #define GET_WINDOW_SIZE()								(GET_WINDOW_MANAGER()->getWindowSize())
@@ -132,6 +133,9 @@
 #define PLAY_EFFECT_SOUND(FILE_PATH)					(GET_SOUND_MANAGER()->playEffectSound((FILE_PATH)))
 #define PLAY_BACKGROUND_SOUND(FILE_PATH)				(GET_SOUND_MANAGER()->playBackgroundSound((FILE_PATH)))
 
+//RenderTarget Option
+#define FIND_RENDERTARGET(TARGETNAME)					(GET_RENDERTARGET_MANAGER()->findRenderTarget(TARGETNAME))
+#define GET_ORIGIN_RENDERTARGET()						(GET_RENDERTARGET_MANAGER()->getOriginRenderTarget())
 
 // singleton
 #define DECLARE_SINGLETON(CLASS_NAME)			\

@@ -8,6 +8,9 @@
 #include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CSceneManager.h"
 #include "../../../Utility/Manager/CInputManager.h"
+#include "../../../Utility/Manager/CRendertargetManager.h"
+#include "../../../Utility/Manager/CDeviceManager.h"
+#include "../../../Function/GlobalFunction.h"
 
 CTitleScene::CTitleScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
@@ -51,7 +54,8 @@ void CTitleScene::init()
 	this->createDefaultUI();
 	this->createWindowUI();
 
-	int a = 1;
+	
+
 }
 
 void CTitleScene::createWindowUI()
@@ -284,11 +288,15 @@ void CTitleScene::draw(void)
 void CTitleScene::drawUI(void)
 {
 	CScene::drawUI();
+	
+
 	this->defaultImageDrawUI();
 	this->buttonImageDrawUI();
 	this->scrollDrawUI();
 
 	optionWindow->drawUI();
+
+	
 	//uiList->drawUI();
 }
 
