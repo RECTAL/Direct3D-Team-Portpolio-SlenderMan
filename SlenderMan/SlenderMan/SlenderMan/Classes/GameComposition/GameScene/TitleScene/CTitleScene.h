@@ -9,6 +9,7 @@ class CSpriteObject_Container;
 class CSpriteObject_List;
 class CSpriteObject_Default;
 
+
 class CTitleScene :public CScene
 {
 private:
@@ -65,5 +66,4 @@ private:
 	FPTR* beginFptr = nullptr;
 	FPTR* pressFptr = nullptr;
 	FPTR* endFptr	= nullptr;
-
 };

@@ -38,7 +38,8 @@ void CMapToolScene::createWindowUI()
 	m_pSpriteContainer = new CSpriteObject_Container("Resources/Textures/Scene/MapToolScene/ExWindow", "png", 300, 310, 1);
 	m_pSpriteContainer->setPosition(D3DXVECTOR3(300.0f, 200.0f, 0.0f));
 	m_pSpriteContainer->init(nullptr, nullptr, nullptr, nullptr);
-
+	
+	
 		/***************************************************/
 		//스크롤 바 만들기
 		/***************************************************/

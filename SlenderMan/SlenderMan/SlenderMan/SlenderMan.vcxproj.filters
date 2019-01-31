@@ -197,6 +197,12 @@
     <Filter Include="Classes\Global\Utility\Object\SoundObject">
       <UniqueIdentifier>{f38b478e-0983-4710-b4f1-ffc7fae6990a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Global\Utility\System\RenderingSystem">
+      <UniqueIdentifier>{4fa8d260-e4c5-4990-8bb6-d23e819c11ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\Global\Utility\System\RenderingSystem\RenderSystem_TargetKind">
+      <UniqueIdentifier>{76091d2e-7557-432e-b52d-7d48c57dd556}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\Define\KGlobalDefine.h">
@@ -313,9 +319,6 @@
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_Button.h">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClInclude>
-    <ClInclude Include="Classes\Utility\Base\CWindow.h">
-      <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
-    </ClInclude>
     <ClInclude Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowContainer.h">
       <Filter>Classes\Global\Utility\System\WindowSystem</Filter>
     </ClInclude>
@@ -342,6 +345,12 @@
     </ClInclude>
     <ClInclude Include="Classes\Utility\Object\SoundObject\CSoundObject.h">
       <Filter>Classes\Global\Utility\Object\SoundObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\System\RenderSystem\RenderSystem_CRenderTarget.h">
+      <Filter>Classes\Global\Utility\System\RenderingSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Manager\CRendertargetManager.h">
+      <Filter>Classes\Global\Utility\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -492,5 +501,16 @@
     <ClCompile Include="Classes\Utility\Object\SoundObject\CSoundObject.cpp">
       <Filter>Classes\Global\Utility\Object\SoundObject</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Utility\System\RenderSystem\RenderSystem_CRenderTarget.cpp">
+      <Filter>Classes\Global\Utility\System\RenderingSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Manager\CRendertargetManager.cpp">
+      <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\Effects\CopyTexture.fx">
+      <Filter>Resources\Effects</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

@@ -21,6 +21,7 @@ public:
 	CWindowType	  getWindowType() { return m_ECWindowType; }
 	oSpriteTexture	getSpriteTexture() { return m_oSpriteTexture; }
 	int& getTextureOffset() { return m_nTextureOffset; }
+	LPD3DXSPRITE	getSprite() { return m_pSprite; }
 
 private:
 	LPD3DXSPRITE   createSprite();
