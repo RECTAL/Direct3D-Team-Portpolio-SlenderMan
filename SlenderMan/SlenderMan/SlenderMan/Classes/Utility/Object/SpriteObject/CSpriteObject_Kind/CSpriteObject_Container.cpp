@@ -128,6 +128,16 @@ void CSpriteObject_Container::addChildSpriteObject(std::string a_stSpriteName,CW
 			auto pSpriteObject = dynamic_cast<CSpriteObject_Container*>(a_pSpriteObject);
 			m_oChildSpriteObjectList.push_back(decltype(m_oChildSpriteObjectList)::value_type(a_stSpriteName, a_pSpriteObject));
 		}
+		else if (a_ECWindowType == CWindowType::LIST)
+		{
+			auto pSpriteObject = dynamic_cast<CSpriteObject_List*>(a_pSpriteObject);
+			m_oChildSpriteObjectList.push_back(decltype(m_oChildSpriteObjectList)::value_type(a_stSpriteName, a_pSpriteObject));
+		}
+		else if (a_ECWindowType == CWindowType::SCROLLBAR)
+		{
+			auto pSpriteObject = dynamic_cast<CSpriteObject_ScrollBar*>(a_pSpriteObject);
+			m_oChildSpriteObjectList.push_back(decltype(m_oChildSpriteObjectList)::value_type(a_stSpriteName, a_pSpriteObject));
+		}
 	}
 }
 
