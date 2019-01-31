@@ -32,7 +32,7 @@ CTitleScene::~CTitleScene()
 	
 	SAFE_DELETE(optionWindow);
 
-	SAFE_DELETE(soundScrollBar);
+	//SAFE_DELETE(soundScrollBar);
 
 	/*for (int i = 0; i < 5; i++)
 	{
@@ -81,7 +81,7 @@ void CTitleScene::createWindowUI()
 	(*endFptr) = [=](void)->void
 	{
 		m_pCurrentSpriteHandle = nullptr;
-		soundScrollBar->setVisible(false);
+		//soundScrollBar->setVisible(false);
 		optionWindow->setVisible(false);
 	};
 	backButton->init(
@@ -155,8 +155,8 @@ void CTitleScene::createButtonUI()
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
 
-	soundScrollBar = new CSpriteObject_ScrollBar("Resources/Textures/Scene/MapToolScene/scrollBarEX", "png", 50, 300, 1);
-	soundScrollBar->init(nullptr, nullptr, nullptr, nullptr, 0, 300, nullptr, true, D3DXVECTOR3(300, 50, 0.0f));
+	//soundScrollBar = new CSpriteObject_ScrollBar("Resources/Textures/Scene/MapToolScene/scrollBarEX", "png", 50, 300, 1);
+	//soundScrollBar->init(nullptr, nullptr, nullptr, nullptr, 0, 300, nullptr, true, D3DXVECTOR3(300, 50, 0.0f));
 
 	optionButton = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/option", "png", 350, 60, 2);
 	optionButton->setPosition(D3DXVECTOR3(370, 490, 0));
@@ -169,7 +169,7 @@ void CTitleScene::createButtonUI()
 	{
 		m_pCurrentSpriteHandle = optionWindow;
 		optionWindow->setVisible(true);
-		soundScrollBar->setVisible(true);
+		//soundScrollBar->setVisible(true);
 	};
 	optionButton->init(crashFptr, nullptr, nullptr, endFptr);
 
@@ -273,7 +273,7 @@ void CTitleScene::buttonImageUpdate()
 
 void CTitleScene::scrollBarUpdate()
 {
-	soundScrollBar->update();
+	//soundScrollBar->update();
 }
 
 void CTitleScene::draw(void)
@@ -309,7 +309,7 @@ void CTitleScene::buttonImageDrawUI()
 
 void CTitleScene::scrollDrawUI()
 {
-	soundScrollBar->doDrawUI();
+	//soundScrollBar->doDrawUI();
 }
 
 LRESULT CTitleScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)

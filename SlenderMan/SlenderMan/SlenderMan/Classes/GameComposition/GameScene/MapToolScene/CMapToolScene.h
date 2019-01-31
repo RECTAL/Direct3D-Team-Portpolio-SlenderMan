@@ -2,7 +2,7 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
-
+class CSpriteObject_Default;
 class CSpriteObject_ScrollBar;
 class CSpriteObject_Button;
 class CSpriteObject_List;
@@ -26,13 +26,32 @@ public:		//interface
 public:		//public override function
 	virtual void init()override;					//override	: CScene
 	virtual void createWindowUI()override;
+private:
+	void createButtonUI();
 
-	CSpriteObject_Container* m_pSpriteContainer = nullptr;
+	void buttonUpdate();
 
-	CSpriteObject_ScrollBar* m_pSpriteScrollBar = nullptr;
-	CSpriteObject_Button*	 m_pSpriteButton = nullptr;
+	void buttonDrawUI();
+private:
+	CSpriteObject_Container* selectWindowContainer = nullptr;
+
+	CSpriteObject_ScrollBar* UpDownScrollBar = nullptr;
+	CSpriteObject_Button*	 scrollBarButton = nullptr;
 
 	CSpriteObject_List*		 m_pSpriteList = nullptr;
-	CSpriteObject_Button*	 m_pSpriteListButton[5] = {nullptr,};
+	CSpriteObject_Button*	 m_pSpriteListButton[5] = { nullptr };
+
+	CSpriteObject_Button* openButton = nullptr;
+	CSpriteObject_Button* closeButton = nullptr;
+	CSpriteObject_Button* buildingButton = nullptr;
+	CSpriteObject_Button* terrainButton = nullptr;
+	CSpriteObject_Button* backButton = nullptr;
+
+
+
+	FPTR* crashFptr = nullptr;
+	FPTR* beginFptr = nullptr;
+	FPTR* pressFptr = nullptr;
+	FPTR* endFptr = nullptr;
 
 };

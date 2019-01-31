@@ -31,7 +31,7 @@ public:			// public function: Utility
 	void addStaticMesh(const std::string &a_rKey,STStaticMesh &a_rstStaticMesh);				//! 정적 메시를 추가한다
 	void addWaveSound(const std::string &a_rKey,STWaveSound &a_rstWaveSound);					//! 웨이브 사운드를 추가한다
 	void addEffect(const std::string &a_rKey,LPD3DXEFFECT a_pEffect);							//! 이펙트를 추가한다
-	void addTexture(const std::string &a_rKey,LPDIRECT3DTEXTURE9 a_pTexture);					//! 텍스처를 추가한다
+	void addTexture(const std::string &a_rKey, LPDIRECT3DTEXTURE9 a_pTexture, float width, float height);					//! 텍스처를 추가한다
 	void addCubeTexture(const std::string &a_rKey,LPDIRECT3DCUBETEXTURE9 a_pCubeTexture);		//! 큐브 텍스처를 추가한다;
 
 private:		// private function utility
