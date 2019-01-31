@@ -71,7 +71,7 @@ int CDirect3DApplication::runMessageLoop(void)
 		GET_DEVICE()->Clear(0,
 			NULL,
 			D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL,
-			D3DCOLOR_XRGB(0, 0, 0),
+			D3DCOLOR_XRGB(100, 100, 100),
 			1.0f,
 			0);
 

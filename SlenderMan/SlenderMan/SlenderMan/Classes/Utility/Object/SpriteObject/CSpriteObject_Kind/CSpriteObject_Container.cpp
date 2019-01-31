@@ -1,6 +1,7 @@
 #include "CSpriteObject_Container.h"
 #include "CSpriteObject_Button.h"
 #include "CSpriteObject_List.h"
+#include "CSpriteObject_ScrollBar.h"
 
 #include "../../../System/WindowSystem/WindowSystem_CWindowContainer.h"
 #include "../../../Manager/CInputManager.h"
@@ -39,9 +40,14 @@ void CSpriteObject_Container::update()
 				auto SpriteObj = dynamic_cast<CSpriteObject_Container*>(oIterator.second);
 				SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
 			}
-			if (oIterator.second->getWindowType() == CWindowType::CONTAINER)
+			if (oIterator.second->getWindowType() == CWindowType::LIST)
 			{
-				auto SpriteObj = dynamic_cast<CSpriteObject_Container*>(oIterator.second);
+				auto SpriteObj = dynamic_cast<CSpriteObject_List*>(oIterator.second);
+				SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
+			}
+			if (oIterator.second->getWindowType() == CWindowType::SCROLLBAR)
+			{
+				auto SpriteObj = dynamic_cast<CSpriteObject_ScrollBar*>(oIterator.second);
 				SpriteObj->getWindow()->setAbsolutePosition(m_pWindow->getAbsolutePosition() + SpriteObj->getRelativePos());
 			}
 		}

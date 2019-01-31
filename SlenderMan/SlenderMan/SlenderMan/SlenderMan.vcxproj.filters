@@ -340,6 +340,7 @@
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ScrollBar.h">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameScene\LoadingScene\Loader\GameOverSceneLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -480,5 +481,6 @@
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ScrollBar.cpp">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\Loader\GameOverSceneLoader.cpp" />
   </ItemGroup>
 </Project>

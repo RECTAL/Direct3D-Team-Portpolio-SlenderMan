@@ -3,6 +3,7 @@
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Container.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Default.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_List.h"
+#include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_ScrollBar.h"
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CSceneManager.h"
@@ -31,10 +32,12 @@ CTitleScene::~CTitleScene()
 	
 	SAFE_DELETE(optionWindow);
 
-	for (int i = 0; i < 5; i++)
+	SAFE_DELETE(soundScrollBar);
+
+	/*for (int i = 0; i < 5; i++)
 	{
 		SAFE_DELETE(uiButton[i]);
-	}
+	}*/
 }
 
 void CTitleScene::init()
@@ -78,6 +81,7 @@ void CTitleScene::createWindowUI()
 	(*endFptr) = [=](void)->void
 	{
 		m_pCurrentSpriteHandle = nullptr;
+		soundScrollBar->setVisible(false);
 		optionWindow->setVisible(false);
 	};
 	backButton->init(
@@ -151,6 +155,9 @@ void CTitleScene::createButtonUI()
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
 
+	soundScrollBar = new CSpriteObject_ScrollBar("Resources/Textures/Scene/MapToolScene/scrollBarEX", "png", 50, 300, 1);
+	soundScrollBar->init(nullptr, nullptr, nullptr, nullptr, 0, 300, nullptr, true, D3DXVECTOR3(300, 50, 0.0f));
+
 	optionButton = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/option", "png", 350, 60, 2);
 	optionButton->setPosition(D3DXVECTOR3(370, 490, 0));
 	(*crashFptr) = [=](void) -> void
@@ -162,6 +169,7 @@ void CTitleScene::createButtonUI()
 	{
 		m_pCurrentSpriteHandle = optionWindow;
 		optionWindow->setVisible(true);
+		soundScrollBar->setVisible(true);
 	};
 	optionButton->init(crashFptr, nullptr, nullptr, endFptr);
 
@@ -202,7 +210,7 @@ void CTitleScene::update(void)
 {
 	CScene::update();
 	this->defaultImageUpdate();
-	if(m_pCurrentSpriteHandle==nullptr)
+	if (m_pCurrentSpriteHandle == nullptr)
 	{
 		this->buttonImageUpdate();
 
@@ -210,8 +218,10 @@ void CTitleScene::update(void)
 		//uiList->update();
 	}
 	else
+	{
 		m_pCurrentSpriteHandle->update();
-
+		this->scrollBarUpdate();
+	}
 	//Sprite Container 안에 있는 윈도우들의 팝업창 예시
 	if (IS_KEY_PRESSED(DIK_ESCAPE))
 	{
@@ -261,6 +271,11 @@ void CTitleScene::buttonImageUpdate()
 	exitButton->update();
 }
 
+void CTitleScene::scrollBarUpdate()
+{
+	soundScrollBar->update();
+}
+
 void CTitleScene::draw(void)
 {
 	CScene::draw();
@@ -271,6 +286,7 @@ void CTitleScene::drawUI(void)
 	CScene::drawUI();
 	this->defaultImageDrawUI();
 	this->buttonImageDrawUI();
+	this->scrollDrawUI();
 
 	optionWindow->drawUI();
 	//uiList->drawUI();
@@ -289,6 +305,11 @@ void CTitleScene::buttonImageDrawUI()
 	optionButton->drawUI();
 	mapToolButton->drawUI();
 	exitButton->drawUI();
+}
+
+void CTitleScene::scrollDrawUI()
+{
+	soundScrollBar->doDrawUI();
 }
 
 LRESULT CTitleScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)

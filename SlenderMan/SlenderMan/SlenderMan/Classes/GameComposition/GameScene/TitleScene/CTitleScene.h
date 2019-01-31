@@ -8,11 +8,12 @@ class CSpriteObject_Button;
 class CSpriteObject_Container;
 class CSpriteObject_List;
 class CSpriteObject_Default;
+class CSpriteObject_ScrollBar;
 
 class CTitleScene :public CScene
 {
 private:
-	typedef std::function<void(void)> FPTR;
+	
 
 public:		//constructor , destructor
 	CTitleScene(std::string a_stSceneName);
@@ -38,32 +39,38 @@ private:
 
 	void defaultImageUpdate();
 	void buttonImageUpdate();
+	void scrollBarUpdate();
 
 	void defaultImageDrawUI();
 	void buttonImageDrawUI();
+	void scrollDrawUI();
 
+	
 private:
-	CSpriteObject_Default* m_pSprite_BackGround;
-	CSpriteObject_Default* titleImage;
-	CSpriteObject_Default* sprite_fire;
+	CSpriteObject_Default* m_pSprite_BackGround = nullptr;
+	CSpriteObject_Default* titleImage = nullptr;
+	CSpriteObject_Default* sprite_fire = nullptr;
 
-	CSpriteObject_Button* playButton;
-	CSpriteObject_Button* optionButton;
-	CSpriteObject_Button* mapToolButton;
-	CSpriteObject_Button* exitButton;
+	CSpriteObject_Button* playButton = nullptr;
+	CSpriteObject_Button* optionButton = nullptr;
+	CSpriteObject_Button* mapToolButton = nullptr;
+	CSpriteObject_Button* exitButton = nullptr;
 
 
-	CSpriteObject_Container* optionWindow;
-	CSpriteObject_Button* backButton;
+	CSpriteObject_Container* optionWindow = nullptr;
+	CSpriteObject_Button* backButton = nullptr;
 
-	CSpriteObject_List*		 uiList;
-	CSpriteObject_Button*	uiButton[5];
+	CSpriteObject_List*		 uiList = nullptr;
+	CSpriteObject_Button*	uiButton[5] = { nullptr };
+
+	CSpriteObject_ScrollBar* soundScrollBar = nullptr;
+
 
 	CSpriteObject*			 m_pCurrentSpriteHandle = nullptr;
 
-	FPTR* crashFptr;
-	FPTR* beginFptr;
-	FPTR* pressFptr;
-	FPTR* endFptr;
+	FPTR* crashFptr = nullptr;
+	FPTR* beginFptr = nullptr;
+	FPTR* pressFptr = nullptr;
+	FPTR* endFptr = nullptr;
 
 };
