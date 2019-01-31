@@ -54,7 +54,7 @@ LRESULT CGameOverScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPA
 
 void CGameOverScene::createScene(void)
 {
-	m_pGameOverSprite = new CSpriteObject_Default("Resources/Textures/Scene/GameOverScene/GameOver", "png", 1366, 768, 13, true);
+	m_pGameOverSprite = new CSpriteObject_Default("Resources/Textures/Scene/GameOverScene/gameOver", "png", 1633, 768, 5, true);
 	m_pGameOverSprite->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 }
 
