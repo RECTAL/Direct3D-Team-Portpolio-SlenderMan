@@ -15,7 +15,6 @@ CLoadingScene::CLoadingScene(std::string a_stSceneName)
 
 CLoadingScene::~CLoadingScene()
 {
-	SAFE_DELETE(m_pLoadThread);
 	SAFE_DELETE(m_pLoader);
 	SAFE_DELETE(m_pBackGround);
 }
@@ -27,8 +26,13 @@ void CLoadingScene::init()
 	m_pLoadThread = new std::thread(std::bind(&CLoadingScene::loadResources, this));
 	m_bIsAllDownLoad = false;
 
-	this->createBackGround();
 
+	if (isFirst)
+	{
+		this->createBackGround();
+
+		isFirst = false;
+	}
 }
 
 void CLoadingScene::loadResources()
@@ -81,6 +85,7 @@ void CLoadingScene::update(void)
 		if (m_pLoader != nullptr)
 		{
 			m_pLoadThread->join();
+			SAFE_DELETE(m_pLoadThread);
 			SAFE_DELETE(m_pLoader);
 		}
 		if (alpha <= 0)

@@ -60,4 +60,6 @@ private:
 	
 	CSpriteObject_Default * m_pBackGround = nullptr;
 	float alpha = 0.0f;
+
+	bool isFirst = true;
 };

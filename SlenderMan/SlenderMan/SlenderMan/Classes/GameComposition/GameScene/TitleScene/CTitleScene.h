@@ -40,11 +40,9 @@ private:
 
 	void defaultImageUpdate();
 	void buttonImageUpdate();
-	void scrollBarUpdate();
 
 	void defaultImageDrawUI();
 	void buttonImageDrawUI();
-	void scrollDrawUI();
 
 	
 private:
@@ -64,7 +62,9 @@ private:
 	CSpriteObject_List*		 uiList = nullptr;
 	CSpriteObject_Button*	uiButton[5] = { nullptr };
 
-	//CSpriteObject_ScrollBar* soundScrollBar = nullptr;
+	CSpriteObject_ScrollBar* soundScrollBar = nullptr;
+	CSpriteObject_Button*	 soundScrollBarButton = nullptr;
+
 
 
 	CSpriteObject*			 m_pCurrentSpriteHandle = nullptr;
@@ -74,4 +74,5 @@ private:
 	FPTR* pressFptr = nullptr;
 	FPTR* endFptr = nullptr;
 
+	bool isFirst = true;
 };

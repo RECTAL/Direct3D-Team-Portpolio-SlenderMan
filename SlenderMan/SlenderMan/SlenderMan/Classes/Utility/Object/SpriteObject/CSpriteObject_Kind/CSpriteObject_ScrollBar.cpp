@@ -111,8 +111,8 @@ void CSpriteObject_ScrollBar::calSetValue()
 		float movePerVal = (m_fMaxVal - m_fMinVal) / m_fWidth;
 		RECT rc = m_pWindow->getActiveRect();
 		float x = m_pSpriteButton->getWindow()->getAbsolutePosition().x;
-		m_stMoveOffset = D3DXVECTOR3(x - m_pWindow->getAbsolutePosition().x,0.0f,0.0f);
-		m_fSetVal = m_fMinVal + (x - (rc.left+m_pSpriteButton->getWindow()->getActiveSize().cx/2))*movePerVal;
+		m_stMoveOffset = D3DXVECTOR3(x - m_pWindow->getAbsolutePosition().x, 0.0f, 0.0f);
+		m_fSetVal = m_fMinVal + (x - rc.left)*movePerVal;
 		m_fSetVal = min(m_fSetVal, m_fMaxVal);
 		m_fSetVal = max(m_fSetVal, m_fMinVal);
 	}
@@ -122,7 +122,7 @@ void CSpriteObject_ScrollBar::calSetValue()
 		RECT rc = m_pWindow->getActiveRect();
 		float y = m_pSpriteButton->getWindow()->getAbsolutePosition().y;
 		m_stMoveOffset = D3DXVECTOR3(0.0f, y - m_pWindow->getAbsolutePosition().y, 0.0f);
-		m_fSetVal = m_fMinVal + ((rc.bottom - m_pSpriteButton->getWindow()->getActiveSize().cy / 2) -y)*movePerVal;
+		m_fSetVal = m_fMinVal + (y - rc.top)*movePerVal;
 		m_fSetVal = min(m_fSetVal, m_fMaxVal);
 		m_fSetVal = max(m_fSetVal, m_fMinVal);
 	}

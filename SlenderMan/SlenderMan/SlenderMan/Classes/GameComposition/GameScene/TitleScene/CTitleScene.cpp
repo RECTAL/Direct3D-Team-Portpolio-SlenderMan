@@ -46,13 +46,19 @@ CTitleScene::~CTitleScene()
 void CTitleScene::init()
 {
 	CScene::init();
-	crashFptr = new std::function<void(void)>;
-	beginFptr = new std::function<void(void)>;
-	pressFptr = new std::function<void(void)>;
-	endFptr = new std::function<void(void)>;
+	
+	if (isFirst)
+	{
+		crashFptr = new std::function<void(void)>;
+		beginFptr = new std::function<void(void)>;
+		pressFptr = new std::function<void(void)>;
+		endFptr = new std::function<void(void)>;
 
-	this->createDefaultUI();
-	this->createWindowUI();
+		this->createDefaultUI();
+		this->createWindowUI();
+		isFirst = false;
+	}
+
 
 	
 
@@ -85,7 +91,7 @@ void CTitleScene::createWindowUI()
 	(*endFptr) = [=](void)->void
 	{
 		m_pCurrentSpriteHandle = nullptr;
-		//soundScrollBar->setVisible(false);
+		soundScrollBar->setVisible(false);
 		optionWindow->setVisible(false);
 	};
 	backButton->init(
@@ -97,7 +103,8 @@ void CTitleScene::createWindowUI()
 		D3DXVECTOR3(260.0f, 230.0f, 0.0f)
 	);
 
-	optionWindow->addChildSpriteObject("gameStartButton", CWindowType::BUTTON, backButton);
+	optionWindow->addChildSpriteObject("backButton", CWindowType::BUTTON, backButton);
+	optionWindow->addChildSpriteObject("soundScroll", CWindowType::SCROLLBAR, soundScrollBar);
 
 	/********************************************************/
 	//ui 리스트
@@ -159,8 +166,12 @@ void CTitleScene::createButtonUI()
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
 
-	//soundScrollBar = new CSpriteObject_ScrollBar("Resources/Textures/Scene/MapToolScene/scrollBarEX", "png", 50, 300, 1);
-	//soundScrollBar->init(nullptr, nullptr, nullptr, nullptr, 0, 300, nullptr, true, D3DXVECTOR3(300, 50, 0.0f));
+	soundScrollBar = new CSpriteObject_ScrollBar("Resources/Textures/Scene/TitleScene/whiteCover", "png", 300, 20, 1);
+
+	soundScrollBarButton = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/grayCover", "png", 10, 50, 1);
+	soundScrollBarButton->init(nullptr, nullptr, nullptr, nullptr, true);
+
+	soundScrollBar->init(nullptr, nullptr, nullptr, nullptr, 0, 300, soundScrollBarButton, true, D3DXVECTOR3(0, -180, 0.0f));
 
 	optionButton = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/option", "png", 350, 60, 2);
 	optionButton->setPosition(D3DXVECTOR3(370, 490, 0));
@@ -173,7 +184,7 @@ void CTitleScene::createButtonUI()
 	{
 		m_pCurrentSpriteHandle = optionWindow;
 		optionWindow->setVisible(true);
-		//soundScrollBar->setVisible(true);
+		soundScrollBar->setVisible(true);
 	};
 	optionButton->init(crashFptr, nullptr, nullptr, endFptr);
 
@@ -217,40 +228,13 @@ void CTitleScene::update(void)
 	if (m_pCurrentSpriteHandle == nullptr)
 	{
 		this->buttonImageUpdate();
-
 		optionWindow->update();
-		//uiList->update();
 	}
 	else
 	{
 		m_pCurrentSpriteHandle->update();
-		this->scrollBarUpdate();
 	}
-	//Sprite Container 안에 있는 윈도우들의 팝업창 예시
-	if (IS_KEY_PRESSED(DIK_ESCAPE))
-	{
-		m_pCurrentSpriteHandle->setVisible(false);
-		m_pCurrentSpriteHandle = nullptr;
-		//uiContainer->setVisible(!uiContainer->getVisible());
-	}
-
-	//Sprite List 안에 있는 윈도우들의 팝업창 예시
-	if (IS_KEY_PRESSED(DIK_F1))
-	{
-		//uiList->setVisible(!uiList->getVisible());
-	}
-
-	//Sprite List 안의 내용물 위치 변경
-	static float moveValue = 0.0f;
-	if (IS_KEY_DOWN(DIK_UP))
-	{
-		moveValue -= 150 * GET_DELTA_TIME();
-	}
-	if (IS_KEY_DOWN(DIK_DOWN))
-	{
-		moveValue += 150 * GET_DELTA_TIME();
-	}
-	//uiList->getMoveOffset() = D3DXVECTOR3(0.0f, moveValue, 0.0f);
+	printf("%f\n", soundScrollBar->getSetValue());
 }
 
 void CTitleScene::defaultImageUpdate()
@@ -275,10 +259,6 @@ void CTitleScene::buttonImageUpdate()
 	exitButton->update();
 }
 
-void CTitleScene::scrollBarUpdate()
-{
-	//soundScrollBar->update();
-}
 
 void CTitleScene::draw(void)
 {
@@ -292,7 +272,6 @@ void CTitleScene::drawUI(void)
 
 	this->defaultImageDrawUI();
 	this->buttonImageDrawUI();
-	this->scrollDrawUI();
 
 	optionWindow->drawUI();
 
@@ -315,10 +294,6 @@ void CTitleScene::buttonImageDrawUI()
 	exitButton->drawUI();
 }
 
-void CTitleScene::scrollDrawUI()
-{
-	//soundScrollBar->doDrawUI();
-}
 
 LRESULT CTitleScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
 {

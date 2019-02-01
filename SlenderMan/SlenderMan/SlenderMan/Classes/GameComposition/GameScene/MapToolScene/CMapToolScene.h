@@ -2,7 +2,7 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
-class CSpriteObject_Default;
+class CSpriteObject;
 class CSpriteObject_ScrollBar;
 class CSpriteObject_Button;
 class CSpriteObject_List;
@@ -34,6 +34,8 @@ private:
 	void buttonDrawUI();
 private:
 	CSpriteObject_Container* selectWindowContainer = nullptr;
+	CSpriteObject_Button* upCover = nullptr;
+	CSpriteObject_Button* downCover = nullptr;
 
 	CSpriteObject_ScrollBar* UpDownScrollBar = nullptr;
 	CSpriteObject_Button*	 scrollBarButton = nullptr;
@@ -46,12 +48,14 @@ private:
 	CSpriteObject_Button* buildingButton = nullptr;
 	CSpriteObject_Button* terrainButton = nullptr;
 	CSpriteObject_Button* backButton = nullptr;
+	CSpriteObject_Button* goTitleButton = nullptr;
 
-
+	CSpriteObject* m_pCurrent = nullptr;
 
 	FPTR* crashFptr = nullptr;
 	FPTR* beginFptr = nullptr;
 	FPTR* pressFptr = nullptr;
 	FPTR* endFptr = nullptr;
 
+	bool isFirst = true;
 };
