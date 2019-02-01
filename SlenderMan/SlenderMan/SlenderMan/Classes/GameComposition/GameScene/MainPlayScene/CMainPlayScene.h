@@ -5,6 +5,7 @@
 
 
 class CCameraObject;
+class CTerrainObject;
 class CMainPlayScene :public CScene
 {
 public:		//constructor , destructor
@@ -32,14 +33,13 @@ private:
 	void	createSound();
 
 public:
-
+	CTerrainObject* createTerrain();
 
 private:
 	POINT m_stPrevMousePosition;
 
 	CCameraObject* m_pCamera = nullptr;
-
+	CTerrainObject* m_pTerrain = nullptr;
 
 	LPD3DXMESH m_pSphere = nullptr;
-
 };
