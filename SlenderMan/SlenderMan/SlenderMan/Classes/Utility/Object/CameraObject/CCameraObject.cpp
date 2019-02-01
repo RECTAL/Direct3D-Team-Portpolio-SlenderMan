@@ -1,5 +1,6 @@
 #include "CCameraObject.h"
 #include "../../Manager/CDeviceManager.h"
+#include "../../System/CollisionSystem/CollisionSystem_CFrustum.h"
 
 CCameraObject::CCameraObject(float a_fAspect)
 {
@@ -7,6 +8,8 @@ CCameraObject::CCameraObject(float a_fAspect)
 	D3DXMatrixIdentity(&m_stProjectionMatrix);
 
 	this->setAspect(a_fAspect);
+
+	m_pFrustum = new CFrustum();
 }
 
 D3DXMATRIXA16 CCameraObject::getViewMatrix(void)
@@ -53,4 +56,7 @@ void CCameraObject::update(void)
 
 	// 뷰 행렬을 설정한다
 	GET_DEVICE()->SetTransform(D3DTS_VIEW, &m_stViewMatrix);
+
+	D3DXMATRIXA16 stViewProj = m_stViewMatrix * m_stProjectionMatrix;
+	m_pFrustum->Make(&stViewProj);
 }

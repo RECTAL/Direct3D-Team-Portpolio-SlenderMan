@@ -188,8 +188,11 @@
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_List.h" />
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ScrollBar.h" />
     <ClInclude Include="Classes\Utility\Object\StaticObject\CStaticObject.h" />
+    <ClInclude Include="Classes\Utility\Object\TerrainObject\CTerrainObject.h" />
     <ClInclude Include="Classes\Utility\System\AnimationSystem\AnimationSystem_CAllocateHierarchy.h" />
     <ClInclude Include="Classes\Utility\System\AnimationSystem\AnimationSystem_CAnimationController.h" />
+    <ClInclude Include="Classes\Utility\System\CollisionSystem\CollisionSystem_CFrustum.h" />
+    <ClInclude Include="Classes\Utility\System\CollisionSystem\CollisionSystem_CQuadSystem.h" />
     <ClInclude Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleEmitter.h" />
     <ClInclude Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleSystem.h" />
     <ClInclude Include="Classes\Utility\System\ParticleSystem\ParticleSystem_EmitterKind\ParticleSystem_EmitterDefault.h" />
@@ -240,8 +243,11 @@
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_List.cpp" />
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ScrollBar.cpp" />
     <ClCompile Include="Classes\Utility\Object\StaticObject\CStaticObject.cpp" />
+    <ClCompile Include="Classes\Utility\Object\TerrainObject\CTerrainObject.cpp" />
     <ClCompile Include="Classes\Utility\System\AnimationSystem\AnimationSystem_CAllocateHierarchy.cpp" />
     <ClCompile Include="Classes\Utility\System\AnimationSystem\AnimationSystem_CAnimationController.cpp" />
+    <ClCompile Include="Classes\Utility\System\CollisionSystem\CollisionSystem_CFrustum.cpp" />
+    <ClCompile Include="Classes\Utility\System\CollisionSystem\CollisionSystem_CQuadSystem.cpp" />
     <ClCompile Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleEmitter.cpp" />
     <ClCompile Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleSystem.cpp" />
     <ClCompile Include="Classes\Utility\System\ParticleSystem\ParticleSystem_EmitterKind\ParticleSystem_EmitterDefault.cpp" />

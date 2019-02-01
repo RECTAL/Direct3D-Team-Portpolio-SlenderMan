@@ -37,6 +37,7 @@ public:		//public override function
 private:
 	void createDefaultUI();
 	void createButtonUI();
+	void createSound();
 
 	void defaultImageUpdate();
 	void buttonImageUpdate();

@@ -1,7 +1,9 @@
 #include "CMainPlayScene.h"
 #include "../../../Function/GlobalFunction.h"
+#include "../../../Utility/Object/TerrainObject/CTerrainObject.h"
 #include "../../../Utility/System/RenderSystem/RenderSystem_CRenderTarget.h"
 #include "../../../Utility/Object/CameraObject/CCameraObject.h"
+#include "../../../Utility/Manager/CSoundManager.h"
 #include "../../../Utility/Manager/CRendertargetManager.h"
 #include "../../../Utility/Manager/CDeviceManager.h"
 #include "../../../Utility/Manager/CWindowManager.h"
@@ -15,6 +17,7 @@ CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 
 CMainPlayScene::~CMainPlayScene()
 {
+	SAFE_DELETE(m_pTerrain);
 	SAFE_RELEASE(m_pSphere);
 	SAFE_DELETE(m_pCamera);
 }
@@ -26,6 +29,11 @@ void CMainPlayScene::init()
 	this->createRenderTarget();
 	this->createMesh();
 	this->createCamera();
+	this->createSound();
+
+	m_pTerrain = this->createTerrain();
+	m_pTerrain->getTechniqueName() = "DefaultTerrain";
+	m_pTerrain->setPosition(D3DXVECTOR3(0, 0, 0));
 }
 
 void CMainPlayScene::createWindowUI()
@@ -51,11 +59,41 @@ void CMainPlayScene::createCamera()
 	m_pCamera->setPosition(D3DXVECTOR3(0.0f,0.0f,-5.0f));
 }
 
+CTerrainObject * CMainPlayScene::createTerrain()
+{
+	CTerrainObject::STParameters stParameters;
+	stParameters.m_pCamera = m_pCamera;
+	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.007f, 1.0f);
+	stParameters.m_oHeightFilepath = "Resources/Datas/HeightMap.raw";
+	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/HeightMap.bmp";
+	stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
+
+	stParameters.m_stMapSize.cx = 257;
+	stParameters.m_stMapSize.cy = 257;
+
+	stParameters.m_nSmoothLevel = 1;
+
+	for (int i = 0; i < CTerrainObject::MAX_TERRAIN_TEX; ++i) {
+		char szFilepath[MAX_PATH] = "";
+		sprintf(szFilepath, "Resources/Textures/Terrain/Terrain_%02d.jpg", i + 1);
+
+		stParameters.m_oTextureFilepathList.push_back(szFilepath);
+	}
+
+	return new CTerrainObject(stParameters);
+}
+
+void CMainPlayScene::createSound()
+{
+	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/BGM.wav", true);
+}
+
 
 void CMainPlayScene::update(void)
 {
 	CScene::update();
 	m_pCamera->update();
+	m_pTerrain->update();
 
 	if (IS_MOUSE_BUTTON_DOWN(EMouseInput::RIGHT)) {
 		float fSpeed = 15.0f;
@@ -126,6 +164,7 @@ void CMainPlayScene::draw(void)
 	GET_DEVICE()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	GET_DEVICE()->SetRenderState(D3DRS_LIGHTING, TRUE);
 
+	m_pTerrain->draw();
 
 	/***************************************************/
 	//Back Buffer로 재설정
