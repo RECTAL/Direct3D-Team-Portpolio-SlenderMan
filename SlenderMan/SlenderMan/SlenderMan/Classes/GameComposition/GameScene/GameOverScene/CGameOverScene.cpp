@@ -15,6 +15,7 @@ CGameOverScene::CGameOverScene(std::string a_stSceneName)
 CGameOverScene::~CGameOverScene()
 {
 	SAFE_DELETE(m_pGameOverSprite);
+	SAFE_DELETE(m_pDeadSprite);
 }
 
 void CGameOverScene::init()
@@ -32,8 +33,8 @@ void CGameOverScene::createWindowUI()
 void CGameOverScene::update(void)
 {
 	CScene::update();
+	m_fCurrentTime += GET_DELTA_TIME();
 	updateSprite();
-	
 }
 
 void CGameOverScene::draw(void)
@@ -45,7 +46,12 @@ void CGameOverScene::drawUI(void)
 {
 	CScene::drawUI();
 	
-	m_pGameOverSprite->drawUI();
+	if (m_fCurrentTime > 5.0f) {
+		m_pGameOverSprite->drawUI();
+	}
+	else {
+		m_pDeadSprite->drawUI();
+	}
 }
 
 LRESULT CGameOverScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
@@ -59,6 +65,9 @@ LRESULT CGameOverScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPA
 
 void CGameOverScene::createScene(void)
 {
+	m_pDeadSprite = new CSpriteObject_Default("Resources/Textures/Scene/GameOverScene/Dead", "png", 1633, 768, 10);
+	m_pDeadSprite->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
+
 	m_pGameOverSprite = new CSpriteObject_Default("Resources/Textures/Scene/GameOverScene/gameOver", "png", 1633, 768, 5, true);
 	m_pGameOverSprite->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 }
@@ -68,20 +77,27 @@ void CGameOverScene::updateSprite(void)
 	static float fTime = 0.0f;
 
 	fTime += GET_DELTA_TIME();
-	
-	if (fTime > 0.08f) {
-		m_pGameOverSprite->update();
+
+	if (fTime > 0.1f && m_fCurrentTime < 5.0f) {
+		m_pDeadSprite->update();
 		fTime = 0.0f;
 	}
-	if (IS_KEY_DOWN(DIK_RETURN))
-	{
-		GET_SOUND_MANAGER()->stopBackgroundSound();
-		CHANGE_SCENE_DIRECT(GAMESCENE_TITLE, TRUE);
+
+	if (m_fCurrentTime > 5.0f) {
+		if (fTime > 0.08f) {
+			m_pGameOverSprite->update();
+			fTime = 0.0f;
+		}
+		if (IS_KEY_DOWN(DIK_RETURN) || m_fCurrentTime > 10.0f)
+		{
+			GET_SOUND_MANAGER()->stopBackgroundSound();
+			CHANGE_SCENE_DIRECT(GAMESCENE_TITLE, TRUE);
+		}
 	}
 }
 
 void CGameOverScene::createSound(void)
 {
-	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/EffectSounds/Dead.wav", true);
+	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/EffectSounds/Noise_3.wav", true);
 	GET_SOUND_MANAGER()->setBackgroundSoundVolume(0.8f);
 }

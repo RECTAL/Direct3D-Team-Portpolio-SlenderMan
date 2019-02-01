@@ -30,4 +30,7 @@ private:	//private 함수
 
 private:	//private 변수
 	CSpriteObject_Default * m_pGameOverSprite = nullptr;
+	CSpriteObject_Default * m_pDeadSprite = nullptr;
+	int m_nCount = 0;
+	float m_fCurrentTime = 0.0f;
 };
