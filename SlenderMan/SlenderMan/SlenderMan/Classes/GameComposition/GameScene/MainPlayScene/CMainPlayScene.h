@@ -2,8 +2,9 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
-class CStaticObject;
 
+
+class CCameraObject;
 class CMainPlayScene :public CScene
 {
 public:		//constructor , destructor
@@ -24,10 +25,19 @@ public:		//public override function
 	virtual void init()override;					//override	: CScene
 	virtual void createWindowUI()override;
 
+private:
+	void	createRenderTarget();
+	void	createMesh();
+	void	createCamera();
 public:
 
 
 private:
+	POINT m_stPrevMousePosition;
 
+	CCameraObject* m_pCamera = nullptr;
+
+
+	LPD3DXMESH m_pSphere = nullptr;
 
 };

@@ -13,7 +13,7 @@ CVirtualScene::~CVirtualScene()
 void CVirtualScene::update(void)
 {
 	CScene::update();
-	CHANGE_SCENE_LOADING(GAMESCENE_GAMEOVER, TRUE);
+	CHANGE_SCENE_DIRECT(GAMESCENE_MAPTOOL, TRUE);
 }
 
 void CVirtualScene::draw(void)

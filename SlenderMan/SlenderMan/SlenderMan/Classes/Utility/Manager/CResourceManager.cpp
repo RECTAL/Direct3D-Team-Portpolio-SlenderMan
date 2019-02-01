@@ -91,7 +91,10 @@ LPDIRECT3DTEXTURE9 CResourceManager::getTexture(const std::string & a_rKey, bool
 
 		if (a_bIsAutoCreate) {
 			pTexture = this->createTexture(a_rKey);
-			this->addTexture(a_rKey, pTexture);
+
+			D3DSURFACE_DESC pSurf;
+			pTexture->GetLevelDesc(0, &pSurf);
+			this->addTexture(a_rKey, pTexture, pSurf.Width, pSurf.Height);
 		}
 
 		return pTexture;
@@ -110,7 +113,7 @@ LPDIRECT3DTEXTURE9 CResourceManager::getSpriteTexture(const std::string & a_rKey
 
 		if (a_bIsAutoCreate) {
 			pTexture = this->createSpriteTexture(a_rKey, width, height);
-			this->addTexture(a_rKey, pTexture);
+			this->addTexture(a_rKey, pTexture,width,height);
 		}
 
 		return pTexture;
@@ -159,10 +162,13 @@ void CResourceManager::addEffect(const std::string & a_rKey, LPD3DXEFFECT a_pEff
 	}
 }
 
-void CResourceManager::addTexture(const std::string & a_rKey, LPDIRECT3DTEXTURE9 a_pTexture)
+void CResourceManager::addTexture(const std::string & a_rKey, LPDIRECT3DTEXTURE9 a_pTexture, float width, float height)
 {
+	char path[MAX_PATH];
+	sprintf(path, "%s%d%d", a_rKey.c_str(), width, height);
+
 	if (m_oTextureList.find(a_rKey) == m_oTextureList.end()) {
-		m_oTextureList.insert(decltype(m_oTextureList)::value_type(a_rKey, a_pTexture));
+		m_oTextureList.insert(decltype(m_oTextureList)::value_type(path, a_pTexture));
 	}
 }
 

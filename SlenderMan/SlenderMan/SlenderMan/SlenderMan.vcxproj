@@ -23,13 +23,13 @@
     <ProjectGuid>{E0F8E15A-0022-4DCE-955B-F851EE94569F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SlenderMan</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -98,6 +98,10 @@
       <SubSystem>Windows</SubSystem>
       <AdditionalDependencies>d3d9.lib;d3dx9.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <FxCompile>
+      <ShaderModel>3.0</ShaderModel>
+      <EntryPointName>vs_main</EntryPointName>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -158,12 +162,12 @@
     <ClInclude Include="Classes\GameComposition\GameScene\TitleScene\CTitleScene.h" />
     <ClInclude Include="Classes\GameComposition\GameScene\VictoryScene\CVictoryScene.h" />
     <ClInclude Include="Classes\Utility\Base\CDirect3DApplication.h" />
-    <ClInclude Include="Classes\Utility\Base\CWindow.h" />
     <ClInclude Include="Classes\Utility\Interface\IRenderable.h" />
     <ClInclude Include="Classes\Utility\Interface\IUpdateable.h" />
     <ClInclude Include="Classes\Utility\Interface\IWindowMessageHandler.h" />
     <ClInclude Include="Classes\Utility\Manager\CDeviceManager.h" />
     <ClInclude Include="Classes\Utility\Manager\CInputManager.h" />
+    <ClInclude Include="Classes\Utility\Manager\CRendertargetManager.h" />
     <ClInclude Include="Classes\Utility\Manager\CResourceManager.h" />
     <ClInclude Include="Classes\Utility\Manager\CSceneManager.h" />
     <ClInclude Include="Classes\Utility\Manager\CSoundManager.h" />
@@ -189,6 +193,7 @@
     <ClInclude Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleEmitter.h" />
     <ClInclude Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleSystem.h" />
     <ClInclude Include="Classes\Utility\System\ParticleSystem\ParticleSystem_EmitterKind\ParticleSystem_EmitterDefault.h" />
+    <ClInclude Include="Classes\Utility\System\RenderSystem\RenderSystem_CRenderTarget.h" />
     <ClInclude Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowButton.h" />
     <ClInclude Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowContainer.h" />
     <ClInclude Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowList.h" />
@@ -216,6 +221,7 @@
     <ClCompile Include="Classes\Utility\Base\CWindowApplication.cpp" />
     <ClCompile Include="Classes\Utility\Manager\CDeviceManager.cpp" />
     <ClCompile Include="Classes\Utility\Manager\CInputManager.cpp" />
+    <ClCompile Include="Classes\Utility\Manager\CRendertargetManager.cpp" />
     <ClCompile Include="Classes\Utility\Manager\CResourceManager.cpp" />
     <ClCompile Include="Classes\Utility\Manager\CSceneManager.cpp" />
     <ClCompile Include="Classes\Utility\Manager\CSoundManager.cpp" />
@@ -239,11 +245,15 @@
     <ClCompile Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleEmitter.cpp" />
     <ClCompile Include="Classes\Utility\System\ParticleSystem\ParticleSystem_CParticleSystem.cpp" />
     <ClCompile Include="Classes\Utility\System\ParticleSystem\ParticleSystem_EmitterKind\ParticleSystem_EmitterDefault.cpp" />
+    <ClCompile Include="Classes\Utility\System\RenderSystem\RenderSystem_CRenderTarget.cpp" />
     <ClCompile Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowButton.cpp" />
     <ClCompile Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowContainer.cpp" />
     <ClCompile Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowList.cpp" />
     <ClCompile Include="Classes\Utility\System\WindowSystem\WindowSystem_CWindowScrollBar.cpp" />
     <ClCompile Include="SlenderMan.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\Effects\CopyTexture.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

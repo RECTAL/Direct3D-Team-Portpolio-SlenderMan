@@ -10,6 +10,7 @@ class CSpriteObject_List;
 class CSpriteObject_Default;
 class CSpriteObject_ScrollBar;
 
+
 class CTitleScene :public CScene
 {
 private:
@@ -63,7 +64,7 @@ private:
 	CSpriteObject_List*		 uiList = nullptr;
 	CSpriteObject_Button*	uiButton[5] = { nullptr };
 
-	CSpriteObject_ScrollBar* soundScrollBar = nullptr;
+	//CSpriteObject_ScrollBar* soundScrollBar = nullptr;
 
 
 	CSpriteObject*			 m_pCurrentSpriteHandle = nullptr;
