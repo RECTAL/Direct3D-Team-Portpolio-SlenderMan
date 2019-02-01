@@ -29,6 +29,8 @@ private:
 	void	createRenderTarget();
 	void	createMesh();
 	void	createCamera();
+	void	createSound();
+
 public:
 
 

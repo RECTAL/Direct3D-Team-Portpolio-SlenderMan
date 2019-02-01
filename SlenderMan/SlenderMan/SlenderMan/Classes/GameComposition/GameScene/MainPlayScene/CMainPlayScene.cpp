@@ -2,6 +2,7 @@
 #include "../../../Function/GlobalFunction.h"
 #include "../../../Utility/System/RenderSystem/RenderSystem_CRenderTarget.h"
 #include "../../../Utility/Object/CameraObject/CCameraObject.h"
+#include "../../../Utility/Manager/CSoundManager.h"
 #include "../../../Utility/Manager/CRendertargetManager.h"
 #include "../../../Utility/Manager/CDeviceManager.h"
 #include "../../../Utility/Manager/CWindowManager.h"
@@ -26,6 +27,7 @@ void CMainPlayScene::init()
 	this->createRenderTarget();
 	this->createMesh();
 	this->createCamera();
+	this->createSound();
 }
 
 void CMainPlayScene::createWindowUI()
@@ -49,6 +51,11 @@ void CMainPlayScene::createCamera()
 {
 	m_pCamera = new CCameraObject((float)GET_WINDOW_SIZE().cx/(float)GET_WINDOW_SIZE().cy);
 	m_pCamera->setPosition(D3DXVECTOR3(0.0f,0.0f,-5.0f));
+}
+
+void CMainPlayScene::createSound()
+{
+	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/BGM.wav", true);
 }
 
 

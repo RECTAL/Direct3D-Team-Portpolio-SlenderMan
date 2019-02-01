@@ -4,6 +4,7 @@
 #include "../Manager/CTimeManager.h"
 #include "../Manager/CInputManager.h"
 #include "../Manager/CSceneManager.h"
+#include "../Manager//CSoundManager.h"
 #include "../Manager/CRendertargetManager.h"
 
 
@@ -26,6 +27,7 @@ void CDirect3DApplication::initApplication(void)
 	GET_SCENE_MANAGER()->init();
 	CWindowApplication::initApplication();
 	GET_DEVICE_MANAGER()->init();
+
 	GET_RENDERTARGET_MANAGER()->init();
 	m_pSprite = this->createSprite();
 }
@@ -56,6 +58,7 @@ int CDirect3DApplication::runMessageLoop(void)
 	// manager init
 	GET_TIME_MANAGER()->init();
 	GET_INPUT_MANAGER()->init();
+	GET_SOUND_MANAGER()->init();
 
 	MSG stMessage;
 	ZeroMemory(&stMessage, sizeof(stMessage));

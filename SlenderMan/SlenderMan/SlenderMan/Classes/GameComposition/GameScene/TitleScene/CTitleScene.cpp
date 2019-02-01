@@ -4,6 +4,7 @@
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Default.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_List.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_ScrollBar.h"
+#include "../../../Utility/Manager/CSoundManager.h"
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CSceneManager.h"
@@ -53,8 +54,7 @@ void CTitleScene::init()
 
 	this->createDefaultUI();
 	this->createWindowUI();
-
-	
+	this->createSound();
 
 }
 
@@ -155,6 +155,7 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
+		GET_SOUND_MANAGER()->stopBackgroundSound();
 		CHANGE_SCENE_DIRECT(GAMESCENE_MAINPLAY,TRUE);
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
@@ -205,9 +206,12 @@ void CTitleScene::createButtonUI()
 	};
 
 	exitButton->init(crashFptr, nullptr, nullptr, endFptr);
+}
 
-	
-
+void CTitleScene::createSound()
+{
+	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/Title.wav", true);
+	GET_SOUND_MANAGER()->setBackgroundSoundVolume(1.0f);
 }
 
 void CTitleScene::update(void)

@@ -4,6 +4,8 @@
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CInputManager.h"
+#include "../../../Utility/Manager/CSoundManager.h"
+
 
 CGameOverScene::CGameOverScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
@@ -19,6 +21,8 @@ void CGameOverScene::init()
 {
 	CScene::init();
 	this->createScene();
+
+	createSound();
 }
 
 void CGameOverScene::createWindowUI()
@@ -29,6 +33,7 @@ void CGameOverScene::update(void)
 {
 	CScene::update();
 	updateSprite();
+	
 }
 
 void CGameOverScene::draw(void)
@@ -70,6 +75,13 @@ void CGameOverScene::updateSprite(void)
 	}
 	if (IS_KEY_DOWN(DIK_RETURN))
 	{
+		GET_SOUND_MANAGER()->stopBackgroundSound();
 		CHANGE_SCENE_DIRECT(GAMESCENE_TITLE, TRUE);
 	}
+}
+
+void CGameOverScene::createSound(void)
+{
+	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/EffectSounds/Dead.wav", true);
+	GET_SOUND_MANAGER()->setBackgroundSoundVolume(0.8f);
 }
