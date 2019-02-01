@@ -203,6 +203,9 @@
     <Filter Include="Classes\Global\Utility\System\RenderingSystem\RenderSystem_TargetKind">
       <UniqueIdentifier>{76091d2e-7557-432e-b52d-7d48c57dd556}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Global\Utility\Object\TerrainObject">
+      <UniqueIdentifier>{8607554e-a196-40b1-8ef1-8bf4621e9144}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\Define\KGlobalDefine.h">
@@ -351,6 +354,15 @@
     </ClInclude>
     <ClInclude Include="Classes\Utility\Manager\CRendertargetManager.h">
       <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\System\CollisionSystem\CollisionSystem_CQuadSystem.h">
+      <Filter>Classes\Global\Utility\System\CollisionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\TerrainObject\CTerrainObject.h">
+      <Filter>Classes\Global\Utility\Object\TerrainObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\System\CollisionSystem\CollisionSystem_CFrustum.h">
+      <Filter>Classes\Global\Utility\System\CollisionSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -506,6 +518,15 @@
     </ClCompile>
     <ClCompile Include="Classes\Utility\Manager\CRendertargetManager.cpp">
       <Filter>Classes\Global\Utility\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\System\CollisionSystem\CollisionSystem_CQuadSystem.cpp">
+      <Filter>Classes\Global\Utility\System\CollisionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\TerrainObject\CTerrainObject.cpp">
+      <Filter>Classes\Global\Utility\Object\TerrainObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\System\CollisionSystem\CollisionSystem_CFrustum.cpp">
+      <Filter>Classes\Global\Utility\System\CollisionSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

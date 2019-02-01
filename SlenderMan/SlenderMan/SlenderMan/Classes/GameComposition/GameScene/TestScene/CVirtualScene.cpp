@@ -13,7 +13,7 @@ CVirtualScene::~CVirtualScene()
 void CVirtualScene::update(void)
 {
 	CScene::update();
-	CHANGE_SCENE_DIRECT(GAMESCENE_MAPTOOL, TRUE);
+	CHANGE_SCENE_DIRECT(GAMESCENE_TITLE, TRUE);
 }
 
 void CVirtualScene::draw(void)
