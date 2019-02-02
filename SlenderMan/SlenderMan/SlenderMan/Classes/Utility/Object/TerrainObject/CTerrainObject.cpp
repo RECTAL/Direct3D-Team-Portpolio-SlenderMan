@@ -2,6 +2,8 @@
 #include "../../../Function/GlobalFunction.h"
 #include "../../Manager/CDeviceManager.h"
 #include "../../Manager/CResourceManager.h"
+#include "../../Manager/CInputManager.h"
+#include "../../Manager/CWindowManager.h"
 #include "../../System/CollisionSystem/CollisionSystem_CQuadSystem.h"
 
 CTerrainObject::CTerrainObject(const STParameters& a_stParameters)
@@ -210,22 +212,77 @@ HRESULT CTerrainObject::createTerrainMesh()
 	return S_OK;
 }
 
-
-void CTerrainObject::doDraw()
+void CTerrainObject::update(void)
 {
-	LPDWORD		pIndices;
+	CObject::update();
+	
+	LPDWORD		pIndices = nullptr;
+
 	LPDIRECT3DINDEXBUFFER9 pIndexBuffer;
 	m_pTerrainMesh->GetIndexBuffer(&pIndexBuffer);
 
+
+	
 	if (SUCCEEDED(pIndexBuffer->Lock(0, (m_cxDIB - 1)*(m_czDIB - 1) * 2 * sizeof(DWORD) * 3, (void**)&pIndices, 0)))
 	{
-	
 		m_nTriangles = m_pQuadTree->GenerateIndex(pIndices, m_pHeightMap, m_pCamera->getCameraFrustum());
+
 		pIndexBuffer->Unlock();
-		
-		render();
+	}
+	
+	static bool IsMapToolUpdate = false;
+	if (IS_KEY_PRESSED(DIK_F1))
+	{
+		IsMapToolUpdate = !IsMapToolUpdate;
+	}
+	if (IsMapToolUpdate)
+	{
+		this->mapToolUpdate();
 	}
 }
+
+void CTerrainObject::mapToolUpdate()
+{
+	bool isClick = false;
+	STRay	ray;
+	float	fu, fv;
+	TERRAINVERTEX* pVertices = nullptr;
+	LPDWORD			pIndices = nullptr;
+
+	LPDIRECT3DINDEXBUFFER9 pIndexBuffer;
+	m_pTerrainMesh->GetIndexBuffer(&pIndexBuffer);
+
+
+	if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
+	{
+		ray = CreateRay(GET_MOUSE_POSITION());
+		isClick = true;
+	}
+
+	if (isClick)
+	{
+		if (SUCCEEDED(m_pTerrainMesh->LockVertexBuffer(0, (void**)&pVertices)))
+		{
+			if (SUCCEEDED(pIndexBuffer->Lock(0, (m_cxDIB - 1)*(m_czDIB - 1) * 2 * sizeof(DWORD) * 3, (void**)&pIndices, 0)))
+			{
+				for (int i = 0; i < m_nTriangles * 3; i += 3)
+				{
+					if (D3DXIntersectTri(&pVertices[pIndices[i]].m_stPosition, &pVertices[pIndices[i + 1]].m_stPosition, &pVertices[pIndices[i + 2]].m_stPosition,
+						&ray.m_stOrigin, &ray.m_stDirection, &fu, &fv, NULL))
+						MessageBox(GET_WINDOW_HANDLE(), "지형 피킹 충돌", "충돌", S_OK);
+				}
+				pIndexBuffer->Unlock();
+			}
+		}
+		m_pTerrainMesh->UnlockVertexBuffer();
+	}
+}
+
+void CTerrainObject::doDraw()
+{
+	render();
+}
+
 
 HRESULT CTerrainObject::render()
 {
@@ -264,7 +321,6 @@ HRESULT CTerrainObject::render()
 	RunEffectLoop(m_pEffect, m_stTechniqueName.c_str(), [=](int a_nPassNumber) -> void {
 		GET_DEVICE()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, m_cxDIB*m_czDIB, 0, m_nTriangles);
 	});
-
 
 	return S_OK;
 }

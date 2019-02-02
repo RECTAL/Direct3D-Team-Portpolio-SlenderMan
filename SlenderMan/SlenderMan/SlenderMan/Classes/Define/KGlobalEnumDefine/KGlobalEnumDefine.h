@@ -26,3 +26,12 @@ enum class CWindowType
 	SCROLLBAR,
 	NONE
 };
+
+enum class EObjType
+{
+	TREE_0,
+	TREE_1,
+	ROCK_0,
+	ROCK_1,
+	NONE = -1
+};

@@ -25,15 +25,20 @@ CMainPlayScene::~CMainPlayScene()
 void CMainPlayScene::init()
 {	
 	CScene::init();
-	this->createWindowUI();
-	this->createRenderTarget();
-	this->createMesh();
-	this->createCamera();
-	this->createSound();
+	if (isFirst)
+	{
+		this->createWindowUI();
+		this->createRenderTarget();
+		this->createMesh();
+		this->createCamera();
+		this->createSound();
 
-	m_pTerrain = this->createTerrain();
-	m_pTerrain->getTechniqueName() = "DefaultTerrain";
-	m_pTerrain->setPosition(D3DXVECTOR3(0, 0, 0));
+		m_pTerrain = this->createTerrain();
+		m_pTerrain->getTechniqueName() = "DefaultTerrain";
+		m_pTerrain->setPosition(D3DXVECTOR3(0, 0, 0));
+
+		isFirst = false;
+	}
 }
 
 void CMainPlayScene::createWindowUI()
@@ -85,7 +90,7 @@ CTerrainObject * CMainPlayScene::createTerrain()
 
 void CMainPlayScene::createSound()
 {
-	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/BGM.wav", true);
+	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/BGM_1.wav", true);
 }
 
 

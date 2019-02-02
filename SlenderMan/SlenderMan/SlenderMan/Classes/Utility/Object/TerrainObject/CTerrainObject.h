@@ -52,7 +52,9 @@ public:
 	std::string&	getTechniqueName(){ return m_stTechniqueName; }
 
 	virtual	void	doDraw(void) override;
+	virtual void	update(void) override;
 
+	void			mapToolUpdate();
 private:
 	HRESULT			destroy();
 	HRESULT			loadTextures(std::vector<std::string>&  lpTexFilename);

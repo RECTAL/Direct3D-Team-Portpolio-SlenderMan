@@ -1,4 +1,5 @@
 #include "GlobalFunction.h"
+#include "../Utility/Manager/CDeviceManager.h"
 
 DWORD FloatToDWORD(float a_fValue)
 {
@@ -42,7 +43,40 @@ void RunEffectLoop(LPD3DXEFFECT a_pEffect, const std::string & a_rTechnique, con
 
 STRay CreateRay(const POINT & a_rstPoint)
 {
-	return STRay();
+	D3DVIEWPORT9 stViewport;
+	GET_DEVICE()->GetViewport(&stViewport);
+
+	float fNormalizeX = ((a_rstPoint.x * 2.0f) / stViewport.Width) - 1.0f;
+	float fNormalizeY = ((a_rstPoint.y * -2.0f) / stViewport.Height) + 1.0f;
+	// }
+
+	// 투영 -> 뷰 공간으로 좌표 이동
+	// {
+	D3DXMATRIXA16 stProjectionMatrix;
+	GET_DEVICE()->GetTransform(D3DTS_PROJECTION, &stProjectionMatrix);
+
+	STRay stRay;
+	ZeroMemory(&stRay, sizeof(stRay));
+
+	stRay.m_stDirection = D3DXVECTOR3(fNormalizeX / stProjectionMatrix(0, 0),
+		fNormalizeY / stProjectionMatrix(1, 1),
+		1.0f);
+	// }
+
+	// 뷰 -> 월드 공간으로 좌표 이동
+	// {
+	D3DXMATRIXA16 stViewMatrix;
+	GET_DEVICE()->GetTransform(D3DTS_VIEW, &stViewMatrix);
+
+	D3DXMATRIXA16 stInverseMatrix;
+	D3DXMatrixInverse(&stInverseMatrix, NULL, &stViewMatrix);
+
+	D3DXVec3TransformCoord(&stRay.m_stOrigin, &stRay.m_stOrigin, &stInverseMatrix);
+	D3DXVec3TransformNormal(&stRay.m_stDirection, &stRay.m_stDirection, &stInverseMatrix);
+	// }
+
+	D3DXVec3Normalize(&stRay.m_stDirection, &stRay.m_stDirection);
+	return stRay;
 }
 
 LPD3DXMESH CreateMesh(int a_nFaceSize, int a_nVertexSize, DWORD a_nOptions, DWORD a_nFVF)

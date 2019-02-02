@@ -364,6 +364,9 @@
     <ClInclude Include="Classes\Utility\System\CollisionSystem\CollisionSystem_CFrustum.h">
       <Filter>Classes\Global\Utility\System\CollisionSystem</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Utility\Base\CStage.h">
+      <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -527,6 +530,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Utility\System\CollisionSystem\CollisionSystem_CFrustum.cpp">
       <Filter>Classes\Global\Utility\System\CollisionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Base\CStage.cpp">
+      <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

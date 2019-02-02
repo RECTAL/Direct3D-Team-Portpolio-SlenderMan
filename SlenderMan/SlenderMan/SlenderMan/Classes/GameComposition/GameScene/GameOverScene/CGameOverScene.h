@@ -33,4 +33,6 @@ private:	//private º¯¼ö
 	CSpriteObject_Default * m_pDeadSprite = nullptr;
 	int m_nCount = 0;
 	float m_fCurrentTime = 0.0f;
+
+	bool isFirst = true;
 };

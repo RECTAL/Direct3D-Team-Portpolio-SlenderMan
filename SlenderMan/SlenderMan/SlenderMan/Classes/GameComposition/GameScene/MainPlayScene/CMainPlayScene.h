@@ -42,4 +42,6 @@ private:
 	CTerrainObject* m_pTerrain = nullptr;
 
 	LPD3DXMESH m_pSphere = nullptr;
+
+	bool isFirst = true;
 };

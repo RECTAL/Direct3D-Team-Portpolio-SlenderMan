@@ -21,9 +21,12 @@ CGameOverScene::~CGameOverScene()
 void CGameOverScene::init()
 {
 	CScene::init();
-	this->createScene();
 
-	createSound();
+	if (isFirst)
+	{
+		this->createScene();
+		createSound();
+	}
 }
 
 void CGameOverScene::createWindowUI()
