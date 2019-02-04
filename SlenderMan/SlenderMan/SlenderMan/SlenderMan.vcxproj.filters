@@ -539,5 +539,14 @@
     <FxCompile Include="Resources\Effects\CopyTexture.fx">
       <Filter>Resources\Effects</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Effects\DefaultTerrain.fx">
+      <Filter>Resources\Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Effects\DefaultStaticMesh.fx">
+      <Filter>Resources\Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Effects\DefaultSkinnedMesh.fx">
+      <Filter>Resources\Effects</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

@@ -262,6 +262,9 @@
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Effects\CopyTexture.fx" />
+    <FxCompile Include="Resources\Effects\DefaultSkinnedMesh.fx" />
+    <FxCompile Include="Resources\Effects\DefaultStaticMesh.fx" />
+    <FxCompile Include="Resources\Effects\DefaultTerrain.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
