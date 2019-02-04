@@ -32,7 +32,7 @@ struct VSOutput
 };
 
 
-VSOutput vs_main(VS_Input a_stInput)
+VSOutput vs_main(VSInput a_stInput)
 {
     VSOutput stOutput = (VSOutput)0;
     float fLeftWeight = 1.0f;

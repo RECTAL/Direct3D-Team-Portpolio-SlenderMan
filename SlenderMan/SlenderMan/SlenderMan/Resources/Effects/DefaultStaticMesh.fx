@@ -56,7 +56,7 @@ VSOutput vs_main(VSInput a_stInput)
 
 struct PSInput
 {
-    float2 m_stIV               :TEXCOORD0;
+    float2 m_stUV               :TEXCOORD0;
     float3 m_stNormal           :TEXCOORD1;
     float3 m_stBinormal         :TEXCOORD2;
     float3 m_stTangent          :TEXCOORD3;
