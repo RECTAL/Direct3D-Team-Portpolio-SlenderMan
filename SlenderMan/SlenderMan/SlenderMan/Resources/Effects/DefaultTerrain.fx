@@ -4,6 +4,19 @@ float4x4 g_stViewMatrix;
 float4x4 g_stProjectionMatrix;
 
 
+int	nNumSpotLight;
+float4	g_stSpotLightPosition[10];
+float4	g_stSpotLightForward[10];
+float	g_fTheta[10];
+float	g_fPhi[10];
+float	g_fSpotDistance[10];
+
+int nNumPointLight;
+float4	g_stPointLightPosition[10];
+float	g_fPointDistance[10];
+
+
+
 texture g_pTextureA;
 texture g_pTextureB;
 texture g_pTextureC;
@@ -28,6 +41,7 @@ struct STOutput
 	float3 m_stNormal 	: TEXCOORD1;
 	float3 m_stBinormal : TEXCOORD2;
 	float3 m_stTangent 	: TEXCOORD3;
+	float3 m_stWorldPosition    :TEXCOORD4;
 };
 
 STOutput vs_main(STInput a_stInput)
@@ -46,6 +60,8 @@ STOutput vs_main(STInput a_stInput)
 
 	float3 stTangent = mul(a_stInput.m_stTangent, (float3x3)g_stWorldMatrix);
 	stOutput.m_stTangent = normalize(stTangent);
+
+	stOutput.m_stWorldPosition = stWorldPosition.xyz;
 
 	stOutput.m_stUV = a_stInput.m_stUV;
 	return stOutput;
@@ -112,8 +128,41 @@ float4 ps_main(STOutput a_stInput) : COLOR0
 		(stColorC * stSplatColor.b) +
 		(stColorD * fBlackPercent);
 
+	float4 fSpotLightColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 
-	float4 stFinalColor = stDiffuseColor;
+	for (int i = 0; i < nNumSpotLight; i++)
+	{
+		float3 stSpotPosition = g_stSpotLightPosition[i].xyz;
+		float3 stSpotDirection = g_stSpotLightForward[i].xyz;
+		float fTheta = g_fTheta[i];
+		float fPhi = g_fPhi[i];
+		float fSpotDistance = g_fSpotDistance[i];
+		float4 stSpotColor = stDiffuseColor;
+
+		float3 stSpotToPos = normalize(a_stInput.m_stWorldPosition - stSpotPosition);
+		float fDistance = distance(a_stInput.m_stWorldPosition, stSpotPosition);
+
+		if (fDistance > fSpotDistance)continue;
+
+		float delDegree = acos(dot(stSpotDirection, stSpotToPos));
+
+		if (delDegree < fTheta)
+		{
+			stSpotColor.rgb *= saturate(dot(stSpotDirection, stSpotToPos));
+			stSpotColor.rgb = lerp(stSpotColor.rgb, stDiffuseColor.rgb*1.2f, (fTheta - delDegree) / fTheta);
+		}
+		if (delDegree < fPhi)
+		{
+			stSpotColor.rgb *= saturate(dot(stSpotDirection, stSpotToPos));
+			stSpotColor.rgb = lerp(float3(0.0f, 0.0f, 0.0f), stSpotColor.rgb, (fPhi - delDegree) / fPhi);
+		}
+		else continue;
+
+		fSpotLightColor.rgb += lerp(float3(0.0f, 0.0f, 0.0f), stSpotColor.rgb,  min(fSpotDistance /fDistance,5.0f));
+	}
+
+
+	float4 stFinalColor = stDiffuseColor+ fSpotLightColor;
 	return stFinalColor;
 }
 

@@ -1,5 +1,7 @@
 #include "CTerrainObject.h"
 #include "../../../Function/GlobalFunction.h"
+#include "../LightObject/CLightObject.h"
+#include "../LightObject/SpotLightObject/SpotLightObject.h"
 #include "../../Manager/CDeviceManager.h"
 #include "../../Manager/CResourceManager.h"
 #include "../../Manager/CInputManager.h"
@@ -292,6 +294,16 @@ HRESULT CTerrainObject::render()
 	D3DXMATRIXA16 stViewMatrix = m_pCamera->getViewMatrix();
 	D3DXMATRIXA16 stProjectionMatrix = m_pCamera->getProjectionMatrix();
 
+	D3DXVECTOR4	stSpotLightPosition[10];
+	D3DXVECTOR4	stSpotLightForward[10];
+	float	fSpotDistance[10];
+	float	fTheta[10];
+	float	fPhi[10];
+
+	D3DXVECTOR4 stPointLightPosition[10];
+	float	fPointDistance[10];
+
+
 	m_pEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
 	m_pEffect->SetMatrix("g_stViewMatrix", &stViewMatrix);
 	m_pEffect->SetMatrix("g_stProjectionMatrix", &stProjectionMatrix);
@@ -307,6 +319,50 @@ HRESULT CTerrainObject::render()
 
 		m_pEffect->SetTexture(szVariableName, m_pTex[i]);
 	}
+
+
+	int nNumSpotLight = m_stParameters.m_nNumSpotLight;
+	m_pEffect->SetInt("nNumSpotLight", nNumSpotLight);
+	for (int i = 0; i < nNumSpotLight; i++)
+	{
+		stSpotLightPosition[i] = D3DXVECTOR4(m_stParameters.m_pSpotLight[i].getPosition(), 1.0f);
+		stSpotLightForward[i] = D3DXVECTOR4(m_stParameters.m_pSpotLight[i].getForwardDirection(), 0.0f);
+		fTheta[i] = m_stParameters.m_pSpotLight[i].m_fTheta;
+		fPhi[i] = m_stParameters.m_pSpotLight[i].m_fPhi;
+		fSpotDistance[i] = m_stParameters.m_pSpotLight[i].m_fRange;
+	}
+	for (int i = nNumSpotLight; i < 10; i++)
+	{
+		stSpotLightPosition[i] = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
+		stSpotLightForward[i] = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
+		fTheta[i] = 0.0f;
+		fPhi[i] = 0.0f;
+		fSpotDistance[i] = 0.0f;
+	}
+
+	m_pEffect->SetVectorArray("g_stSpotLightPosition", stSpotLightPosition, 10);
+	m_pEffect->SetVectorArray("g_stSpotLightForward", stSpotLightForward, 10);
+	m_pEffect->SetFloatArray("g_fSpotDistance", fSpotDistance, 10);
+	m_pEffect->SetFloatArray("g_fTheta", fTheta, 10);
+	m_pEffect->SetFloatArray("g_fPhi", fPhi, 10);
+
+	int nNumPointLight = m_stParameters.m_nNumPointLight;
+	m_pEffect->SetInt("nNumPointLight", nNumPointLight);
+	for (int i = 0; i < nNumPointLight; i++)
+	{
+		stPointLightPosition[i] = D3DXVECTOR4(m_stParameters.m_pPointLight->getPosition(), 1.0f);
+		fPointDistance[i] = 10.0f;
+	}
+
+	for (int i = nNumPointLight; i < 10; i++)
+	{
+		stPointLightPosition[i] = D3DXVECTOR4(0.0f, 0.0f, 0.0f, 1.0f);
+		fPointDistance[i] = 0.0f;
+	}
+
+	m_pEffect->SetVectorArray("g_stPointLightPosition", stPointLightPosition, 10);
+	m_pEffect->SetFloatArray("g_fPointDistance", fPointDistance, 10);
+
 	// }
 	LPDIRECT3DVERTEXBUFFER9	pVertexBuffer;
 	LPDIRECT3DINDEXBUFFER9 pIndexBuffer;

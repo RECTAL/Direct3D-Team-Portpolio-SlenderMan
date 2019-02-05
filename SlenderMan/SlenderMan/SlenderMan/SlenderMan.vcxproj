@@ -178,6 +178,7 @@
     <ClInclude Include="Classes\Utility\Object\GeometryObject\CGeometryObject.h" />
     <ClInclude Include="Classes\Utility\Object\LabelObject\CLabelObject.h" />
     <ClInclude Include="Classes\Utility\Object\LightObject\CLightObject.h" />
+    <ClInclude Include="Classes\Utility\Object\LightObject\SpotLightObject\SpotLightObject.h" />
     <ClInclude Include="Classes\Utility\Object\ParticleObject\CPointParticleObject.h" />
     <ClInclude Include="Classes\Utility\Object\ParticleObject\CQuadParticleObject.h" />
     <ClInclude Include="Classes\Utility\Object\SkinnedObject\CSkinnedObject.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="Classes\Utility\Object\CameraObject\CCameraObject.cpp" />
     <ClCompile Include="Classes\Utility\Object\LabelObject\CLabelObject.cpp" />
     <ClCompile Include="Classes\Utility\Object\LightObject\CLightObject.cpp" />
+    <ClCompile Include="Classes\Utility\Object\LightObject\SpotLightObject\SpotLightObject.cpp" />
     <ClCompile Include="Classes\Utility\Object\ParticleObject\CPointParticleObject.cpp" />
     <ClCompile Include="Classes\Utility\Object\SkinnedObject\CSkinnedObject.cpp" />
     <ClCompile Include="Classes\Utility\Object\SoundObject\CSoundObject.cpp" />

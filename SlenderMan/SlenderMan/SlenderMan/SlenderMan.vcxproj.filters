@@ -367,6 +367,9 @@
     <ClInclude Include="Classes\Utility\Base\CStage.h">
       <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\LightObject\SpotLightObject\SpotLightObject.h">
+      <Filter>Classes\Global\Utility\Object\LightObject\SpotLightObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -533,6 +536,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Utility\Base\CStage.cpp">
       <Filter>Classes\Global\Utility\Base\DON%27T TOUCH</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\LightObject\SpotLightObject\SpotLightObject.cpp">
+      <Filter>Classes\Global\Utility\Object\LightObject\SpotLightObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

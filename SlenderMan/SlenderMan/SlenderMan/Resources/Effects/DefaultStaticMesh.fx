@@ -5,6 +5,17 @@ float4x4 g_stProjectionMatrix;
 float4  g_stLightDirection;
 float4  g_stViewPosition;
 
+int	nNumSpotLight;
+float4	g_stSpotLightPosition[10];
+float4	g_stSpotLightForward[10];
+float	g_fTheta[10];
+float	g_fPhi[10];
+float	g_fSpotDistance[10];
+
+int nNumPointLight;
+float4	g_stPointLightPosition[10];
+float	g_fPointDistance[10];
+
 texture g_pTexture;
 
 struct VSInput
@@ -25,6 +36,7 @@ struct VSOutput
     float3 m_stTangent          :TEXCOORD3;
     float3 m_stLightDirection   :TEXCOORD4;
     float3 m_stViewDirection    :TEXCOORD5;
+    float3 m_stWorldPosition    :TEXCOORD6;
 };
 
 VSOutput vs_main(VSInput a_stInput)
@@ -34,19 +46,21 @@ VSOutput vs_main(VSInput a_stInput)
     stOutput.m_stPosition =  mul(stWorldPosition,g_stViewMatrix);
     stOutput.m_stPosition = mul(stOutput.m_stPosition ,g_stProjectionMatrix);
 
-    float3 stNormal = mul(a_stInput.m_stNormal,g_stWorldMatrix);
+    float3 stNormal = mul(a_stInput.m_stNormal,(float3x3)g_stWorldMatrix);
     stOutput.m_stNormal = normalize(stNormal);
 
-    float3 stBinormal = mul(a_stInput.m_stBinormal,g_stWorldMatrix);
+    float3 stBinormal = mul(a_stInput.m_stBinormal,(float3x3)g_stWorldMatrix);
     stOutput.m_stBinormal = normalize(stBinormal);
 
-    float3 stTangent = mul(a_stInput.m_stTangent,g_stWorldMatrix);
+    float3 stTangent = mul(a_stInput.m_stTangent,(float3x3)g_stWorldMatrix);
     stOutput.m_stTangent = normalize(stTangent);
 
     stOutput.m_stLightDirection = normalize(g_stLightDirection.xyz);
 
     float3 stViewDirection = g_stViewPosition.xyz - stWorldPosition.xyz;
     stOutput.m_stViewDirection = normalize(stViewDirection);
+
+    stOutput.m_stWorldPosition = stWorldPosition;
 
     stOutput.m_stUV = a_stInput.m_stUV;
 
@@ -62,12 +76,13 @@ struct PSInput
     float3 m_stTangent          :TEXCOORD3;
     float3 m_stLightDirection   :TEXCOORD4;
     float3 m_stViewDirection    :TEXCOORD5;
+    float3 m_stWorldPosition    :TEXCOORD6;
 };
 
 
 sampler2D g_pSampler = sampler_state
 {
-    Textrue = g_pTexture;
+    Texture = g_pTexture;
     MinFilter = Linear;
     MagFilter = Linear;
     MipFilter = Linear;
@@ -91,9 +106,45 @@ float4  ps_main(PSInput a_stInput):COLOR0
     float4 fSpecularColor = float4(fBaseColor.rgb*fSpecular,1.0f);
     float4 fAmbient = float4(fBaseColor.rgb*0.2f,1.0f);
 
-    float4 finalColor;
+    float4 fSpotLightColor = float4(0.0f,0.0f,0.0f,1.0f);
 
-    finalColor = fDiffuseColor+fAmbient+fSpecularColor;
+	
+
+    for(int i=0;i<nNumSpotLight;i++)
+    {
+        float3 stSpotPosition = g_stSpotLightPosition[i].xyz;
+        float3 stSpotDirection = g_stSpotLightForward[i].xyz;
+        float fTheta = g_fTheta[i];
+        float fPhi = g_fPhi[i];
+        float fSpotDistance = g_fSpotDistance[i];
+        float4 stSpotColor = fBaseColor;
+
+        float3 stSpotToPos = normalize(a_stInput.m_stWorldPosition-stSpotPosition);
+        float fDistance = distance(a_stInput.m_stWorldPosition,stSpotPosition);
+
+		if (fDistance > fSpotDistance)continue;
+
+        float delDegree = acos(dot(stSpotDirection,stSpotToPos));
+
+        if(delDegree < fTheta) 
+        {
+			stSpotColor.rgb *= saturate(dot(stSpotDirection, stSpotToPos));
+			stSpotColor.rgb = lerp(stSpotColor.rgb, fBaseColor.rgb*1.2f, (fTheta - delDegree) / fTheta);
+        }
+        if(delDegree<fPhi)
+        {
+            stSpotColor.rgb *= saturate(dot(stSpotDirection,stSpotToPos));
+            stSpotColor.rgb = lerp(float3(0.0f, 0.0f, 0.0f),stSpotColor.rgb,(fPhi - delDegree)/fPhi);
+        } 
+        else continue;
+
+		fSpotLightColor.rgb += lerp(float3(0.0f, 0.0f, 0.0f),stSpotColor.rgb, min(fSpotDistance /fDistance,2.0f));
+    }
+
+
+	float4 finalColor;
+
+	finalColor = fDiffuseColor + fAmbient + fSpecularColor + fSpotLightColor;
 
     return finalColor;
 }

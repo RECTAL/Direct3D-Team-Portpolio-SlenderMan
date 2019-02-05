@@ -4,6 +4,8 @@
 #include "../../Base/CRenderObject.h"
 
 class CQuadTree;
+class CSpotLightObject;
+class CLightObject;
 class CTerrainObject:public CRenderObject
 {
 public:
@@ -26,6 +28,12 @@ public:
 		CCameraObject*		m_pCamera;
 		int					m_nSmoothLevel;
 		D3DXVECTOR3			m_vfScale;
+
+		int	m_nNumSpotLight;
+		CSpotLightObject*	m_pSpotLight;
+
+		int m_nNumPointLight;
+		CLightObject*	m_pPointLight;
 
 		std::string m_oSplatFilepath;
 		std::string m_oHeightFilepath;
