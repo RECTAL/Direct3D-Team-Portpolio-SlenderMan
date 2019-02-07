@@ -63,7 +63,8 @@ private:
 
 	CCameraObject* m_pCamera = nullptr;
 
-	CSpriteObject_ListSquare* m_pListTable = nullptr;
+	CSpriteObject_Button* squareUpCover = nullptr;
+	CSpriteObject_ListSquare* treeListSquare = nullptr;
 	CSpriteObject_Button* testButton[6] = { nullptr };
 
 	CSpriteObject_Button* saveButton = nullptr;
