@@ -63,36 +63,93 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 			if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
 			else
 			{
-				switch (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType)
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_1)
 				{
-				case EObjType::TREE_0:
-					//CStaticObject::STParameters stParameters = {
-					//
-					//
-					//};
-					//m_pObjList[i].push_back(new CStaticObject(stParameters));
-					break;
-				case EObjType::TREE_1:
-					//CStaticObject::STParameters stParameters = {
-					//
-					//
-					//};
-					//m_pObjList[i].push_back(new CStaticObject(stParameters));
-					break;
-				case EObjType::ROCK_0:
-					//CStaticObject::STParameters stParameters = {
-					//
-					//
-					//};
-					//m_pObjList[i].push_back(new CStaticObject(stParameters));
-					break;
-				case EObjType::ROCK_1:
-					//CStaticObject::STParameters stParameters = {
-					//
-					//
-					//};
-					//m_pObjList[i].push_back(new CStaticObject(stParameters));
-					break;
+					CStaticObject::STParameters stParameters = {
+						NULL,NULL,
+						0,NULL,
+						0,NULL,
+						"Resources/Meshes/tree1/tree.X",
+						"Resources/Effects/DefaultStaticMesh.fx"
+					};
+					m_pObjList[i].push_back(new CStaticObject(stParameters));
+				}
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_2)
+				{
+					CStaticObject::STParameters stParameters = {
+						NULL,NULL,
+						0,NULL,
+						0,NULL,
+						"Resources/Meshes/tree2/tree2.X",
+						"Resources/Effects/DefaultStaticMesh.fx"
+					};
+					m_pObjList[i].push_back(new CStaticObject(stParameters));
+				}
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_3)
+				{
+					CStaticObject::STParameters stParameters = {
+						NULL,NULL,
+						0,NULL,
+						0,NULL,
+						"Resources/Meshes/tree3/tree3.X",
+						"Resources/Effects/DefaultStaticMesh.fx"
+					};
+					m_pObjList[i].push_back(new CStaticObject(stParameters));
+				}
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_4)
+				{
+					CStaticObject::STParameters stParameters = {
+						NULL,NULL,
+						0,NULL,
+						0,NULL,
+						"Resources/Meshes/tree4/tree4.X",
+						"Resources/Effects/DefaultStaticMesh.fx"
+					};
+					m_pObjList[i].push_back(new CStaticObject(stParameters));
+				}
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_5)
+				{
+					CStaticObject::STParameters stParameters = {
+						NULL,NULL,
+						0,NULL,
+						0,NULL,
+						"Resources/Meshes/tree5/tree5.X",
+						"Resources/Effects/DefaultStaticMesh.fx"
+					};
+					m_pObjList[i].push_back(new CStaticObject(stParameters));
+				}
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_6)
+				{
+					CStaticObject::STParameters stParameters = {
+						NULL,NULL,
+						0,NULL,
+						0,NULL,
+						"Resources/Meshes/tree6/tree6.X",
+						"Resources/Effects/DefaultStaticMesh.fx"
+					};
+					m_pObjList[i].push_back(new CStaticObject(stParameters));
+				}
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_7)
+				{
+					CStaticObject::STParameters stParameters = {
+						NULL,NULL,
+						0,NULL,
+						0,NULL,
+						"Resources/Meshes/tree7/tree7.X",
+						"Resources/Effects/DefaultStaticMesh.fx"
+					};
+					m_pObjList[i].push_back(new CStaticObject(stParameters));
+				}
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_8)
+				{
+					CStaticObject::STParameters stParameters = {
+						NULL,NULL,
+						0,NULL,
+						0,NULL,
+						"Resources/Meshes/tree8/tree8.X",
+						"Resources/Effects/DefaultStaticMesh.fx"
+					};
+					m_pObjList[i].push_back(new CStaticObject(stParameters));
 				}
 			}
 		}

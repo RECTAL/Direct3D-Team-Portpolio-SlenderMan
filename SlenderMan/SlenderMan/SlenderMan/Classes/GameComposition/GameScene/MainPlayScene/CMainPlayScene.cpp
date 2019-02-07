@@ -136,7 +136,7 @@ CLightObject * CMainPlayScene::createDirectionalLight()
 
 CSpotLightObject * CMainPlayScene::createSpotObj()
 {
-	return new CSpotLightObject(0,140.0f,D3DXToRadian(5.0f), D3DXToRadian(10.0f));
+	return new CSpotLightObject(0,140.0f,D3DXToRadian(5.0f), D3DXToRadian(20.0f));
 }
 
 void CMainPlayScene::createSound()
@@ -156,7 +156,7 @@ void CMainPlayScene::update(void)
 	m_pStaticMesh2->update();
 	m_pSpotObj->update();
 
-	m_pSpotObj->setPosition(m_pCamera->getPosition());
+	//m_pSpotObj->setPosition(m_pCamera->getPosition());
 	if (IS_MOUSE_BUTTON_DOWN(EMouseInput::RIGHT)) {
 		float fSpeed = 15.0f;
 

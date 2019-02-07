@@ -29,8 +29,14 @@ enum class CWindowType
 
 enum class EObjType
 {
-	TREE_0,
 	TREE_1,
+	TREE_2,
+	TREE_3,
+	TREE_4,
+	TREE_5,
+	TREE_6,
+	TREE_7,
+	TREE_8,
 	ROCK_0,
 	ROCK_1,
 	NONE = -1

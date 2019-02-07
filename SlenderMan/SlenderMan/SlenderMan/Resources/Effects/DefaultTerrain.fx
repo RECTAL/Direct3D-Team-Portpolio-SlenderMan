@@ -142,7 +142,7 @@ float4 ps_main(STOutput a_stInput) : COLOR0
 		float3 stSpotToPos = normalize(a_stInput.m_stWorldPosition - stSpotPosition);
 		float fDistance = distance(a_stInput.m_stWorldPosition, stSpotPosition);
 
-		if (fDistance > fSpotDistance)continue;
+		//if (fDistance > fSpotDistance)continue;
 
 		float delDegree = acos(dot(stSpotDirection, stSpotToPos));
 
