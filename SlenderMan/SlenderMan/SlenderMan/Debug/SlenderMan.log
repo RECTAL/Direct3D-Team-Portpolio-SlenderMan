@@ -1,9 +1,281 @@
-﻿  CSpriteObject_ScrollBar.cpp
+﻿C:\Users\zoddl\Source\Repos\Direct3D-Team-Portpolio-SlenderMan\SlenderMan\SlenderMan\SlenderMan\Resources\Effects\DefaultStaticMesh.fx(63,5-48): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\zoddl\Source\Repos\Direct3D-Team-Portpolio-SlenderMan\SlenderMan\SlenderMan\Debug\DefaultStaticMesh.cso
+  compilation object save succeeded; see C:\Users\zoddl\Source\Repos\Direct3D-Team-Portpolio-SlenderMan\SlenderMan\SlenderMan\Debug\DefaultTerrain.cso
+  SlenderMan.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  WindowSystem_CWindowContainer.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  WindowSystem_CWindowButton.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ParticleSystem_EmitterDefault.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\system\particlesystem\particlesystem_emitterkind\particlesystem_emitterdefault.cpp(23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  ParticleSystem_CParticleSystem.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ParticleSystem_CParticleEmitter.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  AnimationSystem_CAnimationController.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_canimationcontroller.cpp(67): warning C4244: '초기화 중': 'DOUBLE'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  AnimationSystem_CAllocateHierarchy.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_callocatehierarchy.cpp(13): warning C4316: 'CAllocateHierarchy::STBone': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_callocatehierarchy.cpp(18): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 'strcpy' 선언을 참조하십시오.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_callocatehierarchy.cpp(67): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_callocatehierarchy.cpp(96): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_callocatehierarchy.cpp(57): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 'strcpy' 선언을 참조하십시오.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_callocatehierarchy.cpp(73): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+  CStaticObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\staticobject\cstaticobject.cpp(85): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  CSpriteObject_Default.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_default.cpp(32): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
+  CSpriteObject_Button.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CSpriteObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject.cpp(14): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject.cpp(33): warning C4018: '>=': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject.cpp(47): warning C4838: 'UINT'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+  CSkinnedObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\skinnedobject\cskinnedobject.cpp(121): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\skinnedobject\cskinnedobject.cpp(126): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\skinnedobject\cskinnedobject.cpp(142): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\skinnedobject\cskinnedobject.cpp(297): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  CPointParticleObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\particleobject\cpointparticleobject.cpp(40): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  CLightObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CLabelObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\labelobject\clabelobject.cpp(24): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\labelobject\clabelobject.cpp(24): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\labelobject\clabelobject.cpp(48): warning C4244: '=': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CCameraObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CWindowManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CTimeManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CSceneManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  코드를 생성하고 있습니다...
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\particleobject\cpointparticleobject.cpp(79): warning C4715: 'CPointParticleObject::createParticleEmitter': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  CResourceManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(97): warning C4244: '인수': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(168): warning C4477: 'sprintf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'double'입니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(168): warning C4477: 'sprintf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 3의 형식이 'double'입니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(168): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(199): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(211): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(348): warning C4244: '인수': 'const float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CInputManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\manager\cinputmanager.cpp(45): warning C4800: 'int': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\manager\cinputmanager.cpp(63): warning C4800: 'int': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  CDeviceManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CWindowApplication.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cwindowapplication.cpp(16): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(240): note: 'freopen' 선언을 참조하십시오.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cwindowapplication.cpp(17): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(240): note: 'freopen' 선언을 참조하십시오.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cwindowapplication.cpp(18): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(240): note: 'freopen' 선언을 참조하십시오.
+  CWindow.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CUIObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CStage.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(56): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cstage.cpp(38): warning C4316: 'CTerrainObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cstage.cpp(75): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cstage.cpp(86): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cstage.cpp(97): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cstage.cpp(108): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cstage.cpp(119): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cstage.cpp(130): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cstage.cpp(141): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\base\cstage.cpp(152): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+  CScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CRenderObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CDirect3DApplication.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CVictoryScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CTitleScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(77): warning C4316: 'CSpriteObject_Container': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(78): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(85): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(144): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(145): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(147): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(148): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(150): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(156): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(169): warning C4316: 'CSpriteObject_ScrollBar': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(171): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(176): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(191): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(205): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(303): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+  CMapToolScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(61): warning C4316: 'CSpriteObject_Container': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(62): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(66): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(69): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(74): warning C4316: 'CSpriteObject_ScrollBar': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(79): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(90): warning C4316: 'CSpriteObject_List': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(95): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(104): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(108): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(112): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(116): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(123): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(136): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(137): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(151): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(155): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(159): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(163): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(206): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(275): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+  CMainPlayScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(56): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(84): warning C4316: 'CCameraObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(116): warning C4316: 'CTerrainObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(111): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(129): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(134): warning C4316: 'CLightObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(139): warning C4316: 'CSpotLightObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(172): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(173): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(248): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(296): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+  TitleSceneLoader.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  MapToolSceneLoader.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  MainPlaySceneLoader.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CLoadingScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\loadingscene\cloadingscene.cpp(121): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\loadingscene\cloadingscene.cpp(127): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\loadingscene\cloadingscene.cpp(128): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CGameOverScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\gameoverscene\cgameoverscene.cpp(65): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\gameoverscene\cgameoverscene.cpp(71): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\gameoverscene\cgameoverscene.cpp(72): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\gameoverscene\cgameoverscene.cpp(74): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\gameoverscene\cgameoverscene.cpp(75): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  GlobalFunction.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\function\globalfunction.cpp(34): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  WindowSystem_CWindowScrollBar.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  WindowSystem_CWindowList.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  RenderSystem_CRenderTarget.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CollisionSystem_CQuadSystem.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(56): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\system\collisionsystem\collisionsystem_cquadsystem.cpp(21): warning C4552: '-': 의미 없는 연산자입니다. 파생 작업이 있는 연산자여야 합니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\system\collisionsystem\collisionsystem_cquadsystem.cpp(6): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
+  CollisionSystem_CFrustum.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CTerrainObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(56): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(22): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(23): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(87): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 'fopen' 선언을 참조하십시오.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(318): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+  CSpriteObject_ScrollBar.cpp
   c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
 c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_scrollbar.cpp(35): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_scrollbar.cpp(40): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_scrollbar.cpp(48): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_scrollbar.cpp(53): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_scrollbar.cpp(86): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CSpriteObject_List.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(56): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(57): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(67): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(68): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(78): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(79): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(99): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(100): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(111): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(112): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(123): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(124): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(150): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(171): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(181): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(191): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(215): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(220): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(225): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CSpriteObject_Container.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CSoundObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\soundobject\csoundobject.cpp(21): warning C4244: '인수': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\utility\object\soundobject\csoundobject.cpp(29): warning C4800: 'DWORD': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  SpotLightObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CSoundManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CRendertargetManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CVirtualScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\testscene\cvirtualscene.cpp(34): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+  GameOverSceneLoader.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  코드를 생성하고 있습니다...
   SlenderMan.vcxproj -> C:\Users\zoddl\Source\Repos\Direct3D-Team-Portpolio-SlenderMan\SlenderMan\SlenderMan\Debug\SlenderMan.exe
   SlenderMan.vcxproj -> C:\Users\zoddl\Source\Repos\Direct3D-Team-Portpolio-SlenderMan\SlenderMan\SlenderMan\Debug\SlenderMan.pdb (Full PDB)
