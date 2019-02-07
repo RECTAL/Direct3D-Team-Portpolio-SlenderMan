@@ -72,6 +72,9 @@ sampler2D g_pSamplerA = sampler_state
 {
 	Texture = g_pTextureA;
 
+	ADDRESSU = MIRROR;
+	ADDRESSV = MIRROR;
+
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
 	MipFilter = LINEAR;
@@ -80,6 +83,9 @@ sampler2D g_pSamplerA = sampler_state
 sampler2D g_pSamplerB = sampler_state
 {
 	Texture = g_pTextureB;
+
+	ADDRESSU = MIRROR;
+	ADDRESSV = MIRROR;
 
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
@@ -90,6 +96,9 @@ sampler2D g_pSamplerC = sampler_state
 {
 	Texture = g_pTextureC;
 
+	ADDRESSU = MIRROR;
+	ADDRESSV = MIRROR;
+
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
 	MipFilter = LINEAR;
@@ -98,6 +107,9 @@ sampler2D g_pSamplerC = sampler_state
 sampler2D g_pSamplerD = sampler_state
 {
 	Texture = g_pTextureD;
+
+	ADDRESSU = MIRROR;
+	ADDRESSV = MIRROR;
 
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
@@ -170,6 +182,8 @@ technique DefaultTerrain
 {
 	pass P0
 	{
+
+
 		VertexShader = compile vs_3_0 vs_main();
 		PixelShader = compile ps_3_0 ps_main();
 	}

@@ -179,7 +179,7 @@ HRESULT CTerrainObject::createTerrainMesh()
 				int nIndex = (i*m_cxDIB) + j;
 				pstVertices[nIndex].m_stPosition = stBasePosition + D3DXVECTOR3(j*m_vfScale.x, m_pHeightMap[nIndex].y, i*-m_vfScale.z);
 				m_pHeightMap[nIndex] = pstVertices[nIndex].m_stPosition;
-				pstVertices[nIndex].m_stUV = D3DXVECTOR2(j / (float)(m_cxDIB - 1), i / (float)(m_czDIB - 1));
+				pstVertices[nIndex].m_stUV = D3DXVECTOR2(j  / (float)(m_cxDIB - 1), i   / (float)(m_czDIB - 1));
 			}
 		}
 		m_pTerrainMesh->UnlockVertexBuffer();
