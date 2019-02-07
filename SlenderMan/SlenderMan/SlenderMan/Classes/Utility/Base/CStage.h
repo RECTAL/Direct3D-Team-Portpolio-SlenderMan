@@ -8,6 +8,8 @@
 #define MAX_OBJ_CAPACITY		10
 #define GOUST_VALUE				-1
 
+class CCameraObject;
+class CRenderObject;
 class CStage
 {
 private:
@@ -32,13 +34,21 @@ public:
 	void	init(CTerrainObject::STParameters a_stParameters, std::string m_oObjPacketListFilePath);
 	void	release();
 	void	load(CTerrainObject::STParameters a_stParameters,std::string m_oObjPacketListFilePath);
+	void	setCameraObj(CCameraObject* a_pCameraObj);
 	void	save(std::string m_oObjPacketListFilePath);
 	void	update();
 	void	draw();
 
 
+	BOOL&	getbIsMaptool() { return m_bIsMaptool; }
+
 private:
+	CCameraObject*	m_pCameraObj;
 	CTerrainObject*	m_pTerrainObj;
 	OBJCONTAINER* m_pObjPacketList;
 	std::vector<CRenderObject*>* m_pObjList;
+
+
+
+	BOOL	m_bIsMaptool = false;
 };

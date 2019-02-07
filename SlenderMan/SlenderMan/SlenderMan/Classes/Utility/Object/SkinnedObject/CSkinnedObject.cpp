@@ -10,7 +10,7 @@
 #include "../../Manager/CTimeManager.h"
 
 
-SkinnedObject::SkinnedObject(const STParameters & a_rstParameters)
+CSkinnedObject::CSkinnedObject(const STParameters & a_rstParameters)
 	:
 	m_stParameters(a_rstParameters)
 {
@@ -23,22 +23,22 @@ SkinnedObject::SkinnedObject(const STParameters & a_rstParameters)
 	m_pMesh = this->createSkinnedMeshFromX(a_rstParameters.m_oMeshFilepath);
 }
 
-SkinnedObject::~SkinnedObject(void)
+CSkinnedObject::~CSkinnedObject(void)
 {
 	SAFE_DELETE(m_pAnimationController);
 }
 
-std::vector<std::string> SkinnedObject::getAnimationNameList(void)
+std::vector<std::string> CSkinnedObject::getAnimationNameList(void)
 {
 	return m_pAnimationController->getAnimationNameList();
 }
 
-void SkinnedObject::setTimeScale(float a_fTimeScale)
+void CSkinnedObject::setTimeScale(float a_fTimeScale)
 {
 	m_pAnimationController->setTimeScale(a_fTimeScale);
 }
 
-void SkinnedObject::update(void)
+void CSkinnedObject::update(void)
 {
 	CRenderObject::update();
 	m_pAnimationController->update();
@@ -47,36 +47,36 @@ void SkinnedObject::update(void)
 	this->updateBoneMatrix(m_pstRootBone, stWorldMatrix);
 }
 
-void SkinnedObject::playAnimation(const std::string & a_rAnimationName, bool a_bIsLoop)
+void CSkinnedObject::playAnimation(const std::string & a_rAnimationName, bool a_bIsLoop)
 {
 	m_pAnimationController->playAnimation(a_rAnimationName, a_bIsLoop);
 }
 
-void SkinnedObject::stopAnimation(void)
+void CSkinnedObject::stopAnimation(void)
 {
 	m_pAnimationController->stopAnimation();
 }
 
-void SkinnedObject::preDraw(void)
+void CSkinnedObject::preDraw(void)
 {
 	CRenderObject::preDraw();
 }
 
-void SkinnedObject::doDraw(void)
+void CSkinnedObject::doDraw(void)
 {
 	CRenderObject::doDraw();
 
 	this->drawBone(m_pstRootBone);
 }
 
-void SkinnedObject::postDraw(void)
+void CSkinnedObject::postDraw(void)
 {
 	CRenderObject::postDraw();
 	GET_DEVICE()->SetRenderState(D3DRS_LIGHTING, true);
 
 }
 
-void SkinnedObject::updateBoneMatrix(LPD3DXFRAME a_pstFrame, const D3DXMATRIXA16 & a_rstMatrix)
+void CSkinnedObject::updateBoneMatrix(LPD3DXFRAME a_pstFrame, const D3DXMATRIXA16 & a_rstMatrix)
 {
 	auto pstBone = (CAllocateHierarchy::STBone *)a_pstFrame;
 	pstBone->m_stCombineMatrix = pstBone->TransformationMatrix * a_rstMatrix;
@@ -92,7 +92,7 @@ void SkinnedObject::updateBoneMatrix(LPD3DXFRAME a_pstFrame, const D3DXMATRIXA16
 	}
 }
 
-void SkinnedObject::drawBone(LPD3DXFRAME a_pstFrame)
+void CSkinnedObject::drawBone(LPD3DXFRAME a_pstFrame)
 {
 	auto pstMeshContainer = a_pstFrame->pMeshContainer;
 
@@ -112,7 +112,7 @@ void SkinnedObject::drawBone(LPD3DXFRAME a_pstFrame)
 	}
 }
 
-void SkinnedObject::drawMeshContainer(LPD3DXFRAME a_pstFrame, LPD3DXMESHCONTAINER a_pstMeshContainer)
+void CSkinnedObject::drawMeshContainer(LPD3DXFRAME a_pstFrame, LPD3DXMESHCONTAINER a_pstMeshContainer)
 {
 	if (a_pstMeshContainer->pSkinInfo != nullptr) {
 
@@ -158,7 +158,7 @@ void SkinnedObject::drawMeshContainer(LPD3DXFRAME a_pstFrame, LPD3DXMESHCONTAINE
 	}
 }
 
-void SkinnedObject::setupBone(LPD3DXFRAME a_pstFrame)
+void CSkinnedObject::setupBone(LPD3DXFRAME a_pstFrame)
 {
 	if (a_pstFrame->pMeshContainer != nullptr) {
 		this->setupBoneOnMeshContainer(a_pstFrame, a_pstFrame->pMeshContainer);
@@ -175,7 +175,7 @@ void SkinnedObject::setupBone(LPD3DXFRAME a_pstFrame)
 	}
 }
 
-void SkinnedObject::setupBoneOnMeshContainer(LPD3DXFRAME a_pstFrame, LPD3DXMESHCONTAINER a_pstMeshContainer)
+void CSkinnedObject::setupBoneOnMeshContainer(LPD3DXFRAME a_pstFrame, LPD3DXMESHCONTAINER a_pstMeshContainer)
 {
 	auto pstMeshContainer = (CAllocateHierarchy::STMeshContainer *)a_pstMeshContainer;
 
@@ -199,11 +199,11 @@ void SkinnedObject::setupBoneOnMeshContainer(LPD3DXFRAME a_pstFrame, LPD3DXMESHC
 	}
 }
 
-LPD3DXMESH SkinnedObject::createSkinnedMeshFromX(const std::string & a_rFilepath)
+LPD3DXMESH CSkinnedObject::createSkinnedMeshFromX(const std::string & a_rFilepath)
 {
 	CAllocateHierarchy::STParameters stParameters = {
 		m_oBasepath,
-		std::bind(&SkinnedObject::createSkinnedMesh, this, std::placeholders::_1, std::placeholders::_2)
+		std::bind(&CSkinnedObject::createSkinnedMesh, this, std::placeholders::_1, std::placeholders::_2)
 	};
 
 	CAllocateHierarchy oAllocateHierarchy(stParameters);
@@ -234,7 +234,7 @@ LPD3DXMESH SkinnedObject::createSkinnedMeshFromX(const std::string & a_rFilepath
 	return m_oMeshContainerList.front()->m_pSkinnedMesh;
 }
 
-LPD3DXMESH SkinnedObject::createSkinnedMesh(LPD3DXMESHCONTAINER a_pstMeshContainer, int a_nMeshContainerNumber)
+LPD3DXMESH CSkinnedObject::createSkinnedMesh(LPD3DXMESHCONTAINER a_pstMeshContainer, int a_nMeshContainerNumber)
 {
 	auto pstMeshContainer = (CAllocateHierarchy::STMeshContainer *)a_pstMeshContainer;
 

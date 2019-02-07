@@ -12,6 +12,17 @@ CStaticObject::CStaticObject(STParameters & a_rstParameters)
 {
 	m_pEffect = GET_EFFECT(a_rstParameters.m_oEffectFilepath);
 	m_stStaticMesh = GET_STATIC_MESH(a_rstParameters.m_oMeshFilepath);
+
+	m_stBoundingSphere = this->createBoundingSphere();
+}
+
+void CStaticObject::update(void)
+{
+	CObject::update();
+
+	D3DXMATRIXA16 stWorldMatrix = this->getFinalWorldMatrix();
+	D3DXVec3TransformCoord(&m_stBoundingSphere.m_stPosition, &m_stBoundingSphere.m_stPosition, &stWorldMatrix);
+
 }
 
 void CStaticObject::doDraw(void)
@@ -91,4 +102,24 @@ void CStaticObject::doDraw(void)
 		});
 	}
 
+}
+
+STBoundingSphere CStaticObject::createBoundingSphere()
+{
+	STBoundingSphere stBoundingSphere;
+	ZeroMemory(&stBoundingSphere, sizeof(stBoundingSphere));
+
+	void* pVertices = nullptr;
+	if (SUCCEEDED(m_stStaticMesh.m_pStaticMesh->LockVertexBuffer(0, &pVertices)))
+	{
+		D3DXComputeBoundingSphere((D3DXVECTOR3*)pVertices, m_stStaticMesh.m_pStaticMesh->GetNumVertices(),
+			m_stStaticMesh.m_pStaticMesh->GetNumBytesPerVertex(), &stBoundingSphere.m_stPosition, &stBoundingSphere.m_fRadius
+		);
+
+		m_stStaticMesh.m_pStaticMesh->UnlockVertexBuffer();
+	}
+
+
+
+	return stBoundingSphere;
 }

@@ -1,6 +1,12 @@
 #include "CMapToolScene.h"
+
+#include "../../../Utility/Base/CStage.h"
+#include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CInputManager.h"
+#include "../../../Utility/Object/CameraObject/CCameraObject.h"
+#include "../../../Utility/Object/LightObject/CLightObject.h"
+#include "../../../Utility/Object/LightObject/SpotLightObject/SpotLightObject.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Button.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_ScrollBar.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_List.h"
@@ -33,6 +39,9 @@ CMapToolScene::~CMapToolScene()
 	}
 	SAFE_DELETE(m_pSpriteList);
 	SAFE_DELETE(selectWindowContainer);
+
+	SAFE_DELETE(m_pStage);
+	SAFE_DELETE(m_pCamera);
 }
 
 void CMapToolScene::init()
@@ -46,6 +55,8 @@ void CMapToolScene::init()
 		endFptr = new std::function<void(void)>;
 
 
+		this->createCameraObj();
+		this->createStage();
 		this->createWindowUI();
 		this->createButtonUI();
 
@@ -213,15 +224,104 @@ void CMapToolScene::createButtonUI()
 	backButton->init(nullptr, nullptr, nullptr, endFptr);
 }
 
+void CMapToolScene::createCameraObj()
+{
+	m_pCamera = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
+}
+
+void CMapToolScene::createStage()
+{
+	m_pStage = new CStage();
+
+	CTerrainObject::STParameters stParameters;
+	stParameters.m_pCamera = m_pCamera;
+	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.007f, 1.0f);
+	stParameters.m_oHeightFilepath = "Resources/Datas/HeightMap.raw";
+	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/HeightMap.bmp";
+	stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
+
+	stParameters.m_stMapSize.cx = 257;
+	stParameters.m_stMapSize.cy = 257;
+
+	stParameters.m_nSmoothLevel = 1;
+
+	stParameters.m_nNumSpotLight = 0;
+	stParameters.m_pSpotLight = NULL;
+
+	stParameters.m_nNumPointLight = 0;
+	stParameters.m_pPointLight = NULL;
+
+
+	for (int i = 0; i < CTerrainObject::MAX_TERRAIN_TEX; ++i) {
+		char szFilepath[MAX_PATH] = "";
+		sprintf(szFilepath, "Resources/Textures/Terrain/Terrain_%02d.jpg", i + 1);
+
+		stParameters.m_oTextureFilepathList.push_back(szFilepath);
+	}
+
+	m_pStage->init(stParameters, "");
+	m_pStage->setCameraObj(m_pCamera);
+	m_pStage->getbIsMaptool() = TRUE;
+}
+
 void CMapToolScene::update(void)
 {
 	CScene::update();
 	selectWindowContainer->update();
 	this->buttonUpdate();
 
-
 	printf("%f\n", UpDownScrollBar->getSetValue());
+	m_pCamera->update();
+	m_pStage->update();
 
+
+	m_pSpriteList->getMoveOffset() = D3DXVECTOR3(0, -UpDownScrollBar->getSetValue(), 0);
+
+	if (IS_MOUSE_BUTTON_DOWN(EMouseInput::RIGHT)) {
+		float fSpeed = 15.0f;
+
+		if (IS_KEY_DOWN(DIK_LSHIFT)) {
+			fSpeed = 50.0f;
+		}
+
+		if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::RIGHT)) {
+			m_stPrevMousePosition = GET_MOUSE_POSITION();
+		}
+
+		auto stMousePosition = GET_MOUSE_POSITION();
+		float fDeltaY = stMousePosition.y - m_stPrevMousePosition.y;
+		float fDeltaX = stMousePosition.x - m_stPrevMousePosition.x;
+
+		m_stPrevMousePosition = stMousePosition;
+
+		m_pCamera->rotateByXAxis(fDeltaY / 5.0f);
+		
+
+		m_pCamera->rotateByYAxis(fDeltaX / 5.0f, false);
+	
+
+
+		
+
+		if (IS_KEY_DOWN(DIK_W)) {
+			m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
+			
+		}
+		else if (IS_KEY_DOWN(DIK_S)) {
+			m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+			
+		}
+
+		if (IS_KEY_DOWN(DIK_A)) {
+			m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+			
+		}
+		else if (IS_KEY_DOWN(DIK_D)) {
+			m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
+			
+		}
+
+	}
 }
 
 void CMapToolScene::buttonUpdate()
@@ -247,6 +347,7 @@ void CMapToolScene::buttonUpdate()
 void CMapToolScene::draw(void)
 {
 	CScene::draw();
+	m_pStage->draw();
 }
 
 void CMapToolScene::drawUI(void)

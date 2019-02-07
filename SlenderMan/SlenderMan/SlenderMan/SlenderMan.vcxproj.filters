@@ -370,6 +370,9 @@
     <ClInclude Include="Classes\Utility\Object\LightObject\SpotLightObject\SpotLightObject.h">
       <Filter>Classes\Global\Utility\Object\LightObject\SpotLightObject</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ListSquare.h">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -539,6 +542,9 @@
     </ClCompile>
     <ClCompile Include="Classes\Utility\Object\LightObject\SpotLightObject\SpotLightObject.cpp">
       <Filter>Classes\Global\Utility\Object\LightObject\SpotLightObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ListSquare.cpp">
+      <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

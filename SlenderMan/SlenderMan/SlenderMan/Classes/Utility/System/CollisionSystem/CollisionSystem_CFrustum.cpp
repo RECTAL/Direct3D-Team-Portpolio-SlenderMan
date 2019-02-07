@@ -85,6 +85,20 @@ BOOL CFrustum::IsInSphere(D3DXVECTOR3 * pv, float radius)
 	return TRUE;
 }
 
+BOOL CFrustum::IsInSphere(STBoundingSphere & a_stBoundingSphere)
+{
+	float		fDist;
+
+	fDist = D3DXPlaneDotCoord(&m_plane[3], &a_stBoundingSphere.m_stPosition);
+	if (fDist > (a_stBoundingSphere.m_fRadius + PLANE_EPSILON)) return FALSE;	// 평면과 중심점의 거리가 반지름보다 크면 프러스텀에 없음
+	fDist = D3DXPlaneDotCoord(&m_plane[4], &a_stBoundingSphere.m_stPosition);
+	if (fDist > (a_stBoundingSphere.m_fRadius + PLANE_EPSILON)) return FALSE;	// 평면과 중심점의 거리가 반지름보다 크면 프러스텀에 없음
+	fDist = D3DXPlaneDotCoord(&m_plane[5], &a_stBoundingSphere.m_stPosition);
+	if (fDist > (a_stBoundingSphere.m_fRadius + PLANE_EPSILON)) return FALSE;	// 평면과 중심점의 거리가 반지름보다 크면 프러스텀에 없음
+
+	return TRUE;
+}
+
 BOOL CFrustum::Draw(LPDIRECT3DDEVICE9 pDev)
 {
 	WORD		index[] = { 0, 1, 2,
