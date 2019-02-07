@@ -7,6 +7,7 @@ class CSpriteObject_ScrollBar;
 class CSpriteObject_Button;
 class CSpriteObject_List;
 class CSpriteObject_Container;
+class CSpriteObject_ListSquare;
 class CStage;
 class CCameraObject;
 class CMapToolScene :public CScene
@@ -62,6 +63,11 @@ private:
 
 	CCameraObject* m_pCamera = nullptr;
 
+	CSpriteObject_ListSquare* m_pListTable = nullptr;
+	CSpriteObject_Button* testButton[6] = { nullptr };
+
+	CSpriteObject_Button* saveButton = nullptr;
+	CSpriteObject_Button* loadButton = nullptr;
 
 
 

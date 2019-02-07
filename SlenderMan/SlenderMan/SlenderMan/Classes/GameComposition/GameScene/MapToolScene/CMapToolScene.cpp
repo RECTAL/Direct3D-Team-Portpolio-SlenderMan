@@ -11,6 +11,7 @@
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_ScrollBar.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_List.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Container.h"
+#include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_ListSquare.h"
 #include "../../../Utility/Manager/CSceneManager.h"
 
 CMapToolScene::CMapToolScene(std::string a_stSceneName)
@@ -28,15 +29,23 @@ CMapToolScene::~CMapToolScene()
 	SAFE_DELETE(buildingButton);
 	SAFE_DELETE(terrainButton);
 	SAFE_DELETE(goTitleButton);
+	SAFE_DELETE(m_pListTable);
+	SAFE_DELETE(saveButton);
+	SAFE_DELETE(loadButton);
 
 	if (backButton != nullptr)
 	{
 		SAFE_DELETE(backButton);
 	}
-		for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		SAFE_DELETE(m_pSpriteListButton[i]);
 	}
+	for (int i = 0; i < 6; i++)
+	{
+		SAFE_DELETE(testButton[i]);
+	}
+
 	SAFE_DELETE(m_pSpriteList);
 	SAFE_DELETE(selectWindowContainer);
 
@@ -66,9 +75,30 @@ void CMapToolScene::init()
 
 void CMapToolScene::createWindowUI()
 {
+	m_pListTable = new CSpriteObject_ListSquare("Resources/Textures/Scene/MapToolScene/blackCover", "png", 500, 500, 1);
+	m_pListTable->setPosition(D3DXVECTOR3(500, 500, 0));
+	m_pListTable->setVisible(true);
+	m_pListTable->init(nullptr, nullptr, nullptr, nullptr, true, D3DXVECTOR3(0, 110, 0.0f));
+
+	testButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 100, 1);
+	
+	testButton[0]->init(nullptr, nullptr, nullptr, nullptr, true);
+
+	for (int i = 0; i < 6; i++)
+	{
+		testButton[i] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 100, 1);
+
+		testButton[i]->init(nullptr, nullptr, nullptr, nullptr, true);
+		char path[MAX_PATH];
+		sprintf(path, "test%1d", i);
+		m_pListTable->addChildSpriteObject(path, CWindowType::BUTTON, testButton[i]);
+
+	}
+
 	/***************************************************/
 	//컨테이너 만들기
 	/***************************************************/
+
 	selectWindowContainer = new CSpriteObject_Container("Resources/Textures/Scene/MapToolScene/blackCover", "png", 150, 500, 1);
 	selectWindowContainer->setPosition(D3DXVECTOR3(75, GET_WINDOW_SIZE().cy / 2 - 50, 0.0f));
 	selectWindowContainer->setVisible(false);
@@ -99,7 +129,7 @@ void CMapToolScene::createWindowUI()
 		//리스트 만들기
 		/***************************************************/
 		m_pSpriteList = new CSpriteObject_List("Resources/Textures/Scene/MapToolScene/blackCover", "png", 150, 500, 1);
-		m_pSpriteList->init(nullptr, nullptr, nullptr, nullptr,true,D3DXVECTOR3(0, 110, 0.0f));
+		m_pSpriteList->init(nullptr, nullptr, nullptr, nullptr, true, D3DXVECTOR3(0, 110, 0.0f));
 			/*************************/
 			//리스트 내 버튼 만들기
 			/*************************/
@@ -107,7 +137,7 @@ void CMapToolScene::createWindowUI()
 			m_pSpriteListButton[0]->setPosition(m_pSpriteList->getPosition());
 			(*endFptr) = [=](void) -> void
 			{
-				m_pSpriteList->setVisible(false);
+				//m_pSpriteList->setVisible(false);
 				backButton->setVisible(true);
 			};
 			m_pSpriteListButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -222,6 +252,14 @@ void CMapToolScene::createButtonUI()
 
 	};
 	backButton->init(nullptr, nullptr, nullptr, endFptr);
+
+	saveButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 50, 50, 1);
+	saveButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 25, 500, 0));
+	saveButton->init(nullptr, nullptr, nullptr, nullptr);
+
+	loadButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 50, 50, 1);
+	loadButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 25, 550, 0));
+	loadButton->init(nullptr, nullptr, nullptr, nullptr);
 }
 
 void CMapToolScene::createCameraObj()
@@ -268,6 +306,7 @@ void CMapToolScene::update(void)
 {
 	CScene::update();
 	selectWindowContainer->update();
+	m_pListTable->update();
 	this->buttonUpdate();
 
 	printf("%f\n", UpDownScrollBar->getSetValue());
@@ -342,6 +381,9 @@ void CMapToolScene::buttonUpdate()
 		(D3DXVECTOR3(selectWindowContainer->getWindow()->getAbsolutePosition().x - 50,
 			selectWindowContainer->getWindow()->getAbsolutePosition().y + 350, 0)));
 	backButton->update();
+
+	saveButton->update();
+	loadButton->update();
 }
 
 void CMapToolScene::draw(void)
@@ -354,6 +396,7 @@ void CMapToolScene::drawUI(void)
 {
 	CScene::drawUI();
 	selectWindowContainer->drawUI();
+	m_pListTable->drawUI();
 
 	this->buttonDrawUI();
 
@@ -365,7 +408,8 @@ void CMapToolScene::buttonDrawUI()
 	openButton->drawUI();
 	closeButton->drawUI();
 	backButton->drawUI();
-
+	saveButton->drawUI();
+	loadButton->drawUI();
 }
 
 LRESULT CMapToolScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)

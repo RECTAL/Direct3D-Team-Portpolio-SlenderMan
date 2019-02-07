@@ -178,7 +178,7 @@ void CSpriteObject_ListSquare::addChildSpriteObject(std::string a_stSpriteName, 
 			if (m_nMaxHeight < halfSizeY)m_nMaxHeight = halfSizeY;
 
 			m_stListOffset += D3DXVECTOR3(halfSizeX*2, 0.0f, 0.0f);
-			if (m_stListOffset.x > m_pWindow->getActiveSize().cx/2)
+			if (m_stListOffset.x >= m_pWindow->getActiveSize().cx/2)
 			{
 				m_stListOffset.x = -m_pWindow->getActiveSize().cx / 2.0f;
 				m_stListOffset += D3DXVECTOR3(0.0f, m_nMaxHeight*2.0f, 0.0f);
