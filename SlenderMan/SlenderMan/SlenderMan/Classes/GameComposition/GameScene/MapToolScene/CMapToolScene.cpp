@@ -30,7 +30,8 @@ CMapToolScene::~CMapToolScene()
 	SAFE_DELETE(buildingButton);
 	SAFE_DELETE(terrainButton);
 	SAFE_DELETE(goTitleButton);
-	SAFE_DELETE(m_pListTable);
+	SAFE_DELETE(squareUpCover);
+	SAFE_DELETE(treeListSquare);
 	SAFE_DELETE(saveButton);
 	SAFE_DELETE(loadButton);
 
@@ -83,10 +84,11 @@ void CMapToolScene::init()
 
 void CMapToolScene::createWindowUI()
 {
-	m_pListTable = new CSpriteObject_ListSquare("Resources/Textures/Scene/MapToolScene/blackCover", "png", 500, 500, 1);
-	m_pListTable->setPosition(D3DXVECTOR3(500, 500, 0));
-	m_pListTable->setVisible(true);
-	m_pListTable->init(nullptr, nullptr, nullptr, nullptr, true, D3DXVECTOR3(0, 110, 0.0f));
+
+	treeListSquare = new CSpriteObject_ListSquare("Resources/Textures/Scene/MapToolScene/blackCover", "png", 300, 300, 1);
+	treeListSquare->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 200, 250, 0));
+	treeListSquare->setVisible(false);
+	treeListSquare->init(nullptr, nullptr, nullptr, nullptr);
 
 	testButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 100, 1);
 	
@@ -104,7 +106,7 @@ void CMapToolScene::createWindowUI()
 		testButton[i]->init(nullptr, nullptr, nullptr, nullptr, true);
 		char path[MAX_PATH];
 		sprintf(path, "test%1d", i);
-		m_pListTable->addChildSpriteObject(path, CWindowType::BUTTON, testButton[i]);
+		treeListSquare->addChildSpriteObject(path, CWindowType::BUTTON, testButton[i]);
 
 	}
 
@@ -150,8 +152,9 @@ void CMapToolScene::createWindowUI()
 			m_pSpriteListButton[0]->setPosition(m_pSpriteList->getPosition());
 			(*endFptr) = [=](void) -> void
 			{
-				//m_pSpriteList->setVisible(false);
-				backButton->setVisible(true);
+				treeListSquare->setVisible(true);
+				squareUpCover->setVisible(true);
+				backButton->setVisible(true); // 나중에 x버튼으로 바꾸기
 			};
 			m_pSpriteListButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -262,16 +265,23 @@ void CMapToolScene::createButtonUI()
 	(*endFptr) = [=](void) -> void
 	{
 		backButton->setVisible(false);
+		treeListSquare->setVisible(false);
+		squareUpCover->setVisible(false);
 
 	};
 	backButton->init(nullptr, nullptr, nullptr, endFptr);
 
-	saveButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 50, 50, 1);
-	saveButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 25, 500, 0));
+	squareUpCover = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/blackCover", "png", 300, 100, 1);
+	squareUpCover->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 200, 50, 0));
+	squareUpCover->setVisible(false);
+	squareUpCover->init(nullptr, nullptr, nullptr, nullptr);
+
+	saveButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/save", "png", 50, 50, 1);
+	saveButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy - 25, 0));
 	saveButton->init(nullptr, nullptr, nullptr, nullptr);
 
-	loadButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 50, 50, 1);
-	loadButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 25, 550, 0));
+	loadButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/load", "png", 50, 50, 1);
+	loadButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2 + 50, GET_WINDOW_SIZE().cy - 25, 0));
 	loadButton->init(nullptr, nullptr, nullptr, nullptr);
 }
 
@@ -288,7 +298,7 @@ void CMapToolScene::createStage()
 	stParameters.m_pCamera = m_pCamera;
 	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.007f, 1.0f);
 	stParameters.m_oHeightFilepath = "Resources/Datas/HeightMap.raw";
-	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/HeightMap.bmp";
+	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap.png";
 	stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
 
 	stParameters.m_stMapSize.cx = 257;
@@ -319,7 +329,7 @@ void CMapToolScene::update(void)
 {
 	CScene::update();
 	selectWindowContainer->update();
-	m_pListTable->update();
+	treeListSquare->update();
 	this->buttonUpdate();
 
 	printf("%f\n", UpDownScrollBar->getSetValue());
@@ -414,6 +424,7 @@ void CMapToolScene::buttonUpdate()
 			selectWindowContainer->getWindow()->getAbsolutePosition().y + 350, 0)));
 	backButton->update();
 
+	squareUpCover->update();
 	saveButton->update();
 	loadButton->update();
 }
@@ -428,7 +439,7 @@ void CMapToolScene::drawUI(void)
 {
 	CScene::drawUI();
 	selectWindowContainer->drawUI();
-	m_pListTable->drawUI();
+	treeListSquare->drawUI();
 
 	this->buttonDrawUI();
 
@@ -440,6 +451,7 @@ void CMapToolScene::buttonDrawUI()
 	openButton->drawUI();
 	closeButton->drawUI();
 	backButton->drawUI();
+	squareUpCover->drawUI();
 	saveButton->drawUI();
 	loadButton->drawUI();
 }

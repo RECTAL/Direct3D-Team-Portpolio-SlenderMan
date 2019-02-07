@@ -199,6 +199,11 @@ void CMainPlayScene::update(void)
 			
 		}
 
+		if (IS_KEY_DOWN(DIK_SPACE)) {
+			m_pCamera->moveByYAxis(10 * GET_DELTA_TIME());
+
+		}
+
 		if (IS_KEY_DOWN(DIK_W)) {
 			m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
 			m_pSpotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
