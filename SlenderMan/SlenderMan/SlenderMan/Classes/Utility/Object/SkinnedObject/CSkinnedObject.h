@@ -6,7 +6,7 @@
 
 class CAnimationController;
 //! SkinnedObject 
-class SkinnedObject : public CRenderObject
+class CSkinnedObject : public CRenderObject
 {
 public:
 	struct STParameters
@@ -17,8 +17,8 @@ public:
 
 public:			// constructor, destructor
 
-	SkinnedObject(const STParameters &a_rstParameters);
-	virtual ~SkinnedObject(void);
+	CSkinnedObject(const STParameters &a_rstParameters);
+	virtual ~CSkinnedObject(void);
 
 public:			//interface
 	virtual void update(void) override;					//interface : IUpdateable

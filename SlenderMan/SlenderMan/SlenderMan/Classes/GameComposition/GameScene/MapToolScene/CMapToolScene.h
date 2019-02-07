@@ -7,6 +7,8 @@ class CSpriteObject_ScrollBar;
 class CSpriteObject_Button;
 class CSpriteObject_List;
 class CSpriteObject_Container;
+class CStage;
+class CCameraObject;
 class CMapToolScene :public CScene
 {
 public:		//constructor , destructor
@@ -27,12 +29,17 @@ public:		//public override function
 	virtual void init()override;					//override	: CScene
 	virtual void createWindowUI()override;
 private:
-	void createButtonUI();
 
+	void createButtonUI();
+	void createCameraObj();
+	void createStage();
 	void buttonUpdate();
 
 	void buttonDrawUI();
 private:
+	POINT m_stPrevMousePosition;
+
+
 	CSpriteObject_Container* selectWindowContainer = nullptr;
 	CSpriteObject_Button* upCover = nullptr;
 	CSpriteObject_Button* downCover = nullptr;
@@ -51,6 +58,12 @@ private:
 	CSpriteObject_Button* goTitleButton = nullptr;
 
 	CSpriteObject* m_pCurrent = nullptr;
+	CStage*		   m_pStage = nullptr;
+
+	CCameraObject* m_pCamera = nullptr;
+
+
+
 
 	FPTR* crashFptr = nullptr;
 	FPTR* beginFptr = nullptr;

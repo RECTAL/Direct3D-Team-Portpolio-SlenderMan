@@ -1,4 +1,9 @@
 #include "CStage.h"
+#include "../Base/CRenderObject.h"
+#include "../System/CollisionSystem/CollisionSystem_CFrustum.h"
+#include "../Object/SkinnedObject/CSkinnedObject.h"
+#include "../Object/StaticObject/CStaticObject.h"
+#include "../Object/CameraObject/CCameraObject.h"
 
 void CStage::init(CTerrainObject::STParameters a_stParameters, std::string m_oObjPacketListFilePath)
 {
@@ -43,113 +48,160 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 	m_pObjPacketList	= new OBJCONTAINER[fWidth*fHeight];
 	m_pObjList			= new std::vector<CRenderObject*>[fWidth*fHeight];
 
-
-	HANDLE	hFile = CreateFile(
-		_T(m_oObjPacketListFilePath.c_str()),
-		GENERIC_READ,
-		0,
-		NULL,
-		OPEN_EXISTING,
-		FILE_ATTRIBUTE_NORMAL,
-		NULL
-	);
-	DWORD dwRead;
-	
-	ReadFile(hFile, m_pObjPacketList, fWidth*fHeight, &dwRead, NULL);
-	for (int i = 0; i < fWidth*fHeight; i++)
+	if (m_oObjPacketListFilePath != "")
 	{
-		for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
+		HANDLE	hFile = CreateFile(
+			_T(m_oObjPacketListFilePath.c_str()),
+			GENERIC_READ,
+			0,
+			NULL,
+			OPEN_EXISTING,
+			FILE_ATTRIBUTE_NORMAL,
+			NULL
+		);
+		DWORD dwRead;
+
+		ReadFile(hFile, m_pObjPacketList, fWidth*fHeight, &dwRead, NULL);
+		for (int i = 0; i < fWidth*fHeight; i++)
 		{
-			if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
-			else
+			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
 			{
-				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_1)
+				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
+				else
 				{
-					CStaticObject::STParameters stParameters = {
-						NULL,NULL,
-						0,NULL,
-						0,NULL,
-						"Resources/Meshes/tree1/tree.X",
-						"Resources/Effects/DefaultStaticMesh.fx"
-					};
-					m_pObjList[i].push_back(new CStaticObject(stParameters));
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_1)
+					{
+						CStaticObject::STParameters stParameters = {
+							NULL,NULL,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/tree1/tree.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						m_pObjList[i].push_back(new CStaticObject(stParameters));
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_2)
+					{
+						CStaticObject::STParameters stParameters = {
+							NULL,NULL,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/tree2/tree2.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						m_pObjList[i].push_back(new CStaticObject(stParameters));
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_3)
+					{
+						CStaticObject::STParameters stParameters = {
+							NULL,NULL,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/tree3/tree3.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						m_pObjList[i].push_back(new CStaticObject(stParameters));
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_4)
+					{
+						CStaticObject::STParameters stParameters = {
+							NULL,NULL,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/tree4/tree4.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						m_pObjList[i].push_back(new CStaticObject(stParameters));
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_5)
+					{
+						CStaticObject::STParameters stParameters = {
+							NULL,NULL,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/tree5/tree5.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						m_pObjList[i].push_back(new CStaticObject(stParameters));
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_6)
+					{
+						CStaticObject::STParameters stParameters = {
+							NULL,NULL,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/tree6/tree6.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						m_pObjList[i].push_back(new CStaticObject(stParameters));
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_7)
+					{
+						CStaticObject::STParameters stParameters = {
+							NULL,NULL,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/tree7/tree7.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						m_pObjList[i].push_back(new CStaticObject(stParameters));
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_8)
+					{
+						CStaticObject::STParameters stParameters = {
+							NULL,NULL,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/tree8/tree8.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						m_pObjList[i].push_back(new CStaticObject(stParameters));
+					}
 				}
-				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_2)
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < fWidth*fHeight; i++)
+		{
+			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
+			{
+				m_pObjPacketList[i].m_nObjCapacity[j] = GOUST_VALUE;
+				ZeroMemory(&m_pObjPacketList[i].m_stObjPacket[j], sizeof(m_pObjPacketList[j]));
+			}
+		}
+	}
+}
+
+void CStage::setCameraObj(CCameraObject * a_pCameraObj)
+{
+	CCameraObject* pCameraObj = a_pCameraObj;
+	if (m_pObjList != nullptr&&m_pTerrainObj != nullptr)
+	{
+		int fWidth = m_pTerrainObj->getCXDIB();
+		int fHeight = m_pTerrainObj->getCZDIB();
+
+
+		for (int i = 0; i < fWidth*fHeight; i++)
+		{
+			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
+			{
+				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
+				else
 				{
-					CStaticObject::STParameters stParameters = {
-						NULL,NULL,
-						0,NULL,
-						0,NULL,
-						"Resources/Meshes/tree2/tree2.X",
-						"Resources/Effects/DefaultStaticMesh.fx"
-					};
-					m_pObjList[i].push_back(new CStaticObject(stParameters));
-				}
-				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_3)
-				{
-					CStaticObject::STParameters stParameters = {
-						NULL,NULL,
-						0,NULL,
-						0,NULL,
-						"Resources/Meshes/tree3/tree3.X",
-						"Resources/Effects/DefaultStaticMesh.fx"
-					};
-					m_pObjList[i].push_back(new CStaticObject(stParameters));
-				}
-				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_4)
-				{
-					CStaticObject::STParameters stParameters = {
-						NULL,NULL,
-						0,NULL,
-						0,NULL,
-						"Resources/Meshes/tree4/tree4.X",
-						"Resources/Effects/DefaultStaticMesh.fx"
-					};
-					m_pObjList[i].push_back(new CStaticObject(stParameters));
-				}
-				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_5)
-				{
-					CStaticObject::STParameters stParameters = {
-						NULL,NULL,
-						0,NULL,
-						0,NULL,
-						"Resources/Meshes/tree5/tree5.X",
-						"Resources/Effects/DefaultStaticMesh.fx"
-					};
-					m_pObjList[i].push_back(new CStaticObject(stParameters));
-				}
-				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_6)
-				{
-					CStaticObject::STParameters stParameters = {
-						NULL,NULL,
-						0,NULL,
-						0,NULL,
-						"Resources/Meshes/tree6/tree6.X",
-						"Resources/Effects/DefaultStaticMesh.fx"
-					};
-					m_pObjList[i].push_back(new CStaticObject(stParameters));
-				}
-				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_7)
-				{
-					CStaticObject::STParameters stParameters = {
-						NULL,NULL,
-						0,NULL,
-						0,NULL,
-						"Resources/Meshes/tree7/tree7.X",
-						"Resources/Effects/DefaultStaticMesh.fx"
-					};
-					m_pObjList[i].push_back(new CStaticObject(stParameters));
-				}
-				if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_8)
-				{
-					CStaticObject::STParameters stParameters = {
-						NULL,NULL,
-						0,NULL,
-						0,NULL,
-						"Resources/Meshes/tree8/tree8.X",
-						"Resources/Effects/DefaultStaticMesh.fx"
-					};
-					m_pObjList[i].push_back(new CStaticObject(stParameters));
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+					{
+						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
+
+
+
+					}
+					else
+					{
+						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
+						pStaticObj->getSTParameters().m_pCamera = pCameraObj;
+					}
 				}
 			}
 		}
@@ -179,8 +231,73 @@ void CStage::save(std::string m_oObjPacketListFilePath)
 
 void CStage::update()
 {
+	if (m_bIsMaptool)
+	{
+
+		m_pTerrainObj->update();
+		int fWidth = m_pTerrainObj->getCXDIB();
+		int fHeight = m_pTerrainObj->getCZDIB();
+
+		for (int i = 0; i < fWidth*fHeight; i++)
+		{
+			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
+			{
+				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
+				else
+				{
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+					{
+						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
+
+					}
+					else
+					{
+						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
+						pStaticObj->update();
+					}
+				}
+			}
+		}
+
+	}
+	else
+	{
+
+
+
+
+	}
 }
 
 void CStage::draw()
 {
+	m_pTerrainObj->draw();
+
+	int fWidth = m_pTerrainObj->getCXDIB();
+	int fHeight = m_pTerrainObj->getCZDIB();
+
+	for (int i = 0; i < fWidth*fHeight; i++)
+	{
+		for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
+		{
+			if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
+			else
+			{
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+				{
+					CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
+
+				}
+				else
+				{
+					CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
+					if (pStaticObj->getSTParameters().m_pCamera->getCameraFrustum()->IsInSphere(pStaticObj->getBoundingSphere()))
+					{
+						pStaticObj->draw();
+					}
+				}
+			}
+		}
+	}
+
 }

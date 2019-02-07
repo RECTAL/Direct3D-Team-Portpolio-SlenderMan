@@ -39,3 +39,9 @@ struct STWaveSound
 	DWORD m_nNumBytes;
 	WAVEFORMATEX m_stWaveFormat;
 };
+
+struct STBoundingSphere
+{
+	D3DXVECTOR3 m_stPosition;
+	float		m_fRadius;
+};
