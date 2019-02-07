@@ -38,7 +38,9 @@ public:			// getter, setter
 	void setScale(const D3DXVECTOR3 &a_rstScale);					//! set Scale
 	void setRotation(const D3DXVECTOR3 &a_rstRotation);				//! set Rotation
 	void setOffsetMatrix(const D3DXMATRIXA16 &a_rstOffsetMatrix);	//! set OffsetMatrix
-
+	void setForwardDirection(D3DXVECTOR3& a_stDirection);
+	void setUpDirection(D3DXVECTOR3& a_stDirection);
+	void setRightDirection(D3DXVECTOR3& a_stDirection);
 
 
 public:			//public function : utility	

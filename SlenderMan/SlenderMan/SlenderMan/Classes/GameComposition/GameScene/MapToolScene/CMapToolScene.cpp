@@ -1,6 +1,7 @@
 #include "CMapToolScene.h"
 
 #include "../../../Utility/Base/CStage.h"
+#include"../../../Utility/Base/CObject.h"
 #include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CInputManager.h"
@@ -41,16 +42,18 @@ CMapToolScene::~CMapToolScene()
 	{
 		SAFE_DELETE(m_pSpriteListButton[i]);
 	}
-	for (int i = 0; i < 6; i++)
-	{
-		SAFE_DELETE(testButton[i]);
-	}
+	//for (int i = 0; i < 6; i++)
+	//{
+	//	SAFE_DELETE(testButton[i]);
+	//}
 
 	SAFE_DELETE(m_pSpriteList);
 	SAFE_DELETE(selectWindowContainer);
 
 	SAFE_DELETE(m_pStage);
 	SAFE_DELETE(m_pCamera);
+
+	SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 }
 
 void CMapToolScene::init()
@@ -68,6 +71,11 @@ void CMapToolScene::init()
 		this->createStage();
 		this->createWindowUI();
 		this->createButtonUI();
+
+		m_stMouseInfo.m_eObjType = EObjType::TREE_1;
+		m_stMouseInfo.m_pRenderObj = (CRenderObject*) new CObject();
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.1f, 0.1f, 0.1f));
+		m_pStage->setCameraObjMain(m_pCamera);
 
 		isFirst = false;
 	}
@@ -87,7 +95,12 @@ void CMapToolScene::createWindowUI()
 	for (int i = 0; i < 6; i++)
 	{
 		testButton[i] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 100, 1);
-
+		(*beginFptr) = [=](void)->void {
+			m_stMouseInfo.m_bIsSkinned = false;
+			m_stMouseInfo.m_eObjType = EObjType::TREE_1;
+		
+	
+		};
 		testButton[i]->init(nullptr, nullptr, nullptr, nullptr, true);
 		char path[MAX_PATH];
 		sprintf(path, "test%1d", i);
@@ -334,33 +347,52 @@ void CMapToolScene::update(void)
 		m_stPrevMousePosition = stMousePosition;
 
 		m_pCamera->rotateByXAxis(fDeltaY / 5.0f);
-		
-
 		m_pCamera->rotateByYAxis(fDeltaX / 5.0f, false);
 	
-
-
-		
 
 		if (IS_KEY_DOWN(DIK_W)) {
 			m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
 			
 		}
 		else if (IS_KEY_DOWN(DIK_S)) {
-			m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-			
+			m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());			
 		}
 
 		if (IS_KEY_DOWN(DIK_A)) {
 			m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-			
 		}
 		else if (IS_KEY_DOWN(DIK_D)) {
 			m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
-			
 		}
-
 	}
+
+	if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
+	{
+		if (IS_KEY_DOWN(DIK_LCONTROL))
+		{
+
+		}
+		else
+		{
+			D3DXVECTOR3 stPos;
+			
+			if (m_pStage->getPickingPosWithTerrain(stPos))
+			{
+				CStage::OBJPACKET objPacket =
+				{
+					m_stMouseInfo.m_eObjType,
+					m_stMouseInfo.m_bIsSkinned,
+					stPos,
+					m_stMouseInfo.m_pRenderObj->getForwardDirection(),
+					m_stMouseInfo.m_pRenderObj->getUpDirection(),
+					m_stMouseInfo.m_pRenderObj->getRightDirection(),
+					m_stMouseInfo.m_pRenderObj->getScale()
+				};
+				m_pStage->addObj(objPacket, stPos);
+			}
+		}
+	}
+
 }
 
 void CMapToolScene::buttonUpdate()

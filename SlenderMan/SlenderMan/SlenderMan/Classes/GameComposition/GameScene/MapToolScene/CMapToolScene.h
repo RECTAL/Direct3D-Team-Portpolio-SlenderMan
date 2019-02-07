@@ -2,6 +2,7 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
+
 class CSpriteObject;
 class CSpriteObject_ScrollBar;
 class CSpriteObject_Button;
@@ -10,8 +11,16 @@ class CSpriteObject_Container;
 class CSpriteObject_ListSquare;
 class CStage;
 class CCameraObject;
+class CRenderObject;
 class CMapToolScene :public CScene
 {
+private:
+	struct MouseInfo
+	{
+		bool m_bIsSkinned = false;
+		EObjType	   m_eObjType = EObjType::NONE;
+		CRenderObject* m_pRenderObj = nullptr;
+	};
 public:		//constructor , destructor
 	CMapToolScene(std::string a_stSceneName);
 	virtual ~CMapToolScene();
@@ -68,6 +77,9 @@ private:
 
 	CSpriteObject_Button* saveButton = nullptr;
 	CSpriteObject_Button* loadButton = nullptr;
+
+
+	MouseInfo		m_stMouseInfo;
 
 
 

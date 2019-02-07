@@ -26,6 +26,7 @@ public:
 	struct STParameters
 	{
 		CCameraObject*		m_pCamera;
+		CLightObject*		m_pLight;
 		int					m_nSmoothLevel;
 		D3DXVECTOR3			m_vfScale;
 
@@ -56,13 +57,14 @@ public:
 	float			getCXTerrain() { return m_cxTerrain; }
 	float			getCYTerrain() { return m_cyTerrain; }
 	float			getCZTerrain() { return m_czTerrain; }
+	int				findIndex(D3DXVECTOR3 a_stPosition);
 	LPD3DXEFFECT	getEffect() { return m_pEffect; }
 	std::string&	getTechniqueName(){ return m_stTechniqueName; }
 
 	virtual	void	doDraw(void) override;
 	virtual void	update(void) override;
 
-	void			mapToolUpdate();
+	bool			terrainPicking(D3DXVECTOR3& a_stPosition);
 private:
 	HRESULT			destroy();
 	HRESULT			loadTextures(std::vector<std::string>&  lpTexFilename);
@@ -88,7 +90,7 @@ private:
 	D3DXVECTOR3*					m_pHeightMap;
 	CQuadTree*						m_pQuadTree;
 	CCameraObject*					m_pCamera;
-
+	CLightObject*					m_pLightObj;
 	STParameters					m_stParameters;
 	LPD3DXEFFECT					m_pEffect = nullptr;
 	LPDIRECT3DVERTEXDECLARATION9	m_pVertexDeclaration = nullptr;

@@ -18,6 +18,7 @@ CTerrainObject::CTerrainObject(const STParameters& a_stParameters)
 	m_cyDIB			= 0;
 	m_vfScale		= a_stParameters.m_vfScale;
 	m_pCamera		= a_stParameters.m_pCamera;
+	m_pLightObj		= a_stParameters.m_pLight;
 
 	m_cxTerrain = m_cxDIB * m_vfScale.x;
 	m_czTerrain = m_czDIB * m_vfScale.z;
@@ -232,52 +233,59 @@ void CTerrainObject::update(void)
 		pIndexBuffer->Unlock();
 	}
 	
-	static bool IsMapToolUpdate = false;
-	if (IS_KEY_PRESSED(DIK_F1))
-	{
-		IsMapToolUpdate = !IsMapToolUpdate;
-	}
-	if (IsMapToolUpdate)
-	{
-		this->mapToolUpdate();
-	}
+	
 }
 
-void CTerrainObject::mapToolUpdate()
+bool CTerrainObject::terrainPicking(D3DXVECTOR3& a_stPosition)
 {
-	bool isClick = false;
 	STRay	ray;
 	float	fu, fv;
 	TERRAINVERTEX* pVertices = nullptr;
 	LPDWORD			pIndices = nullptr;
-
+	bool isPicking = false;
 	LPDIRECT3DINDEXBUFFER9 pIndexBuffer;
 	m_pTerrainMesh->GetIndexBuffer(&pIndexBuffer);
-
-
-	if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
+	
+	ray = CreateRay(GET_MOUSE_POSITION());
+	
+	
+	if (SUCCEEDED(m_pTerrainMesh->LockVertexBuffer(0, (void**)&pVertices)))
 	{
-		ray = CreateRay(GET_MOUSE_POSITION());
-		isClick = true;
-	}
-
-	if (isClick)
-	{
-		if (SUCCEEDED(m_pTerrainMesh->LockVertexBuffer(0, (void**)&pVertices)))
+		if (SUCCEEDED(pIndexBuffer->Lock(0, (m_cxDIB - 1)*(m_czDIB - 1) * 2 * sizeof(DWORD) * 3, (void**)&pIndices, 0)))
 		{
-			if (SUCCEEDED(pIndexBuffer->Lock(0, (m_cxDIB - 1)*(m_czDIB - 1) * 2 * sizeof(DWORD) * 3, (void**)&pIndices, 0)))
+			for (int i = 0; i < m_nTriangles * 3; i += 3)
 			{
-				for (int i = 0; i < m_nTriangles * 3; i += 3)
+				if (D3DXIntersectTri(&pVertices[pIndices[i]].m_stPosition, &pVertices[pIndices[i + 1]].m_stPosition, &pVertices[pIndices[i + 2]].m_stPosition,
+					&ray.m_stOrigin, &ray.m_stDirection, &fu, &fv, NULL))
 				{
-					if (D3DXIntersectTri(&pVertices[pIndices[i]].m_stPosition, &pVertices[pIndices[i + 1]].m_stPosition, &pVertices[pIndices[i + 2]].m_stPosition,
-						&ray.m_stOrigin, &ray.m_stDirection, &fu, &fv, NULL))
-						MessageBox(GET_WINDOW_HANDLE(), "지형 피킹 충돌", "충돌", S_OK);
+
+					D3DXVECTOR3 du;
+					D3DXVec3Normalize(&du,&(pVertices[pIndices[i + 1]].m_stPosition - pVertices[pIndices[i]].m_stPosition));
+					du *= fu;
+
+					D3DXVECTOR3 dv;
+					D3DXVec3Normalize(&dv, &(pVertices[pIndices[i + 2]].m_stPosition - pVertices[pIndices[i]].m_stPosition));
+					dv *= fv;
+
+					a_stPosition = pVertices[pIndices[i]].m_stPosition + du + dv;
+					isPicking = true;
 				}
-				pIndexBuffer->Unlock();
 			}
+			pIndexBuffer->Unlock();
 		}
-		m_pTerrainMesh->UnlockVertexBuffer();
 	}
+	m_pTerrainMesh->UnlockVertexBuffer();
+	return isPicking;
+}
+
+int CTerrainObject::findIndex(D3DXVECTOR3 a_stPosition)
+{
+	D3DXVECTOR3 stPosition = D3DXVECTOR3((a_stPosition.x + m_cxTerrain / 2) / m_stScale.x, 0, (a_stPosition.y + m_cxTerrain / 2) / m_stScale.y);
+	int xIndex = (int)stPosition.x;
+	int zIndex = (int)stPosition.z;
+
+
+	return (zIndex*m_cxDIB + xIndex);
 }
 
 void CTerrainObject::doDraw()

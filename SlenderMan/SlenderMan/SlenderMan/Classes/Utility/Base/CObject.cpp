@@ -125,6 +125,21 @@ void CObject::setOffsetMatrix(const D3DXMATRIXA16 & a_rstOffsetMatrix)
 	m_stOffsetMatrix = a_rstOffsetMatrix;
 }
 
+void CObject::setForwardDirection(D3DXVECTOR3 & a_stDirection)
+{
+	m_stForwardDirection = a_stDirection;
+}
+
+void CObject::setUpDirection(D3DXVECTOR3 & a_stDirection)
+{
+	m_stUpDirection = a_stDirection;
+}
+
+void CObject::setRightDirection(D3DXVECTOR3 & a_stDirection)
+{
+	m_stRightDirection = a_stDirection;
+}
+
 void CObject::resetAxis(void)
 {
 	D3DXVec3Normalize(&m_stRightDirection, &m_stRightDirection);

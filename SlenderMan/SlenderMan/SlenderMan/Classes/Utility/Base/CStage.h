@@ -12,7 +12,7 @@ class CCameraObject;
 class CRenderObject;
 class CStage
 {
-private:
+public:
 	typedef struct objPacket
 	{
 		EObjType	m_EObjType		= EObjType::NONE;
@@ -26,24 +26,34 @@ private:
 
 	typedef struct objContainer
 	{
+		int			m_nPivot = 0;
 		int			m_nObjCapacity[MAX_OBJ_CAPACITY];
 		OBJPACKET	m_stObjPacket[MAX_OBJ_CAPACITY];
 	}OBJCONTAINER;
 public:
 	
+	virtual ~CStage();
+public:
 	void	init(CTerrainObject::STParameters a_stParameters, std::string m_oObjPacketListFilePath);
 	void	release();
 	void	load(CTerrainObject::STParameters a_stParameters,std::string m_oObjPacketListFilePath);
+	void	addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition);
+	void	delObj(CRenderObject* a_pRenderObj, D3DXVECTOR3 a_stPosition);
+	void	setCameraObjMain(CCameraObject* a_pCameraObj) { m_pCameraObj = a_pCameraObj; }
 	void	setCameraObj(CCameraObject* a_pCameraObj);
 	void	save(std::string m_oObjPacketListFilePath);
 	void	update();
 	void	draw();
 
 
+	bool	getPickingPosWithTerrain(D3DXVECTOR3& a_stPosition);
+
+
 	BOOL&	getbIsMaptool() { return m_bIsMaptool; }
 
 private:
 	CCameraObject*	m_pCameraObj;
+	CLightObject*	m_pDirectionLightObj;
 	CTerrainObject*	m_pTerrainObj;
 	OBJCONTAINER* m_pObjPacketList;
 	std::vector<CRenderObject*>* m_pObjList;
