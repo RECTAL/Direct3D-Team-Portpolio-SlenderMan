@@ -2,6 +2,7 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
+#define MAX_TREE_NUM 7
 
 class CSpriteObject;
 class CSpriteObject_ScrollBar;
@@ -74,7 +75,7 @@ private:
 
 	CSpriteObject_Button* squareUpCover = nullptr;
 	CSpriteObject_ListSquare* treeListSquare = nullptr;
-	CSpriteObject_Button* testButton[6] = { nullptr };
+	CSpriteObject_Button* treeButton[MAX_TREE_NUM] = { nullptr };
 
 	CSpriteObject_Button* saveButton = nullptr;
 	CSpriteObject_Button* loadButton = nullptr;
