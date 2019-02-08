@@ -29,6 +29,15 @@ enum class CWindowType
 
 enum class EObjType
 {
+	DESK,
+	GRASS,
+	MOUNTAIN,
+	OLDHOUSE,
+	OLDWOODDOCK,
+	PLANTS,
+	ROUNDWOOD,
+	URBANDEBRIS,
+	WOODHOUSE,
 	TREE_1,
 	TREE_2,
 	TREE_3,
@@ -37,6 +46,7 @@ enum class EObjType
 	TREE_6,
 	TREE_7,
 	TREE_8,
+	TREE_9,
 	ROCK_0,
 	ROCK_1,
 	NONE = -1

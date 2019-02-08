@@ -72,9 +72,6 @@ sampler2D g_pSamplerA = sampler_state
 {
 	Texture = g_pTextureA;
 
-	ADDRESSU = MIRROR;
-	ADDRESSV = MIRROR;
-
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
 	MipFilter = LINEAR;
@@ -84,8 +81,6 @@ sampler2D g_pSamplerB = sampler_state
 {
 	Texture = g_pTextureB;
 
-	ADDRESSU = MIRROR;
-	ADDRESSV = MIRROR;
 
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
@@ -96,8 +91,6 @@ sampler2D g_pSamplerC = sampler_state
 {
 	Texture = g_pTextureC;
 
-	ADDRESSU = MIRROR;
-	ADDRESSV = MIRROR;
 
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
@@ -108,8 +101,6 @@ sampler2D g_pSamplerD = sampler_state
 {
 	Texture = g_pTextureD;
 
-	ADDRESSU = MIRROR;
-	ADDRESSV = MIRROR;
 
 	MinFilter = LINEAR;
 	MagFilter = LINEAR;
@@ -127,18 +118,24 @@ sampler2D g_pSplatSampler = sampler_state
 
 float4 ps_main(STOutput a_stInput) : COLOR0
 {
+	float2 stUV = a_stInput.m_stUV;
+	stUV.x = stUV.x / 80;
+	stUV.y = stUV.y / 80;
+
 	float4 stColorA = tex2D(g_pSamplerA, a_stInput.m_stUV);
 	float4 stColorB = tex2D(g_pSamplerB, a_stInput.m_stUV);
 	float4 stColorC = tex2D(g_pSamplerC, a_stInput.m_stUV);
 	float4 stColorD = tex2D(g_pSamplerD, a_stInput.m_stUV);
-	float4 stSplatColor = tex2D(g_pSplatSampler, a_stInput.m_stUV);
+	float4 stSplatColor = tex2D(g_pSplatSampler, stUV);
 
 	float fBlackPercent = 1.0f - saturate(stSplatColor.r + stSplatColor.g + stSplatColor.b);
 
-	float4 stDiffuseColor = (stColorA * stSplatColor.r) +
-		(stColorB * stSplatColor.g) +
-		(stColorC * stSplatColor.b) +
-		(stColorD * fBlackPercent);
+	//float4 stDiffuseColor = (stColorA * stSplatColor.r) +
+	//	(stColorB * stSplatColor.g) +
+	//	(stColorC * stSplatColor.b) +
+	//	(stColorD * fBlackPercent);
+
+	float4 stDiffuseColor = float4(0.4f, 0.4f, 0.4f, 1.0f);
 
 	float4 fSpotLightColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 

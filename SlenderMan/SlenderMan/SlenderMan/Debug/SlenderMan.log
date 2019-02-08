@@ -1,5 +1,3 @@
-﻿  CVirtualScene.cpp
-  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
-c:\users\zoddl\source\repos\direct3d-team-portpolio-slenderman\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\testscene\cvirtualscene.cpp(34): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
-  SlenderMan.vcxproj -> C:\Users\zoddl\Source\Repos\Direct3D-Team-Portpolio-SlenderMan\SlenderMan\SlenderMan\Debug\SlenderMan.exe
-  SlenderMan.vcxproj -> C:\Users\zoddl\Source\Repos\Direct3D-Team-Portpolio-SlenderMan\SlenderMan\SlenderMan\Debug\SlenderMan.pdb (Full PDB)
+﻿  compilation object save succeeded; see C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\Debug\DefaultTerrain.cso
+  SlenderMan.vcxproj -> C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\Debug\SlenderMan.exe
+  SlenderMan.vcxproj -> C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\Debug\SlenderMan.pdb (Full PDB)
