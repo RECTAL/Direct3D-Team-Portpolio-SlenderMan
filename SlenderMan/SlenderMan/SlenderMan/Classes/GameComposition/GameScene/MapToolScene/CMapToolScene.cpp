@@ -332,7 +332,7 @@ void CMapToolScene::createButtonUI()
 		CTerrainObject::STParameters stParameters;
 		stParameters.m_pCamera = m_pCamera;
 		stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.007f, 1.0f);
-		stParameters.m_oHeightFilepath = "Resources/Datas/HeightMap.raw";
+		stParameters.m_oHeightFilepath = "Resources/Datas/terrain.raw";
 		stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap.png";
 		stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
 
@@ -376,13 +376,13 @@ void CMapToolScene::createStage()
 
 	CTerrainObject::STParameters stParameters;
 	stParameters.m_pCamera = m_pCamera;
-	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.007f, 1.0f);
-	stParameters.m_oHeightFilepath = "Resources/Datas/HeightMap.raw";
-	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap.png";
+	stParameters.m_vfScale = D3DXVECTOR3(2.0f, 0.015f, 2.0f);
+	stParameters.m_oHeightFilepath = "Resources/Datas/realterrain.raw";
+	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap2.png";
 	stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
 
-	stParameters.m_stMapSize.cx = 257;
-	stParameters.m_stMapSize.cy = 257;
+	stParameters.m_stMapSize.cx = 513;
+	stParameters.m_stMapSize.cy = 513;
 
 	stParameters.m_nSmoothLevel = 1;
 
