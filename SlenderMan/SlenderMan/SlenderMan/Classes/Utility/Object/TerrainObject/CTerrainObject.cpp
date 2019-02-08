@@ -61,8 +61,6 @@ HRESULT CTerrainObject::destroy()
 	SAFE_DELETE_ARRAY(m_pHeightMap);
 	SAFE_RELEASE(m_pTerrainMesh);
 
-	for (int i = 0; i < CTerrainObject::MAX_TERRAIN_TEX; i++)
-		SAFE_RELEASE(m_pTex[i]);
 
 	return S_OK;
 }

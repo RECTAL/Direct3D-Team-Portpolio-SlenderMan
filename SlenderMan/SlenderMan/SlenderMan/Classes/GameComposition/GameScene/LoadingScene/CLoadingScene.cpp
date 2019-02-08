@@ -1,4 +1,5 @@
 #include "CLoadingScene.h"
+#include "../../../Function/GlobalFunction.h"
 #include "../LoadingScene/Loader/TitleSceneLoader.h"
 #include "../LoadingScene/Loader/MainPlaySceneLoader.h"
 #include "../LoadingScene/Loader/MapToolSceneLoader.h"
@@ -6,6 +7,8 @@
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CSceneManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
+#include "../../../Utility/Manager/CDeviceManager.h"
+#include "../../../Utility/Manager/CRendertargetManager.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Default.h"
 
 CLoadingScene::CLoadingScene(std::string a_stSceneName)
@@ -30,7 +33,7 @@ void CLoadingScene::init()
 	if (isFirst)
 	{
 		this->createBackGround();
-
+		this->createRenderTarget();
 		isFirst = false;
 	}
 }
@@ -105,6 +108,34 @@ void CLoadingScene::update(void)
 void CLoadingScene::draw(void)
 {
 	CScene::draw();
+	D3DXMATRIXA16 stWorldMatrix;
+	D3DXMatrixIdentity(&stWorldMatrix);
+
+	/***************************************************/
+	//LoadingRenderTarget에 draw
+	/***************************************************/
+	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("LoadingRenderTarget")->m_stRenderTarget.m_pTexSurf);
+	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("LoadingRenderTarget")->m_stRenderTarget.m_pDepthStencil);
+	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0.0f);
+
+
+
+
+
+
+	/***************************************************/
+	//Back Buffer로 재설정
+	/***************************************************/
+	GET_RENDERTARGET_MANAGER()->resetRenderTarget();
+
+	FIND_RENDERTARGET("LoadingRenderTarget")->m_pCopyEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+	FIND_RENDERTARGET("LoadingRenderTarget")->m_pCopyEffect->SetTexture("g_pTexture", FIND_RENDERTARGET("LoadingRenderTarget")->m_stRenderTarget.m_pTex);
+
+	RunEffectLoop(FIND_RENDERTARGET("LoadingRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
+		FIND_RENDERTARGET("LoadingRenderTarget")->getPlaneMesh()->DrawSubset(0);
+	});
+
+
 }
 
 void CLoadingScene::drawUI(void)
@@ -126,6 +157,14 @@ void CLoadingScene::createBackGround(void)
 {
 	m_pBackGround = new CSpriteObject_Default("Resources/Textures/Scene/LoadingScene/load", "png", 1366, 768, 1);
 	m_pBackGround->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
+}
+
+void CLoadingScene::createRenderTarget(void)
+{	
+	D3DVIEWPORT9 stViewport;
+	GET_DEVICE()->GetViewport(&stViewport);
+	GET_RENDERTARGET_MANAGER()->addRenderTarget("LoadingRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
+
 }
 
 void CLoadingScene::updateImage(void)
