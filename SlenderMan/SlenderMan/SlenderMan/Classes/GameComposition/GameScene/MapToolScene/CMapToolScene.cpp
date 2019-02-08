@@ -90,25 +90,62 @@ void CMapToolScene::createWindowUI()
 	treeListSquare->setVisible(false);
 	treeListSquare->init(nullptr, nullptr, nullptr, nullptr);
 
-	testButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 100, 1);
-	
-	testButton[0]->init(nullptr, nullptr, nullptr, nullptr, true);
+	treeButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_1;
+	};
+	treeButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
-	for (int i = 0; i < 6; i++)
+	treeButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_2;
+	};
+	treeButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	treeButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_3;
+	};
+	treeButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	treeButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_4;
+	};
+	treeButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	treeButton[4] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree5Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_5;
+	};
+	treeButton[4]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	treeButton[5] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree6Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_6;
+	};
+	treeButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	treeButton[6] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree7Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_7;
+	};
+	treeButton[6]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	for (int i = 0; i < MAX_TREE_NUM; i++)
 	{
-		testButton[i] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 100, 1);
-		(*endFptr) = [=](void)->void {
-			m_stMouseInfo.m_bIsSkinned = false;
-			m_stMouseInfo.m_eObjType = EObjType::TREE_1;
-		
-	
-		};
-		testButton[i]->init(nullptr, nullptr, nullptr, endFptr, true);
 		char path[MAX_PATH];
 		sprintf(path, "test%1d", i);
-		treeListSquare->addChildSpriteObject(path, CWindowType::BUTTON, testButton[i]);
-
+		treeListSquare->addChildSpriteObject(path, CWindowType::BUTTON, treeButton[i]);
 	}
+	
 
 	/***************************************************/
 	//컨테이너 만들기
@@ -437,16 +474,15 @@ void CMapToolScene::update(void)
 
 				if (m_pStage->getPickingPosWithTerrain(stPos))
 				{
-					CStage::OBJPACKET objPacket =
-					{
-						m_stMouseInfo.m_eObjType,
-						m_stMouseInfo.m_bIsSkinned,
-						stPos,
-						m_stMouseInfo.m_pRenderObj->getForwardDirection(),
-						m_stMouseInfo.m_pRenderObj->getUpDirection(),
-						m_stMouseInfo.m_pRenderObj->getRightDirection(),
-						m_stMouseInfo.m_pRenderObj->getScale()
-					};
+					CStage::OBJPACKET objPacket;
+					objPacket.m_bIsSkinned = m_stMouseInfo.m_bIsSkinned;
+					objPacket.m_EObjType = m_stMouseInfo.m_eObjType;
+					objPacket.m_stPosition = stPos;
+					objPacket.m_stScale = m_stMouseInfo.m_pRenderObj->getScale();
+					objPacket.m_stForwordVec = m_stMouseInfo.m_pRenderObj->getForwardDirection();
+					objPacket.m_stUpVec = m_stMouseInfo.m_pRenderObj->getUpDirection();
+					objPacket.m_stRightVec = m_stMouseInfo.m_pRenderObj->getRightDirection();
+					
 					m_pStage->addObj(objPacket, stPos);
 				}
 			}
