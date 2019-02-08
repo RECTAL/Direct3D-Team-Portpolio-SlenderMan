@@ -85,7 +85,7 @@ BOOL CFrustum::IsInSphere(D3DXVECTOR3 * pv, float radius)
 	return TRUE;
 }
 
-BOOL CFrustum::IsInSphere(STBoundingSphere & a_stBoundingSphere)
+BOOL CFrustum::IsInSphere(STBoundingSphere  a_stBoundingSphere)
 {
 	float		fDist;
 

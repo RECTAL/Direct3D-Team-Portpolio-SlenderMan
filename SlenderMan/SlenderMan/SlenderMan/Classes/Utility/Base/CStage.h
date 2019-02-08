@@ -47,7 +47,8 @@ public:
 
 	bool	getPickingPosWithTerrain(D3DXVECTOR3& a_stPosition);
 
-
+	CTerrainObject*	getTerrainObj(){ return m_pTerrainObj; }
+	std::vector<CRenderObject*>*	getObjList() { return m_pObjList; }
 	BOOL&	getbIsMaptool() { return m_bIsMaptool; }
 
 private:

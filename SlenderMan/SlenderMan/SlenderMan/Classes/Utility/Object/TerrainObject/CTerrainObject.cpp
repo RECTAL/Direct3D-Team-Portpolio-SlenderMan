@@ -198,9 +198,9 @@ HRESULT CTerrainObject::createTerrainMesh()
 				pIndices[nIndex + 1] = nVertexIndex + 1;
 				pIndices[nIndex + 2] = nVertexIndex + m_cxDIB;
 
-				pIndices[nIndex + 3] = nVertexIndex + m_cxDIB;
-				pIndices[nIndex + 4] = nVertexIndex + 1;
-				pIndices[nIndex + 5] = nVertexIndex + m_cxDIB + 1;
+				pIndices[nIndex + 3] = nVertexIndex + m_cxDIB + 1;
+				pIndices[nIndex + 4] = nVertexIndex + m_cxDIB;
+				pIndices[nIndex + 5] = nVertexIndex + 1;
 
 			}
 		}
