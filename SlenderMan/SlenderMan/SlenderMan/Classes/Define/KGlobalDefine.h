@@ -57,6 +57,9 @@
 #define WORLD_RIGHT_DIRECTION				(D3DXVECTOR3(1.0f, 0.0f, 0.0f))
 #define WORLD_UP_DIRECTION					(D3DXVECTOR3(0.0f, 1.0f, 0.0f))
 #define WORLD_FORWARD_DIRECTION				(D3DXVECTOR3(0.0f, 0.0f, 1.0f))
+#define MAX_OBJ_CAPACITY					10
+#define GOUST_VALUE							-1
+
 
 #define SAFE_FREE(TARGET)					if((TARGET) != nullptr) { free((TARGET)); (TARGET) = nullptr; }
 #define SAFE_DELETE(TARGET)					if((TARGET) != nullptr) { delete (TARGET); (TARGET) = nullptr; }
@@ -116,7 +119,7 @@
 #define GET_STATIC_MESH(FILE_PATH)						(GET_RESOURCE_MANAGER()->getStaticMesh((FILE_PATH)))
 #define GET_WAVE_SOUND(FILE_PATH)						(GET_RESOURCE_MANAGER()->getWaveSound((FILE_PATH)))
 #define GET_EFFECT(FILE_PATH)							(GET_RESOURCE_MANAGER()->getEffect((FILE_PATH)))
-#define GET_TEXTURE(FILE_PATH)							(GET_RESOURCE_MANAGER()->getTexture((FILE_PATH)))
+#define GET_TEXTURE(FILE_PATH,WIDTH,HEIGHT)				(GET_RESOURCE_MANAGER()->getTexture(FILE_PATH,WIDTH,HEIGHT))
 #define GET_SPRITE_TEXTURE(FILE_PATH,WIDTH,HEIGHT)		(GET_RESOURCE_MANAGER()->getSpriteTexture(FILE_PATH,WIDTH,HEIGHT))
 #define GET_CUBE_TEXTURE(FILE_PATH)						(GET_RESOURCE_MANAGER()->getCubeTexture((FILE_PATH)))
 

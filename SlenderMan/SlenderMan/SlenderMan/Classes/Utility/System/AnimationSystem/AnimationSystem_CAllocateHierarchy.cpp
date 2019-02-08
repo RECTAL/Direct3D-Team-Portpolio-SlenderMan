@@ -73,7 +73,7 @@ HRESULT CAllocateHierarchy::CreateMeshContainer(LPCSTR a_pszName,
 				sprintf(szFilepath, "%s%s", m_stParameters.m_oBasepath.c_str(),
 					a_pstXMaterials[i].pTextureFilename);
 
-				pTexture = GET_TEXTURE(szFilepath);
+				pTexture = GET_TEXTURE(szFilepath,GOUST_VALUE,GOUST_VALUE);
 			}
 
 			pstMeshContainer->m_oTextureList.push_back(pTexture);

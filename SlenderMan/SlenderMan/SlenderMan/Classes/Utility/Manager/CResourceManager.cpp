@@ -81,9 +81,12 @@ LPD3DXEFFECT CResourceManager::getEffect(const std::string & a_rKey, bool a_bIsA
 	return oIterator->second;
 }
 
-LPDIRECT3DTEXTURE9 CResourceManager::getTexture(const std::string & a_rKey, bool a_bIsAutoCreate)
+LPDIRECT3DTEXTURE9 CResourceManager::getTexture(const std::string & a_rKey, int width, int height, bool a_bIsAutoCreate)
 {
-	auto oIterator = m_oTextureList.find(a_rKey);
+
+	char path[MAX_PATH];
+	sprintf(path, "%s%d%d", a_rKey.c_str(), width, height);
+	auto oIterator = m_oTextureList.find(path);
 
 	// 보관 중인 텍스처가 없을 경우
 	if (oIterator == m_oTextureList.end()) {
@@ -92,9 +95,9 @@ LPDIRECT3DTEXTURE9 CResourceManager::getTexture(const std::string & a_rKey, bool
 		if (a_bIsAutoCreate) {
 			pTexture = this->createTexture(a_rKey);
 
-			D3DSURFACE_DESC pSurf;
-			pTexture->GetLevelDesc(0, &pSurf);
-			this->addTexture(a_rKey, pTexture, pSurf.Width, pSurf.Height);
+
+			this->addTexture(a_rKey, pTexture, width, height);
+			int a = 0;
 		}
 
 		return pTexture;
@@ -211,7 +214,7 @@ STStaticMesh CResourceManager::createStaticMesh(const std::string & a_rFilepath)
 			sprintf(szFilepath, "%s%s", oBasepath.c_str(),
 				pstXMaterials[i].pTextureFilename);
 
-			pTexture = GET_TEXTURE(szFilepath);
+			pTexture = GET_TEXTURE(szFilepath,GOUST_VALUE,GOUST_VALUE);
 		}
 
 		stStaticMesh.m_oTextureList.push_back(pTexture);

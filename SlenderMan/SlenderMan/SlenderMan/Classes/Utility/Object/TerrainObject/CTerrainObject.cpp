@@ -30,7 +30,7 @@ CTerrainObject::CTerrainObject(const STParameters& a_stParameters)
 	m_pQuadTree		= NULL;
 
 	m_pHeightMap	= new D3DXVECTOR3[m_cxDIB*m_czDIB];
-	m_pSplatTexture = GET_TEXTURE(a_stParameters.m_oSplatFilepath.c_str());
+	m_pSplatTexture = GET_TEXTURE(a_stParameters.m_oSplatFilepath.c_str(), m_cxDIB-1, m_czDIB-1);
 	m_pEffect		= GET_EFFECT(a_stParameters.m_oEffectFilepath.c_str());
 
 	for (int i = 0; i < CTerrainObject::MAX_TERRAIN_TEX; i++) m_pTex[i] = NULL;
@@ -71,7 +71,7 @@ HRESULT CTerrainObject::loadTextures(std::vector<std::string>&  lpTexFilename)
 {
 	for (int i = 0; i < CTerrainObject::MAX_TERRAIN_TEX; i++)
 	{
-		m_pTex[i] = GET_TEXTURE(lpTexFilename[i]);
+		m_pTex[i] = GET_TEXTURE(lpTexFilename[i],m_cxDIB,m_czDIB);
 		if (m_pTex == nullptr)
 		{
 			assert("CTerrainObject: texture loading false");
@@ -105,7 +105,7 @@ HRESULT CTerrainObject::buildHeightMap(std::string lpFilename)
 	else
 	{
 
-		auto pHeightTexture = GET_TEXTURE(lpFilename.c_str());
+		auto pHeightTexture = GET_TEXTURE(lpFilename.c_str(), m_cxDIB, m_czDIB);
 		D3DLOCKED_RECT stLockRect;
 		ZeroMemory(&stLockRect, sizeof(stLockRect));
 

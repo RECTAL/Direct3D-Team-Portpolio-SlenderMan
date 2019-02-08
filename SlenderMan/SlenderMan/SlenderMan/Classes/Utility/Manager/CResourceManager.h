@@ -20,7 +20,7 @@ public:			// getter
 	STStaticMesh			getStaticMesh(const std::string &a_rKey, bool a_bIsAutoCreate = true);			//! 정적 메시를 반환한다
 	STWaveSound				getWaveSound(const std::string &a_rKey,bool a_bIsAutoCreate = true);			//! 웨이브 사운드를 반환한다
 	LPD3DXEFFECT			getEffect(const std::string &a_rKey,bool a_bIsAutoCreate = true);				//! 이펙트를 반환한다
-	LPDIRECT3DTEXTURE9		getTexture(const std::string &a_rKey,bool a_bIsAutoCreate = true);				//! 텍스처를 반환한다
+	LPDIRECT3DTEXTURE9		getTexture(const std::string &a_rKey,int width,int height,bool a_bIsAutoCreate = true);				//! 텍스처를 반환한다
 	LPDIRECT3DTEXTURE9		getSpriteTexture(const std::string &a_rKey, const float width, const float height, bool a_bIsAutoCreate = true);		//! 스프라이트 텍스처를 반환한다
 	LPDIRECT3DCUBETEXTURE9	getCubeTexture(const std::string &a_rKey,bool a_bIsAutoCreate = true);			//! 큐브 텍스처를 반환한다
 

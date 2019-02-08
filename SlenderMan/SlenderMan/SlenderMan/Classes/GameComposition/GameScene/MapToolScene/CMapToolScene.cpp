@@ -73,7 +73,7 @@ void CMapToolScene::init()
 		this->createWindowUI();
 		this->createButtonUI();
 
-		m_stMouseInfo.m_eObjType = EObjType::TREE_1;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_2;
 		m_stMouseInfo.m_pRenderObj = (CRenderObject*) new CObject();
 		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.1f, 0.1f, 0.1f));
 		m_pStage->setCameraObjMain(m_pCamera);
@@ -97,13 +97,13 @@ void CMapToolScene::createWindowUI()
 	for (int i = 0; i < 6; i++)
 	{
 		testButton[i] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 100, 1);
-		(*beginFptr) = [=](void)->void {
+		(*endFptr) = [=](void)->void {
 			m_stMouseInfo.m_bIsSkinned = false;
 			m_stMouseInfo.m_eObjType = EObjType::TREE_1;
 		
 	
 		};
-		testButton[i]->init(nullptr, nullptr, nullptr, nullptr, true);
+		testButton[i]->init(nullptr, nullptr, nullptr, endFptr, true);
 		char path[MAX_PATH];
 		sprintf(path, "test%1d", i);
 		treeListSquare->addChildSpriteObject(path, CWindowType::BUTTON, testButton[i]);
@@ -278,11 +278,54 @@ void CMapToolScene::createButtonUI()
 
 	saveButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/save", "png", 50, 50, 1);
 	saveButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy - 25, 0));
-	saveButton->init(nullptr, nullptr, nullptr, nullptr);
+	(*endFptr) = [=](void)->void
+	{
+		MessageBox(GET_WINDOW_HANDLE(), _T("Save"), "", S_OK);
+		m_pStage->save("Resources/Datas/ObjPacket.map");
+		MessageBox(GET_WINDOW_HANDLE(), _T("Save Complete"), "", S_OK);
+		
+	};
+	saveButton->init(nullptr, nullptr, nullptr, endFptr);
 
 	loadButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/load", "png", 50, 50, 1);
-	loadButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2 + 50, GET_WINDOW_SIZE().cy - 25, 0));
-	loadButton->init(nullptr, nullptr, nullptr, nullptr);
+	loadButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2 + 55, GET_WINDOW_SIZE().cy - 25, 0));
+	(*endFptr) = [=](void)->void
+	{
+		MessageBox(GET_WINDOW_HANDLE(), _T("Load"), "", S_OK);
+		CTerrainObject::STParameters stParameters;
+		stParameters.m_pCamera = m_pCamera;
+		stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.007f, 1.0f);
+		stParameters.m_oHeightFilepath = "Resources/Datas/HeightMap.raw";
+		stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap.png";
+		stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
+
+		stParameters.m_stMapSize.cx = 257;
+		stParameters.m_stMapSize.cy = 257;
+
+		stParameters.m_nSmoothLevel = 1;
+
+		stParameters.m_nNumSpotLight = 0;
+		stParameters.m_pSpotLight = NULL;
+
+		stParameters.m_nNumPointLight = 0;
+		stParameters.m_pPointLight = NULL;
+
+
+		for (int i = 0; i < CTerrainObject::MAX_TERRAIN_TEX; ++i) {
+			char szFilepath[MAX_PATH] = "";
+			sprintf(szFilepath, "Resources/Textures/Terrain/Terrain_%02d.jpg", i + 1);
+
+			stParameters.m_oTextureFilepathList.push_back(szFilepath);
+		}
+
+		m_pStage->init(stParameters, "");
+		m_pStage->setCameraObj(m_pCamera);
+		m_pStage->getbIsMaptool() = TRUE;
+		m_pStage->load(stParameters, "Resources/Datas/ObjPacket.map");
+
+		MessageBox(GET_WINDOW_HANDLE(), _T("Load Complete"), "", S_OK);
+	};
+	loadButton->init(nullptr, nullptr, nullptr, endFptr);
 }
 
 void CMapToolScene::createCameraObj()
@@ -339,70 +382,76 @@ void CMapToolScene::update(void)
 
 	m_pSpriteList->getMoveOffset() = D3DXVECTOR3(0, -UpDownScrollBar->getSetValue(), 0);
 
-	if (IS_MOUSE_BUTTON_DOWN(EMouseInput::RIGHT)) {
-		float fSpeed = 15.0f;
-
-		if (IS_KEY_DOWN(DIK_LSHIFT)) {
-			fSpeed = 50.0f;
-		}
-
-		if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::RIGHT)) {
-			m_stPrevMousePosition = GET_MOUSE_POSITION();
-		}
-
-		auto stMousePosition = GET_MOUSE_POSITION();
-		float fDeltaY = stMousePosition.y - m_stPrevMousePosition.y;
-		float fDeltaX = stMousePosition.x - m_stPrevMousePosition.x;
-
-		m_stPrevMousePosition = stMousePosition;
-
-		m_pCamera->rotateByXAxis(fDeltaY / 5.0f);
-		m_pCamera->rotateByYAxis(fDeltaX / 5.0f, false);
-	
-
-		if (IS_KEY_DOWN(DIK_W)) {
-			m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
-			
-		}
-		else if (IS_KEY_DOWN(DIK_S)) {
-			m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());			
-		}
-
-		if (IS_KEY_DOWN(DIK_A)) {
-			m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-		}
-		else if (IS_KEY_DOWN(DIK_D)) {
-			m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
-		}
-	}
-
-	if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
+	if (IS_KEY_PRESSED(DIK_F1))
 	{
-		if (IS_KEY_DOWN(DIK_LCONTROL))
-		{
+		isEnableClick = !isEnableClick;
+	}
+	if (isEnableClick)
+	{
+		if (IS_MOUSE_BUTTON_DOWN(EMouseInput::RIGHT)) {
+			float fSpeed = 15.0f;
 
+			if (IS_KEY_DOWN(DIK_LSHIFT)) {
+				fSpeed = 50.0f;
+			}
+
+			if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::RIGHT)) {
+				m_stPrevMousePosition = GET_MOUSE_POSITION();
+			}
+
+			auto stMousePosition = GET_MOUSE_POSITION();
+			float fDeltaY = stMousePosition.y - m_stPrevMousePosition.y;
+			float fDeltaX = stMousePosition.x - m_stPrevMousePosition.x;
+
+			m_stPrevMousePosition = stMousePosition;
+
+			m_pCamera->rotateByXAxis(fDeltaY / 5.0f);
+			m_pCamera->rotateByYAxis(fDeltaX / 5.0f, false);
+
+
+			if (IS_KEY_DOWN(DIK_W)) {
+				m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
+
+			}
+			else if (IS_KEY_DOWN(DIK_S)) {
+				m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+			}
+
+			if (IS_KEY_DOWN(DIK_A)) {
+				m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+			}
+			else if (IS_KEY_DOWN(DIK_D)) {
+				m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
+			}
 		}
-		else
+
+		if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
 		{
-			D3DXVECTOR3 stPos;
-			
-			if (m_pStage->getPickingPosWithTerrain(stPos))
+			if (IS_KEY_DOWN(DIK_LCONTROL))
 			{
-				CStage::OBJPACKET objPacket =
+
+			}
+			else
+			{
+				D3DXVECTOR3 stPos;
+
+				if (m_pStage->getPickingPosWithTerrain(stPos))
 				{
-					m_stMouseInfo.m_eObjType,
-					m_stMouseInfo.m_bIsSkinned,
-					stPos,
-					m_stMouseInfo.m_pRenderObj->getForwardDirection(),
-					m_stMouseInfo.m_pRenderObj->getUpDirection(),
-					m_stMouseInfo.m_pRenderObj->getRightDirection(),
-					m_stMouseInfo.m_pRenderObj->getScale()
-				};
-				m_pStage->addObj(objPacket, stPos);
+					CStage::OBJPACKET objPacket =
+					{
+						m_stMouseInfo.m_eObjType,
+						m_stMouseInfo.m_bIsSkinned,
+						stPos,
+						m_stMouseInfo.m_pRenderObj->getForwardDirection(),
+						m_stMouseInfo.m_pRenderObj->getUpDirection(),
+						m_stMouseInfo.m_pRenderObj->getRightDirection(),
+						m_stMouseInfo.m_pRenderObj->getScale()
+					};
+					m_pStage->addObj(objPacket, stPos);
+				}
 			}
 		}
 	}
-
 }
 
 void CMapToolScene::buttonUpdate()

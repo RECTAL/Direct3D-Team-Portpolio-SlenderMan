@@ -10,7 +10,7 @@ CParticleSystem::CParticleSystem(const STParameters & a_rstParameters,
 	m_stParameters(a_rstParameters),
 	m_pVertexBuffer(a_pVertexBuffer)
 {
-	m_pTexture = GET_TEXTURE(a_rstParameters.m_oTextureFilepath);
+	m_pTexture = GET_TEXTURE(a_rstParameters.m_oTextureFilepath,GOUST_VALUE,GOUST_VALUE);
 }
 
 CParticleSystem::~CParticleSystem(void)

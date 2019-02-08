@@ -32,7 +32,8 @@ void CStage::release()
 		int fHeight = m_pTerrainObj->getCZDIB();
 		if (m_pObjPacketList != nullptr)
 		{
-			SAFE_DELETE_ARRAY(m_pObjPacketList);
+			delete[] m_pObjPacketList;
+			m_pObjPacketList = nullptr;
 		}
 		if (m_pObjList != nullptr)
 		{
@@ -44,7 +45,8 @@ void CStage::release()
 				}
 				m_pObjList[i].clear();
 			}
-			SAFE_DELETE_ARRAY(m_pObjList);
+			delete[] m_pObjList;
+			m_pObjList = nullptr;
 		}
 		SAFE_DELETE(m_pTerrainObj);
 	}
@@ -61,6 +63,16 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 	int fHeight = m_pTerrainObj->getCZDIB();
 
 	m_pObjPacketList	= new OBJCONTAINER[fWidth*fHeight];
+	for (int i = 0; i < fWidth*fHeight; i++)
+	{
+		for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
+		{
+			m_pObjPacketList[i].m_nPivot = 0;
+			m_pObjPacketList[i].m_nObjCapacity[j] = GOUST_VALUE;
+			ZeroMemory(&m_pObjPacketList[i].m_stObjPacket[j], sizeof(m_pObjPacketList[i].m_stObjPacket[j]));
+		}
+	}
+
 	m_pObjList			= new std::vector<CRenderObject*>[fWidth*fHeight];
 
 	if (m_oObjPacketListFilePath != "")
@@ -76,7 +88,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 		);
 		DWORD dwRead;
 
-		ReadFile(hFile, m_pObjPacketList, fWidth*fHeight, &dwRead, NULL);
+		if (!ReadFile(hFile, m_pObjPacketList, sizeof(OBJCONTAINER)*fWidth*fHeight, &dwRead, NULL))assert("Fail");
 		for (int i = 0; i < fWidth*fHeight; i++)
 		{
 			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
@@ -231,17 +243,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 				}
 			}
 		}
-	}
-	else
-	{
-		for (int i = 0; i < fWidth*fHeight; i++)
-		{
-			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
-			{
-				m_pObjPacketList[i].m_nObjCapacity[j] = GOUST_VALUE;
-				ZeroMemory(&m_pObjPacketList[i].m_stObjPacket[j], sizeof(m_pObjPacketList[j]));
-			}
-		}
+		CloseHandle(hFile);
 	}
 }
 
@@ -459,7 +461,6 @@ void CStage::setCameraObj(CCameraObject * a_pCameraObj)
 						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
 
 
-
 					}
 					else
 					{
@@ -488,14 +489,14 @@ void CStage::save(std::string m_oObjPacketListFilePath)
 			NULL
 		);
 		DWORD dwWrite;
-		WriteFile(hFile,m_pObjList, fWidth*fHeight,&dwWrite,NULL);
+		WriteFile(hFile,m_pObjPacketList, sizeof(OBJCONTAINER)*fWidth*fHeight,&dwWrite,NULL);
+		CloseHandle(hFile);
 	}
 }
 
 
 void CStage::update()
 {
-	//m_pDirectionLightObj->update();
 	m_pTerrainObj->update();
 	int fWidth = m_pTerrainObj->getCXDIB();
 	int fHeight = m_pTerrainObj->getCZDIB();
@@ -552,7 +553,6 @@ void CStage::draw()
 			}
 		}
 	}
-
 }
 
 bool CStage::getPickingPosWithTerrain(D3DXVECTOR3& a_stPosition)

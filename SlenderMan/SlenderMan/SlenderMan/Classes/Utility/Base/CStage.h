@@ -5,8 +5,7 @@
 #include "../Object/TerrainObject/CTerrainObject.h"
 
 
-#define MAX_OBJ_CAPACITY		10
-#define GOUST_VALUE				-1
+
 
 class CCameraObject;
 class CRenderObject;
@@ -21,7 +20,7 @@ public:
 		D3DXVECTOR3 m_stForwordVec	= WORLD_FORWARD_DIRECTION;
 		D3DXVECTOR3 m_stUpVec		= WORLD_UP_DIRECTION;
 		D3DXVECTOR3 m_stRightVec	= WORLD_RIGHT_DIRECTION;
-		D3DXVECTOR3 m_stScale		= D3DXVECTOR3(1.0f,0.0f,0.0f);
+		D3DXVECTOR3 m_stScale		= D3DXVECTOR3(1.0f,1.0f,1.0f);
 	}OBJPACKET;
 
 	typedef struct objContainer
@@ -52,11 +51,11 @@ public:
 	BOOL&	getbIsMaptool() { return m_bIsMaptool; }
 
 private:
-	CCameraObject*	m_pCameraObj;
-	CLightObject*	m_pDirectionLightObj;
-	CTerrainObject*	m_pTerrainObj;
-	OBJCONTAINER* m_pObjPacketList;
-	std::vector<CRenderObject*>* m_pObjList;
+	CCameraObject*	m_pCameraObj =nullptr;
+	CLightObject*	m_pDirectionLightObj=nullptr;
+	CTerrainObject*	m_pTerrainObj= nullptr;
+	OBJCONTAINER* m_pObjPacketList =nullptr;
+	std::vector<CRenderObject*>* m_pObjList = nullptr;
 
 
 
