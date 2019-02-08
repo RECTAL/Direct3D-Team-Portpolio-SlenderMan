@@ -130,12 +130,12 @@ float4 ps_main(STOutput a_stInput) : COLOR0
 
 	float fBlackPercent = 1.0f - saturate(stSplatColor.r + stSplatColor.g + stSplatColor.b);
 
-	//float4 stDiffuseColor = (stColorA * stSplatColor.r) +
-	//	(stColorB * stSplatColor.g) +
-	//	(stColorC * stSplatColor.b) +
-	//	(stColorD * fBlackPercent);
+	float4 stDiffuseColor = (stColorA * stSplatColor.r) +
+		(stColorB * stSplatColor.g) +
+		(stColorC * stSplatColor.b) +
+		(stColorD * fBlackPercent);
 
-	float4 stDiffuseColor = float4(0.4f, 0.4f, 0.4f, 1.0f);
+	//float4 stDiffuseColor = float4(0.4f, 0.4f, 0.4f, 1.0f);
 
 	float4 fSpotLightColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 

@@ -290,13 +290,13 @@ void CMapToolScene::createButtonUI()
 		MessageBox(GET_WINDOW_HANDLE(), _T("Load"), "", S_OK);
 		CTerrainObject::STParameters stParameters;
 		stParameters.m_pCamera = m_pCamera;
-		stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.007f, 1.0f);
-		stParameters.m_oHeightFilepath = "Resources/Datas/terrain.raw";
-		stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap.png";
+		stParameters.m_vfScale = D3DXVECTOR3(2.0f, 0.015f, 2.0f);
+		stParameters.m_oHeightFilepath = "Resources/Datas/realterrain.raw";
+		stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap2.png";
 		stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
 
-		stParameters.m_stMapSize.cx = 257;
-		stParameters.m_stMapSize.cy = 257;
+		stParameters.m_stMapSize.cx = 513;
+		stParameters.m_stMapSize.cy = 513;
 
 		stParameters.m_nSmoothLevel = 1;
 
@@ -680,10 +680,10 @@ void CMapToolScene::createObjectButton(void)
 void CMapToolScene::draw(void)
 {
 	CScene::draw();
-	GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	//GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	m_pStage->draw();
 
-	GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+	//GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 
 
 
