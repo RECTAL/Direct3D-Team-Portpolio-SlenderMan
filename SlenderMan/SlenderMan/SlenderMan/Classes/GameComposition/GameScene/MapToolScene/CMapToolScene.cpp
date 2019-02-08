@@ -32,6 +32,8 @@ CMapToolScene::~CMapToolScene()
 	SAFE_DELETE(goTitleButton);
 	SAFE_DELETE(squareUpCover);
 	SAFE_DELETE(treeListSquare);
+	SAFE_DELETE(m_pBuildingListSquare);
+	SAFE_DELETE(m_pObjectListSquare);
 	SAFE_DELETE(saveButton);
 	SAFE_DELETE(loadButton);
 
@@ -85,68 +87,9 @@ void CMapToolScene::init()
 void CMapToolScene::createWindowUI()
 {
 
-	treeListSquare = new CSpriteObject_ListSquare("Resources/Textures/Scene/MapToolScene/blackCover", "png", 300, 300, 1);
-	treeListSquare->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 200, 250, 0));
-	treeListSquare->setVisible(false);
-	treeListSquare->init(nullptr, nullptr, nullptr, nullptr);
-
-	treeButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::TREE_1;
-	};
-	treeButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	treeButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::TREE_2;
-	};
-	treeButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	treeButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::TREE_3;
-	};
-	treeButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	treeButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::TREE_4;
-	};
-	treeButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	treeButton[4] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree5Icon", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::TREE_5;
-	};
-	treeButton[4]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	treeButton[5] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree6Icon", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::TREE_6;
-	};
-	treeButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	treeButton[6] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree7Icon", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::TREE_7;
-	};
-	treeButton[6]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	for (int i = 0; i < MAX_TREE_NUM; i++)
-	{
-		char path[MAX_PATH];
-		sprintf(path, "test%1d", i);
-		treeListSquare->addChildSpriteObject(path, CWindowType::BUTTON, treeButton[i]);
-	}
-	
-
+	createTreeButton();
+	createBuildingButton();
+	createObjectButton();
 	/***************************************************/
 	//컨테이너 만들기
 	/***************************************************/
@@ -185,7 +128,7 @@ void CMapToolScene::createWindowUI()
 			/*************************/
 			//리스트 내 버튼 만들기
 			/*************************/
-			m_pSpriteListButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 80, 1);
+			m_pSpriteListButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree", "png", 100, 80, 1);
 			m_pSpriteListButton[0]->setPosition(m_pSpriteList->getPosition());
 			(*endFptr) = [=](void) -> void
 			{
@@ -197,11 +140,23 @@ void CMapToolScene::createWindowUI()
 
 			m_pSpriteListButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 80, 1);
 			m_pSpriteListButton[1]->setPosition(m_pSpriteList->getPosition());
-			m_pSpriteListButton[1]->init(nullptr, nullptr, nullptr, nullptr, true);
+			(*endFptr) = [=](void) -> void
+			{
+				m_pBuildingListSquare->setVisible(true);
+				squareUpCover->setVisible(true);
+				backButton->setVisible(true); // 나중에 x버튼으로 바꾸기
+			};
+			m_pSpriteListButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 
 			m_pSpriteListButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 80, 1);
 			m_pSpriteListButton[2]->setPosition(m_pSpriteList->getPosition());
-			m_pSpriteListButton[2]->init(nullptr, nullptr, nullptr, nullptr, true);
+			(*endFptr) = [=](void) -> void
+			{
+				m_pObjectListSquare->setVisible(true);
+				squareUpCover->setVisible(true);
+				backButton->setVisible(true); // 나중에 x버튼으로 바꾸기
+			};
+			m_pSpriteListButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
 			m_pSpriteListButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 80, 1);
 			m_pSpriteListButton[3]->setPosition(m_pSpriteList->getPosition());
@@ -303,6 +258,8 @@ void CMapToolScene::createButtonUI()
 	{
 		backButton->setVisible(false);
 		treeListSquare->setVisible(false);
+		m_pObjectListSquare->setVisible(false);
+		m_pBuildingListSquare->setVisible(false);
 		squareUpCover->setVisible(false);
 
 	};
@@ -410,6 +367,8 @@ void CMapToolScene::update(void)
 	CScene::update();
 	selectWindowContainer->update();
 	treeListSquare->update();
+	m_pBuildingListSquare->update();
+	m_pObjectListSquare->update();
 	this->buttonUpdate();
 
 	printf("%f\n", UpDownScrollBar->getSetValue());
@@ -459,6 +418,13 @@ void CMapToolScene::update(void)
 			}
 			else if (IS_KEY_DOWN(DIK_D)) {
 				m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
+			}
+
+			if (IS_KEY_DOWN(DIK_Q)) {
+				m_fAngleX += 10.0f * GET_DELTA_TIME();
+			}
+			else if (IS_KEY_DOWN(DIK_E)) {
+				m_fAngleX -= 10.0f * GET_DELTA_TIME();
 			}
 		}
 
@@ -514,6 +480,157 @@ void CMapToolScene::buttonUpdate()
 	loadButton->update();
 }
 
+void CMapToolScene::createTreeButton(void)
+{
+	treeListSquare = new CSpriteObject_ListSquare("Resources/Textures/Scene/MapToolScene/blackCover", "png", 300, 300, 1);
+	treeListSquare->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 200, 250, 0));
+	treeListSquare->setVisible(false);
+	treeListSquare->init(nullptr, nullptr, nullptr, nullptr);
+
+	treeButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_1;
+		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, 0));
+		
+	};
+	treeButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	treeButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_2;
+		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, 0));
+	};
+	treeButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	treeButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_3;
+		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, 0));
+	};
+	treeButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	treeButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_4;
+		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, 0));
+	};
+	treeButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	treeButton[4] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree5Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_5;
+		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, 0));
+	};
+	treeButton[4]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	treeButton[5] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree6Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_6;
+		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, 0));
+	};
+	treeButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	treeButton[6] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree7Icon", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::TREE_7;
+		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, 0));
+	};
+	treeButton[6]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	for (int i = 0; i < MAX_TREE_NUM; i++)
+	{
+		char path[MAX_PATH];
+		sprintf(path, "test%1d", i);
+		treeListSquare->addChildSpriteObject(path, CWindowType::BUTTON, treeButton[i]);
+	}
+}
+
+void CMapToolScene::createBuildingButton(void)
+{
+	m_pBuildingListSquare = new CSpriteObject_ListSquare("Resources/Textures/Scene/MapToolScene/blackCover", "png", 300, 300, 1);
+	m_pBuildingListSquare->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 200, 250, 0));
+	m_pBuildingListSquare->setVisible(false);
+	m_pBuildingListSquare->init(nullptr, nullptr, nullptr, nullptr);
+
+	m_pBuildingButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/oldHouse", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::OLDHOUSE;
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.2f, 0.2f, 0.2f));
+	};
+	m_pBuildingButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pBuildingButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/woodHouse", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::WOODHOUSE;
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(3.0f, 3.0f, 3.0f));
+	};
+	m_pBuildingButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pBuildingButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/oldWoodDock", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::OLDWOODDOCK;
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.1f, 0.1f, 0.1f));
+	};
+	m_pBuildingButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	for (int i = 0; i < MAX_BUILDING; i++)
+	{
+		char path[MAX_PATH];
+		sprintf(path, "test%1d", i);
+		m_pBuildingListSquare->addChildSpriteObject(path, CWindowType::BUTTON, m_pBuildingButton[i]);
+	}
+
+}
+
+void CMapToolScene::createObjectButton(void)
+{
+	m_pObjectListSquare = new CSpriteObject_ListSquare("Resources/Textures/Scene/MapToolScene/blackCover", "png", 300, 300, 1);
+	m_pObjectListSquare->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 200, 250, 0));
+	m_pObjectListSquare->setVisible(false);
+	m_pObjectListSquare->init(nullptr, nullptr, nullptr, nullptr);
+
+	m_pObjectButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/urbanDebris", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::URBANDEBRIS;
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.4f, 0.4f, 0.4f));
+	};
+	m_pObjectButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pObjectButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/plants", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::PLANTS;
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.4f, 0.4f, 0.4f));
+	};
+	m_pObjectButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pObjectButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/roundWood", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::ROUNDWOOD;
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.4f, 0.4f, 0.4f));
+	};
+	m_pObjectButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	for (int i = 0; i < MAX_BUILDING; i++)
+	{
+		char path[MAX_PATH];
+		sprintf(path, "test%1d", i);
+		m_pObjectListSquare->addChildSpriteObject(path, CWindowType::BUTTON, m_pObjectButton[i]);
+	}
+}
+
 void CMapToolScene::draw(void)
 {
 	CScene::draw();
@@ -525,6 +642,8 @@ void CMapToolScene::drawUI(void)
 	CScene::drawUI();
 	selectWindowContainer->drawUI();
 	treeListSquare->drawUI();
+	m_pBuildingListSquare->drawUI();
+	m_pObjectListSquare->drawUI();
 
 	this->buttonDrawUI();
 

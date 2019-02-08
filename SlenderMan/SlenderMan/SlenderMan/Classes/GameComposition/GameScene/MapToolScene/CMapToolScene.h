@@ -3,6 +3,8 @@
 #include "../../../Utility/Base/CScene.h"
 
 #define MAX_TREE_NUM 7
+#define MAX_BUILDING 3
+#define MAX_OBJECT 3
 
 class CSpriteObject;
 class CSpriteObject_ScrollBar;
@@ -46,6 +48,10 @@ private:
 	void createStage();
 	void buttonUpdate();
 
+	void createTreeButton(void);
+	void createBuildingButton(void);
+	void createObjectButton(void);
+
 	void buttonDrawUI();
 private:
 	POINT m_stPrevMousePosition;
@@ -75,7 +81,11 @@ private:
 
 	CSpriteObject_Button* squareUpCover = nullptr;
 	CSpriteObject_ListSquare* treeListSquare = nullptr;
+	CSpriteObject_ListSquare* m_pBuildingListSquare = nullptr;
+	CSpriteObject_ListSquare* m_pObjectListSquare = nullptr;
 	CSpriteObject_Button* treeButton[MAX_TREE_NUM] = { nullptr };
+	CSpriteObject_Button* m_pBuildingButton[MAX_BUILDING] = { nullptr };
+	CSpriteObject_Button* m_pObjectButton[MAX_OBJECT] = { nullptr };
 
 	CSpriteObject_Button* saveButton = nullptr;
 	CSpriteObject_Button* loadButton = nullptr;
@@ -92,4 +102,10 @@ private:
 
 	bool isFirst = true;
 	bool isEnableClick = false;
+
+	float m_fAngleX = 0.0f;
+	float m_fAngleY = 0.0f;
+	float m_fAngleZ = 0.0f;
+
+	float m_fScale = 0.0f;
 };
