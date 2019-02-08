@@ -87,7 +87,6 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 			NULL
 		);
 		DWORD dwRead;
-
 		if (!ReadFile(hFile, m_pObjPacketList, sizeof(OBJCONTAINER)*fWidth*fHeight, &dwRead, NULL))assert("Fail");
 		for (int i = 0; i < fWidth*fHeight; i++)
 		{
@@ -96,6 +95,168 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
 				else
 				{
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::DESK)
+					{
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/desk/desk.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::GRASS)
+					{
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/grass/grass.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::MOUNTAIN)
+					{
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/mountain/mountain.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDHOUSE)
+					{
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/oldHouse/oldHouse.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDWOODDOCK)
+					{
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/oldWoodDock/oldWoodDock.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PLANTS)
+					{
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/plants/plants.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::ROUNDWOOD)
+					{
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/roundwood/roundwood.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::URBANDEBRIS)
+					{
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/urbanDebris/urbanDebris.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::WOODHOUSE)
+					{
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/woodHouse/woodHouse.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_1)
 					{
 						CStaticObject::STParameters stParameters = {
@@ -240,6 +401,24 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_9)
+					{
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,NULL,
+							0,NULL,
+							"Resources/Meshes/tree9/tree9.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
 				}
 			}
 		}
@@ -257,8 +436,178 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			m_pObjPacketList[nIndex].m_nObjCapacity[i] = (int)a_stPacket.m_EObjType;
 			m_pObjPacketList[nIndex].m_stObjPacket[i] = a_stPacket;
 
-
-			if (a_stPacket.m_EObjType == EObjType::TREE_1)
+			if (a_stPacket.m_EObjType == EObjType::DESK)
+			{
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0, NULL,
+					0, NULL,
+					"Resources/Meshes/desk/desk.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::GRASS)
+			{
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0, NULL,
+					0, NULL,
+					"Resources/Meshes/grass/grass.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::MOUNTAIN)
+			{
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0, NULL,
+					0, NULL,
+					"Resources/Meshes/mountain/mountain.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::OLDHOUSE)
+			{
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0, NULL,
+					0, NULL,
+					"Resources/Meshes/oldHouse/oldHouse.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::OLDWOODDOCK)
+			{
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0, NULL,
+					0, NULL,
+					"Resources/Meshes/oldWoodDock/oldWoodDock.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::PLANTS)
+			{
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0, NULL,
+					0, NULL,
+					"Resources/Meshes/plants/plants.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::ROUNDWOOD)
+			{
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0, NULL,
+					0, NULL,
+					"Resources/Meshes/roundwood/roundwood.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::URBANDEBRIS)
+			{
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0, NULL,
+					0, NULL,
+					"Resources/Meshes/urbanDebris/urbanDebris.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::WOODHOUSE)
+			{
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0, NULL,
+					0, NULL,
+					"Resources/Meshes/woodHouse/woodHouse.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::TREE_1)
 			{
 				CStaticObject::STParameters stParameters =
 				{
@@ -400,6 +749,25 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 					0,NULL,
 					0,NULL,
 					"Resources/Meshes/tree8/tree8.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::TREE_9)
+			{
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0, NULL,
+					0, NULL,
+					"Resources/Meshes/tree9/tree9.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
 				CStaticObject* stStaticObj = new CStaticObject(stParameters);
