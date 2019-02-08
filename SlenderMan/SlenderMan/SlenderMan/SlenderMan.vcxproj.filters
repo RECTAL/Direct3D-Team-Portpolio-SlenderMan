@@ -113,9 +113,6 @@
     <Filter Include="Classes\GameComposition\GameScene\TitleScene">
       <UniqueIdentifier>{ce922a8c-8813-4b40-8072-adac74cbb7ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\GameComposition\GameScene\MapToolScene">
-      <UniqueIdentifier>{502af136-e1fd-4755-8e6f-b4e538cbfc4c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\GameComposition\GameScene\MainPlayScene">
       <UniqueIdentifier>{5bd352ea-c25f-4c01-81ef-941ac56fb041}</UniqueIdentifier>
     </Filter>
@@ -205,6 +202,9 @@
     </Filter>
     <Filter Include="Classes\Global\Utility\Object\TerrainObject">
       <UniqueIdentifier>{8607554e-a196-40b1-8ef1-8bf4621e9144}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameScene\MapToolScene">
+      <UniqueIdentifier>{502af136-e1fd-4755-8e6f-b4e538cbfc4c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

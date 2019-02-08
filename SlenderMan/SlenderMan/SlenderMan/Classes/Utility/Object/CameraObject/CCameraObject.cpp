@@ -28,7 +28,7 @@ void CCameraObject::setAspect(float a_fAspect)
 		D3DXToRadian(50.0f),
 		a_fAspect,
 		0.1f,
-		100.0f);
+		300.0f);
 
 	// 투영 행렬을 설정한다
 	GET_DEVICE()->SetTransform(D3DTS_PROJECTION, &m_stProjectionMatrix);

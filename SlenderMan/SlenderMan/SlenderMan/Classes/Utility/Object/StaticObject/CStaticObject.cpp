@@ -104,7 +104,7 @@ void CStaticObject::doDraw(void)
 	//GET_DEVICE()->SetTransform(D3DTS_WORLD, &stWorldMatrix);
 	//GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
-	m_pDebugMesh->DrawSubset(0);
+	//m_pDebugMesh->DrawSubset(0);
 
 	//GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 

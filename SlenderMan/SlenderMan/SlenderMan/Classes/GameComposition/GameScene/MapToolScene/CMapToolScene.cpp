@@ -290,7 +290,7 @@ void CMapToolScene::createButtonUI()
 		MessageBox(GET_WINDOW_HANDLE(), _T("Load"), "", S_OK);
 		CTerrainObject::STParameters stParameters;
 		stParameters.m_pCamera = m_pCamera;
-		stParameters.m_vfScale = D3DXVECTOR3(2.0f, 0.015f, 2.0f);
+		stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.015f, 1.0f);
 		stParameters.m_oHeightFilepath = "Resources/Datas/realterrain.raw";
 		stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap2.png";
 		stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
@@ -335,7 +335,7 @@ void CMapToolScene::createStage()
 
 	CTerrainObject::STParameters stParameters;
 	stParameters.m_pCamera = m_pCamera;
-	stParameters.m_vfScale = D3DXVECTOR3(2.0f, 0.015f, 2.0f);
+	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.015f, 1.0f);
 	stParameters.m_oHeightFilepath = "Resources/Datas/realterrain.raw";
 	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap2.png";
 	stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
@@ -453,7 +453,7 @@ void CMapToolScene::update(void)
 						float fMinLength = 100000.0f;
 						std::vector<CRenderObject*> oRenderObjList;
 						CRenderObject* pRenderObj = nullptr;
-						for (int i = 0; i < nTriangles * 3; i += 6)
+						for (int i = 0; i < nTriangles * 3; i += 3)
 						{
 							for (auto iter : m_pStage->getObjList()[pIndices[i]])
 							{
