@@ -1,4 +1,5 @@
 #include "CStaticObject.h"
+#include "../../../Utility/Manager/CDeviceManager.h"
 #include "../../../Function/GlobalFunction.h"
 #include "../../Base/CDirect3DApplication.h"
 #include "../CameraObject/CCameraObject.h"
@@ -14,15 +15,12 @@ CStaticObject::CStaticObject(STParameters & a_rstParameters)
 	m_stStaticMesh = GET_STATIC_MESH(a_rstParameters.m_oMeshFilepath);
 
 	m_stBoundingSphere = this->createBoundingSphere();
+	m_pDebugMesh = this->createDebugMesh();
 }
 
 void CStaticObject::update(void)
 {
 	CObject::update();
-
-	D3DXMATRIXA16 stWorldMatrix = this->getFinalWorldMatrix();
-	D3DXVec3TransformCoord(&m_stBoundingSphere.m_stPosition, &m_stBoundingSphere.m_stPosition, &stWorldMatrix);
-
 }
 
 void CStaticObject::doDraw(void)
@@ -102,7 +100,16 @@ void CStaticObject::doDraw(void)
 		});
 	}
 
+
+	GET_DEVICE()->SetTransform(D3DTS_WORLD, &stWorldMatrix);
+	GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+
+	m_pDebugMesh->DrawSubset(0);
+
+	GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+
 }
+
 
 STBoundingSphere CStaticObject::createBoundingSphere()
 {
@@ -122,4 +129,11 @@ STBoundingSphere CStaticObject::createBoundingSphere()
 
 
 	return stBoundingSphere;
+}
+
+LPD3DXMESH CStaticObject::createDebugMesh()
+{
+	LPD3DXMESH pMesh = nullptr;
+	D3DXCreateSphere(GET_DEVICE(), m_stBoundingSphere.m_fRadius, 10, 10, &pMesh, NULL);
+	return pMesh;
 }

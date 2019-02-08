@@ -178,7 +178,7 @@ HRESULT CTerrainObject::createTerrainMesh()
 				int nIndex = (i*m_cxDIB) + j;
 				pstVertices[nIndex].m_stPosition = stBasePosition + D3DXVECTOR3(j*m_vfScale.x, m_pHeightMap[nIndex].y, i*-m_vfScale.z);
 				m_pHeightMap[nIndex] = pstVertices[nIndex].m_stPosition;
-				pstVertices[nIndex].m_stUV = D3DXVECTOR2(j  / (float)(m_cxDIB - 1), i   / (float)(m_czDIB - 1));
+				pstVertices[nIndex].m_stUV = D3DXVECTOR2(j * 80  / (float)(m_cxDIB - 1), i * 80 / (float)(m_czDIB - 1));
 			}
 		}
 		m_pTerrainMesh->UnlockVertexBuffer();
@@ -198,9 +198,9 @@ HRESULT CTerrainObject::createTerrainMesh()
 				pIndices[nIndex + 1] = nVertexIndex + 1;
 				pIndices[nIndex + 2] = nVertexIndex + m_cxDIB;
 
-				pIndices[nIndex + 3] = nVertexIndex + m_cxDIB;
-				pIndices[nIndex + 4] = nVertexIndex + 1;
-				pIndices[nIndex + 5] = nVertexIndex + m_cxDIB + 1;
+				pIndices[nIndex + 3] = nVertexIndex + m_cxDIB + 1;
+				pIndices[nIndex + 4] = nVertexIndex + m_cxDIB;
+				pIndices[nIndex + 5] = nVertexIndex + 1;
 
 			}
 		}
@@ -314,7 +314,6 @@ HRESULT CTerrainObject::render()
 	m_pEffect->SetMatrix("g_stViewMatrix", &stViewMatrix);
 	m_pEffect->SetMatrix("g_stProjectionMatrix", &stProjectionMatrix);
 	// }
-
 	// 텍스처를 설정한다
 	// {
 	m_pEffect->SetTexture("g_pSplatTexture", m_pSplatTexture);

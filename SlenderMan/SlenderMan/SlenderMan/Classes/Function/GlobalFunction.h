@@ -29,3 +29,5 @@ LPDIRECT3DVERTEXBUFFER9 CreateVertexBuffer(int a_nSize, DWORD a_nOptions, DWORD 
 
 //! Create IndexBuffer
 LPDIRECT3DINDEXBUFFER9 CreateIndexBuffer(int a_nSize, DWORD a_nOptions, D3DFORMAT a_nFormat);
+
+BOOL	IsCreshWithBoundingSphere(STRay a_stRay, STBoundingSphere a_stBoundingSphere);

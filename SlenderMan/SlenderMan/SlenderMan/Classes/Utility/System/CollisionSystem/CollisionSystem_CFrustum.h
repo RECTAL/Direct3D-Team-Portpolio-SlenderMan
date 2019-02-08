@@ -24,7 +24,7 @@ public:
 	 *  TRUE를 반환, 아니면 FALSE를 반환한다.
 	 */
 	BOOL	IsInSphere(D3DXVECTOR3* pv, float radius);
-	BOOL	IsInSphere(STBoundingSphere& a_stBoundingSphere);
+	BOOL	IsInSphere(STBoundingSphere a_stBoundingSphere);
 
 	/// 프러스텀을 화면에 그려준다.
 	BOOL	Draw(LPDIRECT3DDEVICE9 pDev);

@@ -20,7 +20,7 @@ public:			// getter, setter
 	//getter
 	/**********************************************/
 	bool getVisible(void);							//! get IsVisible
-
+	STBoundingSphere getFinalBoundingSphere();
 	/**********************************************/
 	//setter
 	/**********************************************/
@@ -36,4 +36,5 @@ protected:
 protected:	
 
 	bool m_bIsVisible = false;
+	STBoundingSphere	m_stBoundingSphere;
 };

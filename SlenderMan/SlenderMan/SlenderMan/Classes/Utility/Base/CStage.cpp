@@ -913,11 +913,11 @@ void CStage::draw()
 				else
 				{
 					CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
-					//if (pStaticObj->getSTParameters().m_pCamera->getCameraFrustum()->IsInSphere(pStaticObj->getBoundingSphere()))
-					//{
-					if (!pStaticObj->getVisible())pStaticObj->setVisible(true);
-					else pStaticObj->draw();
-					//}
+					if (pStaticObj->getSTParameters().m_pCamera->getCameraFrustum()->IsInSphere(pStaticObj->getFinalBoundingSphere()))
+					{
+						if (!pStaticObj->getVisible())pStaticObj->setVisible(true);
+						else pStaticObj->draw();
+					}
 				}
 			}
 		}

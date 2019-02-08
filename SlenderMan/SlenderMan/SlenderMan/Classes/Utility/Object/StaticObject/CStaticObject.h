@@ -34,24 +34,26 @@ protected:		//interface
 
 
 public:
-
 	STStaticMesh	getStaticMesh() { return m_stStaticMesh; }
 	LPD3DXEFFECT	getEffect() { return m_pEffect; }
 	std::string&	getTechniqueName() { return m_stTechniqueName; }
 	STParameters&	getSTParameters() { return m_stParameters; }
-	STBoundingSphere& getBoundingSphere() { return m_stBoundingSphere; }
 
 	virtual void update(void) override;		//! interface : IUpdateable
 
 private:
 	STBoundingSphere createBoundingSphere();
+	LPD3DXMESH		 createDebugMesh();
 
 protected:
 	LPD3DXEFFECT m_pEffect = nullptr;
 
 	STStaticMesh m_stStaticMesh;
 	STParameters m_stParameters;
-	STBoundingSphere	m_stBoundingSphere;
-
+	LPD3DXMESH	 m_pDebugMesh;
 	std::string	m_stTechniqueName;
+
+private:
+	float	m_fTmpRadius = 0.0f;
+
 };

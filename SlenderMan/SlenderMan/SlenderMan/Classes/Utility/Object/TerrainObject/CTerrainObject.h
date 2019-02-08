@@ -58,6 +58,9 @@ public:
 	float			getCYTerrain() { return m_cyTerrain; }
 	float			getCZTerrain() { return m_czTerrain; }
 	int				findIndex(D3DXVECTOR3 a_stPosition);
+	int				getTriangles() { return m_nTriangles; }
+	
+	LPD3DXMESH		getTerrainMesh() { return m_pTerrainMesh; }
 	LPD3DXEFFECT	getEffect() { return m_pEffect; }
 	std::string&	getTechniqueName(){ return m_stTechniqueName; }
 
@@ -72,6 +75,7 @@ private:
 	HRESULT			buildQuadTree(D3DXVECTOR3* pHeightMap);
 	HRESULT			createTerrainMesh();
 	HRESULT			render();
+
 
 private:
 	int								m_cxDIB;

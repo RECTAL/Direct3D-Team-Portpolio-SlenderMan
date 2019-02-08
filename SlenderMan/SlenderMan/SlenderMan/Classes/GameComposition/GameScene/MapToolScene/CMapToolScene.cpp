@@ -1,10 +1,12 @@
 #include "CMapToolScene.h"
 
+#include "../../../Utility/../Function/GlobalFunction.h"
 #include "../../../Utility/Base/CStage.h"
 #include"../../../Utility/Base/CObject.h"
 #include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CInputManager.h"
+#include "../../../Utility/Manager/CDeviceManager.h"
 #include "../../../Utility/Object/CameraObject/CCameraObject.h"
 #include "../../../Utility/Object/LightObject/CLightObject.h"
 #include "../../../Utility/Object/LightObject/SpotLightObject/SpotLightObject.h"
@@ -289,7 +291,7 @@ void CMapToolScene::createButtonUI()
 		CTerrainObject::STParameters stParameters;
 		stParameters.m_pCamera = m_pCamera;
 		stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.007f, 1.0f);
-		stParameters.m_oHeightFilepath = "Resources/Datas/HeightMap.raw";
+		stParameters.m_oHeightFilepath = "Resources/Datas/terrain.raw";
 		stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap.png";
 		stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
 
@@ -333,13 +335,13 @@ void CMapToolScene::createStage()
 
 	CTerrainObject::STParameters stParameters;
 	stParameters.m_pCamera = m_pCamera;
-	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.007f, 1.0f);
-	stParameters.m_oHeightFilepath = "Resources/Datas/HeightMap.raw";
-	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap.png";
+	stParameters.m_vfScale = D3DXVECTOR3(2.0f, 0.015f, 2.0f);
+	stParameters.m_oHeightFilepath = "Resources/Datas/realterrain.raw";
+	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap2.png";
 	stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
 
-	stParameters.m_stMapSize.cx = 257;
-	stParameters.m_stMapSize.cy = 257;
+	stParameters.m_stMapSize.cx = 513;
+	stParameters.m_stMapSize.cy = 513;
 
 	stParameters.m_nSmoothLevel = 1;
 
@@ -432,7 +434,51 @@ void CMapToolScene::update(void)
 		{
 			if (IS_KEY_DOWN(DIK_LCONTROL))
 			{
+				D3DXVECTOR3 stPos;
+				if (m_pStage->getPickingPosWithTerrain(stPos))
+				{
+					STRay	ray;
+					LPDWORD			pIndices = nullptr;
+					LPDIRECT3DINDEXBUFFER9 pIndexBuffer;
+					m_pStage->getTerrainObj()->getTerrainMesh()->GetIndexBuffer(&pIndexBuffer);
 
+					ray = CreateRay(GET_MOUSE_POSITION());
+
+					int width = m_pStage->getTerrainObj()->getCXDIB();
+					int height = m_pStage->getTerrainObj()->getCZDIB();
+					int nTriangles = m_pStage->getTerrainObj()->getTriangles();
+					
+					if (SUCCEEDED(pIndexBuffer->Lock(0, (width - 1)*(height - 1) * 2 * sizeof(DWORD) * 3, (void**)&pIndices, 0)))
+					{
+						float fMinLength = 100000.0f;
+						std::vector<CRenderObject*> oRenderObjList;
+						CRenderObject* pRenderObj = nullptr;
+						for (int i = 0; i < nTriangles * 3; i += 6)
+						{
+							for (auto iter : m_pStage->getObjList()[pIndices[i]])
+							{
+								if (IsCreshWithBoundingSphere(ray, iter->getFinalBoundingSphere()))
+								{
+									oRenderObjList.push_back(iter);
+								}
+							}
+						}
+						for (auto iter : oRenderObjList)
+						{
+							D3DXVECTOR3 vec = iter->getPosition() - ray.m_stOrigin;
+							float flength = D3DXVec3Length(&vec);
+							if (fMinLength > flength)
+							{
+								fMinLength = flength;
+								pRenderObj = iter;
+							}
+						}
+
+						if(pRenderObj != nullptr)
+							m_pStage->delObj(pRenderObj, pRenderObj->getPosition());
+						pIndexBuffer->Unlock();
+					}
+				}
 			}
 			else
 			{
@@ -634,7 +680,14 @@ void CMapToolScene::createObjectButton(void)
 void CMapToolScene::draw(void)
 {
 	CScene::draw();
+	GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 	m_pStage->draw();
+
+	GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
+
+
+
+
 }
 
 void CMapToolScene::drawUI(void)

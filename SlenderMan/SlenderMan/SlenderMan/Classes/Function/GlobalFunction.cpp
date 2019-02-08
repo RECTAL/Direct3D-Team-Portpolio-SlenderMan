@@ -98,3 +98,23 @@ LPDIRECT3DINDEXBUFFER9 CreateIndexBuffer(int a_nSize, DWORD a_nOptions, D3DFORMA
 {
 	return LPDIRECT3DINDEXBUFFER9();
 }
+
+BOOL IsCreshWithBoundingSphere(STRay a_stRay, STBoundingSphere a_stBoundingSphere)
+{
+	D3DXVECTOR3 stDelta = a_stBoundingSphere.m_stPosition - a_stRay.m_stOrigin;
+	D3DXVECTOR3 stDirection = a_stRay.m_stDirection;
+
+	// 방향 벡터를 정규화한다
+	D3DXVec3Normalize(&stDirection, &stDirection);
+
+	float fDeltaLength = D3DXVec3Dot(&stDelta, &stDelta);
+	float fRadius = powf(a_stBoundingSphere.m_fRadius, 2.0f);
+	float fDotValue = D3DXVec3Dot(&stDelta, &stDirection);
+
+	// 충돌이 발생하지 않았을 경우
+	if (fDotValue < 0.0f && fDeltaLength > fRadius) {
+		return false;
+	}
+
+	return fDeltaLength - (fDotValue * fDotValue) <= fRadius;
+}
