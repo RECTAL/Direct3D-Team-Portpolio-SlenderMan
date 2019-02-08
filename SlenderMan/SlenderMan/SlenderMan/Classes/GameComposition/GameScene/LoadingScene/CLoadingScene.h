@@ -53,6 +53,8 @@ private:	// private 함수
 	//! 백그라운드를 만든다
 	void createBackGround(void);
 
+	void createRenderTarget(void);
+
 	//! 이미지를 업데이트한다
 	void updateImage(void);
 

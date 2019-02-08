@@ -162,7 +162,7 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
-		CHANGE_SCENE_DIRECT(GAMESCENE_MAINPLAY,TRUE);
+		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
 

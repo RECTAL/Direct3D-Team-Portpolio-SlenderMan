@@ -274,7 +274,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-
+				stStaticObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stStaticObj);
 				int a = 0;
 			}
@@ -294,7 +294,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-
+				stStaticObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_3)
@@ -313,7 +313,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-
+				stStaticObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_4)
@@ -332,7 +332,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-
+				stStaticObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_5)
@@ -351,7 +351,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-
+				stStaticObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_6)
@@ -370,46 +370,46 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-
+				stStaticObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_7)
 			{
-			CStaticObject::STParameters stParameters =
-			{
-				m_pCameraObj,m_pDirectionLightObj,
-				0,NULL,
-				0,NULL,
-				"Resources/Meshes/tree7/tree7.X",
-				"Resources/Effects/DefaultStaticMesh.fx"
-			};
-			CStaticObject* stStaticObj = new CStaticObject(stParameters);
-			stStaticObj->setPosition(a_stPacket.m_stPosition);
-			stStaticObj->setScale(a_stPacket.m_stScale);
-			stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
-			stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
-			stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-
-			m_pObjList[nIndex].push_back(stStaticObj);
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0,NULL,
+					0,NULL,
+					"Resources/Meshes/tree7/tree7.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_8)
 			{
-			CStaticObject::STParameters stParameters =
-			{
-				m_pCameraObj,m_pDirectionLightObj,
-				0,NULL,
-				0,NULL,
-				"Resources/Meshes/tree8/tree8.X",
-				"Resources/Effects/DefaultStaticMesh.fx"
-			};
-			CStaticObject* stStaticObj = new CStaticObject(stParameters);
-			stStaticObj->setPosition(a_stPacket.m_stPosition);
-			stStaticObj->setScale(a_stPacket.m_stScale);
-			stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
-			stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
-			stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-
-			m_pObjList[nIndex].push_back(stStaticObj);
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0,NULL,
+					0,NULL,
+					"Resources/Meshes/tree8/tree8.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			m_pObjPacketList[nIndex].m_nPivot ++;
 			break;
@@ -547,7 +547,8 @@ void CStage::draw()
 					CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
 					//if (pStaticObj->getSTParameters().m_pCamera->getCameraFrustum()->IsInSphere(pStaticObj->getBoundingSphere()))
 					//{
-						pStaticObj->draw();
+					if (!pStaticObj->getVisible())pStaticObj->setVisible(true);
+					else pStaticObj->draw();
 					//}
 				}
 			}

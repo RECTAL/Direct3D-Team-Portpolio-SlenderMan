@@ -200,7 +200,7 @@ void CMapToolScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
-		CHANGE_SCENE_LOADING(GAMESCENE_TITLE, FALSE);
+		CHANGE_SCENE_LOADING(GAMESCENE_TITLE, TRUE);
 
 	};
 	goTitleButton->init(crashFptr, nullptr, nullptr, endFptr);
