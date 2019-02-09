@@ -2,7 +2,7 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
-#define MAX_TREE_NUM 7
+#define MAX_TREE 6
 #define MAX_BUILDING 3
 #define MAX_OBJECT 3
 
@@ -65,7 +65,7 @@ private:
 	CSpriteObject_Button*	 scrollBarButton = nullptr;
 
 	CSpriteObject_List*		 m_pSpriteList = nullptr;
-	CSpriteObject_Button*	 m_pSpriteListButton[5] = { nullptr };
+	CSpriteObject_Button*	 m_pSpriteListButton[3] = { nullptr };
 
 	CSpriteObject_Button* openButton = nullptr;
 	CSpriteObject_Button* closeButton = nullptr;
@@ -80,10 +80,10 @@ private:
 	CCameraObject* m_pCamera = nullptr;
 
 	CSpriteObject_Button* squareUpCover = nullptr;
-	CSpriteObject_ListSquare* treeListSquare = nullptr;
+	CSpriteObject_ListSquare* m_pTreeListSquare = nullptr;
 	CSpriteObject_ListSquare* m_pBuildingListSquare = nullptr;
 	CSpriteObject_ListSquare* m_pObjectListSquare = nullptr;
-	CSpriteObject_Button* treeButton[MAX_TREE_NUM] = { nullptr };
+	CSpriteObject_Button* m_pTreeButton[MAX_TREE] = { nullptr };
 	CSpriteObject_Button* m_pBuildingButton[MAX_BUILDING] = { nullptr };
 	CSpriteObject_Button* m_pObjectButton[MAX_OBJECT] = { nullptr };
 
@@ -107,5 +107,5 @@ private:
 	float m_fAngleY = 0.0f;
 	float m_fAngleZ = 0.0f;
 
-	float m_fScale = 0.0f;
+	float m_fScale;
 };

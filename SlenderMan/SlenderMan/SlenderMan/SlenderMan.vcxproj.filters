@@ -561,4 +561,9 @@
       <Filter>Resources\Effects</Filter>
     </FxCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Datas\realterrain.raw">
+      <Filter>Resources\Datas</Filter>
+    </None>
+  </ItemGroup>
 </Project>
