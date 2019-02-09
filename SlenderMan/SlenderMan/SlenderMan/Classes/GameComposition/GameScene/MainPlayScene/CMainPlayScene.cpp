@@ -1,4 +1,6 @@
 #include "CMainPlayScene.h"
+#include "../MapToolScene/CMapToolScene.h"
+#include "../../../Utility/Base/CStage.h"
 #include "../../../Function/GlobalFunction.h"
 #include "../../../Utility/Object/TerrainObject/CTerrainObject.h"
 #include "../../../Utility/Object/StaticObject/CStaticObject.h"
@@ -12,6 +14,8 @@
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CInputManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
+#include "../../../Utility/Manager/CSceneManager.h"
+
 
 CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
@@ -20,10 +24,7 @@ CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 
 CMainPlayScene::~CMainPlayScene()
 {
-	SAFE_DELETE(m_pTerrain);
-	SAFE_RELEASE(m_pSphere);
 	SAFE_DELETE(m_pCamera);
-	SAFE_DELETE(m_pLightObj);
 	SAFE_DELETE(m_pSpotObj);
 }
 
@@ -34,31 +35,23 @@ void CMainPlayScene::init()
 	{
 		this->createWindowUI();
 		this->createRenderTarget();
-		this->createMesh();
 		this->createCamera();
 		this->createSound();
 
-		m_pLightObj = this->createDirectionalLight();
 		m_pSpotObj = this->createSpotObj();
-
-		m_pTerrain = this->createTerrain();
-		m_pTerrain->getTechniqueName() = "DefaultTerrain";
-		m_pTerrain->setPosition(D3DXVECTOR3(0, 0, 0));
-
-		m_pStaticMesh = this->createStaticMesh();
-		m_pStaticMesh->getTechniqueName() = "DefaultStaticMesh";
-		m_pStaticMesh->setPosition(D3DXVECTOR3(0.0f, 20.0f, 0.0f));
-
-		m_pStaticMesh1 = this->createStaticMesh();
-		m_pStaticMesh1->getTechniqueName() = "DefaultStaticMesh";
-		m_pStaticMesh1->setPosition(D3DXVECTOR3(1.0f, 20.0f, 2.0f));
-
-		m_pStaticMesh2 = this->createStaticMesh();
-		m_pStaticMesh2->getTechniqueName() = "DefaultStaticMesh";
-		m_pStaticMesh2->setPosition(D3DXVECTOR3(-1.0f, 20.0f, -2.0f));
-
-
 		isFirst = false;
+	}
+
+
+	CMapToolScene* pMapToolScene = dynamic_cast<CMapToolScene*>(FIND_SCENE(GAMESCENE_MAPTOOL));
+	m_pStage = pMapToolScene->getStage();
+	m_pStage->setCameraObjMain(m_pCamera);
+	m_pStage->addSpotLightObj(m_pSpotObj);
+
+	int nNumSpot = ++m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight;
+	if (nNumSpot < 10)
+	{
+		m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = m_pSpotObj;
 	}
 }
 
@@ -74,74 +67,24 @@ void CMainPlayScene::createRenderTarget()
 
 }
 
-void CMainPlayScene::createMesh()
-{
-	D3DXCreateSphere(GET_DEVICE(), 3.0f, 10, 10, &m_pSphere, NULL);
-}
+
 
 void CMainPlayScene::createCamera()
 {
-	m_pCamera = new CCameraObject((float)GET_WINDOW_SIZE().cx/(float)GET_WINDOW_SIZE().cy);
-	m_pCamera->setPosition(D3DXVECTOR3(0.0f,0.0f,-5.0f));
+	m_pCamera = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
+	m_pCamera->setPosition(D3DXVECTOR3(0.0f, 0.0f, -5.0f));
+
 }
 
-CTerrainObject * CMainPlayScene::createTerrain()
-{
-	CTerrainObject::STParameters stParameters;
-	stParameters.m_pCamera = m_pCamera;
-	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.007f, 1.0f);
-	stParameters.m_oHeightFilepath = "Resources/Datas/terrain.raw";
-	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap.png";
-	stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
-
-	stParameters.m_stMapSize.cx = 513;
-	stParameters.m_stMapSize.cy = 513;
-
-	stParameters.m_nSmoothLevel = 1;
-
-	stParameters.m_nNumSpotLight = 1;
-	stParameters.m_pSpotLight = m_pSpotObj;
-
-	stParameters.m_nNumPointLight = 0;
-	stParameters.m_pPointLight = NULL;
-
-
-	for (int i = 0; i < CTerrainObject::MAX_TERRAIN_TEX; ++i) {
-		char szFilepath[MAX_PATH] = "";
-		sprintf(szFilepath, "Resources/Textures/Terrain/Terrain_%02d.jpg", i + 1);
-
-		stParameters.m_oTextureFilepathList.push_back(szFilepath);
-	}
-
-	return new CTerrainObject(stParameters);
-}
-
-CStaticObject * CMainPlayScene::createStaticMesh()
-{
-	CStaticObject::STParameters stParameters = {
-		m_pCamera,
-		m_pLightObj,
-		1,m_pSpotObj,
-		0,NULL,
-		"Resources/Meshes/slenderMan/slenderMan.X",
-		"Resources/Effects/DefaultStaticMesh.fx"
-	};
-	return new CStaticObject(stParameters);
-}
-
-CLightObject * CMainPlayScene::createDirectionalLight()
-{
-	return new CLightObject(0);
-}
-
-CSpotLightObject * CMainPlayScene::createSpotObj()
-{
-	return new CSpotLightObject(0,140.0f,D3DXToRadian(5.0f), D3DXToRadian(20.0f));
-}
 
 void CMainPlayScene::createSound()
 {
 	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/BGM_1.wav", true);
+}
+
+CSpotLightObject * CMainPlayScene::createSpotObj()
+{
+	return new CSpotLightObject(0,300.0f,D3DXToRadian(5.0f),D3DXToRadian(15.0f));
 }
 
 
@@ -149,14 +92,9 @@ void CMainPlayScene::update(void)
 {
 	CScene::update();
 	m_pCamera->update();
-	m_pTerrain->update();
-	m_pLightObj->update();
-	m_pStaticMesh->update();
-	m_pStaticMesh1->update();
-	m_pStaticMesh2->update();
 	m_pSpotObj->update();
+	m_pStage->update();
 
-	//m_pSpotObj->setPosition(m_pCamera->getPosition());
 	if (IS_MOUSE_BUTTON_DOWN(EMouseInput::RIGHT)) {
 		float fSpeed = 15.0f;
 
@@ -253,30 +191,15 @@ void CMainPlayScene::draw(void)
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0.0f);
 	
 
-	GET_DEVICE()->SetRenderState(D3DRS_LIGHTING, TRUE);
-	GET_DEVICE()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
 
-	D3DXMATRIXA16 stWorldMatrix;
-	D3DXMatrixIdentity(&stWorldMatrix);
-	GET_DEVICE()->SetTransform(D3DTS_WORLD, &stWorldMatrix);
-	
-	m_pSphere->DrawSubset(0);
-
-	GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-	GET_DEVICE()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	GET_DEVICE()->SetRenderState(D3DRS_LIGHTING, TRUE);
-
-	m_pTerrain->draw();
-	m_pStaticMesh->draw();
-	m_pStaticMesh1->draw();
-	m_pStaticMesh2->draw();
+	m_pStage->draw();
 
 	/***************************************************/
 	//Back Buffer로 재설정
 	/***************************************************/
 	GET_RENDERTARGET_MANAGER()->resetRenderTarget();
-	
+
+	D3DXMATRIXA16 stWorldMatrix;
 	D3DXMatrixIdentity(&stWorldMatrix);
 
 	FIND_RENDERTARGET("TestRenderTarget")->m_pCopyEffect->SetMatrix("g_stWorldMatrix",&stWorldMatrix);

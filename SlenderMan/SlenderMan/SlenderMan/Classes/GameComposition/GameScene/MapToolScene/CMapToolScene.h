@@ -41,6 +41,19 @@ public:		//interface
 public:		//public override function
 	virtual void init()override;					//override	: CScene
 	virtual void createWindowUI()override;
+
+public:		//getter,setter
+	/**************************************************/
+	//getter
+	/**************************************************/
+	CStage*	getStage() { return m_pStage; }
+
+
+
+	/**************************************************/
+	//setter
+	/**************************************************/
+
 private:
 
 	void createButtonUI();

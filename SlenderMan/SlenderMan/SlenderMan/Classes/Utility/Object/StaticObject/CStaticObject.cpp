@@ -18,6 +18,12 @@ CStaticObject::CStaticObject(STParameters & a_rstParameters)
 	m_pDebugMesh = this->createDebugMesh();
 }
 
+CStaticObject::~CStaticObject()
+{
+	delete[] m_stParameters.m_pSpotLight;
+	delete[] m_stParameters.m_pPointLight;
+}
+
 void CStaticObject::update(void)
 {
 	CObject::update();
@@ -53,11 +59,11 @@ void CStaticObject::doDraw(void)
 	m_pEffect->SetInt("nNumSpotLight", nNumSpotLight);
 	for (int i = 0; i < nNumSpotLight; i++)
 	{
-		stSpotLightPosition[i] = D3DXVECTOR4(m_stParameters.m_pSpotLight[i].getPosition(), 1.0f);
-		stSpotLightForward[i] = D3DXVECTOR4(m_stParameters.m_pSpotLight[i].getForwardDirection(), 0.0f);
-		fTheta[i] = m_stParameters.m_pSpotLight[i].m_fTheta;
-		fPhi[i] = m_stParameters.m_pSpotLight[i].m_fPhi;
-		fSpotDistance[i] = m_stParameters.m_pSpotLight[i].m_fRange;
+		stSpotLightPosition[i] = D3DXVECTOR4(m_stParameters.m_pSpotLight[i]->getPosition(), 1.0f);
+		stSpotLightForward[i] = D3DXVECTOR4(m_stParameters.m_pSpotLight[i]->getForwardDirection(), 0.0f);
+		fTheta[i] = m_stParameters.m_pSpotLight[i]->m_fTheta;
+		fPhi[i] = m_stParameters.m_pSpotLight[i]->m_fPhi;
+		fSpotDistance[i] = m_stParameters.m_pSpotLight[i]->m_fRange;
 	}
 	for (int i = nNumSpotLight; i < 10; i++)
 	{
@@ -78,7 +84,7 @@ void CStaticObject::doDraw(void)
 	m_pEffect->SetInt("nNumPointLight", nNumPointLight);
 	for (int i = 0; i < nNumPointLight; i++)
 	{
-		stPointLightPosition[i] = D3DXVECTOR4(m_stParameters.m_pPointLight->getPosition(), 1.0f);
+		stPointLightPosition[i] = D3DXVECTOR4(m_stParameters.m_pPointLight[i]->getPosition(), 1.0f);
 		fPointDistance[i] = 10.0f;
 	}
 	

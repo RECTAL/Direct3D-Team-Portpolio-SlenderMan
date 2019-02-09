@@ -3,6 +3,8 @@ float4x4 g_stWorldMatrix;
 float4x4 g_stViewMatrix;
 float4x4 g_stProjectionMatrix;
 
+float4	g_stLightDirection;
+float4	g_stViewPosition;
 
 int	nNumSpotLight;
 float4	g_stSpotLightPosition[10];
@@ -41,7 +43,9 @@ struct STOutput
 	float3 m_stNormal 	: TEXCOORD1;
 	float3 m_stBinormal : TEXCOORD2;
 	float3 m_stTangent 	: TEXCOORD3;
-	float3 m_stWorldPosition    :TEXCOORD4;
+	float3 m_stLightDirection : TEXCOORD4;
+	float3 m_stViewDirection  : TEXCOORD5;
+	float3 m_stWorldPosition  : TEXCOORD6;
 };
 
 STOutput vs_main(STInput a_stInput)
@@ -60,6 +64,12 @@ STOutput vs_main(STInput a_stInput)
 
 	float3 stTangent = mul(a_stInput.m_stTangent, (float3x3)g_stWorldMatrix);
 	stOutput.m_stTangent = normalize(stTangent);
+
+	float3 stLightDirection = g_stLightDirection.xyz;
+	stOutput.m_stLightDirection = normalize(stLightDirection);
+
+	float3 stViewDirection = g_stViewPosition.xyz - stWorldPosition.xyz;
+	stOutput.m_stViewDirection = normalize(stViewDirection);
 
 	stOutput.m_stWorldPosition = stWorldPosition.xyz;
 
@@ -122,6 +132,17 @@ float4 ps_main(STOutput a_stInput) : COLOR0
 	stUV.x = stUV.x / 80;
 	stUV.y = stUV.y / 80;
 
+	float3 stNormal = normalize(a_stInput.m_stNormal);
+	float3 stBinormal = normalize(a_stInput.m_stBinormal);
+	float3 stTangent = normalize(a_stInput.m_stTangent);
+	float3 stLightDirection = normalize(a_stInput.m_stLightDirection);
+	float3 stViewDirection = normalize(a_stInput.m_stViewDirection);
+
+	float fDiffuse = saturate(dot(stLightDirection,stNormal));
+	float fSpecular = saturate(dot(reflect(stLightDirection,stNormal),stViewDirection));
+	fSpecular = pow(fSpecular,20.0f);
+
+
 	float4 stColorA = tex2D(g_pSamplerA, a_stInput.m_stUV);
 	float4 stColorB = tex2D(g_pSamplerB, a_stInput.m_stUV);
 	float4 stColorC = tex2D(g_pSamplerC, a_stInput.m_stUV);
@@ -130,12 +151,14 @@ float4 ps_main(STOutput a_stInput) : COLOR0
 
 	float fBlackPercent = 1.0f - saturate(stSplatColor.r + stSplatColor.g + stSplatColor.b);
 
-	float4 stDiffuseColor = (stColorA * stSplatColor.r) +
+	float4 stBaseColor = (stColorA * stSplatColor.r) +
 		(stColorB * stSplatColor.g) +
 		(stColorC * stSplatColor.b) +
 		(stColorD * fBlackPercent);
 
-	//float4 stDiffuseColor = float4(0.4f, 0.4f, 0.4f, 1.0f);
+	float4 stDiffuseColor = float4(stBaseColor.rgb*fDiffuse,1.0f);
+	float4 stSpecularColor = float4(stBaseColor.rgb*fSpecular,1.0f);
+	float4 stAmbientColor = float4(stBaseColor.rgb*0.2f,1.0f);
 
 	float4 fSpotLightColor = float4(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -146,7 +169,7 @@ float4 ps_main(STOutput a_stInput) : COLOR0
 		float fTheta = g_fTheta[i];
 		float fPhi = g_fPhi[i];
 		float fSpotDistance = g_fSpotDistance[i];
-		float4 stSpotColor = stDiffuseColor;
+		float4 stSpotColor = stBaseColor;
 
 		float3 stSpotToPos = normalize(a_stInput.m_stWorldPosition - stSpotPosition);
 		float fDistance = distance(a_stInput.m_stWorldPosition, stSpotPosition);
@@ -171,7 +194,7 @@ float4 ps_main(STOutput a_stInput) : COLOR0
 	}
 
 
-	float4 stFinalColor = stDiffuseColor+ fSpotLightColor;
+	float4 stFinalColor = stAmbientColor + stDiffuseColor+ stSpecularColor+fSpotLightColor;
 	return stFinalColor;
 }
 

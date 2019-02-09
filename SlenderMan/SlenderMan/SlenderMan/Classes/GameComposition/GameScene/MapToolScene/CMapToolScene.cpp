@@ -77,7 +77,7 @@ void CMapToolScene::init()
 		this->createWindowUI();
 		this->createButtonUI();
 
-		m_stMouseInfo.m_eObjType = EObjType::TREE_2;
+		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		m_stMouseInfo.m_pRenderObj = (CRenderObject*) new CObject();
 		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.1f, 0.1f, 0.1f));
 		m_pStage->setCameraObjMain(m_pCamera);
@@ -280,6 +280,10 @@ void CMapToolScene::createButtonUI()
 	(*endFptr) = [=](void)->void
 	{
 		MessageBox(GET_WINDOW_HANDLE(), _T("Load"), "", S_OK);
+
+		CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+		CLightObject** ppPointLightObj = new CLightObject*[10];
+
 		CTerrainObject::STParameters stParameters;
 		stParameters.m_pCamera = m_pCamera;
 		stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.015f, 1.0f);
@@ -293,10 +297,10 @@ void CMapToolScene::createButtonUI()
 		stParameters.m_nSmoothLevel = 1;
 
 		stParameters.m_nNumSpotLight = 0;
-		stParameters.m_pSpotLight = NULL;
+		stParameters.m_pSpotLight = ppSpotLightObj;
 
 		stParameters.m_nNumPointLight = 0;
-		stParameters.m_pPointLight = NULL;
+		stParameters.m_pPointLight = ppPointLightObj;
 
 
 		for (int i = 0; i < CTerrainObject::MAX_TERRAIN_TEX; ++i) {
@@ -325,6 +329,9 @@ void CMapToolScene::createStage()
 {
 	m_pStage = new CStage();
 
+	CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+	CLightObject** ppPointLightObj = new CLightObject*[10];
+
 	CTerrainObject::STParameters stParameters;
 	stParameters.m_pCamera = m_pCamera;
 	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.015f, 1.0f);
@@ -338,10 +345,10 @@ void CMapToolScene::createStage()
 	stParameters.m_nSmoothLevel = 1;
 
 	stParameters.m_nNumSpotLight = 0;
-	stParameters.m_pSpotLight = NULL;
+	stParameters.m_pSpotLight = ppSpotLightObj;
 
 	stParameters.m_nNumPointLight = 0;
-	stParameters.m_pPointLight = NULL;
+	stParameters.m_pPointLight = ppPointLightObj;
 
 
 	for (int i = 0; i < CTerrainObject::MAX_TERRAIN_TEX; ++i) {
@@ -532,7 +539,9 @@ void CMapToolScene::draw(void)
 	CScene::draw();
 
 	m_pStage->draw();
-	m_stMouseInfo.m_pRenderObj->draw();
+	if(m_stMouseInfo.m_eObjType != EObjType::NONE)
+		m_stMouseInfo.m_pRenderObj->draw();
+	
 }
 
 void CMapToolScene::drawUI(void)
