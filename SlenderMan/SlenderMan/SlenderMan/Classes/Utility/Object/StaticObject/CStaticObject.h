@@ -16,10 +16,10 @@ public:
 		CLightObject*	m_pDirectional;
 		
 		int	m_nNumSpotLight;
-		CSpotLightObject*	m_pSpotLight;
+		CSpotLightObject**	m_pSpotLight;
 
 		int m_nNumPointLight;
-		CLightObject*	m_pPointLight;
+		CLightObject**	m_pPointLight;
 
 		std::string m_oMeshFilepath;
 		std::string m_oEffectFilepath;
@@ -27,7 +27,7 @@ public:
 
 public:			//constructor , destructor
 	CStaticObject(STParameters &a_rstParameters);
-
+	~CStaticObject();
 protected:		//interface		
 
 	virtual void doDraw(void) override;		//! interface : IRenderable

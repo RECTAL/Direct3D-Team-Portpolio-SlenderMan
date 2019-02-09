@@ -57,6 +57,7 @@ void CStage::release()
 void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oObjPacketListFilePath)
 {
 	release();
+	a_stParameters.m_pLight = m_pDirectionLightObj;
 	m_pTerrainObj = new CTerrainObject(a_stParameters);
 	
 	int fWidth  = m_pTerrainObj->getCXDIB();
@@ -97,10 +98,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 				{
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::DESK)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/desk/desk.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -115,10 +118,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::GRASS)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/grass/grass.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -133,10 +138,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::MOUNTAIN)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/mountain/mountain.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -151,10 +158,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDHOUSE)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/oldHouse/oldHouse.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -169,10 +178,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDWOODDOCK)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/oldWoodDock/oldWoodDock.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -187,10 +198,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PLANTS)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/plants/plants.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -205,10 +218,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::ROUNDWOOD)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/roundwood/roundwood.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -223,10 +238,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::URBANDEBRIS)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/urbanDebris/urbanDebris.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -241,10 +258,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::WOODHOUSE)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/woodHouse/woodHouse.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -259,10 +278,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_1)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/tree1/tree1.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -277,10 +298,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_2)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/tree2/tree2.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -295,10 +318,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_3)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/tree3/tree3.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -313,10 +338,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_4)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/tree4/tree4.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -331,10 +358,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_5)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/tree5/tree5.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -349,10 +378,12 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_6)
 					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
 						CStaticObject::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj,
-							0,NULL,
-							0,NULL,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
 							"Resources/Meshes/tree6/tree6.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
@@ -384,11 +415,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 
 			if (a_stPacket.m_EObjType == EObjType::DESK)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0, NULL,
-					0, NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/desk/desk.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -403,11 +436,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::GRASS)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0, NULL,
-					0, NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/grass/grass.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -422,11 +457,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::MOUNTAIN)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0, NULL,
-					0, NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/mountain/mountain.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -441,11 +478,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::OLDHOUSE)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0, NULL,
-					0, NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/oldHouse/oldHouse.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -460,11 +499,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::OLDWOODDOCK)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0, NULL,
-					0, NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/oldWoodDock/oldWoodDock.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -479,11 +520,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::PLANTS)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0, NULL,
-					0, NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/plants/plants.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -498,11 +541,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::ROUNDWOOD)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0, NULL,
-					0, NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/roundwood/roundwood.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -517,11 +562,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::URBANDEBRIS)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0, NULL,
-					0, NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/urbanDebris/urbanDebris.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -536,11 +583,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::WOODHOUSE)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0, NULL,
-					0, NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/woodHouse/woodHouse.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -555,11 +604,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_1)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0,NULL,
-					0,NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/tree1/tree1.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -575,11 +626,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_2)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0,NULL,
-					0,NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/tree2/tree2.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -594,11 +647,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_3)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0,NULL,
-					0,NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/tree3/tree3.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -613,11 +668,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_4)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0,NULL,
-					0,NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/tree4/tree4.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -632,11 +689,14 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_5)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0,NULL,
-					0,NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/tree5/tree5.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -651,11 +711,13 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_6)
 			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
 				CStaticObject::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj,
-					0,NULL,
-					0,NULL,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
 					"Resources/Meshes/tree6/tree6.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
@@ -697,6 +759,13 @@ void CStage::delObj(CRenderObject * a_pRenderObj, D3DXVECTOR3 a_stPosition)
 	}
 }
 
+void CStage::setCameraObjMain(CCameraObject * a_pCameraObj)
+{
+	m_pCameraObj = a_pCameraObj;
+	m_pTerrainObj->getSTParameters().m_pCamera = a_pCameraObj;
+	setCameraObj(a_pCameraObj);
+}
+
 void CStage::setCameraObj(CCameraObject * a_pCameraObj)
 {
 	CCameraObject* pCameraObj = a_pCameraObj;
@@ -723,6 +792,41 @@ void CStage::setCameraObj(CCameraObject * a_pCameraObj)
 					{
 						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
 						pStaticObj->getSTParameters().m_pCamera = pCameraObj;
+					}
+				}
+			}
+		}
+	}
+}
+
+void CStage::addSpotLightObj(CSpotLightObject * a_pSpotLightObj)
+{
+	CSpotLightObject* pSpotLight = a_pSpotLightObj;
+	if (m_pObjList != nullptr&&m_pTerrainObj != nullptr)
+	{
+		int fWidth = m_pTerrainObj->getCXDIB();
+		int fHeight = m_pTerrainObj->getCZDIB();
+
+
+		for (int i = 0; i < fWidth*fHeight; i++)
+		{
+			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
+			{
+				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
+				else
+				{
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+					{
+						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
+
+
+					}
+					else
+					{
+						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
+						int nNumSpot = ++pStaticObj->getSTParameters().m_nNumSpotLight;
+						if(nNumSpot<10)
+							pStaticObj->getSTParameters().m_pSpotLight[nNumSpot-1] = pSpotLight;
 					}
 				}
 			}

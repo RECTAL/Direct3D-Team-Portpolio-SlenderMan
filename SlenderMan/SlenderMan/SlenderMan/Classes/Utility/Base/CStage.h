@@ -38,8 +38,9 @@ public:
 	void	load(CTerrainObject::STParameters a_stParameters,std::string m_oObjPacketListFilePath);
 	void	addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition);
 	void	delObj(CRenderObject* a_pRenderObj, D3DXVECTOR3 a_stPosition);
-	void	setCameraObjMain(CCameraObject* a_pCameraObj) { m_pCameraObj = a_pCameraObj; }
+	void	setCameraObjMain(CCameraObject* a_pCameraObj);
 	void	setCameraObj(CCameraObject* a_pCameraObj);
+	void	addSpotLightObj(CSpotLightObject* a_pSpotLightObj);
 	void	save(std::string m_oObjPacketListFilePath);
 	void	update();
 	void	draw();

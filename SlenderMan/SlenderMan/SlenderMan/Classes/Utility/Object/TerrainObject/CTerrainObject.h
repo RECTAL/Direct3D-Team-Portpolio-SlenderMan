@@ -31,10 +31,10 @@ public:
 		D3DXVECTOR3			m_vfScale;
 
 		int	m_nNumSpotLight;
-		CSpotLightObject*	m_pSpotLight;
+		CSpotLightObject**	m_pSpotLight;
 
 		int m_nNumPointLight;
-		CLightObject*	m_pPointLight;
+		CLightObject**	m_pPointLight;
 
 		std::string m_oSplatFilepath;
 		std::string m_oHeightFilepath;
@@ -63,6 +63,8 @@ public:
 	LPD3DXMESH		getTerrainMesh() { return m_pTerrainMesh; }
 	LPD3DXEFFECT	getEffect() { return m_pEffect; }
 	std::string&	getTechniqueName(){ return m_stTechniqueName; }
+	STParameters&	getSTParameters() { return m_stParameters; }
+
 
 	virtual	void	doDraw(void) override;
 	virtual void	update(void) override;

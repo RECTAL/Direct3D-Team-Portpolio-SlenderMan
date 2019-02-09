@@ -40,6 +40,8 @@ CTerrainObject::CTerrainObject(const STParameters& a_stParameters)
 
 CTerrainObject::~CTerrainObject()
 {
+	delete[] m_stParameters.m_pSpotLight;
+	delete[] m_stParameters.m_pPointLight;
 	destroy();
 }
 
@@ -216,7 +218,11 @@ HRESULT CTerrainObject::createTerrainMesh()
 void CTerrainObject::update(void)
 {
 	CObject::update();
-	
+	m_pCamera = m_stParameters.m_pCamera;
+	m_pLightObj = m_stParameters.m_pLight;
+
+
+
 	LPDWORD		pIndices = nullptr;
 
 	LPDIRECT3DINDEXBUFFER9 pIndexBuffer;
@@ -299,6 +305,8 @@ HRESULT CTerrainObject::render()
 	D3DXMATRIXA16 stWorldMatrix = this->getFinalWorldMatrix();
 	D3DXMATRIXA16 stViewMatrix = m_pCamera->getViewMatrix();
 	D3DXMATRIXA16 stProjectionMatrix = m_pCamera->getProjectionMatrix();
+	D3DXVECTOR4	  stLightDirection = D3DXVECTOR4(m_pLightObj->getForwardDirection(), 0.0f);
+	D3DXVECTOR4	  stViewPosition = D3DXVECTOR4(m_pCamera->getPosition(), 1.0f);
 
 	D3DXVECTOR4	stSpotLightPosition[10];
 	D3DXVECTOR4	stSpotLightForward[10];
@@ -313,6 +321,9 @@ HRESULT CTerrainObject::render()
 	m_pEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
 	m_pEffect->SetMatrix("g_stViewMatrix", &stViewMatrix);
 	m_pEffect->SetMatrix("g_stProjectionMatrix", &stProjectionMatrix);
+
+	m_pEffect->SetVector("g_stLightDirection", &stLightDirection);
+	m_pEffect->SetVector("g_stViewPosition", &stViewPosition);
 	// }
 	// 텍스처를 설정한다
 	// {
@@ -330,11 +341,11 @@ HRESULT CTerrainObject::render()
 	m_pEffect->SetInt("nNumSpotLight", nNumSpotLight);
 	for (int i = 0; i < nNumSpotLight; i++)
 	{
-		stSpotLightPosition[i] = D3DXVECTOR4(m_stParameters.m_pSpotLight[i].getPosition(), 1.0f);
-		stSpotLightForward[i] = D3DXVECTOR4(m_stParameters.m_pSpotLight[i].getForwardDirection(), 0.0f);
-		fTheta[i] = m_stParameters.m_pSpotLight[i].m_fTheta;
-		fPhi[i] = m_stParameters.m_pSpotLight[i].m_fPhi;
-		fSpotDistance[i] = m_stParameters.m_pSpotLight[i].m_fRange;
+		stSpotLightPosition[i] = D3DXVECTOR4(m_stParameters.m_pSpotLight[i]->getPosition(), 1.0f);
+		stSpotLightForward[i] = D3DXVECTOR4(m_stParameters.m_pSpotLight[i]->getForwardDirection(), 0.0f);
+		fTheta[i] = m_stParameters.m_pSpotLight[i]->m_fTheta;
+		fPhi[i] = m_stParameters.m_pSpotLight[i]->m_fPhi;
+		fSpotDistance[i] = m_stParameters.m_pSpotLight[i]->m_fRange;
 	}
 	for (int i = nNumSpotLight; i < 10; i++)
 	{
@@ -355,7 +366,7 @@ HRESULT CTerrainObject::render()
 	m_pEffect->SetInt("nNumPointLight", nNumPointLight);
 	for (int i = 0; i < nNumPointLight; i++)
 	{
-		stPointLightPosition[i] = D3DXVECTOR4(m_stParameters.m_pPointLight->getPosition(), 1.0f);
+		stPointLightPosition[i] = D3DXVECTOR4(m_stParameters.m_pPointLight[i]->getPosition(), 1.0f);
 		fPointDistance[i] = 10.0f;
 	}
 

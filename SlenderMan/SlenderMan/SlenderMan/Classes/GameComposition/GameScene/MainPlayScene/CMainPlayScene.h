@@ -9,6 +9,7 @@ class CTerrainObject;
 class CStaticObject;
 class CLightObject;
 class CSpotLightObject;
+class CStage;
 class CMainPlayScene :public CScene
 {
 public:		//constructor , destructor
@@ -31,27 +32,20 @@ public:		//public override function
 
 private:
 	void	createRenderTarget();
-	void	createMesh();
 	void	createCamera();
 	void	createSound();
 
 public:
-	CTerrainObject* createTerrain();
-	CStaticObject*	createStaticMesh();
-	CLightObject*	createDirectionalLight();
 	CSpotLightObject* createSpotObj();
 private:
 	POINT m_stPrevMousePosition;
 
 	CCameraObject* m_pCamera = nullptr;
-	CTerrainObject* m_pTerrain = nullptr;
-	CStaticObject*	m_pStaticMesh = nullptr;
-	CStaticObject*	m_pStaticMesh1 = nullptr;
-	CStaticObject*	m_pStaticMesh2 = nullptr;
-	CLightObject*	m_pLightObj = nullptr;
 	CSpotLightObject* m_pSpotObj = nullptr;
 
 	LPD3DXMESH m_pSphere = nullptr;
 
+
+	CStage* m_pStage;
 	bool isFirst = true;
 };
