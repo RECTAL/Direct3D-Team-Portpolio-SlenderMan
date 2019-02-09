@@ -53,6 +53,7 @@ private:
 	void createObjectButton(void);
 
 	void buttonDrawUI();
+	void inputKey(void);
 private:
 	POINT m_stPrevMousePosition;
 
@@ -83,6 +84,7 @@ private:
 	CSpriteObject_ListSquare* m_pTreeListSquare = nullptr;
 	CSpriteObject_ListSquare* m_pBuildingListSquare = nullptr;
 	CSpriteObject_ListSquare* m_pObjectListSquare = nullptr;
+
 	CSpriteObject_Button* m_pTreeButton[MAX_TREE] = { nullptr };
 	CSpriteObject_Button* m_pBuildingButton[MAX_BUILDING] = { nullptr };
 	CSpriteObject_Button* m_pObjectButton[MAX_OBJECT] = { nullptr };
@@ -107,5 +109,5 @@ private:
 	float m_fAngleY = 0.0f;
 	float m_fAngleZ = 0.0f;
 
-	float m_fScale;
+	float m_fScale = 0.2f;
 };

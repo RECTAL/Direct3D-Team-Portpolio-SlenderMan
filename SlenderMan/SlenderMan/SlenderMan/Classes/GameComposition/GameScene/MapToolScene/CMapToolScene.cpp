@@ -20,7 +20,6 @@
 CMapToolScene::CMapToolScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
 {
-	m_fScale = 0.2f;
 }
 
 CMapToolScene::~CMapToolScene()
@@ -369,144 +368,9 @@ void CMapToolScene::update(void)
 	printf("%f\n", UpDownScrollBar->getSetValue());
 	m_pCamera->update();
 	m_pStage->update();
-
+	inputKey();
 
 	m_pSpriteList->getMoveOffset() = D3DXVECTOR3(0, -UpDownScrollBar->getSetValue(), 0);
-
-	if (IS_KEY_PRESSED(DIK_F1))
-	{
-		isEnableClick = !isEnableClick;
-	}
-	
-	if (isEnableClick)
-	{
-		if (IS_KEY_DOWN(DIK_UP))
-		{
-			m_fScale += 0.01f * GET_DELTA_TIME();
-			m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
-		}
-		else if (IS_KEY_DOWN(DIK_DOWN))
-		{
-			m_fScale -= 0.01f * GET_DELTA_TIME();
-			m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
-		}
-		if (IS_MOUSE_BUTTON_DOWN(EMouseInput::RIGHT)) {
-			float fSpeed = 15.0f;
-
-			if (IS_KEY_DOWN(DIK_LSHIFT)) {
-				fSpeed = 50.0f;
-			}
-
-			if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::RIGHT)) {
-				m_stPrevMousePosition = GET_MOUSE_POSITION();
-			}
-
-			auto stMousePosition = GET_MOUSE_POSITION();
-			float fDeltaY = stMousePosition.y - m_stPrevMousePosition.y;
-			float fDeltaX = stMousePosition.x - m_stPrevMousePosition.x;
-
-			m_stPrevMousePosition = stMousePosition;
-
-			m_pCamera->rotateByXAxis(fDeltaY / 5.0f);
-			m_pCamera->rotateByYAxis(fDeltaX / 5.0f, false);
-
-
-			if (IS_KEY_DOWN(DIK_W)) {
-				m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
-
-			}
-			else if (IS_KEY_DOWN(DIK_S)) {
-				m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-			}
-
-			if (IS_KEY_DOWN(DIK_A)) {
-				m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-			}
-			else if (IS_KEY_DOWN(DIK_D)) {
-				m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
-			}
-			
-			if (IS_KEY_DOWN(DIK_Q))
-			{
-				m_fAngleX += 90.0f * GET_DELTA_TIME();
-			}
-			else if (IS_KEY_DOWN(DIK_E))
-			{
-				m_fAngleX -= 90.0f * GET_DELTA_TIME();
-			}
-
-		}
-
-		if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
-		{
-			if (IS_KEY_DOWN(DIK_LCONTROL))
-			{
-				D3DXVECTOR3 stPos;
-				if (m_pStage->getPickingPosWithTerrain(stPos))
-				{
-					STRay	ray;
-					LPDWORD			pIndices = nullptr;
-					LPDIRECT3DINDEXBUFFER9 pIndexBuffer;
-					m_pStage->getTerrainObj()->getTerrainMesh()->GetIndexBuffer(&pIndexBuffer);
-
-					ray = CreateRay(GET_MOUSE_POSITION());
-
-					int width = m_pStage->getTerrainObj()->getCXDIB();
-					int height = m_pStage->getTerrainObj()->getCZDIB();
-					int nTriangles = m_pStage->getTerrainObj()->getTriangles();
-					
-					if (SUCCEEDED(pIndexBuffer->Lock(0, (width - 1)*(height - 1) * 2 * sizeof(DWORD) * 3, (void**)&pIndices, 0)))
-					{
-						float fMinLength = 100000.0f;
-						std::vector<CRenderObject*> oRenderObjList;
-						CRenderObject* pRenderObj = nullptr;
-						for (int i = 0; i < nTriangles * 3; i += 3)
-						{
-							for (auto iter : m_pStage->getObjList()[pIndices[i]])
-							{
-								if (IsCreshWithBoundingSphere(ray, iter->getFinalBoundingSphere()))
-								{
-									oRenderObjList.push_back(iter);
-								}
-							}
-						}
-						for (auto iter : oRenderObjList)
-						{
-							D3DXVECTOR3 vec = iter->getPosition() - ray.m_stOrigin;
-							float flength = D3DXVec3Length(&vec);
-							if (fMinLength > flength)
-							{
-								fMinLength = flength;
-								pRenderObj = iter;
-							}
-						}
-
-						if(pRenderObj != nullptr)
-							m_pStage->delObj(pRenderObj, pRenderObj->getPosition());
-						pIndexBuffer->Unlock();
-					}
-				}
-			}
-			else
-			{
-				D3DXVECTOR3 stPos;
-
-				if (m_pStage->getPickingPosWithTerrain(stPos))
-				{
-					CStage::OBJPACKET objPacket;
-					objPacket.m_bIsSkinned = m_stMouseInfo.m_bIsSkinned;
-					objPacket.m_EObjType = m_stMouseInfo.m_eObjType;
-					objPacket.m_stPosition = stPos;
-					objPacket.m_stScale = m_stMouseInfo.m_pRenderObj->getScale();
-					objPacket.m_stForwordVec = m_stMouseInfo.m_pRenderObj->getForwardDirection();
-					objPacket.m_stUpVec = m_stMouseInfo.m_pRenderObj->getUpDirection();
-					objPacket.m_stRightVec = m_stMouseInfo.m_pRenderObj->getRightDirection();
-					
-					m_pStage->addObj(objPacket, stPos);
-				}
-			}
-		}
-	}
 }
 
 void CMapToolScene::buttonUpdate()
@@ -544,7 +408,6 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_1;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
 	};
 	m_pTreeButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -552,7 +415,6 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_2;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.04f, 0.04f, 0.04f));
 	};
 	m_pTreeButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -560,7 +422,6 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_3;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.06f, 0.06f, 0.06f));
 	};
 	m_pTreeButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -568,7 +429,6 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_4;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.08f, 0.08f, 0.08f));
 	};
 	m_pTreeButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -576,7 +436,6 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_5;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.1f, 0.1f, 0.1f));
 	};
 	m_pTreeButton[4]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -584,7 +443,6 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_6;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(5.0f, 5.0f, 5.0f));
 	};
 	m_pTreeButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -607,7 +465,6 @@ void CMapToolScene::createBuildingButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::OLDHOUSE;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.2f, 0.2f, 0.2f));
 	};
 	m_pBuildingButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -615,7 +472,6 @@ void CMapToolScene::createBuildingButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::WOODHOUSE;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(3.0f, 3.0f, 3.0f));
 	};
 	m_pBuildingButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -623,7 +479,6 @@ void CMapToolScene::createBuildingButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::OLDWOODDOCK;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.1f, 0.1f, 0.1f));
 	};
 	m_pBuildingButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -647,7 +502,6 @@ void CMapToolScene::createObjectButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::URBANDEBRIS;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.4f, 0.4f, 0.4f));
 	};
 	m_pObjectButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -655,7 +509,6 @@ void CMapToolScene::createObjectButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::PLANTS;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.4f, 0.4f, 0.4f));
 	};
 	m_pObjectButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -663,7 +516,6 @@ void CMapToolScene::createObjectButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::ROUNDWOOD;
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.4f, 0.4f, 0.4f));
 	};
 	m_pObjectButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -681,7 +533,6 @@ void CMapToolScene::draw(void)
 
 	m_pStage->draw();
 	m_stMouseInfo.m_pRenderObj->draw();
-	
 }
 
 void CMapToolScene::drawUI(void)
@@ -705,6 +556,140 @@ void CMapToolScene::buttonDrawUI()
 	squareUpCover->drawUI();
 	saveButton->drawUI();
 	loadButton->drawUI();
+}
+
+void CMapToolScene::inputKey(void)
+{
+	if (IS_KEY_PRESSED(DIK_F1))
+	{
+		isEnableClick = !isEnableClick;
+	}
+
+	if (isEnableClick)
+	{
+		if (IS_MOUSE_BUTTON_DOWN(EMouseInput::RIGHT)) {
+			float fSpeed = 15.0f;
+
+			if (IS_KEY_DOWN(DIK_LSHIFT)) {
+				fSpeed = 50.0f;
+			}
+
+			if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::RIGHT)) {
+				m_stPrevMousePosition = GET_MOUSE_POSITION();
+			}
+
+			auto stMousePosition = GET_MOUSE_POSITION();
+			float fDeltaY = stMousePosition.y - m_stPrevMousePosition.y;
+			float fDeltaX = stMousePosition.x - m_stPrevMousePosition.x;
+
+			m_stPrevMousePosition = stMousePosition;
+
+			m_pCamera->rotateByXAxis(fDeltaY / 5.0f);
+			m_pCamera->rotateByYAxis(fDeltaX / 5.0f, false);
+
+
+			if (IS_KEY_DOWN(DIK_W)) {
+				m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
+
+			}
+			else if (IS_KEY_DOWN(DIK_S)) {
+				m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+			}
+
+			if (IS_KEY_DOWN(DIK_A)) {
+				m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+			}
+			else if (IS_KEY_DOWN(DIK_D)) {
+				m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
+			}
+		}
+
+		if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
+		{
+			if (IS_KEY_DOWN(DIK_LCONTROL))
+			{
+				D3DXVECTOR3 stPos;
+				if (m_pStage->getPickingPosWithTerrain(stPos))
+				{
+					STRay	ray;
+					LPDWORD			pIndices = nullptr;
+					LPDIRECT3DINDEXBUFFER9 pIndexBuffer;
+					m_pStage->getTerrainObj()->getTerrainMesh()->GetIndexBuffer(&pIndexBuffer);
+
+					ray = CreateRay(GET_MOUSE_POSITION());
+
+					int width = m_pStage->getTerrainObj()->getCXDIB();
+					int height = m_pStage->getTerrainObj()->getCZDIB();
+					int nTriangles = m_pStage->getTerrainObj()->getTriangles();
+
+					if (SUCCEEDED(pIndexBuffer->Lock(0, (width - 1)*(height - 1) * 2 * sizeof(DWORD) * 3, (void**)&pIndices, 0)))
+					{
+						float fMinLength = 100000.0f;
+						std::vector<CRenderObject*> oRenderObjList;
+						CRenderObject* pRenderObj = nullptr;
+						for (int i = 0; i < nTriangles * 3; i += 3)
+						{
+							for (auto iter : m_pStage->getObjList()[pIndices[i]])
+							{
+								if (IsCreshWithBoundingSphere(ray, iter->getFinalBoundingSphere()))
+								{
+									oRenderObjList.push_back(iter);
+								}
+							}
+						}
+						for (auto iter : oRenderObjList)
+						{
+							D3DXVECTOR3 vec = iter->getPosition() - ray.m_stOrigin;
+							float flength = D3DXVec3Length(&vec);
+							if (fMinLength > flength)
+							{
+								fMinLength = flength;
+								pRenderObj = iter;
+							}
+						}
+
+						if (pRenderObj != nullptr)
+							m_pStage->delObj(pRenderObj, pRenderObj->getPosition());
+						pIndexBuffer->Unlock();
+					}
+				}
+			}
+			else
+			{
+				D3DXVECTOR3 stPos;
+
+				if (m_pStage->getPickingPosWithTerrain(stPos))
+				{
+					CStage::OBJPACKET objPacket;
+					objPacket.m_bIsSkinned = m_stMouseInfo.m_bIsSkinned;
+					objPacket.m_EObjType = m_stMouseInfo.m_eObjType;
+					objPacket.m_stPosition = stPos;
+					objPacket.m_stScale = m_stMouseInfo.m_pRenderObj->getScale();
+					objPacket.m_stForwordVec = m_stMouseInfo.m_pRenderObj->getForwardDirection();
+					objPacket.m_stUpVec = m_stMouseInfo.m_pRenderObj->getUpDirection();
+					objPacket.m_stRightVec = m_stMouseInfo.m_pRenderObj->getRightDirection();
+
+					m_pStage->addObj(objPacket, stPos);
+				}
+			}
+		}
+
+		if (IS_KEY_DOWN(DIK_Q)) {
+			m_fScale += 0.01f * GET_DELTA_TIME();
+			m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
+		}
+		else if (IS_KEY_DOWN(DIK_E)) {
+			m_fScale -= 0.01f * GET_DELTA_TIME();
+			m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
+		}
+
+		if (IS_KEY_PRESSED(DIK_LEFT))		m_fAngleX += 30.0f * GET_DELTA_TIME();
+		else if (IS_KEY_PRESSED(DIK_RIGHT)) m_fAngleX -= 30.0f * GET_DELTA_TIME();
+		else if (IS_KEY_PRESSED(DIK_UP))	m_fAngleY += 30.0f * GET_DELTA_TIME();
+		else if (IS_KEY_PRESSED(DIK_DOWN))	m_fAngleY -= 30.0f * GET_DELTA_TIME();
+
+		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, m_fAngleZ));
+	}
 }
 
 LRESULT CMapToolScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
