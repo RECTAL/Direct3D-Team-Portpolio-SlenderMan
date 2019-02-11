@@ -273,7 +273,6 @@
     <FxCompile Include="Resources\Effects\DefaultSkinnedMesh.fx" />
     <FxCompile Include="Resources\Effects\DefaultStaticMesh.fx" />
     <FxCompile Include="Resources\Effects\DefaultTerrain.fx" />
-    <FxCompile Include="Resources\Effects\fogTerrain.fx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Datas\realterrain.raw" />

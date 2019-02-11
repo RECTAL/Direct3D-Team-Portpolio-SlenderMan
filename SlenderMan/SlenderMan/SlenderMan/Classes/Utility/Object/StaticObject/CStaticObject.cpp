@@ -55,6 +55,11 @@ void CStaticObject::doDraw(void)
 	m_pEffect->SetVector("g_stLightDirection", &stDirectionalLight);
 	m_pEffect->SetVector("g_stViewPosition", &stViewPosition);
 
+
+	m_pEffect->SetFloat("g_fFogDensity", 0.55f);
+	m_pEffect->SetFloat("g_fFogEnd", 700.0f);
+
+
 	int nNumSpotLight = m_stParameters.m_nNumSpotLight;
 	m_pEffect->SetInt("nNumSpotLight", nNumSpotLight);
 	for (int i = 0; i < nNumSpotLight; i++)
