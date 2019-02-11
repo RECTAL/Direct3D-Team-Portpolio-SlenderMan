@@ -1,13 +1,339 @@
-﻿  GlobalFunction.cpp
-c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
-  CGameOverScene.cpp
-c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
-  CLoadingScene.cpp
-c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
-  MainPlaySceneLoader.cpp
-c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
-  MapToolSceneLoader.cpp
-c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
-  TitleSceneLoader.cpp
-c:\users\kcl53\desktop\direct3d_portpolio\slenderman\slenderman\slenderman\classes\define\kglobaldefine.h(40): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory
+﻿  compilation object save succeeded; see C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\x64\Debug\CopyTexture.cso
+C:\Users\zoddl\Desktop\3d ????��\SlenderMan\SlenderMan\SlenderMan\Resources\Effects\DefaultSkinnedMesh.fx(39,5-36): warning X3552: cannot map loop to shader target, target does not support breaks, forcing loop to unroll
+  
+  compilation object save succeeded; see C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\x64\Debug\DefaultSkinnedMesh.cso
+C:\Users\zoddl\Desktop\3d ????��\SlenderMan\SlenderMan\SlenderMan\Resources\Effects\DefaultStaticMesh.fx(63,5-48): warning X3206: implicit truncation of vector type
+  
+  compilation object save succeeded; see C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\x64\Debug\DefaultStaticMesh.cso
+  compilation object save succeeded; see C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\x64\Debug\DefaultTerrain.cso
+  SlenderMan.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  WindowSystem_CWindowScrollBar.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  WindowSystem_CWindowList.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  WindowSystem_CWindowContainer.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  WindowSystem_CWindowButton.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  RenderSystem_CRenderTarget.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ParticleSystem_EmitterDefault.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ParticleSystem_CParticleSystem.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  ParticleSystem_CParticleEmitter.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CollisionSystem_CQuadSystem.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(59): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\system\collisionsystem\collisionsystem_cquadsystem.cpp(21): warning C4552: '-': 의미 없는 연산자입니다. 파생 작업이 있는 연산자여야 합니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\system\collisionsystem\collisionsystem_cquadsystem.cpp(6): warning C4101: 'i' :참조되지 않은 지역 변수입니다.
+  CollisionSystem_CFrustum.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  AnimationSystem_CAnimationController.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_canimationcontroller.cpp(67): warning C4244: '초기화 중': 'DOUBLE'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  AnimationSystem_CAllocateHierarchy.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_callocatehierarchy.cpp(18): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 'strcpy' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_callocatehierarchy.cpp(67): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_callocatehierarchy.cpp(96): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_callocatehierarchy.cpp(57): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 'strcpy' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\system\animationsystem\animationsystem_callocatehierarchy.cpp(73): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+  CTerrainObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(59): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(23): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(24): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(88): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 'fopen' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(334): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+  CStaticObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\staticobject\cstaticobject.cpp(100): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  CSpriteObject_ScrollBar.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_scrollbar.cpp(35): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_scrollbar.cpp(40): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_scrollbar.cpp(48): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_scrollbar.cpp(53): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_scrollbar.cpp(86): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CSpriteObject_ListSquare.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(57): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(58): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(68): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(69): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(79): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(80): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(100): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(101): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(112): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(113): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(124): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(125): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(172): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(173): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(178): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(191): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(192): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(197): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(210): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(211): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_listsquare.cpp(216): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CSpriteObject_List.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(56): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(57): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(67): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(68): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(78): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(79): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(99): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(100): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(111): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(112): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(123): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(124): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(150): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(171): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(181): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(191): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(215): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(220): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject_kind\cspriteobject_list.cpp(225): warning C4244: '=': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CSpriteObject_Default.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CSpriteObject_Container.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  CSpriteObject_Button.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CSpriteObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject.cpp(14): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\spriteobject\cspriteobject.cpp(47): warning C4838: 'UINT'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+  CSoundObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\soundobject\csoundobject.cpp(21): warning C4244: '인수': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\soundobject\csoundobject.cpp(29): warning C4800: 'DWORD': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  CSkinnedObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\skinnedobject\cskinnedobject.cpp(126): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\skinnedobject\cskinnedobject.cpp(142): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\skinnedobject\cskinnedobject.cpp(297): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  CPointParticleObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\particleobject\cpointparticleobject.cpp(53): warning C4267: '인수': 'size_t'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  SpotLightObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CLightObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CLabelObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\labelobject\clabelobject.cpp(24): warning C4838: 'float'에서 'LONG'(으)로의 변환에는 축소 변환이 필요합니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\labelobject\clabelobject.cpp(24): warning C4244: '초기화 중': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\labelobject\clabelobject.cpp(48): warning C4244: '=': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CCameraObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CWindowManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CTimeManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CSoundManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\manager\csoundmanager.cpp(139): warning C4244: '초기화 중': 'std::_Array_iterator<_Ty,5>::difference_type'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+          with
+          [
+              _Ty=CSoundObject *
+          ]
+  CSceneManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CResourceManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(99): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(88): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(171): warning C4477: 'sprintf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'double'입니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(171): warning C4477: 'sprintf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 3의 형식이 'double'입니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(171): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(202): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(214): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\manager\cresourcemanager.cpp(351): warning C4244: '인수': 'const float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CRendertargetManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CInputManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\manager\cinputmanager.cpp(45): warning C4800: 'int': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\manager\cinputmanager.cpp(63): warning C4800: 'int': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  CDeviceManager.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CWindowApplication.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\base\cwindowapplication.cpp(16): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(240): note: 'freopen' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\base\cwindowapplication.cpp(17): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(240): note: 'freopen' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\base\cwindowapplication.cpp(18): warning C4996: 'freopen': This function or variable may be unsafe. Consider using freopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(240): note: 'freopen' 선언을 참조하십시오.
+  CWindow.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CUIObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  코드를 생성하고 있습니다...
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\particleobject\cpointparticleobject.cpp(79): warning C4715: 'CPointParticleObject::createParticleEmitter': 모든 제어 경로에서 값을 반환하지는 않습니다.
+  컴파일하고 있습니다...
+  CStage.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(59): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CRenderObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CDirect3DApplication.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CVictoryScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CTitleScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(78): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(145): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(148): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\titlescene\ctitlescene.cpp(303): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+  CVirtualScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\testscene\cvirtualscene.cpp(34): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+  CMapToolScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(59): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(99): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(166): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(180): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(263): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(268): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(279): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(308): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(356): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(410): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(459): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(467): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(495): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(504): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(532): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(591): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(592): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(709): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
   CMainPlayScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(59): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(110): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(111): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(191): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(224): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+  TitleSceneLoader.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  MapToolSceneLoader.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  MainPlaySceneLoader.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  GameOverSceneLoader.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+  CLoadingScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\loadingscene\cloadingscene.cpp(119): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\loadingscene\cloadingscene.cpp(152): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\loadingscene\cloadingscene.cpp(159): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CGameOverScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\gameoverscene\cgameoverscene.cpp(65): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\gameoverscene\cgameoverscene.cpp(72): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\gameoverscene\cgameoverscene.cpp(75): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  GlobalFunction.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\function\globalfunction.cpp(34): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  코드를 생성하고 있습니다...
+GlobalFunction.obj : error LNK2019: D3DXVec3Normalize 외부 기호(참조 위치: "struct STRay __cdecl CreateRay(struct tagPOINT const &)" (?CreateRay@@YA?AUSTRay@@AEBUtagPOINT@@@Z) 함수)에서 확인하지 못했습니다.
+CObject.obj : error LNK2001: D3DXVec3Normalize 외부 기호를 확인할 수 없습니다.
+CTerrainObject.obj : error LNK2001: D3DXVec3Normalize 외부 기호를 확인할 수 없습니다.
+ParticleSystem_EmitterDefault.obj : error LNK2001: D3DXVec3Normalize 외부 기호를 확인할 수 없습니다.
+GlobalFunction.obj : error LNK2019: D3DXVec3TransformCoord 외부 기호(참조 위치: "struct STRay __cdecl CreateRay(struct tagPOINT const &)" (?CreateRay@@YA?AUSTRay@@AEBUtagPOINT@@@Z) 함수)에서 확인하지 못했습니다.
+CRenderObject.obj : error LNK2001: D3DXVec3TransformCoord 외부 기호를 확인할 수 없습니다.
+CollisionSystem_CFrustum.obj : error LNK2001: D3DXVec3TransformCoord 외부 기호를 확인할 수 없습니다.
+GlobalFunction.obj : error LNK2019: D3DXVec3TransformNormal 외부 기호(참조 위치: "struct STRay __cdecl CreateRay(struct tagPOINT const &)" (?CreateRay@@YA?AUSTRay@@AEBUtagPOINT@@@Z) 함수)에서 확인하지 못했습니다.
+CObject.obj : error LNK2001: D3DXVec3TransformNormal 외부 기호를 확인할 수 없습니다.
+GlobalFunction.obj : error LNK2019: D3DXMatrixInverse 외부 기호(참조 위치: "struct STRay __cdecl CreateRay(struct tagPOINT const &)" (?CreateRay@@YA?AUSTRay@@AEBUtagPOINT@@@Z) 함수)에서 확인하지 못했습니다.
+CollisionSystem_CFrustum.obj : error LNK2001: D3DXMatrixInverse 외부 기호를 확인할 수 없습니다.
+CDirect3DApplication.obj : error LNK2019: D3DXCreateSprite 외부 기호(참조 위치: "private: struct ID3DXSprite * __cdecl CDirect3DApplication::createSprite(void)" (?createSprite@CDirect3DApplication@@AEAAPEAUID3DXSprite@@XZ) 함수)에서 확인하지 못했습니다.
+CSpriteObject.obj : error LNK2001: D3DXCreateSprite 외부 기호를 확인할 수 없습니다.
+CObject.obj : error LNK2019: D3DXMatrixMultiply 외부 기호(참조 위치: "public: struct D3DXMATRIX __cdecl D3DXMATRIX::operator*(struct D3DXMATRIX const &)const " (??DD3DXMATRIX@@QEBA?AU0@AEBU0@@Z) 함수)에서 확인하지 못했습니다.
+CCameraObject.obj : error LNK2001: D3DXMatrixMultiply 외부 기호를 확인할 수 없습니다.
+CSkinnedObject.obj : error LNK2001: D3DXMatrixMultiply 외부 기호를 확인할 수 없습니다.
+CObject.obj : error LNK2019: D3DXMatrixScaling 외부 기호(참조 위치: "public: virtual void __cdecl CObject::update(void)" (?update@CObject@@UEAAXXZ) 함수)에서 확인하지 못했습니다.
+CSpriteObject.obj : error LNK2001: D3DXMatrixScaling 외부 기호를 확인할 수 없습니다.
+CObject.obj : error LNK2019: D3DXMatrixTranslation 외부 기호(참조 위치: "public: virtual void __cdecl CObject::update(void)" (?update@CObject@@UEAAXXZ) 함수)에서 확인하지 못했습니다.
+CObject.obj : error LNK2019: D3DXMatrixRotationAxis 외부 기호(참조 위치: "public: void __cdecl CObject::rotateByXAxis(float,bool)" (?rotateByXAxis@CObject@@QEAAXM_N@Z) 함수)에서 확인하지 못했습니다.
+CObject.obj : error LNK2019: D3DXMatrixRotationYawPitchRoll 외부 기호(참조 위치: "public: void __cdecl CObject::setRotation(struct D3DXVECTOR3 const &)" (?setRotation@CObject@@QEAAXAEBUD3DXVECTOR3@@@Z) 함수)에서 확인하지 못했습니다.
+CDeviceManager.obj : error LNK2019: Direct3DCreate9 외부 기호(참조 위치: "private: struct IDirect3D9 * __cdecl CDeviceManager::createDirect3D(void)" (?createDirect3D@CDeviceManager@@AEAAPEAUIDirect3D9@@XZ) 함수)에서 확인하지 못했습니다.
+CInputManager.obj : error LNK2019: DirectInput8Create 외부 기호(참조 위치: "private: struct IDirectInput8A * __cdecl CInputManager::createDirectInput(void)" (?createDirectInput@CInputManager@@AEAAPEAUIDirectInput8A@@XZ) 함수)에서 확인하지 못했습니다.
+CInputManager.obj : error LNK2001: IID_IDirectInput8A 외부 기호를 확인할 수 없습니다.
+CInputManager.obj : error LNK2001: GUID_SysMouse 외부 기호를 확인할 수 없습니다.
+CInputManager.obj : error LNK2001: GUID_SysKeyboard 외부 기호를 확인할 수 없습니다.
+CInputManager.obj : error LNK2001: c_dfDIMouse 외부 기호를 확인할 수 없습니다.
+CInputManager.obj : error LNK2001: c_dfDIKeyboard 외부 기호를 확인할 수 없습니다.
+CResourceManager.obj : error LNK2019: D3DXComputeNormals 외부 기호(참조 위치: "private: struct STStaticMesh __cdecl CResourceManager::createStaticMesh(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?createStaticMesh@CResourceManager@@AEAA?AUSTStaticMesh@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 함수)에서 확인하지 못했습니다.
+CSkinnedObject.obj : error LNK2001: D3DXComputeNormals 외부 기호를 확인할 수 없습니다.
+CTerrainObject.obj : error LNK2001: D3DXComputeNormals 외부 기호를 확인할 수 없습니다.
+RenderSystem_CRenderTarget.obj : error LNK2001: D3DXComputeNormals 외부 기호를 확인할 수 없습니다.
+CResourceManager.obj : error LNK2019: D3DXLoadMeshFromXA 외부 기호(참조 위치: "private: struct STStaticMesh __cdecl CResourceManager::createStaticMesh(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?createStaticMesh@CResourceManager@@AEAA?AUSTStaticMesh@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 함수)에서 확인하지 못했습니다.
+RenderSystem_CRenderTarget.obj : error LNK2001: D3DXLoadMeshFromXA 외부 기호를 확인할 수 없습니다.
+CResourceManager.obj : error LNK2019: D3DXComputeTangent 외부 기호(참조 위치: "private: struct STStaticMesh __cdecl CResourceManager::createStaticMesh(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?createStaticMesh@CResourceManager@@AEAA?AUSTStaticMesh@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 함수)에서 확인하지 못했습니다.
+CSkinnedObject.obj : error LNK2001: D3DXComputeTangent 외부 기호를 확인할 수 없습니다.
+CTerrainObject.obj : error LNK2001: D3DXComputeTangent 외부 기호를 확인할 수 없습니다.
+RenderSystem_CRenderTarget.obj : error LNK2001: D3DXComputeTangent 외부 기호를 확인할 수 없습니다.
+CResourceManager.obj : error LNK2019: D3DXCreateEffectFromFileA 외부 기호(참조 위치: "private: struct ID3DXEffect * __cdecl CResourceManager::createEffect(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?createEffect@CResourceManager@@AEAAPEAUID3DXEffect@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 함수)에서 확인하지 못했습니다.
+CResourceManager.obj : error LNK2019: D3DXCreateTextureFromFileA 외부 기호(참조 위치: "private: struct IDirect3DTexture9 * __cdecl CResourceManager::createTexture(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?createTexture@CResourceManager@@AEAAPEAUIDirect3DTexture9@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 함수)에서 확인하지 못했습니다.
+CResourceManager.obj : error LNK2019: D3DXCreateCubeTextureFromFileA 외부 기호(참조 위치: "private: struct IDirect3DCubeTexture9 * __cdecl CResourceManager::createCubeTexture(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?createCubeTexture@CResourceManager@@AEAAPEAUIDirect3DCubeTexture9@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 함수)에서 확인하지 못했습니다.
+CResourceManager.obj : error LNK2019: D3DXCreateTextureFromFileExA 외부 기호(참조 위치: "private: struct IDirect3DTexture9 * __cdecl CResourceManager::createSpriteTexture(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,float,float)" (?createSpriteTexture@CResourceManager@@AEAAPEAUIDirect3DTexture9@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@MM@Z) 함수)에서 확인하지 못했습니다.
+CSoundManager.obj : error LNK2019: DirectSoundCreate 외부 기호(참조 위치: "private: struct IDirectSound * __cdecl CSoundManager::createDirectSound(void)" (?createDirectSound@CSoundManager@@AEAAPEAUIDirectSound@@XZ) 함수)에서 확인하지 못했습니다.
+CCameraObject.obj : error LNK2019: D3DXMatrixPerspectiveFovLH 외부 기호(참조 위치: "public: void __cdecl CCameraObject::setAspect(float)" (?setAspect@CCameraObject@@QEAAXM@Z) 함수)에서 확인하지 못했습니다.
+CLabelObject.obj : error LNK2019: D3DXCreateFontIndirectA 외부 기호(참조 위치: "private: struct ID3DXFont * __cdecl CLabelObject::createFont(float)" (?createFont@CLabelObject@@AEAAPEAUID3DXFont@@M@Z) 함수)에서 확인하지 못했습니다.
+CSkinnedObject.obj : error LNK2019: D3DXLoadMeshHierarchyFromXA 외부 기호(참조 위치: "private: struct ID3DXMesh * __cdecl CSkinnedObject::createSkinnedMeshFromX(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (?createSkinnedMeshFromX@CSkinnedObject@@AEAAPEAUID3DXMesh@@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) 함수)에서 확인하지 못했습니다.
+CSkinnedObject.obj : error LNK2019: D3DXFrameFind 외부 기호(참조 위치: "private: void __cdecl CSkinnedObject::setupBoneOnMeshContainer(struct _D3DXFRAME *,struct _D3DXMESHCONTAINER *)" (?setupBoneOnMeshContainer@CSkinnedObject@@AEAAXPEAU_D3DXFRAME@@PEAU_D3DXMESHCONTAINER@@@Z) 함수)에서 확인하지 못했습니다.
+CStaticObject.obj : error LNK2019: D3DXComputeBoundingSphere 외부 기호(참조 위치: "private: struct STBoundingSphere __cdecl CStaticObject::createBoundingSphere(void)" (?createBoundingSphere@CStaticObject@@AEAA?AUSTBoundingSphere@@XZ) 함수)에서 확인하지 못했습니다.
+CStaticObject.obj : error LNK2019: D3DXCreateSphere 외부 기호(참조 위치: "private: struct ID3DXMesh * __cdecl CStaticObject::createDebugMesh(void)" (?createDebugMesh@CStaticObject@@AEAAPEAUID3DXMesh@@XZ) 함수)에서 확인하지 못했습니다.
+CTerrainObject.obj : error LNK2019: D3DXCreateMesh 외부 기호(참조 위치: "private: long __cdecl CTerrainObject::createTerrainMesh(void)" (?createTerrainMesh@CTerrainObject@@AEAAJXZ) 함수)에서 확인하지 못했습니다.
+CTerrainObject.obj : error LNK2019: D3DXIntersectTri 외부 기호(참조 위치: "public: bool __cdecl CTerrainObject::terrainPicking(struct D3DXVECTOR3 &)" (?terrainPicking@CTerrainObject@@QEAA_NAEAUD3DXVECTOR3@@@Z) 함수)에서 확인하지 못했습니다.
+CollisionSystem_CFrustum.obj : error LNK2019: D3DXPlaneFromPoints 외부 기호(참조 위치: "public: int __cdecl CFrustum::Make(struct _D3DXMATRIXA16 *)" (?Make@CFrustum@@QEAAHPEAU_D3DXMATRIXA16@@@Z) 함수)에서 확인하지 못했습니다.
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\d3d9.lib : warning LNK4272: 'X86' 라이브러리 컴퓨터 종류가 'x64' 대상 컴퓨터 종류와 충돌합니다.
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\d3dx9.lib : warning LNK4272: 'X86' 라이브러리 컴퓨터 종류가 'x64' 대상 컴퓨터 종류와 충돌합니다.
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\dinput8.lib : warning LNK4272: 'X86' 라이브러리 컴퓨터 종류가 'x64' 대상 컴퓨터 종류와 충돌합니다.
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\dsound.lib : warning LNK4272: 'X86' 라이브러리 컴퓨터 종류가 'x64' 대상 컴퓨터 종류와 충돌합니다.
+C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86\dxguid.lib : warning LNK4272: 'X86' 라이브러리 컴퓨터 종류가 'x64' 대상 컴퓨터 종류와 충돌합니다.
+C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\x64\Debug\SlenderMan.exe : fatal error LNK1120: 34개의 확인할 수 없는 외부 참조입니다.

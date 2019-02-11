@@ -15,6 +15,8 @@
 #include "../../../Utility/Manager/CInputManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CSceneManager.h"
+#include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Button.h"
+#include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Container.h"
 
 
 CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
@@ -26,6 +28,7 @@ CMainPlayScene::~CMainPlayScene()
 {
 	SAFE_DELETE(m_pCamera);
 	SAFE_DELETE(m_pSpotObj);
+	SAFE_DELETE(menuContainer);
 }
 
 void CMainPlayScene::init()
@@ -37,9 +40,15 @@ void CMainPlayScene::init()
 		this->createRenderTarget();
 		this->createCamera();
 		this->createSound();
+		this->createContainer();
 
 		m_pSpotObj = this->createSpotObj();
 		isFirst = false;
+
+		crashFptr = new std::function<void(void)>;
+		beginFptr = new std::function<void(void)>;
+		pressFptr = new std::function<void(void)>;
+		endFptr = new std::function<void(void)>;
 	}
 
 
@@ -57,6 +66,27 @@ void CMainPlayScene::init()
 
 void CMainPlayScene::createWindowUI()
 {
+	this->createButton();
+
+	menuContainer = new CSpriteObject_Container("Resources/Textures/Scene/MainPlayScene/menuWindow", "png", 500, 500, 1);
+	menuContainer->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
+	menuContainer->setVisible(false);
+	menuContainer->init(nullptr, nullptr, nullptr, nullptr);
+
+	exitButton = new CSpriteObject_Button("Resources/Textures/Scene/MainPlayScene/exit", "png", 100, 100, 2);
+	exitButton->setPosition(D3DXVECTOR3(0, 0, 0));
+	/*(*crashFptr) = [=](void)->void
+	{
+		exitButton->getTextureOffset() = 1;
+	};
+	(*endFptr) = [=](void)->void
+	{
+		CHANGE_SCENE_LOADING(GAMESCENE_TITLE, TRUE);
+	};*/
+	exitButton->init(crashFptr, nullptr, nullptr, endFptr, true);
+
+
+	menuContainer->addChildSpriteObject("backTitle", CWindowType::BUTTON, exitButton);
 }
 
 void CMainPlayScene::createRenderTarget()
@@ -66,8 +96,6 @@ void CMainPlayScene::createRenderTarget()
 	GET_RENDERTARGET_MANAGER()->addRenderTarget("TestRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
 
 }
-
-
 
 void CMainPlayScene::createCamera()
 {
@@ -87,6 +115,15 @@ CSpotLightObject * CMainPlayScene::createSpotObj()
 	return new CSpotLightObject(0,300.0f,D3DXToRadian(5.0f),D3DXToRadian(15.0f));
 }
 
+void CMainPlayScene::createButton()
+{
+	
+}
+
+void CMainPlayScene::createContainer()
+{
+	
+}
 
 void CMainPlayScene::update(void)
 {
@@ -94,6 +131,11 @@ void CMainPlayScene::update(void)
 	m_pCamera->update();
 	m_pSpotObj->update();
 	m_pStage->update();
+	menuContainer->update();
+
+	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
+		menuContainer->setVisible(true);
+	}
 
 	if (IS_MOUSE_BUTTON_DOWN(EMouseInput::RIGHT)) {
 		float fSpeed = 15.0f;
@@ -214,6 +256,7 @@ void CMainPlayScene::draw(void)
 void CMainPlayScene::drawUI(void)
 {
 	CScene::drawUI();
+	menuContainer->drawUI();
 }
 
 LRESULT CMainPlayScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
