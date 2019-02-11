@@ -10,6 +10,7 @@
 #include "../../../Utility/Manager/CInputManager.h"
 #include "../../../Utility/Manager/CRendertargetManager.h"
 #include "../../../Utility/Manager/CDeviceManager.h"
+#include "../../../Utility/Manager/CSoundManager.h"
 #include "../../../Function/GlobalFunction.h"
 
 CTitleScene::CTitleScene(std::string a_stSceneName)
@@ -57,11 +58,8 @@ void CTitleScene::init()
 		this->createDefaultUI();
 		this->createWindowUI();
 		isFirst = false;
+		this->createSound();
 	}
-
-
-	
-
 }
 
 void CTitleScene::createWindowUI()
@@ -221,6 +219,11 @@ void CTitleScene::createButtonUI()
 
 }
 
+void CTitleScene::createSound()
+{
+	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/Title.wav", true);
+}
+
 void CTitleScene::update(void)
 {
 	CScene::update();
@@ -235,6 +238,8 @@ void CTitleScene::update(void)
 		m_pCurrentSpriteHandle->update();
 	}
 	printf("%f\n", soundScrollBar->getSetValue());
+
+	this->setVolume();
 }
 
 void CTitleScene::defaultImageUpdate()
@@ -292,6 +297,13 @@ void CTitleScene::buttonImageDrawUI()
 	optionButton->drawUI();
 	mapToolButton->drawUI();
 	exitButton->drawUI();
+}
+
+void CTitleScene::setVolume()
+{
+	if (m_pCurrentSpriteHandle == optionWindow) {
+		GET_SOUND_MANAGER()->setBackgroundSoundVolume(soundScrollBar->getSetValue() / 300);
+	}
 }
 
 

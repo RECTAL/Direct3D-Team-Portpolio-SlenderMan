@@ -45,6 +45,7 @@ private:
 	void defaultImageDrawUI();
 	void buttonImageDrawUI();
 
+	void setVolume();
 	
 private:
 	CSpriteObject_Default* m_pSprite_BackGround = nullptr;

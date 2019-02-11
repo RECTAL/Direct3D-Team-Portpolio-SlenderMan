@@ -18,7 +18,6 @@
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Button.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Container.h"
 
-
 CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
 {
@@ -39,7 +38,6 @@ void CMainPlayScene::init()
 		this->createWindowUI();
 		this->createRenderTarget();
 		this->createCamera();
-		this->createSound();
 		this->createContainer();
 
 		m_pSpotObj = this->createSpotObj();
@@ -62,6 +60,7 @@ void CMainPlayScene::init()
 	{
 		m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = m_pSpotObj;
 	}
+	
 }
 
 void CMainPlayScene::createWindowUI()
@@ -101,13 +100,80 @@ void CMainPlayScene::createCamera()
 {
 	m_pCamera = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
 	m_pCamera->setPosition(D3DXVECTOR3(0.0f, 0.0f, -5.0f));
-
 }
 
 
 void CMainPlayScene::createSound()
 {
-	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/BGM_1.wav", true);
+	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_1.wav", true);
+	GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Breathe.wav", true);
+}
+
+void CMainPlayScene::setStateSound()
+{
+	switch (m_pPlayerState)
+	{
+	case EPlayerState::WALKGRASS:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Grass.wav", false);
+		break;
+	case EPlayerState::WALKROCK:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Rock.wav", false);
+		break;
+	case EPlayerState::WALKREED:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Reed.wav", false);
+		break;
+	case EPlayerState::PICK:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Pick.wav", false);
+		break;
+	case EPlayerState::SLENDER:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Slenderman.wav", false);
+		break;
+	case EPlayerState::HEARTBEAT:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/HeartBeat.wav", false);
+		break;
+	case EPlayerState::NONE:
+		//GET_SOUND_MANAGER()->stopAllEffectSounds("Resources/Sounds/EffectSounds/%s.wav");
+		break;
+	}
+}
+
+void CMainPlayScene::setBGMSound()
+{
+	switch (m_pPlayingBGM)
+	{
+	case EPlayingBGM::WIND:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Wind.wav", false);
+		break;
+	case EPlayingBGM::RAIN:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Rain.wav", false);
+		break;
+	case EPlayingBGM::CRIKET:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Criket.wav", false);
+		break;
+	case EPlayingBGM::BIRD:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Bird.wav", false);
+		break;
+	case EPlayingBGM::FIRE:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Fire.wav", false);
+		break;
+	case EPlayingBGM::OWL:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Owl.wav", false);
+		break;
+	case EPlayingBGM::MYSTERIOUSE:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Mysteriouse.wav", false);
+		break;
+	case EPlayingBGM::NOISE_1:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
+		break;
+	case EPlayingBGM::NOISE_2:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
+		break;
+	case EPlayingBGM::NOISE_3:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_3.wav", false);
+		break;
+	case EPlayingBGM::NONE:
+		break;
+	}
 }
 
 CSpotLightObject * CMainPlayScene::createSpotObj()
@@ -133,6 +199,11 @@ void CMainPlayScene::update(void)
 	m_pStage->update();
 	menuContainer->update();
 
+	if (isBGMPlay)
+	{
+		this->createSound();
+		isBGMPlay = false;
+	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
 		menuContainer->setVisible(true);
 	}
@@ -181,14 +252,14 @@ void CMainPlayScene::update(void)
 
 		if (IS_KEY_DOWN(DIK_SPACE)) {
 			m_pCamera->moveByYAxis(10 * GET_DELTA_TIME());
-
 		}
 
 		if (IS_KEY_DOWN(DIK_W)) {
+		
 			m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
 			m_pSpotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
 		}
-		else if (IS_KEY_DOWN(DIK_S)) {
+		if (IS_KEY_DOWN(DIK_S)) {
 			m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
 			m_pSpotObj->moveByZAxis(-fSpeed * GET_DELTA_TIME());
 		}
@@ -232,8 +303,6 @@ void CMainPlayScene::draw(void)
 	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("TestRenderTarget")->m_stRenderTarget.m_pDepthStencil);
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0.0f);
 	
-
-
 	m_pStage->draw();
 
 	/***************************************************/
@@ -250,7 +319,6 @@ void CMainPlayScene::draw(void)
 	RunEffectLoop(FIND_RENDERTARGET("TestRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
 		FIND_RENDERTARGET("TestRenderTarget")->getPlaneMesh()->DrawSubset(0);
 	});
-
 }
 
 void CMainPlayScene::drawUI(void)

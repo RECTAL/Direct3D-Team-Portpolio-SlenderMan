@@ -34,6 +34,8 @@ private:
 	void	createRenderTarget();
 	void	createCamera();
 	void	createSound();
+	void	setStateSound();
+	void	setBGMSound();
 
 public:
 	CSpotLightObject* createSpotObj();
@@ -51,12 +53,18 @@ private:
 
 	CStage* m_pStage;
 	bool isFirst = true;
+	bool isBGMPlay = true;
 
 	CSpriteObject_Button* exitButton = nullptr;
 	CSpriteObject_Container* menuContainer = nullptr;
+
+	EPlayerState m_pPlayerState = EPlayerState::NONE;
+	EPlayingBGM m_pPlayingBGM = EPlayingBGM::NONE;
 
 	FPTR* crashFptr = nullptr;
 	FPTR* beginFptr = nullptr;
 	FPTR* pressFptr = nullptr;
 	FPTR* endFptr = nullptr;
+
+	char fileName[8] = {};
 };
