@@ -3,8 +3,8 @@
 #include "../../../Utility/Base/CScene.h"
 
 #define MAX_TREE 6
-#define MAX_BUILDING 3
-#define MAX_OBJECT 3
+#define MAX_HOUSE 2
+#define MAX_OBJECT 4
 
 class CSpriteObject;
 class CSpriteObject_ScrollBar;
@@ -59,51 +59,64 @@ private:
 	void createButtonUI();
 	void createCameraObj();
 	void createStage();
-	void buttonUpdate();
 
+	void buttonUpdate();
+	void listUpdate();
+
+	// 버튼 만들기
 	void createTreeButton(void);
 	void createBuildingButton(void);
 	void createObjectButton(void);
 
+	// 버튼 그리기
 	void buttonDrawUI();
+
+	// 키입력
 	void inputKey(void);
+
+	// 제거
+	void removeButton(void);
+	void removeList(void);
+
 private:
 	POINT m_stPrevMousePosition;
 
 
-	CSpriteObject_Container* selectWindowContainer = nullptr;
-	CSpriteObject_Button* upCover = nullptr;
-	CSpriteObject_Button* downCover = nullptr;
+	CSpriteObject_Container* m_pSelectWindowContainer = nullptr;
+	CSpriteObject_Button* m_pUpCover = nullptr;
+	CSpriteObject_Button* m_pDownCover = nullptr;
 
-	CSpriteObject_ScrollBar* UpDownScrollBar = nullptr;
-	CSpriteObject_Button*	 scrollBarButton = nullptr;
+	CSpriteObject_ScrollBar* m_pUpDownScrollBar = nullptr;
+	CSpriteObject_Button*	 m_pScrollBarButton = nullptr;
 
 	CSpriteObject_List*		 m_pSpriteList = nullptr;
 	CSpriteObject_Button*	 m_pSpriteListButton[3] = { nullptr };
 
-	CSpriteObject_Button* openButton = nullptr;
-	CSpriteObject_Button* closeButton = nullptr;
-	CSpriteObject_Button* buildingButton = nullptr;
-	CSpriteObject_Button* terrainButton = nullptr;
-	CSpriteObject_Button* backButton = nullptr;
-	CSpriteObject_Button* goTitleButton = nullptr;
+	CSpriteObject_Button* m_pOpenButton = nullptr;
+	CSpriteObject_Button* m_pCloseButton = nullptr;
+	CSpriteObject_Button* m_pBuildingButton = nullptr;
+	CSpriteObject_Button* m_pTerrainButton = nullptr;
+	CSpriteObject_Button* m_pBackButton = nullptr;
+	CSpriteObject_Button* m_pGoTitleButton = nullptr;
+
+	CSpriteObject_Button* m_pTreeButton[MAX_TREE] = { nullptr };
+	CSpriteObject_Button* m_pHouseButton[MAX_HOUSE] = { nullptr };
+	CSpriteObject_Button* m_pObjectButton[MAX_OBJECT] = { nullptr };
+
+	CSpriteObject_Button* m_pSaveButton = nullptr;
+	CSpriteObject_Button* m_pLoadButton = nullptr;
 
 	CSpriteObject* m_pCurrent = nullptr;
 	CStage*		   m_pStage = nullptr;
 
 	CCameraObject* m_pCamera = nullptr;
 
-	CSpriteObject_Button* squareUpCover = nullptr;
+	CSpriteObject_Button* m_pSquareUpCover = nullptr;
 	CSpriteObject_ListSquare* m_pTreeListSquare = nullptr;
 	CSpriteObject_ListSquare* m_pBuildingListSquare = nullptr;
 	CSpriteObject_ListSquare* m_pObjectListSquare = nullptr;
 
-	CSpriteObject_Button* m_pTreeButton[MAX_TREE] = { nullptr };
-	CSpriteObject_Button* m_pBuildingButton[MAX_BUILDING] = { nullptr };
-	CSpriteObject_Button* m_pObjectButton[MAX_OBJECT] = { nullptr };
 
-	CSpriteObject_Button* saveButton = nullptr;
-	CSpriteObject_Button* loadButton = nullptr;
 
 
 	MouseInfo		m_stMouseInfo;
