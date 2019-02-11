@@ -15,6 +15,7 @@ class CSpriteObject_ListSquare;
 class CStage;
 class CCameraObject;
 class CRenderObject;
+class CLabelObject;
 class CMapToolScene :public CScene
 {
 private:
@@ -59,13 +60,19 @@ private:
 	void createButtonUI();
 	void createCameraObj();
 	void createStage();
+
+	void createLabel();
+
 	void buttonUpdate();
+	void labelUpdate();
 
 	void createTreeButton(void);
 	void createBuildingButton(void);
 	void createObjectButton(void);
 
 	void buttonDrawUI();
+	void labelDrawUI();
+
 	void inputKey(void);
 private:
 	POINT m_stPrevMousePosition;
@@ -104,6 +111,10 @@ private:
 
 	CSpriteObject_Button* saveButton = nullptr;
 	CSpriteObject_Button* loadButton = nullptr;
+
+
+	CLabelObject*		m_pScaleLabel;
+	CLabelObject*		m_pRotateLabel;
 
 
 	MouseInfo		m_stMouseInfo;
