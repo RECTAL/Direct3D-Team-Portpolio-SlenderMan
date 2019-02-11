@@ -15,6 +15,7 @@ class CSpriteObject_ListSquare;
 class CStage;
 class CCameraObject;
 class CRenderObject;
+class CLabelObject;
 class CMapToolScene :public CScene
 {
 private:
@@ -60,8 +61,11 @@ private:
 	void createCameraObj();
 	void createStage();
 
+	void createLabel();
+
 	void buttonUpdate();
 	void listUpdate();
+	void labelUpdate();
 
 	// 버튼 만들기
 	void createTreeButton(void);
@@ -70,6 +74,8 @@ private:
 
 	// 버튼 그리기
 	void buttonDrawUI();
+	void labelDrawUI();
+
 
 	// 키입력
 	void inputKey(void);
@@ -117,6 +123,10 @@ private:
 	CSpriteObject_ListSquare* m_pObjectListSquare = nullptr;
 
 
+
+
+	CLabelObject*		m_pScaleLabel;
+	CLabelObject*		m_pRotateLabel;
 
 
 	MouseInfo		m_stMouseInfo;

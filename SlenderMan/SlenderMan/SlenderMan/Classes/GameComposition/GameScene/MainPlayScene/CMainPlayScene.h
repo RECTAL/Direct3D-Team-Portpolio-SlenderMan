@@ -2,8 +2,8 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
-
-
+class CSpriteObject_Button;
+class CSpriteObject_Container;
 class CCameraObject;
 class CTerrainObject;
 class CStaticObject;
@@ -38,6 +38,9 @@ private:
 public:
 	CSpotLightObject* createSpotObj();
 private:
+	void createContainer();
+	void createButton();
+private:
 	POINT m_stPrevMousePosition;
 
 	CCameraObject* m_pCamera = nullptr;
@@ -48,4 +51,12 @@ private:
 
 	CStage* m_pStage;
 	bool isFirst = true;
+
+	CSpriteObject_Button* exitButton = nullptr;
+	CSpriteObject_Container* menuContainer = nullptr;
+
+	FPTR* crashFptr = nullptr;
+	FPTR* beginFptr = nullptr;
+	FPTR* pressFptr = nullptr;
+	FPTR* endFptr = nullptr;
 };

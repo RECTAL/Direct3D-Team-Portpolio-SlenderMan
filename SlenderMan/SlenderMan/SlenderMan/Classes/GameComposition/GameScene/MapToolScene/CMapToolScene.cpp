@@ -7,6 +7,7 @@
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CInputManager.h"
 #include "../../../Utility/Manager/CDeviceManager.h"
+#include "../../../Utility/Object/LabelObject/CLabelObject.h"
 #include "../../../Utility/Object/CameraObject/CCameraObject.h"
 #include "../../../Utility/Object/LightObject/CLightObject.h"
 #include "../../../Utility/Object/LightObject/SpotLightObject/SpotLightObject.h"
@@ -51,6 +52,7 @@ void CMapToolScene::init()
 		this->createStage();
 		this->createWindowUI();
 		this->createButtonUI();
+		this->createLabel();
 
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		m_stMouseInfo.m_pRenderObj = (CRenderObject*) new CObject();
@@ -340,12 +342,19 @@ void CMapToolScene::createStage()
 	m_pStage->getbIsMaptool() = TRUE;
 }
 
+void CMapToolScene::createLabel()
+{
+	m_pScaleLabel = new CLabelObject("", 20);
+	m_pRotateLabel = new CLabelObject("", 20);
+}
+
 void CMapToolScene::update(void)
 {
 	CScene::update();
 	m_pSelectWindowContainer->update();
 	this->listUpdate();
 	this->buttonUpdate();
+	this->labelUpdate();
 
 	printf("%f\n", m_pUpDownScrollBar->getSetValue());
 	m_pCamera->update();
@@ -384,6 +393,15 @@ void CMapToolScene::listUpdate()
 	m_pTreeListSquare->update();
 	m_pBuildingListSquare->update();
 	m_pObjectListSquare->update();
+}
+
+void CMapToolScene::labelUpdate()
+{
+	m_pScaleLabel->setPosition(D3DXVECTOR3(100, 10, 0));
+	m_pRotateLabel->setPosition(D3DXVECTOR3(500, 10, 0));
+
+	m_pScaleLabel->update();
+	m_pRotateLabel->update();
 }
 
 void CMapToolScene::createTreeButton(void)
@@ -527,7 +545,6 @@ void CMapToolScene::createObjectButton(void)
 void CMapToolScene::draw(void)
 {
 	CScene::draw();
-
 	m_pStage->draw();
 }
 
@@ -540,6 +557,7 @@ void CMapToolScene::drawUI(void)
 	m_pObjectListSquare->drawUI();
 
 	this->buttonDrawUI();
+	this->labelDrawUI();
 
 }
 
@@ -552,6 +570,25 @@ void CMapToolScene::buttonDrawUI()
 	m_pSquareUpCover->drawUI();
 	m_pSaveButton->drawUI();
 	m_pLoadButton->drawUI();
+}
+
+void CMapToolScene::labelDrawUI()
+{
+	char cScaleValue[100];
+	sprintf(cScaleValue, "scale X:%06.2f ,scale Y:%06.2f ,scale Z:%06.2f", m_stMouseInfo.m_pRenderObj->getScale().x, m_stMouseInfo.m_pRenderObj->getScale().y, m_stMouseInfo.m_pRenderObj->getScale().z);
+	m_pScaleLabel->setString(cScaleValue);
+	m_pScaleLabel->drawUI();
+
+
+	char cRotateValue[300];
+	sprintf(cRotateValue, "RightDirection X:%01.2f ,Y:%01.2f ,Z:%01.2f \n UpDirection X:%01.2f ,Y:%01.2f ,Z:%01.2f \n ForwardDirection X:%01.2f ,Y:%01.2f ,Z:%01.2f"
+		, m_stMouseInfo.m_pRenderObj->getRightDirection().x, m_stMouseInfo.m_pRenderObj->getRightDirection().y, m_stMouseInfo.m_pRenderObj->getRightDirection().z
+		, m_stMouseInfo.m_pRenderObj->getUpDirection().x, m_stMouseInfo.m_pRenderObj->getUpDirection().y, m_stMouseInfo.m_pRenderObj->getUpDirection().z
+		, m_stMouseInfo.m_pRenderObj->getForwardDirection().x, m_stMouseInfo.m_pRenderObj->getForwardDirection().y, m_stMouseInfo.m_pRenderObj->getForwardDirection().z);
+	
+	m_pRotateLabel->setString(cRotateValue);
+	m_pRotateLabel->drawUI();
+
 }
 
 void CMapToolScene::inputKey(void)
