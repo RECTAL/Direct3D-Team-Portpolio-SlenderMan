@@ -799,6 +799,37 @@ void CStage::setCameraObj(CCameraObject * a_pCameraObj)
 	}
 }
 
+void CStage::setObjEffectTechname(std::string a_stTechname)
+{
+	if (m_pObjList != nullptr&&m_pTerrainObj != nullptr)
+	{
+		int fWidth = m_pTerrainObj->getCXDIB();
+		int fHeight = m_pTerrainObj->getCZDIB();
+
+
+		for (int i = 0; i < fWidth*fHeight; i++)
+		{
+			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
+			{
+				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
+				else
+				{
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+					{
+						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
+
+					}
+					else
+					{
+						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
+						pStaticObj->getTechniqueName() = a_stTechname;
+					}
+				}
+			}
+		}
+	}
+}
+
 void CStage::addSpotLightObj(CSpotLightObject * a_pSpotLightObj)
 {
 	CSpotLightObject* pSpotLight = a_pSpotLightObj;

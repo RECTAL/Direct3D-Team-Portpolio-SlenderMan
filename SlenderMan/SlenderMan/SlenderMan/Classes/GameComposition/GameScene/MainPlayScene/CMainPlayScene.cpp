@@ -35,6 +35,12 @@ void CMainPlayScene::init()
 	CScene::init();
 	if (isFirst)
 	{
+
+		crashFptr = new std::function<void(void)>;
+		beginFptr = new std::function<void(void)>;
+		pressFptr = new std::function<void(void)>;
+		endFptr = new std::function<void(void)>;
+
 		this->createWindowUI();
 		this->createRenderTarget();
 		this->createCamera();
@@ -43,24 +49,81 @@ void CMainPlayScene::init()
 		m_pSpotObj = this->createSpotObj();
 		isFirst = false;
 
-		crashFptr = new std::function<void(void)>;
-		beginFptr = new std::function<void(void)>;
-		pressFptr = new std::function<void(void)>;
-		endFptr = new std::function<void(void)>;
 	}
 
 
 	CMapToolScene* pMapToolScene = dynamic_cast<CMapToolScene*>(FIND_SCENE(GAMESCENE_MAPTOOL));
+	pMapToolScene->init();
 	m_pStage = pMapToolScene->getStage();
+	//m_pStage->setCameraObjMain(m_pCamera);
+	//m_pStage->addSpotLightObj(m_pSpotObj);
+	//m_pStage->setObjEffectTechname("FogStaticMesh");
+	//
+	//int nNumSpot = ++m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight;
+	//if (nNumSpot < 10)
+	//{
+	//	m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = m_pSpotObj;
+	//}
+	//
+	//m_pStage->getTerrainObj()->getTechniqueName() = "fogTerrain";
+	//m_pCamera->setPosition(D3DXVECTOR3(100, 200, 100));
+
+
+
+	CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+	CLightObject** ppPointLightObj = new CLightObject*[10];
+
+	CTerrainObject::STParameters stParameters;
+	stParameters.m_pCamera = m_pCamera;
+	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.010f, 1.0f);
+	stParameters.m_oHeightFilepath = "Resources/Datas/realterrain.raw";
+	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap2.png";
+	stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
+
+	stParameters.m_stMapSize.cx = 513;
+	stParameters.m_stMapSize.cy = 513;
+
+	stParameters.m_nSmoothLevel = 1;
+
+	stParameters.m_nNumSpotLight = 0;
+	stParameters.m_pSpotLight = ppSpotLightObj;
+
+	stParameters.m_nNumPointLight = 0;
+	stParameters.m_pPointLight = ppPointLightObj;
+
+
+	for (int i = 0; i < CTerrainObject::MAX_TERRAIN_TEX; ++i) {
+		char szFilepath[MAX_PATH] = "";
+		sprintf(szFilepath, "Resources/Textures/Terrain/Terrain_%02d.jpg", i + 1);
+
+		stParameters.m_oTextureFilepathList.push_back(szFilepath);
+	}
+
+
+	WIN32_FIND_DATAA fileData;
+	if (FindFirstFile("Resources/Datas/ObjPacket.map", &fileData) != INVALID_HANDLE_VALUE)
+	{
+		m_pStage->setCameraObj(m_pCamera);
+		m_pStage->getbIsMaptool() = FALSE;
+		m_pStage->load(stParameters, "Resources/Datas/ObjPacket.map");
+	}
+	else
+	{
+		m_pStage->setCameraObj(m_pCamera);
+		m_pStage->getbIsMaptool() = FALSE;
+		m_pStage->load(stParameters, "");
+	}
 	m_pStage->setCameraObjMain(m_pCamera);
 	m_pStage->addSpotLightObj(m_pSpotObj);
-
+	m_pStage->getTerrainObj()->getTechniqueName() = "fogTerrain";
+	m_pStage->setObjEffectTechname("FogStaticMesh");
 	int nNumSpot = ++m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight;
 	if (nNumSpot < 10)
 	{
 		m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = m_pSpotObj;
 	}
-	
+
+	m_pCamera->setPosition(D3DXVECTOR3(100, 200, 100));
 }
 
 void CMainPlayScene::createWindowUI()
@@ -74,14 +137,14 @@ void CMainPlayScene::createWindowUI()
 
 	exitButton = new CSpriteObject_Button("Resources/Textures/Scene/MainPlayScene/exit", "png", 100, 100, 2);
 	exitButton->setPosition(D3DXVECTOR3(0, 0, 0));
-	/*(*crashFptr) = [=](void)->void
+	(*crashFptr) = [=](void)->void
 	{
 		exitButton->getTextureOffset() = 1;
 	};
 	(*endFptr) = [=](void)->void
 	{
 		CHANGE_SCENE_LOADING(GAMESCENE_TITLE, TRUE);
-	};*/
+	};
 	exitButton->init(crashFptr, nullptr, nullptr, endFptr, true);
 
 
@@ -199,6 +262,7 @@ void CMainPlayScene::update(void)
 	m_pStage->update();
 	menuContainer->update();
 
+	m_pSpotObj->setPosition(m_pCamera->getPosition());
 	if (isBGMPlay)
 	{
 		this->createSound();
@@ -271,23 +335,6 @@ void CMainPlayScene::update(void)
 		else if (IS_KEY_DOWN(DIK_D)) {
 			m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
 			m_pSpotObj->moveByXAxis(fSpeed * GET_DELTA_TIME());
-		}
-
-		if (IS_KEY_DOWN(DIK_Q)) {
-			//m_pCamera->rotateByYAxis(-90.0f * GET_DELTA_TIME(), false);
-			m_pSpotObj->rotateByYAxis(-90.0f * GET_DELTA_TIME(), false);
-		}
-		else if (IS_KEY_DOWN(DIK_E)) {
-			//m_pCamera->rotateByYAxis(90.0f * GET_DELTA_TIME(), false);
-			m_pSpotObj->rotateByYAxis(90.0f * GET_DELTA_TIME(), false);
-		}
-		else if (IS_KEY_DOWN(DIK_Z)) {
-			//m_pCamera->rotateByYAxis(-90.0f * GET_DELTA_TIME(), false);
-			m_pSpotObj->rotateByXAxis(-90.0f * GET_DELTA_TIME(), false);
-		}
-		else if (IS_KEY_DOWN(DIK_C)) {
-			//m_pCamera->rotateByYAxis(90.0f * GET_DELTA_TIME(), false);
-			m_pSpotObj->rotateByXAxis(90.0f * GET_DELTA_TIME(), false);
 		}
 	}
 

@@ -40,6 +40,7 @@ public:
 	void	delObj(CRenderObject* a_pRenderObj, D3DXVECTOR3 a_stPosition);
 	void	setCameraObjMain(CCameraObject* a_pCameraObj);
 	void	setCameraObj(CCameraObject* a_pCameraObj);
+	void	setObjEffectTechname(std::string a_stTechname);
 	void	addSpotLightObj(CSpotLightObject* a_pSpotLightObj);
 	void	save(std::string m_oObjPacketListFilePath);
 	void	update();
@@ -48,7 +49,9 @@ public:
 
 	bool	getPickingPosWithTerrain(D3DXVECTOR3& a_stPosition);
 
+
 	CTerrainObject*	getTerrainObj(){ return m_pTerrainObj; }
+	CLightObject*	getDirectionalLightObj() { return m_pDirectionLightObj; }
 	std::vector<CRenderObject*>*	getObjList() { return m_pObjList; }
 	BOOL&	getbIsMaptool() { return m_bIsMaptool; }
 

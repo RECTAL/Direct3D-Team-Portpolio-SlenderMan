@@ -61,6 +61,7 @@ void CMapToolScene::init()
 
 		isFirst = false;
 	}
+	m_pCamera->setPosition(D3DXVECTOR3(100, 100, 100));
 }
 
 void CMapToolScene::createWindowUI()
@@ -267,7 +268,7 @@ void CMapToolScene::createButtonUI()
 
 		CTerrainObject::STParameters stParameters;
 		stParameters.m_pCamera = m_pCamera;
-		stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.015f, 1.0f);
+		stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.010f, 1.0f);
 		stParameters.m_oHeightFilepath = "Resources/Datas/realterrain.raw";
 		stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap2.png";
 		stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
@@ -314,7 +315,7 @@ void CMapToolScene::createStage()
 
 	CTerrainObject::STParameters stParameters;
 	stParameters.m_pCamera = m_pCamera;
-	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.015f, 1.0f);
+	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.010f, 1.0f);
 	stParameters.m_oHeightFilepath = "Resources/Datas/realterrain.raw";
 	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap2.png";
 	stParameters.m_oEffectFilepath = "Resources/Effects/DefaultTerrain.fx";
@@ -361,7 +362,17 @@ void CMapToolScene::update(void)
 	m_pStage->update();
 	this->inputKey();
 
-	m_pSpriteList->getMoveOffset() = D3DXVECTOR3(0, -m_pUpDownScrollBar->getSetValue(), 0);
+	m_pSpriteList->getMoveOffset() = D3DXVECTOR3(0, -UpDownScrollBar->getSetValue(), 0);
+
+
+	D3DXVECTOR3 pos;
+	m_stMouseInfo.m_bDraw = false;
+	if (m_pStage->getPickingPosWithTerrain(pos))
+	{
+		m_stMouseInfo.m_bDraw = true;
+		if (m_stMouseInfo.m_pRenderObj != nullptr)m_stMouseInfo.m_pRenderObj->setPosition(pos);
+		m_stMouseInfo.m_pRenderObj->update();
+	}
 }
 
 void CMapToolScene::buttonUpdate()
@@ -415,6 +426,16 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_1;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/tree1/tree1.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pTreeButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -422,6 +443,16 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_2;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/tree2/tree2.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pTreeButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -429,6 +460,16 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_3;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/tree3/tree3.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pTreeButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -436,6 +477,16 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_4;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/tree4/tree4.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pTreeButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -443,6 +494,16 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_5;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/tree5/tree5.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pTreeButton[4]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -450,6 +511,16 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_6;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/tree6/tree6.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pTreeButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -472,6 +543,16 @@ void CMapToolScene::createBuildingButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::OLDHOUSE;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/oldHouse/oldHouse.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pHouseButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -479,6 +560,16 @@ void CMapToolScene::createBuildingButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::WOODHOUSE;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/woodHouse/woodHouse.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pHouseButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -486,7 +577,16 @@ void CMapToolScene::createBuildingButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::OLDWOODDOCK;
-
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/oldWoodDock/oldWoodDock.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pHouseButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -510,6 +610,16 @@ void CMapToolScene::createObjectButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::URBANDEBRIS;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/urbanDebris/urbanDebris.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pObjectButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -517,6 +627,16 @@ void CMapToolScene::createObjectButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::PLANTS;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/plants/plants.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pObjectButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -524,6 +644,16 @@ void CMapToolScene::createObjectButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::ROUNDWOOD;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/roundwood/roundwood.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 	};
 	m_pObjectButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -546,6 +676,7 @@ void CMapToolScene::draw(void)
 {
 	CScene::draw();
 	m_pStage->draw();
+	
 }
 
 void CMapToolScene::drawUI(void)
