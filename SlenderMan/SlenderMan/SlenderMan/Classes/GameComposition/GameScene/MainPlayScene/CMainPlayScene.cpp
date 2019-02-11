@@ -62,6 +62,8 @@ void CMainPlayScene::init()
 	{
 		m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = m_pSpotObj;
 	}
+
+	m_pStage->getTerrainObj()->getTechniqueName() = "fogTerrain";
 }
 
 void CMainPlayScene::createWindowUI()
@@ -133,6 +135,7 @@ void CMainPlayScene::update(void)
 	m_pStage->update();
 	menuContainer->update();
 
+	m_pSpotObj->setPosition(m_pCamera->getPosition());
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
 		menuContainer->setVisible(true);
 	}

@@ -55,7 +55,7 @@ LPDIRECT3DDEVICE9 CDeviceManager::createDevice(void)
 	stParameters.AutoDepthStencilFormat = D3DFMT_D24S8;
 
 	stParameters.Flags = 0;
-	stParameters.Windowed = true;
+	stParameters.Windowed = false;
 	stParameters.hDeviceWindow = GET_WINDOW_HANDLE();
 
 	stParameters.FullScreen_RefreshRateInHz = D3DPRESENT_INTERVAL_DEFAULT;
