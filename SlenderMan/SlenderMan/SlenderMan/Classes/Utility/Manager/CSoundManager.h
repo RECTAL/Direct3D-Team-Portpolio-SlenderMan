@@ -11,7 +11,7 @@ public:
 
 	enum
 	{
-		MAX_NUM_DUPLICATE_EFFECT_SOUNDS = 5
+		MAX_NUM_DUPLICATE_EFFECT_SOUNDS = 1
 	};
 
 	

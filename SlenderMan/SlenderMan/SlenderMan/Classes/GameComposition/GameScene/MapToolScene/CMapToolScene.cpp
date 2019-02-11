@@ -362,7 +362,7 @@ void CMapToolScene::update(void)
 	m_pStage->update();
 	this->inputKey();
 
-	m_pSpriteList->getMoveOffset() = D3DXVECTOR3(0, -UpDownScrollBar->getSetValue(), 0);
+	m_pSpriteList->getMoveOffset() = D3DXVECTOR3(0, -m_pUpDownScrollBar->getSetValue(), 0);
 
 
 	D3DXVECTOR3 pos;

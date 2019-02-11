@@ -165,7 +165,6 @@ void CMainPlayScene::createCamera()
 	m_pCamera->setPosition(D3DXVECTOR3(0.0f, 0.0f, -5.0f));
 }
 
-
 void CMainPlayScene::createSound()
 {
 	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_1.wav", true);
@@ -196,6 +195,7 @@ void CMainPlayScene::setStateSound()
 		break;
 	case EPlayerState::NONE:
 		//GET_SOUND_MANAGER()->stopAllEffectSounds("Resources/Sounds/EffectSounds/%s.wav");
+		GET_SOUND_MANAGER()->stopAllEffectSounds();
 		break;
 	}
 }
@@ -261,6 +261,7 @@ void CMainPlayScene::update(void)
 	m_pSpotObj->update();
 	m_pStage->update();
 	menuContainer->update();
+	this->setStateSound();
 
 	m_pSpotObj->setPosition(m_pCamera->getPosition());
 	if (isBGMPlay)
@@ -322,6 +323,11 @@ void CMainPlayScene::update(void)
 		
 			m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
 			m_pSpotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
+			m_pPlayerState = EPlayerState::WALKGRASS;
+		}
+		else
+		{
+			m_pPlayerState = EPlayerState::NONE;
 		}
 		if (IS_KEY_DOWN(DIK_S)) {
 			m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
