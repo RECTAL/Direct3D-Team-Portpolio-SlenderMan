@@ -21,6 +21,7 @@ class CMapToolScene :public CScene
 private:
 	struct MouseInfo
 	{
+		bool m_bDraw = false;
 		bool m_bIsSkinned = false;
 		EObjType	   m_eObjType = EObjType::NONE;
 		CRenderObject* m_pRenderObj = nullptr;

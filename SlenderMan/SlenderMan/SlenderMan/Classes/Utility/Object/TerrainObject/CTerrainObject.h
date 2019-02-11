@@ -100,7 +100,7 @@ private:
 	STParameters					m_stParameters;
 	LPD3DXEFFECT					m_pEffect = nullptr;
 	LPDIRECT3DVERTEXDECLARATION9	m_pVertexDeclaration = nullptr;
-	std::string						m_stTechniqueName;
+	std::string						m_stTechniqueName = "DefaultTerrain";
 
 	std::vector<float>				m_oHeightList;
 };

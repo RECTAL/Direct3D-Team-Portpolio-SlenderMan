@@ -51,7 +51,7 @@ protected:
 	STStaticMesh m_stStaticMesh;
 	STParameters m_stParameters;
 	LPD3DXMESH	 m_pDebugMesh;
-	std::string	m_stTechniqueName;
+	std::string	m_stTechniqueName = "DefaultStaticMesh";
 
 private:
 	float	m_fTmpRadius = 0.0f;
