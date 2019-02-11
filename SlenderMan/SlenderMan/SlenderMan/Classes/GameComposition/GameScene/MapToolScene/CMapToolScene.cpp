@@ -687,8 +687,6 @@ void CMapToolScene::draw(void)
 	CScene::draw();
 
 	m_pStage->draw();
-	if(m_stMouseInfo.m_eObjType != EObjType::NONE)
-		m_stMouseInfo.m_pRenderObj->draw();
 	
 }
 
