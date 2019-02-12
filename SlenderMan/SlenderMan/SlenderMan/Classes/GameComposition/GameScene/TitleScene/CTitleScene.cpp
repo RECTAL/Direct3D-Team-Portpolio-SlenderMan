@@ -58,7 +58,6 @@ void CTitleScene::init()
 		this->createDefaultUI();
 		this->createWindowUI();
 		isFirst = false;
-		this->createSound();
 	}
 }
 
@@ -161,6 +160,7 @@ void CTitleScene::createButtonUI()
 	(*endFptr) = [=](void) -> void
 	{
 		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
 
@@ -180,6 +180,7 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
 		m_pCurrentSpriteHandle = optionWindow;
 		optionWindow->setVisible(true);
 		soundScrollBar->setVisible(true);
@@ -195,6 +196,7 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
 		CHANGE_SCENE_LOADING(GAMESCENE_MAPTOOL,TRUE);
 	};
 
@@ -210,6 +212,7 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
 		SendMessage(GET_WINDOW_HANDLE(), WM_DESTROY, 0, 0);
 	};
 
@@ -222,6 +225,7 @@ void CTitleScene::createButtonUI()
 void CTitleScene::createSound()
 {
 	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/Title.wav", true);
+	GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Fire.wav", true);
 }
 
 void CTitleScene::update(void)
@@ -239,6 +243,11 @@ void CTitleScene::update(void)
 	}
 	printf("%f\n", soundScrollBar->getSetValue());
 
+	if (isStartSound)
+	{
+		createSound();
+		isStartSound = false;
+	}
 	this->setVolume();
 }
 

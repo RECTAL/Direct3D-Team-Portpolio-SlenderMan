@@ -77,4 +77,5 @@ private:
 	FPTR* endFptr = nullptr;
 
 	bool isFirst = true;
+	bool isStartSound = true;
 };
