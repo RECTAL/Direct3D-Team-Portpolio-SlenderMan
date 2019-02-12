@@ -3,6 +3,7 @@
 #include "../../../Utility/Base/CScene.h"
 
 class CSpriteObject_Button;
+class CSpriteObject_Default;
 class CSpriteObject_Container;
 class CCameraObject;
 class CTerrainObject;
@@ -10,6 +11,7 @@ class CStaticObject;
 class CLightObject;
 class CSpotLightObject;
 class CStage;
+class CLabelObject;
 class CMainPlayScene :public CScene
 {
 public:		//constructor , destructor
@@ -43,6 +45,13 @@ public:
 private:
 	void createContainer();
 	void createButton();
+
+	void createLabel();
+	void createSpriteDefault();
+
+
+
+	void calcPlayTime(float a_fTime,int& a_nHour,int& a_nMin,int& a_nSec);
 private:
 	POINT m_stPrevMousePosition;
 
@@ -55,6 +64,12 @@ private:
 	CStage* m_pStage;
 	bool isFirst = true;
 	bool isBGMPlay = true;
+
+	float m_fPlayTime = 0.0f;
+
+
+	CSpriteObject_Default* m_pCamCoderView = nullptr;
+	CLabelObject*		   m_pPlayTime = nullptr;
 
 	CSpriteObject_Button* exitButton = nullptr;
 	CSpriteObject_Container* menuContainer = nullptr;
