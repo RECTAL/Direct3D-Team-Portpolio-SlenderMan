@@ -38,6 +38,7 @@ private:
 	void	createSound();
 	void	setStateSound();
 	void	setBGMSound();
+	void	setTimer();
 
 public:
 	CSpotLightObject* createSpotObj();
@@ -82,5 +83,6 @@ private:
 	FPTR* pressFptr = nullptr;
 	FPTR* endFptr = nullptr;
 
-	char fileName[8] = {};
+	// 움직인 시간
+	float m_fRunTime = 0.0f;
 };
