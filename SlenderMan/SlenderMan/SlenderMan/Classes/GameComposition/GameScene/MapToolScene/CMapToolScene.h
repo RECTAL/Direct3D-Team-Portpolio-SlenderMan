@@ -141,6 +141,7 @@ private:
 
 	bool isFirst = true;
 	bool isEnableClick = false;
+	bool m_bIsDebug = false;
 
 	float m_fAngleX = 0.0f;
 	float m_fAngleY = 0.0f;

@@ -186,7 +186,7 @@ void CMainPlayScene::setStateSound()
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Grass.wav", false);
 		
 		if (m_fRunTime > 10.0f) {
-			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
+			GET_SOUND_MANAGER()->setEffectSoundsVolume(1.0f);
 		}
 		break;
 	case EPlayerState::WALKROCK:

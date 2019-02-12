@@ -75,3 +75,11 @@ enum class EPlayingBGM
 	NOISE_3,		// 사망 노이즈
 	NONE
 };
+
+//! 디버그 타입
+enum class EDebugDrawType
+{
+	BOX,
+	SPHERE,
+	NONE
+};

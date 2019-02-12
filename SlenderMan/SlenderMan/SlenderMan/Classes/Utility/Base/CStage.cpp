@@ -403,7 +403,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 	}
 }
 
-void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
+void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition,bool a_bIsDebug)
 {
 	int nIndex = m_pTerrainObj->findIndex(a_stPosition);
 	for (int i = 0; i < MAX_OBJ_CAPACITY; i++)
@@ -432,6 +432,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::GRASS)
@@ -453,6 +454,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::MOUNTAIN)
@@ -474,6 +476,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::OLDHOUSE)
@@ -495,6 +498,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::OLDWOODDOCK)
@@ -516,6 +520,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::PLANTS)
@@ -537,6 +542,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::ROUNDWOOD)
@@ -558,6 +564,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::URBANDEBRIS)
@@ -579,6 +586,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::WOODHOUSE)
@@ -600,6 +608,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_1)
@@ -621,6 +630,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 				int a = 0;
 			}
@@ -643,6 +653,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_3)
@@ -664,6 +675,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_4)
@@ -685,6 +697,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_5)
@@ -707,6 +720,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::TREE_6)
@@ -728,6 +742,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition)
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
 			m_pObjPacketList[nIndex].m_nPivot ++;
@@ -830,6 +845,38 @@ void CStage::setObjEffectTechname(std::string a_stTechname)
 	}
 }
 
+void CStage::setObjDebugMode(bool a_bIsDebug, EDebugDrawType a_eDebugMode)
+{
+	EDebugDrawType eDebugMode = a_eDebugMode;
+	if (m_pObjList != nullptr&&m_pTerrainObj != nullptr)
+	{
+		int fWidth = m_pTerrainObj->getCXDIB();
+		int fHeight = m_pTerrainObj->getCZDIB();
+
+
+		for (int i = 0; i < fWidth*fHeight; i++)
+		{
+			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
+			{
+				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
+				else
+				{
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+					{
+						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
+
+					}
+					else
+					{
+						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
+						pStaticObj->setDebugEnable(a_bIsDebug, eDebugMode);
+					}
+				}
+			}
+		}
+	}
+}
+
 void CStage::addSpotLightObj(CSpotLightObject * a_pSpotLightObj)
 {
 	CSpotLightObject* pSpotLight = a_pSpotLightObj;
@@ -858,6 +905,40 @@ void CStage::addSpotLightObj(CSpotLightObject * a_pSpotLightObj)
 						int nNumSpot = ++pStaticObj->getSTParameters().m_nNumSpotLight;
 						if(nNumSpot<10)
 							pStaticObj->getSTParameters().m_pSpotLight[nNumSpot-1] = pSpotLight;
+					}
+				}
+			}
+		}
+	}
+}
+
+void CStage::delSpotLightObj()
+{
+	if (m_pObjList != nullptr&&m_pTerrainObj != nullptr)
+	{
+		int fWidth = m_pTerrainObj->getCXDIB();
+		int fHeight = m_pTerrainObj->getCZDIB();
+
+
+		for (int i = 0; i < fWidth*fHeight; i++)
+		{
+			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
+			{
+				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
+				else
+				{
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+					{
+						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
+
+
+					}
+					else
+					{
+						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
+						pStaticObj->getSTParameters().m_nNumSpotLight = max(pStaticObj->getSTParameters().m_nNumSpotLight - 1, 0);
+						int nNumSpot = pStaticObj->getSTParameters().m_nNumSpotLight;
+						pStaticObj->getSTParameters().m_pSpotLight[nNumSpot] = nullptr;
 					}
 				}
 			}

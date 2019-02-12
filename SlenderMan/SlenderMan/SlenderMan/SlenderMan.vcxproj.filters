@@ -206,6 +206,9 @@
     <Filter Include="Classes\GameComposition\GameScene\MapToolScene">
       <UniqueIdentifier>{502af136-e1fd-4755-8e6f-b4e538cbfc4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Global\Utility\Debug">
+      <UniqueIdentifier>{c4dbcaba-3ad0-4481-bfed-7ec1f7332959}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\Define\KGlobalDefine.h">
@@ -372,6 +375,12 @@
     </ClInclude>
     <ClInclude Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ListSquare.h">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Debug\CDebugDraw.h">
+      <Filter>Classes\Global\Utility\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameObject\Decorate\CDecorate_SoundObj.h">
+      <Filter>Classes\GameComposition\GameObject\Decorate</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -545,6 +554,12 @@
     </ClCompile>
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ListSquare.cpp">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\Utility\Debug\CDebugDraw.cpp">
+      <Filter>Classes\Global\Utility\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameObject\Decorate\CDecorate_SoundObj.cpp">
+      <Filter>Classes\GameComposition\GameObject\Decorate</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
