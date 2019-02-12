@@ -376,6 +376,9 @@
     <ClInclude Include="Classes\GameComposition\GameCharactor\Player\player.h">
       <Filter>Classes\GameComposition\GameCharactor\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameCharactor\CCharactor.h">
+      <Filter>Classes\GameComposition\GameCharactor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">

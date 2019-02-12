@@ -37,9 +37,11 @@ CMainPlayScene::~CMainPlayScene()
 void CMainPlayScene::init()
 {	
 	CScene::init();
+	ShowCursor(false);
+	
 	if (isFirst)
 	{
-
+		
 		crashFptr = new std::function<void(void)>;
 		beginFptr = new std::function<void(void)>;
 		pressFptr = new std::function<void(void)>;
@@ -57,25 +59,12 @@ void CMainPlayScene::init()
 
 	}
 	SetCursorPos(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2);
-	mousePosition = GET_MOUSE_POSITION();
+	mousePositionX = GET_MOUSE_POSITION().x;
+	mousePositionY = GET_MOUSE_POSITION().y;
 
 	CMapToolScene* pMapToolScene = dynamic_cast<CMapToolScene*>(FIND_SCENE(GAMESCENE_MAPTOOL));
 	pMapToolScene->init();
 	m_pStage = pMapToolScene->getStage();
-	//m_pStage->setCameraObjMain(m_pCamera);
-	//m_pStage->addSpotLightObj(m_pSpotObj);
-	//m_pStage->setObjEffectTechname("FogStaticMesh");
-	//
-	//int nNumSpot = ++m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight;
-	//if (nNumSpot < 10)
-	//{
-	//	m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = m_pSpotObj;
-	//}
-	//
-	//m_pStage->getTerrainObj()->getTechniqueName() = "fogTerrain";
-	//m_pCamera->setPosition(D3DXVECTOR3(100, 200, 100));
-
-
 
 	CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
 	CLightObject** ppPointLightObj = new CLightObject*[10];
@@ -328,6 +317,7 @@ void CMainPlayScene::update(void)
 	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
 		menuContainer->setVisible(!menuContainer->getVisible());
+		ShowCursor(menuContainer->getVisible());
 	}
 
 	float fSpeed = 15.0f;
@@ -337,41 +327,39 @@ void CMainPlayScene::update(void)
 	}
 
 	// 마우스 화면 조절 
-	POINT movePosition{ mousePosition.x - GET_MOUSE_POSITION().x, mousePosition.y - GET_MOUSE_POSITION().y };
+	if (!menuContainer->getVisible())
+	{
+		int dPosX = mousePositionX - GET_MOUSE_POSITION().x;
+		int dPosY = mousePositionY - GET_MOUSE_POSITION().y;
 
-	m_pCamera->rotateByYAxis(-movePosition.x / 5.0f, false);
-	m_pSpotObj->rotateByYAxis(-movePosition.x / 5.0f, false);
+		m_pCamera->rotateByYAxis(-dPosX / 5.0f, false);
+		m_pSpotObj->rotateByYAxis(-dPosX / 5.0f, false);
 
-	m_pCamera->rotateByXAxis(-movePosition.y / 5.0f);
-	m_pSpotObj->rotateByXAxis(-movePosition.y / 5.0f);
+		m_pCamera->rotateByXAxis(-dPosY / 5.0f);
+		m_pSpotObj->rotateByXAxis(-dPosY / 5.0f);
 
-	SetCursorPos(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2);
+		SetCursorPos(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2);
+	}
 
 
 	if (IS_KEY_DOWN(DIK_UP)) {
 		m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
-
 	}
 	else if (IS_KEY_DOWN(DIK_DOWN)) {
 		m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-
 	}
 
 	if (IS_KEY_DOWN(DIK_LEFT)) {
 		m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-
 	}
 	else if (IS_KEY_DOWN(DIK_RIGHT)) {
 		m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
-
 	}
-
 	if (IS_KEY_DOWN(DIK_SPACE)) {
 		m_pCamera->moveByYAxis(10 * GET_DELTA_TIME());
 	}
 
 	if (IS_KEY_DOWN(DIK_W)) {
-
 		m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
 		m_pSpotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
 		m_pPlayerState = EPlayerState::WALKGRASS;

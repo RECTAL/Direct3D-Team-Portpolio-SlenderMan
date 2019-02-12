@@ -47,7 +47,6 @@ CTitleScene::~CTitleScene()
 void CTitleScene::init()
 {
 	CScene::init();
-	
 	if (isFirst)
 	{
 		crashFptr = new std::function<void(void)>;
