@@ -177,7 +177,9 @@ void CMainPlayScene::setStateSound()
 	case EPlayerState::WALKGRASS:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Grass.wav", false);
 		
-		GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
+		if (m_fRunTime > 10.0f) {
+			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
+		}
 		break;
 	case EPlayerState::WALKROCK:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Rock.wav", false);
@@ -198,7 +200,9 @@ void CMainPlayScene::setStateSound()
 		break;
 	case EPlayerState::NONE:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Breathe.wav", true);
-		GET_SOUND_MANAGER()->setEffectSoundsVolume(0.8f);
+		if (m_fRunTime <= 3.0f) {
+			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.8f);
+		}
 		break;
 	}
 }
@@ -242,6 +246,21 @@ void CMainPlayScene::setBGMSound()
 	}
 }
 
+void CMainPlayScene::setTimer()
+{
+	if (m_pPlayerState != EPlayerState::NONE)
+	{
+		m_fRunTime += GET_DELTA_TIME();
+	}
+	else {
+		m_fRunTime -= GET_DELTA_TIME();
+		if (m_fRunTime <= 0.0f)
+		{
+			m_fRunTime = 0.0f;
+		}
+	}
+}
+
 CSpotLightObject * CMainPlayScene::createSpotObj()
 {
 	return new CSpotLightObject(0,300.0f,D3DXToRadian(5.0f),D3DXToRadian(15.0f));
@@ -264,6 +283,7 @@ void CMainPlayScene::update(void)
 	m_pSpotObj->update();
 	m_pStage->update();
 	menuContainer->update();
+	setTimer();
 	this->setStateSound();
 
 	m_pSpotObj->setPosition(m_pCamera->getPosition());
