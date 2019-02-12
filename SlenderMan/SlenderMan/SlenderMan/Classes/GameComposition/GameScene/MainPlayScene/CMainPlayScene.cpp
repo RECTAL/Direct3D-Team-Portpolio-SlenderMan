@@ -56,7 +56,8 @@ void CMainPlayScene::init()
 		isFirst = false;
 
 	}
-
+	SetCursorPos(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2);
+	mousePosition = GET_MOUSE_POSITION();
 
 	CMapToolScene* pMapToolScene = dynamic_cast<CMapToolScene*>(FIND_SCENE(GAMESCENE_MAPTOOL));
 	pMapToolScene->init();
@@ -306,80 +307,72 @@ void CMainPlayScene::update(void)
 		isBGMPlay = false;
 	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
-		menuContainer->setVisible(true);
+		menuContainer->setVisible(!menuContainer->getVisible());
 	}
 
-	if (IS_MOUSE_BUTTON_DOWN(EMouseInput::RIGHT)) {
-		float fSpeed = 15.0f;
+	float fSpeed = 15.0f;
 
-		if (IS_KEY_DOWN(DIK_LSHIFT)) {
-			fSpeed = 50.0f;
-		}
-
-		if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::RIGHT)) {
-			m_stPrevMousePosition = GET_MOUSE_POSITION();
-		}
-
-		auto stMousePosition = GET_MOUSE_POSITION();
-		float fDeltaY = stMousePosition.y - m_stPrevMousePosition.y;
-		float fDeltaX = stMousePosition.x - m_stPrevMousePosition.x;
-
-		m_stPrevMousePosition = stMousePosition;
-
-		m_pCamera->rotateByXAxis(fDeltaY / 5.0f);
-		m_pSpotObj->rotateByXAxis(fDeltaY / 5.0f);
-
-		m_pCamera->rotateByYAxis(fDeltaX / 5.0f,false);
-		m_pSpotObj->rotateByYAxis(fDeltaX / 5.0f,false);
-
-		
-		if (IS_KEY_DOWN(DIK_UP)) {
-			m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
-			
-		}
-		else if (IS_KEY_DOWN(DIK_DOWN)) {
-			m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-			
-		}
-
-		if (IS_KEY_DOWN(DIK_LEFT)) {
-			m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-			
-		}
-		else if (IS_KEY_DOWN(DIK_RIGHT)) {
-			m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
-			
-		}
-
-		if (IS_KEY_DOWN(DIK_SPACE)) {
-			m_pCamera->moveByYAxis(10 * GET_DELTA_TIME());
-		}
-
-		if (IS_KEY_DOWN(DIK_W)) {
-		
-			m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
-			m_pSpotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
-			m_pPlayerState = EPlayerState::WALKGRASS;
-		}
-		if(IS_KEY_RELEASED(DIK_W))
-		{
-			m_pPlayerState = EPlayerState::NONE;
-		}
-		if (IS_KEY_DOWN(DIK_S)) {
-			m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-			m_pSpotObj->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-		}
-
-		if (IS_KEY_DOWN(DIK_A)) {
-			m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-			m_pSpotObj->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-		}
-		else if (IS_KEY_DOWN(DIK_D)) {
-			m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
-			m_pSpotObj->moveByXAxis(fSpeed * GET_DELTA_TIME());
-		}
+	if (IS_KEY_DOWN(DIK_LSHIFT)) {
+		fSpeed = 50.0f;
 	}
 
+	// 마우스 화면 조절 
+	POINT movePosition{ mousePosition.x - GET_MOUSE_POSITION().x, mousePosition.y - GET_MOUSE_POSITION().y };
+
+	m_pCamera->rotateByYAxis(-movePosition.x / 5.0f, false);
+	m_pSpotObj->rotateByYAxis(-movePosition.x / 5.0f, false);
+
+	m_pCamera->rotateByXAxis(-movePosition.y / 5.0f);
+	m_pSpotObj->rotateByXAxis(-movePosition.y / 5.0f);
+
+	SetCursorPos(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2);
+
+
+	if (IS_KEY_DOWN(DIK_UP)) {
+		m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
+
+	}
+	else if (IS_KEY_DOWN(DIK_DOWN)) {
+		m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+
+	}
+
+	if (IS_KEY_DOWN(DIK_LEFT)) {
+		m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+
+	}
+	else if (IS_KEY_DOWN(DIK_RIGHT)) {
+		m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
+
+	}
+
+	if (IS_KEY_DOWN(DIK_SPACE)) {
+		m_pCamera->moveByYAxis(10 * GET_DELTA_TIME());
+	}
+
+	if (IS_KEY_DOWN(DIK_W)) {
+
+		m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
+		m_pSpotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
+		m_pPlayerState = EPlayerState::WALKGRASS;
+	}
+	if (IS_KEY_RELEASED(DIK_W))
+	{
+		m_pPlayerState = EPlayerState::NONE;
+	}
+	if (IS_KEY_DOWN(DIK_S)) {
+		m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+		m_pSpotObj->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+	}
+
+	if (IS_KEY_DOWN(DIK_A)) {
+		m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+		m_pSpotObj->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+	}
+	else if (IS_KEY_DOWN(DIK_D)) {
+		m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
+		m_pSpotObj->moveByXAxis(fSpeed * GET_DELTA_TIME());
+	}
 
 	m_fPlayTime += GET_DELTA_TIME();
 }
