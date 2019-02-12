@@ -1,3 +1,112 @@
-﻿  compilation object save succeeded; see C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\Debug\DefaultTerrain.cso
+﻿  CTerrainObject.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(59): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(23): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(24): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(88): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(205): note: 'fopen' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.cpp(334): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+  CMapToolScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(59): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(58): warning C4316: 'CObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(76): warning C4316: 'CSpriteObject_Container': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(77): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(81): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(84): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(89): warning C4316: 'CSpriteObject_ScrollBar': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(94): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(105): warning C4316: 'CSpriteObject_List': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(112): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(125): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(138): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(151): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(163): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(164): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(178): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(182): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(186): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(190): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(233): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(245): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(246): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(250): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(251): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(260): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(261): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(289): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(306): warning C4316: 'CCameraObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(336): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(348): warning C4316: 'CLabelObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(349): warning C4316: 'CLabelObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(420): warning C4316: 'CSpriteObject_ListSquare': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(421): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(425): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(438): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(442): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(455): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(459): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(472): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(476): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(489): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(493): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(506): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(510): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(523): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(530): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(537): warning C4316: 'CSpriteObject_ListSquare': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(538): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(542): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(555): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(559): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(572): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(576): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(589): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(596): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(604): warning C4316: 'CSpriteObject_ListSquare': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(605): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(609): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(622): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(626): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(639): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(643): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(656): warning C4316: 'CStaticObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(660): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(670): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(709): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(715): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(746): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(747): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\maptoolscene\cmaptoolscene.cpp(895): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+  CMainPlayScene.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(59): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(97): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(133): warning C4316: 'CSpriteObject_Container': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(134): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(138): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(164): warning C4316: 'CCameraObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(244): warning C4316: 'CSpotLightObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(288): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(289): warning C4244: '초기화 중': 'LONG'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(357): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(388): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+  코드를 생성하고 있습니다...
   SlenderMan.vcxproj -> C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\Debug\SlenderMan.exe
   SlenderMan.vcxproj -> C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\Debug\SlenderMan.pdb (Full PDB)

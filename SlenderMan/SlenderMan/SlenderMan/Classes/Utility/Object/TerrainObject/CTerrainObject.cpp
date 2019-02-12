@@ -336,7 +336,7 @@ HRESULT CTerrainObject::render()
 		m_pEffect->SetTexture(szVariableName, m_pTex[i]);
 	}
 
-	m_pEffect->SetFloat("g_fFogDensity", 0.55f);
+	m_pEffect->SetFloat("g_fFogDensity", 0.01f);
 	m_pEffect->SetFloat("g_fFogEnd", 700.0f);
 
 
