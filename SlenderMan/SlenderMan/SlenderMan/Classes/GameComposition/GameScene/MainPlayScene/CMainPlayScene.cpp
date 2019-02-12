@@ -176,7 +176,6 @@ void CMainPlayScene::createCamera()
 void CMainPlayScene::createSound()
 {
 	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_1.wav", true);
-	GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Breathe.wav", true);
 }
 
 void CMainPlayScene::setStateSound()
@@ -185,12 +184,16 @@ void CMainPlayScene::setStateSound()
 	{
 	case EPlayerState::WALKGRASS:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Grass.wav", false);
+		
+		GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
 		break;
 	case EPlayerState::WALKROCK:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Rock.wav", false);
+		GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
 		break;
 	case EPlayerState::WALKREED:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Reed.wav", false);
+		GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
 		break;
 	case EPlayerState::PICK:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Pick.wav", false);
@@ -202,8 +205,8 @@ void CMainPlayScene::setStateSound()
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/HeartBeat.wav", false);
 		break;
 	case EPlayerState::NONE:
-		//GET_SOUND_MANAGER()->stopAllEffectSounds("Resources/Sounds/EffectSounds/%s.wav");
-		GET_SOUND_MANAGER()->stopAllEffectSounds();
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Breathe.wav", true);
+		GET_SOUND_MANAGER()->setEffectSoundsVolume(0.8f);
 		break;
 	}
 }
@@ -358,7 +361,7 @@ void CMainPlayScene::update(void)
 			m_pSpotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
 			m_pPlayerState = EPlayerState::WALKGRASS;
 		}
-		else
+		if(IS_KEY_RELEASED(DIK_W))
 		{
 			m_pPlayerState = EPlayerState::NONE;
 		}
