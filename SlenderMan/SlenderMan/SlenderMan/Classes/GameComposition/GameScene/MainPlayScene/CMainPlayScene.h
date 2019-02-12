@@ -54,6 +54,7 @@ private:
 	void calcPlayTime(float a_fTime,int& a_nHour,int& a_nMin,int& a_nSec);
 private:
 	POINT m_stPrevMousePosition;
+	POINT mousePosition;
 
 	CCameraObject* m_pCamera = nullptr;
 	CSpotLightObject* m_pSpotObj = nullptr;
