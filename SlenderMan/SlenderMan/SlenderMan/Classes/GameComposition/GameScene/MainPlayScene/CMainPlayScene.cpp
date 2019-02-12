@@ -2,10 +2,12 @@
 #include "../MapToolScene/CMapToolScene.h"
 #include "../../../Utility/Base/CStage.h"
 #include "../../../Function/GlobalFunction.h"
+#include "../../../Utility/Object/LabelObject/CLabelObject.h"
 #include "../../../Utility/Object/TerrainObject/CTerrainObject.h"
 #include "../../../Utility/Object/StaticObject/CStaticObject.h"
 #include "../../../Utility/Object/LightObject/CLightObject.h"
 #include "../../../Utility/Object/LightObject/SpotLightObject/SpotLightObject.h"
+#include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Default.h"
 #include "../../../Utility/System/RenderSystem/RenderSystem_CRenderTarget.h"
 #include "../../../Utility/Object/CameraObject/CCameraObject.h"
 #include "../../../Utility/Manager/CSoundManager.h"
@@ -26,8 +28,10 @@ CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 CMainPlayScene::~CMainPlayScene()
 {
 	SAFE_DELETE(m_pCamera);
+	SAFE_DELETE(m_pPlayTime);
 	SAFE_DELETE(m_pSpotObj);
 	SAFE_DELETE(menuContainer);
+	SAFE_DELETE(m_pCamCoderView);
 }
 
 void CMainPlayScene::init()
@@ -45,6 +49,8 @@ void CMainPlayScene::init()
 		this->createRenderTarget();
 		this->createCamera();
 		this->createContainer();
+		this->createSpriteDefault();
+		this->createLabel();
 
 		m_pSpotObj = this->createSpotObj();
 		isFirst = false;
@@ -124,6 +130,7 @@ void CMainPlayScene::init()
 	}
 
 	m_pCamera->setPosition(D3DXVECTOR3(100, 200, 100));
+	m_fPlayTime = 0.0f;
 }
 
 void CMainPlayScene::createWindowUI()
@@ -155,7 +162,8 @@ void CMainPlayScene::createRenderTarget()
 {
 	D3DVIEWPORT9 stViewport;
 	GET_DEVICE()->GetViewport(&stViewport);
-	GET_RENDERTARGET_MANAGER()->addRenderTarget("TestRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
+	GET_RENDERTARGET_MANAGER()->addRenderTarget("StageRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
+	GET_RENDERTARGET_MANAGER()->addRenderTarget("CamCoderRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
 
 }
 
@@ -249,6 +257,30 @@ void CMainPlayScene::createButton()
 	
 }
 
+void CMainPlayScene::createLabel()
+{
+	m_pPlayTime = new CLabelObject("", 20);
+	m_pPlayTime->setPosition(D3DXVECTOR3(1220, 75, 0));
+}
+
+void CMainPlayScene::createSpriteDefault()
+{
+	m_pCamCoderView = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/camCoderView", "png", 1366, 768, 1);
+	m_pCamCoderView->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx/2.0f, GET_WINDOW_SIZE().cy / 2.0f,0.0f));
+}
+
+void CMainPlayScene::calcPlayTime(float a_fTime, int & a_nHour, int & a_nMin, int & a_nSec)
+{
+	int nTime = a_fTime;
+	a_nHour = nTime / 3600;
+	nTime %= 3600;
+
+	a_nMin = nTime / 60;
+	nTime %= 60;
+
+	a_nSec = nTime;
+}
+
 void CMainPlayScene::createContainer()
 {
 	
@@ -260,6 +292,7 @@ void CMainPlayScene::update(void)
 	m_pCamera->update();
 	m_pSpotObj->update();
 	m_pStage->update();
+	m_pCamCoderView->update();
 	menuContainer->update();
 	this->setStateSound();
 
@@ -344,34 +377,65 @@ void CMainPlayScene::update(void)
 		}
 	}
 
+
+	m_fPlayTime += GET_DELTA_TIME();
 }
 
 void CMainPlayScene::draw(void)
 {
 	CScene::draw();
+	D3DXMATRIXA16 stWorldMatrix;
+	D3DXMatrixIdentity(&stWorldMatrix);
+
 	/***************************************************/
-	//TestRenderTarget에 draw
+	//StageRenderTarget에 draw
 	/***************************************************/
-	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("TestRenderTarget")->m_stRenderTarget.m_pTexSurf);
-	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("TestRenderTarget")->m_stRenderTarget.m_pDepthStencil);
+	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pDepthStencil);
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0.0f);
 	
 	m_pStage->draw();
+
+	/***************************************************/
+	//CamCoderRenderTarget에 draw
+	/***************************************************/
+	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTexSurf);
+	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pDepthStencil);
+	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0.0f);
+
+
+	m_pCamCoderView->drawUI();
+
+	char str[100];
+	int nHour = 0, nMin = 0, nSec = 0;
+	this->calcPlayTime(m_fPlayTime, nHour, nMin, nSec);
+
+	sprintf(str, "%02d:%02d:%02d", nHour, nMin, nSec);
+	m_pPlayTime->setString(str);
+	m_pPlayTime->drawUI();
+
+
+	FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect->SetMatrix("g_stWorldMatrix",&stWorldMatrix);
+	FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect->SetTexture("g_pTexture",FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTex);
+
+	RunEffectLoop(FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
+		FIND_RENDERTARGET("StageRenderTarget")->getPlaneMesh()->DrawSubset(0);
+	});
+
 
 	/***************************************************/
 	//Back Buffer로 재설정
 	/***************************************************/
 	GET_RENDERTARGET_MANAGER()->resetRenderTarget();
 
-	D3DXMATRIXA16 stWorldMatrix;
-	D3DXMatrixIdentity(&stWorldMatrix);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pCopyEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pCopyEffect->SetTexture("g_pTexture", FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTex);
 
-	FIND_RENDERTARGET("TestRenderTarget")->m_pCopyEffect->SetMatrix("g_stWorldMatrix",&stWorldMatrix);
-	FIND_RENDERTARGET("TestRenderTarget")->m_pCopyEffect->SetTexture("g_pTexture",FIND_RENDERTARGET("TestRenderTarget")->m_stRenderTarget.m_pTex);
-
-	RunEffectLoop(FIND_RENDERTARGET("TestRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
-		FIND_RENDERTARGET("TestRenderTarget")->getPlaneMesh()->DrawSubset(0);
+	RunEffectLoop(FIND_RENDERTARGET("CamCoderRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
+		FIND_RENDERTARGET("CamCoderRenderTarget")->getPlaneMesh()->DrawSubset(0);
 	});
+
+
 }
 
 void CMainPlayScene::drawUI(void)
