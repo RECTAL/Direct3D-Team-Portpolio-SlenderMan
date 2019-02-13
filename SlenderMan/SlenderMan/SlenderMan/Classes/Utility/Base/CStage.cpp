@@ -1006,6 +1006,17 @@ void CStage::draw()
 
 	int fWidth = m_pTerrainObj->getCXDIB();
 	int fHeight = m_pTerrainObj->getCZDIB();
+	if (!m_bIsMaptool)
+	{
+		GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineRenderTarget")->m_stRenderTarget.m_pTexSurf);
+		GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
+		GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_stRenderTarget.m_pTexSurf);
+		GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
+		GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+	}
+	D3DXMATRIXA16	stWorldMatrix;
+	D3DXMATRIXA16	stViewMatrix;
+	D3DXMATRIXA16	stProjectionMatrix;
 
 	for (int i = 0; i < fWidth*fHeight; i++)
 	{
@@ -1031,8 +1042,10 @@ void CStage::draw()
 							pStaticObj->getbOutLineDraw() = true;
 							if (pStaticObj->getbOutLineDraw()&&!m_bIsMaptool)
 							{
+								/********************************************/
+								//OutlineRenderTarget¿¡ Draw
+								/********************************************/
 								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineRenderTarget")->m_stRenderTarget.m_pTexSurf);
-								GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
 							
 								D3DXMATRIXA16	stWorldMatrix = pStaticObj->getFinalWorldMatrix();
 								D3DXMATRIXA16	stViewMatrix = pStaticObj->getSTParameters().m_pCamera->getViewMatrix();
@@ -1052,29 +1065,54 @@ void CStage::draw()
 								});
 							
 								GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, true);
-							
-								GET_RENDERTARGET_MANAGER()->resetRenderTarget();
-								
-								D3DXMatrixIdentity(&stWorldMatrix);
-								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
-							
-								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect->SetTexture("g_pOutlineRenderTexture", FIND_RENDERTARGET("OutlineRenderTarget")->m_stRenderTarget.m_pTex);
-								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect->SetTexture("g_pRenderTexture", FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTex);
-								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect->SetVector("g_stOutlineColor", &D3DXVECTOR4(0.0f, 0.0f,1.0f, 1.0f));
-								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect->SetFloat("g_fSize", GET_WINDOW_SIZE().cx);
-							
-								RunEffectLoop(FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect, "outlineBlur", [=](int nPassNum)->void {
-									FIND_RENDERTARGET("OutlineRenderTarget")->getPlaneMesh()->DrawSubset(0);
-								});
-							
+								/********************************************/
+								//OutlineMeshRenderTarget¿¡ Draw
+								/********************************************/
+								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_stRenderTarget.m_pTexSurf);
+								pStaticObj->draw();
+
+								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+
 							}
-							pStaticObj->draw();
-							
+							else
+							{
+								if(!m_bIsMaptool)
+									GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+								pStaticObj->draw();
+							}
 						}
 					}
 				}
 			}
 		}
+	}
+
+	/***************************************************/
+	//StageRenderTarget¿¡ draw
+	/***************************************************/
+	if (!m_bIsMaptool)
+	{
+		GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+
+		D3DXMatrixIdentity(&stWorldMatrix);
+		FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+
+		FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect->SetTexture("g_pOutlineRenderTexture", FIND_RENDERTARGET("OutlineRenderTarget")->m_stRenderTarget.m_pTex);
+		FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect->SetTexture("g_pRenderTexture", FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTex);
+		FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect->SetVector("g_stOutlineColor", &D3DXVECTOR4(0.0f, 0.0f, 1.0f, 1.0f));
+		FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect->SetFloat("g_fSize", GET_WINDOW_SIZE().cx);
+
+		RunEffectLoop(FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineBlurEffect, "outlineBlur", [=](int nPassNum)->void {
+			FIND_RENDERTARGET("OutlineRenderTarget")->getPlaneMesh()->DrawSubset(0);
+		});
+		
+		FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_pBlendEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+		FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_pBlendEffect->SetTexture("g_pTexture", FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTex);
+		FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_pBlendEffect->SetTexture("g_pBlendTexture", FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_stRenderTarget.m_pTex);
+
+		RunEffectLoop(FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_pBlendEffect, "BlendTexture", [=](int nPassNum)->void {
+			FIND_RENDERTARGET("OutlineMeshRenderTarget")->getPlaneMesh()->DrawSubset(0);
+		});
 	}
 }
 
@@ -1087,8 +1125,9 @@ void CStage::createRenderTarget()
 {
 	D3DVIEWPORT9 stViewport;
 	GET_DEVICE()->GetViewport(&stViewport);
-	int fWidth = GET_WINDOW_SIZE().cx;
-	int fHeight = GET_WINDOW_SIZE().cy;
+	int nWidth = GET_WINDOW_SIZE().cx;
+	int nHeight = GET_WINDOW_SIZE().cy;
 
-	GET_RENDERTARGET_MANAGER()->addRenderTarget("OutlineRenderTarget", new CRenderTarget(fWidth, fHeight, &stViewport));
+	GET_RENDERTARGET_MANAGER()->addRenderTarget("OutlineRenderTarget", new CRenderTarget(nWidth, nHeight, &stViewport));
+	GET_RENDERTARGET_MANAGER()->addRenderTarget("OutlineMeshRenderTarget", new CRenderTarget(nWidth, nHeight, &stViewport));
 }

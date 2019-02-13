@@ -274,6 +274,7 @@
     <ClCompile Include="SlenderMan.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="Resources\Effects\BlendTexture.fx" />
     <FxCompile Include="Resources\Effects\CopyTexture.fx" />
     <FxCompile Include="Resources\Effects\DefaultSkinnedMesh.fx" />
     <FxCompile Include="Resources\Effects\DefaultStaticMesh.fx" />

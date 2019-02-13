@@ -71,6 +71,7 @@ void CMapToolScene::init()
 	m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot] = nullptr;
 	m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
 	m_pStage->delSpotLightObj();
+	m_pStage->getbIsMaptool() = TRUE;
 
 
 }

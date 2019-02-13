@@ -59,9 +59,6 @@ void CMainPlayScene::init()
 		isFirst = false;
 
 	}
-	SetCursorPos(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2);
-	mousePositionX = GET_MOUSE_POSITION().x;
-	mousePositionY = GET_MOUSE_POSITION().y;
 
 	CMapToolScene* pMapToolScene = dynamic_cast<CMapToolScene*>(FIND_SCENE(GAMESCENE_MAPTOOL));
 	pMapToolScene->init();
@@ -345,6 +342,11 @@ void CMainPlayScene::createContainer()
 void CMainPlayScene::update(void)
 {
 	CScene::update();
+
+	SetCursorPos(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2);
+	mousePositionX = GET_MOUSE_POSITION().x;
+	mousePositionY = GET_MOUSE_POSITION().y;
+
 	m_pCamera->update();
 	m_pSpotObj->update();
 	m_pStage->update();
@@ -441,7 +443,7 @@ void CMainPlayScene::draw(void)
 	/***************************************************/
 	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
 	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pDepthStencil);
-	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0.0f);
+	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
 	
 	m_pStage->draw();
 
@@ -450,7 +452,7 @@ void CMainPlayScene::draw(void)
 	/***************************************************/
 	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTexSurf);
 	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pDepthStencil);
-	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0.0f);
+	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
 
 
 	m_pCamCoderView->drawUI();

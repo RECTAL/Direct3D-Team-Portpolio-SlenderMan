@@ -82,13 +82,15 @@ float4     ps_main(STOutput a_stInput):COLOR0
     }
 
     float fFinalValue = sqrt(pow(fHSumValue, 2.0f) + pow(fVSumValue, 2.0f));
-    float4 stOutlineColor = float4(g_stOutlineColor.rgb, 1.0f) * fFinalValue;
+    float4 stOutlineColor = g_stOutlineColor*fFinalValue;
     float4 stRenderColor = tex2D(g_pRenderSampler,a_stInput.m_stUV);
 
     float4 stFinalColor;
 
-    if(stOutlineColor.a == 0.0f) stFinalColor = stRenderColor;
-    else stFinalColor =  stOutlineColor;
+   
+	if(stOutlineColor.a <= 0.0001f) stFinalColor = stRenderColor;
+	else stFinalColor = float4(stOutlineColor.rgb,1.0f);
+	//stFinalColor =  stOutlineColor + stRenderColor;
 
     return stFinalColor;
 }
