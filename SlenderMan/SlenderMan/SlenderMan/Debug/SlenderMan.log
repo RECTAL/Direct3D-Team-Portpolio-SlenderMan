@@ -14,21 +14,23 @@ c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\uti
 c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(57): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(58): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\utility\object\terrainobject\cterrainobject.h(59): warning C4244: 'return': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(98): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(94): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(135): warning C4316: 'CSpriteObject_Container': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(136): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(140): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(167): warning C4316: 'CCameraObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(269): warning C4316: 'CSpotLightObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(279): warning C4316: 'CLabelObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(285): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(291): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(404): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(413): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(422): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(131): warning C4316: 'CSpriteObject_Container': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(132): warning C4244: '인수': 'LONG'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(136): warning C4316: 'CSpriteObject_Button': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(163): warning C4316: 'CCameraObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(265): warning C4316: 'CSpotLightObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(275): warning C4316: 'CLabelObject': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(281): warning C4316: 'CSpriteObject_Default': 힙에 할당된 개체가 16에 맞추어져 있지 않을 수도 있습니다
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(287): warning C4244: '초기화 중': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(400): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(409): warning C4244: '인수': 'float'에서 'DWORD'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(418): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\stdio.h(1769): note: 'sprintf' 선언을 참조하십시오.
-c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(461): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+c:\users\zoddl\desktop\3d 팀포폴\slenderman\slenderman\slenderman\classes\gamecomposition\gamescene\mainplayscene\cmainplayscene.cpp(457): warning C4060: switch문에 'case' 또는 'default' 레이블이 없습니다.
+  player.cpp
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
   코드를 생성하고 있습니다...
   SlenderMan.vcxproj -> C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\Debug\SlenderMan.exe
   SlenderMan.vcxproj -> C:\Users\zoddl\Desktop\3d 팀포폴\SlenderMan\SlenderMan\Debug\SlenderMan.pdb (Full PDB)
