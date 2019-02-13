@@ -11,6 +11,7 @@ public:
 	virtual void doDraw(void) override;						//! Drawing
 	virtual void postDraw(void) override;					//! After Drawed
 
+	virtual void update(void) override;			//! interface :IUpdatealbe
 
 protected:
 	STRay m_stRay;

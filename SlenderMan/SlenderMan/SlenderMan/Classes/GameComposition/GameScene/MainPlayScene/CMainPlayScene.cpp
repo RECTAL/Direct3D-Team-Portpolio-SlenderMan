@@ -32,6 +32,7 @@ CMainPlayScene::~CMainPlayScene()
 	SAFE_DELETE(m_pSpotObj);
 	SAFE_DELETE(menuContainer);
 	SAFE_DELETE(m_pCamCoderView);
+	
 }
 
 void CMainPlayScene::init()
@@ -66,8 +67,8 @@ void CMainPlayScene::init()
 	pMapToolScene->init();
 	m_pStage = pMapToolScene->getStage();
 
-	CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-	CLightObject** ppPointLightObj = new CLightObject*[10];
+	ppSpotLightObj = new CSpotLightObject*[10];
+	ppPointLightObj = new CLightObject*[10];
 
 	CTerrainObject::STParameters stParameters;
 	stParameters.m_pCamera = m_pCamera;

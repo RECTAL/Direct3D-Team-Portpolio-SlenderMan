@@ -84,6 +84,9 @@ private:
 	FPTR* pressFptr = nullptr;
 	FPTR* endFptr = nullptr;
 
+	CSpotLightObject** ppSpotLightObj;
+	CLightObject** ppPointLightObj;
+
 	// 움직인 시간
 	float m_fRunTime = 0.0f;
 };

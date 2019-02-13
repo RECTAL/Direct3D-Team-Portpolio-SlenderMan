@@ -552,6 +552,9 @@
     <ClCompile Include="Classes\Utility\Object\SpriteObject\CSpriteObject_Kind\CSpriteObject_ListSquare.cpp">
       <Filter>Classes\Global\Utility\Object\SpriteObject\CSpriteObject_Kind</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameCharactor\Player\player.cpp">
+      <Filter>Classes\GameComposition\GameCharactor\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Effects\CopyTexture.fx">
