@@ -10,6 +10,7 @@
 #include "../../../Utility/Manager/CInputManager.h"
 #include "../../../Utility/Manager/CRendertargetManager.h"
 #include "../../../Utility/Manager/CDeviceManager.h"
+#include "../../../Utility/Manager/CSoundManager.h"
 #include "../../../Function/GlobalFunction.h"
 
 CTitleScene::CTitleScene(std::string a_stSceneName)
@@ -46,7 +47,6 @@ CTitleScene::~CTitleScene()
 void CTitleScene::init()
 {
 	CScene::init();
-	
 	if (isFirst)
 	{
 		crashFptr = new std::function<void(void)>;
@@ -58,10 +58,8 @@ void CTitleScene::init()
 		this->createWindowUI();
 		isFirst = false;
 	}
-
-
-	
-
+	GET_SOUND_MANAGER()->stopAllEffectSounds();
+	isStartSound = true;
 }
 
 void CTitleScene::createWindowUI()
@@ -162,6 +160,7 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
 		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
@@ -182,6 +181,7 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
 		m_pCurrentSpriteHandle = optionWindow;
 		optionWindow->setVisible(true);
 		soundScrollBar->setVisible(true);
@@ -197,6 +197,7 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
 		CHANGE_SCENE_LOADING(GAMESCENE_MAPTOOL,TRUE);
 	};
 
@@ -212,13 +213,17 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
 		SendMessage(GET_WINDOW_HANDLE(), WM_DESTROY, 0, 0);
 	};
 
 	exitButton->init(crashFptr, nullptr, nullptr, endFptr);
+}
 
-	
-
+void CTitleScene::createSound()
+{
+	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/Title.wav", true);
+	GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Fire.wav", true);
 }
 
 void CTitleScene::update(void)
@@ -235,6 +240,13 @@ void CTitleScene::update(void)
 		m_pCurrentSpriteHandle->update();
 	}
 	printf("%f\n", soundScrollBar->getSetValue());
+
+	if (isStartSound)
+	{
+		createSound();
+		isStartSound = false;
+	}
+	this->setVolume();
 }
 
 void CTitleScene::defaultImageUpdate()
@@ -292,6 +304,13 @@ void CTitleScene::buttonImageDrawUI()
 	optionButton->drawUI();
 	mapToolButton->drawUI();
 	exitButton->drawUI();
+}
+
+void CTitleScene::setVolume()
+{
+	if (m_pCurrentSpriteHandle == optionWindow) {
+		GET_SOUND_MANAGER()->setBackgroundSoundVolume(soundScrollBar->getSetValue() / 300);
+	}
 }
 
 

@@ -14,7 +14,7 @@ public:
 	{
 		CCameraObject*	m_pCamera;
 		CLightObject*	m_pDirectional;
-		
+
 		int	m_nNumSpotLight;
 		CSpotLightObject**	m_pSpotLight;
 
@@ -38,22 +38,22 @@ public:
 	LPD3DXEFFECT	getEffect() { return m_pEffect; }
 	std::string&	getTechniqueName() { return m_stTechniqueName; }
 	STParameters&	getSTParameters() { return m_stParameters; }
+	bool&			getbOutLineDraw() { return m_bIsOutlineDraw; }
+
 
 	virtual void update(void) override;		//! interface : IUpdateable
 
-private:
-	STBoundingSphere createBoundingSphere();
-	LPD3DXMESH		 createDebugMesh();
+
 
 protected:
 	LPD3DXEFFECT m_pEffect = nullptr;
 
 	STStaticMesh m_stStaticMesh;
 	STParameters m_stParameters;
-	LPD3DXMESH	 m_pDebugMesh;
-	std::string	m_stTechniqueName;
+	bool		m_bIsOutlineDraw = false;
+	std::string	m_stTechniqueName = "DefaultStaticMesh";
 
 private:
-	float	m_fTmpRadius = 0.0f;
+
 
 };

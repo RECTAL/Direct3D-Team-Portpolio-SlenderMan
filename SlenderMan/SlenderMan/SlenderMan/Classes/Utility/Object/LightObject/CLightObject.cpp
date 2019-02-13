@@ -24,6 +24,8 @@ D3DXMATRIXA16 CLightObject::getViewMatrix(void)
 void CLightObject::setLightEnable(bool a_bIsEnable)
 {
 	m_bIsEnable = a_bIsEnable;
+	GET_DEVICE()->SetLight(m_nIndex, &m_stLight);
+	GET_DEVICE()->LightEnable(m_nIndex, m_bIsEnable);
 }
 
 void CLightObject::setDiffuseColor(const D3DXCOLOR & a_rstColor)
@@ -35,9 +37,6 @@ void CLightObject::update(void)
 {
 	CObject::update();
 	m_stLight.Direction = this->getForwardDirection();
-
-	GET_DEVICE()->SetLight(m_nIndex, &m_stLight);
-	GET_DEVICE()->LightEnable(m_nIndex, m_bIsEnable);
 
 	D3DXMatrixIdentity(&m_stViewMatrix);
 

@@ -45,6 +45,7 @@ private:
 	void defaultImageDrawUI();
 	void buttonImageDrawUI();
 
+	void setVolume();
 	
 private:
 	CSpriteObject_Default* m_pSprite_BackGround = nullptr;
@@ -76,4 +77,5 @@ private:
 	FPTR* endFptr = nullptr;
 
 	bool isFirst = true;
+	bool isStartSound = true;
 };

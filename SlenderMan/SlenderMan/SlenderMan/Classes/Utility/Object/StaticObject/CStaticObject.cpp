@@ -14,8 +14,12 @@ CStaticObject::CStaticObject(STParameters & a_rstParameters)
 	m_pEffect = GET_EFFECT(a_rstParameters.m_oEffectFilepath);
 	m_stStaticMesh = GET_STATIC_MESH(a_rstParameters.m_oMeshFilepath);
 
-	m_stBoundingSphere = this->createBoundingSphere();
-	m_pDebugMesh = this->createDebugMesh();
+	auto stBoundingBox = CreateBoundingBox(m_stStaticMesh.m_pStaticMesh);
+	auto stBoundingSphere = CreateBoundingSphere(m_stStaticMesh.m_pStaticMesh);
+
+	this->setBoundingBox(stBoundingBox);
+	this->setBoundingSphere(stBoundingSphere);
+
 }
 
 CStaticObject::~CStaticObject()
@@ -54,6 +58,11 @@ void CStaticObject::doDraw(void)
 
 	m_pEffect->SetVector("g_stLightDirection", &stDirectionalLight);
 	m_pEffect->SetVector("g_stViewPosition", &stViewPosition);
+
+
+	m_pEffect->SetFloat("g_fFogDensity", 0.55f);
+	m_pEffect->SetFloat("g_fFogEnd", 150.0f);
+
 
 	int nNumSpotLight = m_stParameters.m_nNumSpotLight;
 	m_pEffect->SetInt("nNumSpotLight", nNumSpotLight);
@@ -106,40 +115,4 @@ void CStaticObject::doDraw(void)
 		});
 	}
 
-
-	//GET_DEVICE()->SetTransform(D3DTS_WORLD, &stWorldMatrix);
-	//GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-
-	//m_pDebugMesh->DrawSubset(0);
-
-	//GET_DEVICE()->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
-
-}
-
-
-STBoundingSphere CStaticObject::createBoundingSphere()
-{
-	STBoundingSphere stBoundingSphere;
-	ZeroMemory(&stBoundingSphere, sizeof(stBoundingSphere));
-
-	void* pVertices = nullptr;
-	if (SUCCEEDED(m_stStaticMesh.m_pStaticMesh->LockVertexBuffer(0, &pVertices)))
-	{
-		D3DXComputeBoundingSphere((D3DXVECTOR3*)pVertices, m_stStaticMesh.m_pStaticMesh->GetNumVertices(),
-			m_stStaticMesh.m_pStaticMesh->GetNumBytesPerVertex(), &stBoundingSphere.m_stPosition, &stBoundingSphere.m_fRadius
-		);
-
-		m_stStaticMesh.m_pStaticMesh->UnlockVertexBuffer();
-	}
-
-
-
-	return stBoundingSphere;
-}
-
-LPD3DXMESH CStaticObject::createDebugMesh()
-{
-	LPD3DXMESH pMesh = nullptr;
-	D3DXCreateSphere(GET_DEVICE(), m_stBoundingSphere.m_fRadius, 10, 10, &pMesh, NULL);
-	return pMesh;
 }
