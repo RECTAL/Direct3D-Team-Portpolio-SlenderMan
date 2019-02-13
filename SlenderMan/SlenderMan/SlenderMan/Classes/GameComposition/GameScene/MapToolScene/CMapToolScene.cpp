@@ -61,7 +61,18 @@ void CMapToolScene::init()
 
 		isFirst = false;
 	}
+
+	m_bIsDebug = false;
+
 	m_pCamera->setPosition(D3DXVECTOR3(100, 100, 100));
+	m_pStage->setCameraObjMain(m_pCamera);
+	m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight = max(m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight-1,0);
+	int nNumSpot = m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight;
+	m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot] = nullptr;
+	m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
+	m_pStage->delSpotLightObj();
+	
+
 }
 
 void CMapToolScene::createWindowUI()
@@ -69,6 +80,7 @@ void CMapToolScene::createWindowUI()
 	createTreeButton();
 	createBuildingButton();
 	createObjectButton();
+	createSoundButton();
 	/***************************************************/
 	//컨테이너 만들기
 	/***************************************************/
@@ -145,7 +157,20 @@ void CMapToolScene::createWindowUI()
 			};
 			m_pSpriteListButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 			// }
-			for (int i = 0; i < 3; i++)
+
+			//사운드
+			// {
+			m_pSpriteListButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/sound", "png", 100, 80, 1);
+			m_pSpriteListButton[3]->setPosition(m_pSpriteList->getPosition());
+			(*endFptr) = [=](void) -> void
+			{
+				m_pSoundListSquare->setVisible(true);
+				m_pSquareUpCover->setVisible(true);
+				m_pBackButton->setVisible(true); // 나중에 x버튼으로 바꾸기
+			};
+			m_pSpriteListButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
+			// }
+			for (int i = 0; i < MAX_SPRITE_LIST_BUTTON; i++)
 			{
 					char name[100];
 					sprintf(name, "uiButton_%d", i);
@@ -238,6 +263,7 @@ void CMapToolScene::createButtonUI()
 		m_pTreeListSquare->setVisible(false);
 		m_pObjectListSquare->setVisible(false);
 		m_pBuildingListSquare->setVisible(false);
+		m_pSoundListSquare->setVisible(false);
 		m_pSquareUpCover->setVisible(false);
 	};
 	m_pBackButton->init(nullptr, nullptr, nullptr, endFptr);
@@ -404,6 +430,7 @@ void CMapToolScene::listUpdate()
 	m_pTreeListSquare->update();
 	m_pBuildingListSquare->update();
 	m_pObjectListSquare->update();
+	m_pSoundListSquare->update();
 }
 
 void CMapToolScene::labelUpdate()
@@ -453,6 +480,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -470,6 +498,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -487,6 +516,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -504,6 +534,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[4]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -521,6 +552,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -553,6 +585,7 @@ void CMapToolScene::createBuildingButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pHouseButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -570,6 +603,7 @@ void CMapToolScene::createBuildingButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pHouseButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -587,6 +621,7 @@ void CMapToolScene::createBuildingButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pHouseButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -620,6 +655,7 @@ void CMapToolScene::createObjectButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pObjectButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -637,6 +673,7 @@ void CMapToolScene::createObjectButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pObjectButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -654,6 +691,7 @@ void CMapToolScene::createObjectButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pObjectButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -672,6 +710,70 @@ void CMapToolScene::createObjectButton(void)
 	}
 }
 
+void CMapToolScene::createSoundButton(void)
+{
+	m_pSoundListSquare = new CSpriteObject_ListSquare("Resources/Textures/Scene/MapToolScene/blackCover", "png", 300, 300, 1);
+	m_pSoundListSquare->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 200, 250, 0));
+	m_pSoundListSquare->setVisible(false);
+	m_pSoundListSquare->init(nullptr, nullptr, nullptr, nullptr);
+
+	m_pSoundButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/criket", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::CRIKET;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+	};
+	m_pSoundButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pSoundButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/crow", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::CROW;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+	};
+	m_pSoundButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pSoundButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/fire", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::FIRE;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+	};
+	m_pSoundButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pSoundButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/owl", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::OWL;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+	};
+	m_pSoundButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pSoundButton[4] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/rain", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::RAIN;
+			if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+	};
+	m_pSoundButton[4]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pSoundButton[5] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/wind", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::WIND;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+	};
+	m_pSoundButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	for (int i = 0; i < MAX_SOUND; i++)
+	{
+		char path[MAX_PATH];
+		sprintf(path, "test%1d", i);
+		m_pSoundListSquare->addChildSpriteObject(path, CWindowType::BUTTON, m_pSoundButton[i]);
+	}
+
+}
+
 void CMapToolScene::draw(void)
 {
 	CScene::draw();
@@ -679,6 +781,7 @@ void CMapToolScene::draw(void)
 	if (m_stMouseInfo.m_eObjType != EObjType::NONE&&m_stMouseInfo.m_bDraw)
 	{
 		m_stMouseInfo.m_pRenderObj->draw();
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	}
 }
 
@@ -689,6 +792,7 @@ void CMapToolScene::drawUI(void)
 	m_pTreeListSquare->drawUI();
 	m_pBuildingListSquare->drawUI();
 	m_pObjectListSquare->drawUI();
+	m_pSoundListSquare->drawUI();
 
 	this->buttonDrawUI();
 	this->labelDrawUI();
@@ -796,13 +900,7 @@ void CMapToolScene::inputKey(void)
 						CRenderObject* pRenderObj = nullptr;
 						for (int i = 0; i < nTriangles * 3; i += 3)
 						{
-							for (auto iter : m_pStage->getObjList()[pIndices[i]])
-							{
-								if (IsCreshWithBoundingSphere(ray, iter->getFinalBoundingSphere()))
-								{
-									oRenderObjList.push_back(iter);
-								}
-							}
+							
 						}
 						for (auto iter : oRenderObjList)
 						{
@@ -836,18 +934,16 @@ void CMapToolScene::inputKey(void)
 					objPacket.m_stUpVec = m_stMouseInfo.m_pRenderObj->getUpDirection();
 					objPacket.m_stRightVec = m_stMouseInfo.m_pRenderObj->getRightDirection();
 
-					m_pStage->addObj(objPacket, stPos);
+					m_pStage->addObj(objPacket, stPos,m_bIsDebug);
 				}
 			}
 		}
 
 		if (IS_KEY_DOWN(DIK_Q)) {
 			m_fScale += 0.1f * GET_DELTA_TIME();
-			m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
 		}
 		else if (IS_KEY_DOWN(DIK_E)) {
 			m_fScale -= 0.1f * GET_DELTA_TIME();
-			m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
 		}
 
 		if (IS_KEY_DOWN(DIK_LEFT))		 m_fAngleY += 30.0f * GET_DELTA_TIME();
@@ -855,7 +951,14 @@ void CMapToolScene::inputKey(void)
 		else if (IS_KEY_DOWN(DIK_UP))	 m_fAngleX += 30.0f * GET_DELTA_TIME();
 		else if (IS_KEY_DOWN(DIK_DOWN))	 m_fAngleX -= 30.0f * GET_DELTA_TIME();
 
+		if (IS_KEY_PRESSED(DIK_F2))
+		{
+			m_bIsDebug = !m_bIsDebug;
+			m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
+		}
+
 		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, m_fAngleZ));
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
 	}
 }
 
@@ -888,6 +991,7 @@ void CMapToolScene::removeList(void)
 	SAFE_DELETE(m_pTreeListSquare);
 	SAFE_DELETE(m_pBuildingListSquare);
 	SAFE_DELETE(m_pObjectListSquare);
+	SAFE_DELETE(m_pSoundListSquare);
 }
 
 LRESULT CMapToolScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)

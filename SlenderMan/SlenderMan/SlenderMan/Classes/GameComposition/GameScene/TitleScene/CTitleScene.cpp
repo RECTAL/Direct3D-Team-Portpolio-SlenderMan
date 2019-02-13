@@ -58,6 +58,8 @@ void CTitleScene::init()
 		this->createWindowUI();
 		isFirst = false;
 	}
+	GET_SOUND_MANAGER()->stopAllEffectSounds();
+	isStartSound = true;
 }
 
 void CTitleScene::createWindowUI()
@@ -158,8 +160,8 @@ void CTitleScene::createButtonUI()
 
 	(*endFptr) = [=](void) -> void
 	{
-		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
+		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
 
@@ -216,9 +218,6 @@ void CTitleScene::createButtonUI()
 	};
 
 	exitButton->init(crashFptr, nullptr, nullptr, endFptr);
-
-	
-
 }
 
 void CTitleScene::createSound()

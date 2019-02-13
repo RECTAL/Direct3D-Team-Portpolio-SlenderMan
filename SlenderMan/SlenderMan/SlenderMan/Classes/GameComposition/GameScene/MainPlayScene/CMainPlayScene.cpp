@@ -119,7 +119,7 @@ void CMainPlayScene::init()
 	{
 		m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = m_pSpotObj;
 	}
-
+	GET_SOUND_MANAGER()->stopAllEffectSounds();
 	m_pCamera->setPosition(D3DXVECTOR3(100, 200, 100));
 	m_fPlayTime = 0.0f;
 }
@@ -138,9 +138,11 @@ void CMainPlayScene::createWindowUI()
 	(*crashFptr) = [=](void)->void
 	{
 		exitButton->getTextureOffset() = 1;
+		
 	};
 	(*endFptr) = [=](void)->void
 	{
+		GET_SOUND_MANAGER()->stopAllEffectSounds();
 		CHANGE_SCENE_LOADING(GAMESCENE_TITLE, TRUE);
 	};
 	exitButton->init(crashFptr, nullptr, nullptr, endFptr, true);
@@ -164,20 +166,62 @@ void CMainPlayScene::createCamera()
 	m_pCamera->setPosition(D3DXVECTOR3(0.0f, 0.0f, -5.0f));
 }
 
-void CMainPlayScene::createSound()
+void CMainPlayScene::createStageSound()
 {
-	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_1.wav", true);
+	switch (m_eStageSound)
+	{
+	case EStageSound::START:
+		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_1.wav", true);
+		break;
+	case EStageSound::STAGE_1: 
+		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_1.wav", true);
+		m_ePlayingBGM = EPlayingBGM::CROW; 
+		break;
+	case EStageSound::STAGE_2: 
+		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_1.wav", true);
+		m_ePlayingBGM = EPlayingBGM::OWL;
+		break;
+	case EStageSound::STAGE_3:
+		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_2.wav", true); 
+		break;
+	case EStageSound::STAGE_4:
+		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_2.wav", true);
+		m_ePlayingBGM = EPlayingBGM::WIND;
+		break;
+	case EStageSound::STAGE_5: 
+		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_2.wav", true); 
+		m_ePlayingBGM = EPlayingBGM::CRIKET; 
+		break;
+	case EStageSound::STAGE_6: 
+		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_3.wav", true); 
+		break;
+	case EStageSound::STAGE_7: 
+		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_3.wav", true);
+		m_ePlayingBGM = EPlayingBGM::RAIN; 
+		break;
+	case EStageSound::STAGE_8: 
+		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_3.wav", true);
+		m_ePlayingBGM = EPlayingBGM::FIRE; 
+		break;
+	case EStageSound::EXIT:
+		break;
+	case EStageSound::NONE:
+		break;
+	}
+
 }
 
 void CMainPlayScene::setStateSound()
 {
-	switch (m_pPlayerState)
+	switch (m_ePlayerState)
 	{
 	case EPlayerState::WALKGRASS:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Grass.wav", false);
-		
-		if (m_fRunTime > 10.0f) {
-			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
+		if (m_fRunTime > 8.0f) {
+			GET_SOUND_MANAGER()->setEffectSoundsVolume(1.0f);
+		}
+		else if (m_fRunTime > 6.0f) {
+			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.95f);
 		}
 		break;
 	case EPlayerState::WALKROCK:
@@ -194,13 +238,14 @@ void CMainPlayScene::setStateSound()
 	case EPlayerState::SLENDER:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Slenderman.wav", false);
 		break;
-	case EPlayerState::HEARTBEAT:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/HeartBeat.wav", false);
-		break;
 	case EPlayerState::NONE:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Breathe.wav", true);
-		if (m_fRunTime <= 3.0f) {
-			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.8f);
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Breathe.wav", false);
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/HeartBeat.wav", false);
+		if (m_fRunTime <= 1.0f) {
+			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
+		}
+		else if (m_fRunTime <= 3.0f) {
+			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.95f);
 		}
 		break;
 	}
@@ -208,7 +253,7 @@ void CMainPlayScene::setStateSound()
 
 void CMainPlayScene::setBGMSound()
 {
-	switch (m_pPlayingBGM)
+	switch (m_ePlayingBGM)
 	{
 	case EPlayingBGM::WIND:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Wind.wav", false);
@@ -219,17 +264,14 @@ void CMainPlayScene::setBGMSound()
 	case EPlayingBGM::CRIKET:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Criket.wav", false);
 		break;
-	case EPlayingBGM::BIRD:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Bird.wav", false);
+	case EPlayingBGM::CROW:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Crow.wav", false);
 		break;
 	case EPlayingBGM::FIRE:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Fire.wav", false);
 		break;
 	case EPlayingBGM::OWL:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Owl.wav", false);
-		break;
-	case EPlayingBGM::MYSTERIOUSE:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Mysteriouse.wav", false);
 		break;
 	case EPlayingBGM::NOISE_1:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
@@ -247,9 +289,10 @@ void CMainPlayScene::setBGMSound()
 
 void CMainPlayScene::setTimer()
 {
-	if (m_pPlayerState != EPlayerState::NONE)
+	if (m_ePlayerState != EPlayerState::NONE)
 	{
 		m_fRunTime += GET_DELTA_TIME();
+		if (m_fRunTime >= 20.0f) m_fRunTime = 20.0f;
 	}
 	else {
 		m_fRunTime -= GET_DELTA_TIME();
@@ -309,11 +352,12 @@ void CMainPlayScene::update(void)
 	menuContainer->update();
 	setTimer();
 	this->setStateSound();
+	this->setBGMSound();
 
 	m_pSpotObj->setPosition(m_pCamera->getPosition());
 	if (isBGMPlay)
 	{
-		this->createSound();
+		this->createStageSound();
 		isBGMPlay = false;
 	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
@@ -363,11 +407,11 @@ void CMainPlayScene::update(void)
 	if (IS_KEY_DOWN(DIK_W)) {
 		m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
 		m_pSpotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
-		m_pPlayerState = EPlayerState::WALKGRASS;
+		m_ePlayerState = EPlayerState::WALKGRASS;
 	}
 	if (IS_KEY_RELEASED(DIK_W))
 	{
-		m_pPlayerState = EPlayerState::NONE;
+		m_ePlayerState = EPlayerState::NONE;
 	}
 	if (IS_KEY_DOWN(DIK_S)) {
 		m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());

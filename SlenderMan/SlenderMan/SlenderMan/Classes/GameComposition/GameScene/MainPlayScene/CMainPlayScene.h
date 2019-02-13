@@ -35,7 +35,7 @@ public:		//public override function
 private:
 	void	createRenderTarget();
 	void	createCamera();
-	void	createSound();
+	void	createStageSound();
 	void	setStateSound();
 	void	setBGMSound();
 	void	setTimer();
@@ -62,13 +62,11 @@ private:
 
 	LPD3DXMESH m_pSphere = nullptr;
 
-
 	CStage* m_pStage;
 	bool isFirst = true;
 	bool isBGMPlay = true;
 
 	float m_fPlayTime = 0.0f;
-
 
 	CSpriteObject_Default* m_pCamCoderView = nullptr;
 	CLabelObject*		   m_pPlayTime = nullptr;
@@ -76,8 +74,9 @@ private:
 	CSpriteObject_Button* exitButton = nullptr;
 	CSpriteObject_Container* menuContainer = nullptr;
 
-	EPlayerState m_pPlayerState = EPlayerState::NONE;
-	EPlayingBGM m_pPlayingBGM = EPlayingBGM::NONE;
+	EPlayerState m_ePlayerState = EPlayerState::NONE;
+	EPlayingBGM m_ePlayingBGM = EPlayingBGM::NONE;
+	EStageSound m_eStageSound = EStageSound::STAGE_1;
 
 	FPTR* crashFptr = nullptr;
 	FPTR* beginFptr = nullptr;

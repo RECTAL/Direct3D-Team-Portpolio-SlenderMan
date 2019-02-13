@@ -261,3 +261,13 @@ void CObject::addChildObject(CObject * a_pChildObject)
 		m_oChildObjectList.push_back(a_pChildObject);
 	}
 }
+
+void CObject::removeChildObject(CObject * a_pChildObject)
+{
+	auto oIterator = std::find(m_oChildObjectList.begin(),
+		m_oChildObjectList.end(), a_pChildObject);
+
+	if (oIterator != m_oChildObjectList.end()) {
+		m_oChildObjectList.erase(oIterator);
+	}
+}

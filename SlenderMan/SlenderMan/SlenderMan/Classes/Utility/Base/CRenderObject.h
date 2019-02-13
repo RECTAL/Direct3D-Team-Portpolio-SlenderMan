@@ -4,37 +4,73 @@
 #include "CObject.h"
 #include "../Interface/IRenderable.h"
 
-//! RenderObject
+class CDebugDraw;
+
+//! 기본 렌더링 객체
 class CRenderObject : public CObject,
 	public IRenderable
 {
-protected:		// constructor
-	CRenderObject(void);
+public:			// 인터페이스 구현
 
-public:			// interface
-	virtual void draw(void) final override;			//interface: IRenderable
-
+	//! 그린다
+	virtual void draw(void) final override;
 
 public:			// getter, setter
-	/**********************************************/
-	//getter
-	/**********************************************/
-	bool getVisible(void);							//! get IsVisible
-	STBoundingSphere getFinalBoundingSphere();
-	/**********************************************/
-	//setter
-	/**********************************************/
-	void setVisible(bool a_bIsVisible);				//! set IsVisible
 
-protected:		
+	//! 그리기 여부를 반환한다
+	bool getVisible(void);
 
-	virtual void preDraw(void);						//! Before Drawing
-	virtual void doDraw(void);						//! Drawing
-	virtual void postDraw(void);					//! After Drawed
+	//! 경계 볼륨을 반환한다
+	STBoundingBox getBoundingBox(void);
 
+	//! 객체 볼륨을 반환한다
+	STObjectBox getObjectBox(void);
 
-protected:	
+	//! 최종 경계 볼륨을 반환한다
+	STBoundingBox getFinalBoundingBox(void);
+
+	//! 경계 구를 반환한다
+	STBoundingSphere getBoundingSphere(void);
+
+	//! 최종 경계 구를 반환한다
+	STBoundingSphere getFinalBoundingSphere(void);
+
+	//! 그리기 여부를 변경한다
+	void setVisible(bool a_bIsVisible);
+
+	//! 디버그 여부를 변경한다
+	void setDebugEnable(bool a_bIsDebugEnable,
+		EDebugDrawType a_eDebugDrawType = EDebugDrawType::BOX);
+
+	//! 경계 볼륨을 변경한다
+	void setBoundingBox(const STBoundingBox &a_rstBoundingBox);
+
+	//! 경계 구를 변경한다
+	void setBoundingSphere(const STBoundingSphere &a_rstBoundingSphere);
+
+protected:			// protected 함수
+
+	//! 물체를 그리기 전
+	virtual void preDraw(void);
+
+	//! 물체를 그린다
+	virtual void doDraw(void);
+
+	//! 물체를 그린 후
+	virtual void postDraw(void);
+
+protected:			// 생성자
+
+	//! 생성자
+	CRenderObject(void);
+
+protected:			// protected 변수
 
 	bool m_bIsVisible = false;
-	STBoundingSphere	m_stBoundingSphere;
+	bool m_bIsDebugEnable = false;
+
+	CDebugDraw *m_pDebugDraw = nullptr;
+
+	STBoundingBox m_stBoundingBox;
+	STBoundingSphere m_stBoundingSphere;
 };

@@ -67,6 +67,7 @@ public:			//public function : utility
 	//public function : about parent<->child
 	/***************************************************/
 	void addChildObject(CObject *a_pChildObject);
+	void removeChildObject(CObject *a_pChildObject);
 
 private:
 	void resetAxis(void);					

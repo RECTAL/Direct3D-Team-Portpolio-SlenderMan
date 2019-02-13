@@ -40,8 +40,27 @@ struct STWaveSound
 	WAVEFORMATEX m_stWaveFormat;
 };
 
+
+//! °æ°è º¼·ý
+struct STBoundingBox
+{
+	D3DXVECTOR3 m_stMinPoint;
+	D3DXVECTOR3 m_stMaxPoint;
+};
+
+//! °´Ã¼ º¼·ý
+struct STObjectBox
+{
+	float m_fHalfLengths[3];
+
+	D3DXVECTOR3 m_stCenter;
+	D3DXVECTOR3 m_astDirections[3];
+};
+
+//! °æ°è ±¸
 struct STBoundingSphere
 {
-	D3DXVECTOR3 m_stPosition;
-	float		m_fRadius;
+	float m_fRadius;
+	D3DXVECTOR3 m_stCenter;
 };
+

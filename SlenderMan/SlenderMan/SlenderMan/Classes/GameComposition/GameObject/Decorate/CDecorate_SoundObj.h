@@ -1,20 +1,19 @@
 #pragma once
-
 #include "../../../Define/KGlobalDefine.h"
-#include "../../Base/CRenderObject.h"
+#include "../../../Utility/Base/CRenderObject.h"
 
 //! StaticObject
 class CCameraObject;
 class CLightObject;
 class CSpotLightObject;
-class CStaticObject : public CRenderObject
+class CDecorate_SoundObj: public CRenderObject
 {
 public:
 	struct STParameters
 	{
 		CCameraObject*	m_pCamera;
 		CLightObject*	m_pDirectional;
-		
+
 		int	m_nNumSpotLight;
 		CSpotLightObject**	m_pSpotLight;
 
@@ -26,30 +25,30 @@ public:
 	};
 
 public:			//constructor , destructor
-	CStaticObject(STParameters &a_rstParameters);
-	~CStaticObject();
-protected:		//interface		
+	CDecorate_SoundObj(STParameters &a_rstParameters, EPlayingBGM a_eSound);
+	~CDecorate_SoundObj();
 
+protected:		//interface		
+	
+	virtual void preDraw(void)override;
+	virtual void postDraw(void)override;
 	virtual void doDraw(void) override;		//! interface : IRenderable
 
-
 public:
-	STStaticMesh	getStaticMesh() { return m_stStaticMesh; }
-	LPD3DXEFFECT	getEffect() { return m_pEffect; }
-	std::string&	getTechniqueName() { return m_stTechniqueName; }
+	LPD3DXMESH		getMesh() { return m_pMesh; }
 	STParameters&	getSTParameters() { return m_stParameters; }
 
 	virtual void update(void) override;		//! interface : IUpdateable
 
-
+private:
+	void	createSphereMesh();
+	void	createMatrial();
 
 protected:
-	LPD3DXEFFECT m_pEffect = nullptr;
-
-	STStaticMesh m_stStaticMesh;
-	STParameters m_stParameters;
-	std::string	m_stTechniqueName = "DefaultStaticMesh";
-
+	D3DMATERIAL9	m_stMtrl;
+	LPD3DXMESH		m_pMesh = nullptr;
+	STParameters	m_stParameters;
+	EPlayingBGM		m_eSoundType;
 private:
 
 
