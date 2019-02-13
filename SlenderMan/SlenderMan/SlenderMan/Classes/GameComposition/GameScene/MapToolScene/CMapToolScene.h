@@ -2,9 +2,11 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
+#define MAX_SPRITE_LIST_BUTTON 4
 #define MAX_TREE 6
 #define MAX_HOUSE 2
 #define MAX_OBJECT 4
+#define MAX_SOUND 6
 
 class CSpriteObject;
 class CSpriteObject_ScrollBar;
@@ -72,6 +74,7 @@ private:
 	void createTreeButton(void);
 	void createBuildingButton(void);
 	void createObjectButton(void);
+	void createSoundButton(void);
 
 	// 버튼 그리기
 	void buttonDrawUI();
@@ -97,7 +100,7 @@ private:
 	CSpriteObject_Button*	 m_pScrollBarButton = nullptr;
 
 	CSpriteObject_List*		 m_pSpriteList = nullptr;
-	CSpriteObject_Button*	 m_pSpriteListButton[3] = { nullptr };
+	CSpriteObject_Button*	 m_pSpriteListButton[MAX_SPRITE_LIST_BUTTON] = { nullptr };
 
 	CSpriteObject_Button* m_pOpenButton = nullptr;
 	CSpriteObject_Button* m_pCloseButton = nullptr;
@@ -109,6 +112,7 @@ private:
 	CSpriteObject_Button* m_pTreeButton[MAX_TREE] = { nullptr };
 	CSpriteObject_Button* m_pHouseButton[MAX_HOUSE] = { nullptr };
 	CSpriteObject_Button* m_pObjectButton[MAX_OBJECT] = { nullptr };
+	CSpriteObject_Button* m_pSoundButton[MAX_SOUND] = { nullptr };
 
 	CSpriteObject_Button* m_pSaveButton = nullptr;
 	CSpriteObject_Button* m_pLoadButton = nullptr;
@@ -122,6 +126,7 @@ private:
 	CSpriteObject_ListSquare* m_pTreeListSquare = nullptr;
 	CSpriteObject_ListSquare* m_pBuildingListSquare = nullptr;
 	CSpriteObject_ListSquare* m_pObjectListSquare = nullptr;
+	CSpriteObject_ListSquare* m_pSoundListSquare = nullptr;
 
 
 

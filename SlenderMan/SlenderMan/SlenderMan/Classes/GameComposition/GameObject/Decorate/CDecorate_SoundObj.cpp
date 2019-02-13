@@ -62,7 +62,7 @@ void CDecorate_SoundObj::createSphereMesh()
 
 void CDecorate_SoundObj::createMatrial()
 {
-	if (m_eSoundType == EPlayingBGM::BIRD)
+	if (m_eSoundType == EPlayingBGM::CROW)
 	{
 		m_stMtrl.Diffuse = D3DCOLORVALUE{ 1.0f,0.0f,1.0f,1.0f };
 		m_stMtrl.Ambient = D3DCOLORVALUE{ 0.0f,0.0f,0.0f,1.0f };
