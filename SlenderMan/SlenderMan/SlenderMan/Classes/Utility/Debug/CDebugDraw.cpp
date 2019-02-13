@@ -10,14 +10,14 @@ CDebugDraw::CDebugDraw(CRenderObject * a_pRenderObject, EDebugDrawType a_eDebugD
 	ZeroMemory(&m_stBoundingBox, sizeof(m_stBoundingBox));
 	ZeroMemory(&m_stBoundingSphere, sizeof(m_stBoundingSphere));
 
-	if (a_eDebugDrawType == EDebugDrawType::BOX) {
-		m_stBoundingBox = m_pRenderObject->getBoundingBox();
-		m_pBoundingBox = this->createBoundingBox(m_stBoundingBox);
-	}
-	else {
-		m_stBoundingSphere = m_pRenderObject->getBoundingSphere();
-		m_pBoundingSphere = this->createBoundingSphere(m_stBoundingSphere);
-	}
+	
+	m_stBoundingBox = m_pRenderObject->getBoundingBox();
+	m_pBoundingBox = this->createBoundingBox(m_stBoundingBox);
+	
+	
+	m_stBoundingSphere = m_pRenderObject->getBoundingSphere();
+	m_pBoundingSphere = this->createBoundingSphere(m_stBoundingSphere);
+	
 }
 
 CDebugDraw::~CDebugDraw(void)

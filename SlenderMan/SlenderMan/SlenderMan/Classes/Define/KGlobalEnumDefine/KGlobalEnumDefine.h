@@ -95,7 +95,7 @@ enum class EStageSound
 	EXIT,			// 탈출 시
 	NONE
 };
-};
+
 
 //! 디버그 타입
 enum class EDebugDrawType

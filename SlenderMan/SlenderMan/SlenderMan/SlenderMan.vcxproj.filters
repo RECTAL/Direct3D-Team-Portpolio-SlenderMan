@@ -206,6 +206,9 @@
     <Filter Include="Classes\GameComposition\GameScene\MapToolScene">
       <UniqueIdentifier>{502af136-e1fd-4755-8e6f-b4e538cbfc4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\Global\Utility\Debug">
+      <UniqueIdentifier>{8df4e159-1b26-4d5c-b1bd-97044ce5e01b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Classes\Define\KGlobalDefine.h">
@@ -378,6 +381,9 @@
     </ClInclude>
     <ClInclude Include="Classes\GameComposition\GameCharactor\CCharactor.h">
       <Filter>Classes\GameComposition\GameCharactor</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\Utility\Debug\CDebugDraw.h">
+      <Filter>Classes\Global\Utility\Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -555,6 +561,9 @@
     <ClCompile Include="Classes\GameComposition\GameCharactor\Player\player.cpp">
       <Filter>Classes\GameComposition\GameCharactor\Player</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\Utility\Debug\CDebugDraw.cpp">
+      <Filter>Classes\Global\Utility\Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Effects\CopyTexture.fx">
@@ -567,6 +576,12 @@
       <Filter>Resources\Effects</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Effects\DefaultSkinnedMesh.fx">
+      <Filter>Resources\Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Effects\Outline.fx">
+      <Filter>Resources\Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Effects\OutlineBlur.fx">
       <Filter>Resources\Effects</Filter>
     </FxCompile>
   </ItemGroup>

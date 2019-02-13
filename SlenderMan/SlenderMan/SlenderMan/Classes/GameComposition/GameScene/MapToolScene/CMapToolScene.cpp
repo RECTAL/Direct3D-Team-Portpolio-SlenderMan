@@ -66,12 +66,12 @@ void CMapToolScene::init()
 
 	m_pCamera->setPosition(D3DXVECTOR3(100, 100, 100));
 	m_pStage->setCameraObjMain(m_pCamera);
-	m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight = max(m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight-1,0);
+	m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight = max(m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight - 1, 0);
 	int nNumSpot = m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight;
 	m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot] = nullptr;
 	m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
 	m_pStage->delSpotLightObj();
-	
+
 
 }
 
@@ -80,7 +80,6 @@ void CMapToolScene::createWindowUI()
 	createTreeButton();
 	createBuildingButton();
 	createObjectButton();
-	createSoundButton();
 	/***************************************************/
 	//컨테이너 만들기
 	/***************************************************/
@@ -91,96 +90,83 @@ void CMapToolScene::createWindowUI()
 	m_pSelectWindowContainer->init(nullptr, nullptr, nullptr, nullptr);
 
 	m_pUpCover = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/blackCover", "png", 100, 100, 1);
-	m_pUpCover->init(nullptr, nullptr, nullptr, nullptr,true,D3DXVECTOR3(0, -190, 0));
+	m_pUpCover->init(nullptr, nullptr, nullptr, nullptr, true, D3DXVECTOR3(0, -190, 0));
 
 	m_pDownCover = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/blackCover", "png", 150, 140, 1);
 	m_pDownCover->init(nullptr, nullptr, nullptr, nullptr, true, D3DXVECTOR3(0, 350, 0));
-		/***************************************************/
-		//스크롤 바 만들기
-		/***************************************************/
-		m_pUpDownScrollBar = new CSpriteObject_ScrollBar("Resources/Textures/Scene/MapToolScene/scrollBarBack", "png", 20, 400, 1);
-		m_pUpDownScrollBar->setPosition(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-			/**********************/
-			//스크롤 바 버튼 만들기
-			/**********************/
-			m_pScrollBarButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/scrollBarFront", "png", 20, 100, 1);
-			m_pScrollBarButton->init(nullptr, nullptr, nullptr, nullptr, true);
+	/***************************************************/
+	//스크롤 바 만들기
+	/***************************************************/
+	m_pUpDownScrollBar = new CSpriteObject_ScrollBar("Resources/Textures/Scene/MapToolScene/scrollBarBack", "png", 20, 400, 1);
+	m_pUpDownScrollBar->setPosition(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	/**********************/
+	//스크롤 바 버튼 만들기
+	/**********************/
+	m_pScrollBarButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/scrollBarFront", "png", 20, 100, 1);
+	m_pScrollBarButton->init(nullptr, nullptr, nullptr, nullptr, true);
 
-			m_pUpDownScrollBar->init(
-				nullptr, nullptr, nullptr, nullptr, 0, 400, m_pScrollBarButton, true, D3DXVECTOR3(80, 60, 0.0f)
-			);
+	m_pUpDownScrollBar->init(
+		nullptr, nullptr, nullptr, nullptr, 0, 400, m_pScrollBarButton, true, D3DXVECTOR3(80, 60, 0.0f)
+	);
 
 
-		/***************************************************/
-		//리스트 만들기
-		/***************************************************/
-		m_pSpriteList = new CSpriteObject_List("Resources/Textures/Scene/MapToolScene/blackCover", "png", 150, 500, 1);
-		m_pSpriteList->init(nullptr, nullptr, nullptr, nullptr, true, D3DXVECTOR3(0, 110, 0.0f));
-			/*************************/
-			//리스트 내 버튼 만들기
-			/*************************/
-			// 나무
-			// {
-			m_pSpriteListButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree", "png", 100, 80, 1);
-			m_pSpriteListButton[0]->setPosition(m_pSpriteList->getPosition());
-			(*endFptr) = [=](void) -> void
-			{
-				m_pTreeListSquare->setVisible(true);
-				m_pSquareUpCover->setVisible(true);
-				m_pBackButton->setVisible(true); // 나중에 x버튼으로 바꾸기
-			};
-			m_pSpriteListButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
-			// }
+	/***************************************************/
+	//리스트 만들기
+	/***************************************************/
+	m_pSpriteList = new CSpriteObject_List("Resources/Textures/Scene/MapToolScene/blackCover", "png", 150, 500, 1);
+	m_pSpriteList->init(nullptr, nullptr, nullptr, nullptr, true, D3DXVECTOR3(0, 110, 0.0f));
+	/*************************/
+	//리스트 내 버튼 만들기
+	/*************************/
+	// 나무
+	// {
+	m_pSpriteListButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree", "png", 100, 80, 1);
+	m_pSpriteListButton[0]->setPosition(m_pSpriteList->getPosition());
+	(*endFptr) = [=](void) -> void
+	{
+		m_pTreeListSquare->setVisible(true);
+		m_pSquareUpCover->setVisible(true);
+		m_pBackButton->setVisible(true); // 나중에 x버튼으로 바꾸기
+	};
+	m_pSpriteListButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
+	// }
 
-			// 집
-			// {
-			m_pSpriteListButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 80, 1);
-			m_pSpriteListButton[1]->setPosition(m_pSpriteList->getPosition());
-			(*endFptr) = [=](void) -> void
-			{
-				m_pBuildingListSquare->setVisible(true);
-				m_pSquareUpCover->setVisible(true);
-				m_pBackButton->setVisible(true); // 나중에 x버튼으로 바꾸기
-			};
-			m_pSpriteListButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
-			// }
+	// 집
+	// {
+	m_pSpriteListButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/building", "png", 100, 80, 1);
+	m_pSpriteListButton[1]->setPosition(m_pSpriteList->getPosition());
+	(*endFptr) = [=](void) -> void
+	{
+		m_pBuildingListSquare->setVisible(true);
+		m_pSquareUpCover->setVisible(true);
+		m_pBackButton->setVisible(true); // 나중에 x버튼으로 바꾸기
+	};
+	m_pSpriteListButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
+	// }
 
-			//오브젝트
-			// {
-			m_pSpriteListButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/object", "png", 100, 80, 1);
-			m_pSpriteListButton[2]->setPosition(m_pSpriteList->getPosition());
-			(*endFptr) = [=](void) -> void
-			{
-				m_pObjectListSquare->setVisible(true);
-				m_pSquareUpCover->setVisible(true);
-				m_pBackButton->setVisible(true); // 나중에 x버튼으로 바꾸기
-			};
-			m_pSpriteListButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
-			// }
+	//오브젝트
+	// {
+	m_pSpriteListButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/object", "png", 100, 80, 1);
+	m_pSpriteListButton[2]->setPosition(m_pSpriteList->getPosition());
+	(*endFptr) = [=](void) -> void
+	{
+		m_pObjectListSquare->setVisible(true);
+		m_pSquareUpCover->setVisible(true);
+		m_pBackButton->setVisible(true); // 나중에 x버튼으로 바꾸기
+	};
+	m_pSpriteListButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
+	// }
+	for (int i = 0; i < 3; i++)
+	{
+		char name[100];
+		sprintf(name, "uiButton_%d", i);
+		m_pSpriteList->addChildSpriteObject(name, CWindowType::BUTTON, m_pSpriteListButton[i]);
+	}
 
-			//사운드
-			// {
-			m_pSpriteListButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/sound", "png", 100, 80, 1);
-			m_pSpriteListButton[3]->setPosition(m_pSpriteList->getPosition());
-			(*endFptr) = [=](void) -> void
-			{
-				m_pSoundListSquare->setVisible(true);
-				m_pSquareUpCover->setVisible(true);
-				m_pBackButton->setVisible(true); // 나중에 x버튼으로 바꾸기
-			};
-			m_pSpriteListButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
-			// }
-			for (int i = 0; i < MAX_SPRITE_LIST_BUTTON; i++)
-			{
-					char name[100];
-					sprintf(name, "uiButton_%d", i);
-					m_pSpriteList->addChildSpriteObject(name, CWindowType::BUTTON, m_pSpriteListButton[i]);
-			}
-
-		m_pSelectWindowContainer->addChildSpriteObject("ButtonList", CWindowType::LIST, m_pSpriteList);
-		m_pSelectWindowContainer->addChildSpriteObject("m_pUpCover", CWindowType::BUTTON, m_pUpCover);
-		m_pSelectWindowContainer->addChildSpriteObject("m_pDownCover", CWindowType::BUTTON, m_pDownCover);
-		m_pSelectWindowContainer->addChildSpriteObject("ScrollBar", CWindowType::SCROLLBAR, m_pUpDownScrollBar);
+	m_pSelectWindowContainer->addChildSpriteObject("ButtonList", CWindowType::LIST, m_pSpriteList);
+	m_pSelectWindowContainer->addChildSpriteObject("m_pUpCover", CWindowType::BUTTON, m_pUpCover);
+	m_pSelectWindowContainer->addChildSpriteObject("m_pDownCover", CWindowType::BUTTON, m_pDownCover);
+	m_pSelectWindowContainer->addChildSpriteObject("ScrollBar", CWindowType::SCROLLBAR, m_pUpDownScrollBar);
 }
 
 void CMapToolScene::createButtonUI()
@@ -263,7 +249,6 @@ void CMapToolScene::createButtonUI()
 		m_pTreeListSquare->setVisible(false);
 		m_pObjectListSquare->setVisible(false);
 		m_pBuildingListSquare->setVisible(false);
-		m_pSoundListSquare->setVisible(false);
 		m_pSquareUpCover->setVisible(false);
 	};
 	m_pBackButton->init(nullptr, nullptr, nullptr, endFptr);
@@ -430,7 +415,6 @@ void CMapToolScene::listUpdate()
 	m_pTreeListSquare->update();
 	m_pBuildingListSquare->update();
 	m_pObjectListSquare->update();
-	m_pSoundListSquare->update();
 }
 
 void CMapToolScene::labelUpdate()
@@ -710,70 +694,6 @@ void CMapToolScene::createObjectButton(void)
 	}
 }
 
-void CMapToolScene::createSoundButton(void)
-{
-	m_pSoundListSquare = new CSpriteObject_ListSquare("Resources/Textures/Scene/MapToolScene/blackCover", "png", 300, 300, 1);
-	m_pSoundListSquare->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 200, 250, 0));
-	m_pSoundListSquare->setVisible(false);
-	m_pSoundListSquare->init(nullptr, nullptr, nullptr, nullptr);
-
-	m_pSoundButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/criket", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::CRIKET;
-		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
-	};
-	m_pSoundButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	m_pSoundButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/crow", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::CROW;
-		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
-	};
-	m_pSoundButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	m_pSoundButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/fire", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::FIRE;
-		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
-	};
-	m_pSoundButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	m_pSoundButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/owl", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::OWL;
-		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
-	};
-	m_pSoundButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	m_pSoundButton[4] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/rain", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::RAIN;
-			if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
-	};
-	m_pSoundButton[4]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	m_pSoundButton[5] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/wind", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
-		m_stMouseInfo.m_eObjType = EObjType::WIND;
-		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
-	};
-	m_pSoundButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	for (int i = 0; i < MAX_SOUND; i++)
-	{
-		char path[MAX_PATH];
-		sprintf(path, "test%1d", i);
-		m_pSoundListSquare->addChildSpriteObject(path, CWindowType::BUTTON, m_pSoundButton[i]);
-	}
-
-}
-
 void CMapToolScene::draw(void)
 {
 	CScene::draw();
@@ -792,7 +712,6 @@ void CMapToolScene::drawUI(void)
 	m_pTreeListSquare->drawUI();
 	m_pBuildingListSquare->drawUI();
 	m_pObjectListSquare->drawUI();
-	m_pSoundListSquare->drawUI();
 
 	this->buttonDrawUI();
 	this->labelDrawUI();
@@ -823,7 +742,7 @@ void CMapToolScene::labelDrawUI()
 		, m_stMouseInfo.m_pRenderObj->getRightDirection().x, m_stMouseInfo.m_pRenderObj->getRightDirection().y, m_stMouseInfo.m_pRenderObj->getRightDirection().z
 		, m_stMouseInfo.m_pRenderObj->getUpDirection().x, m_stMouseInfo.m_pRenderObj->getUpDirection().y, m_stMouseInfo.m_pRenderObj->getUpDirection().z
 		, m_stMouseInfo.m_pRenderObj->getForwardDirection().x, m_stMouseInfo.m_pRenderObj->getForwardDirection().y, m_stMouseInfo.m_pRenderObj->getForwardDirection().z);
-	
+
 	m_pRotateLabel->setString(cRotateValue);
 	m_pRotateLabel->drawUI();
 
@@ -900,7 +819,13 @@ void CMapToolScene::inputKey(void)
 						CRenderObject* pRenderObj = nullptr;
 						for (int i = 0; i < nTriangles * 3; i += 3)
 						{
-							
+							for (auto iter : m_pStage->getObjList()[pIndices[i]])
+							{
+								if (IsIntersectRayBox(ray, iter->getFinalBoundingBox()))
+								{
+									oRenderObjList.push_back(iter);
+								}
+							}
 						}
 						for (auto iter : oRenderObjList)
 						{
@@ -915,6 +840,7 @@ void CMapToolScene::inputKey(void)
 
 						if (pRenderObj != nullptr)
 							m_pStage->delObj(pRenderObj, pRenderObj->getPosition());
+						oRenderObjList.clear();
 						pIndexBuffer->Unlock();
 					}
 				}
@@ -934,7 +860,7 @@ void CMapToolScene::inputKey(void)
 					objPacket.m_stUpVec = m_stMouseInfo.m_pRenderObj->getUpDirection();
 					objPacket.m_stRightVec = m_stMouseInfo.m_pRenderObj->getRightDirection();
 
-					m_pStage->addObj(objPacket, stPos,m_bIsDebug);
+					m_pStage->addObj(objPacket, stPos, m_bIsDebug);
 				}
 			}
 		}
@@ -991,7 +917,6 @@ void CMapToolScene::removeList(void)
 	SAFE_DELETE(m_pTreeListSquare);
 	SAFE_DELETE(m_pBuildingListSquare);
 	SAFE_DELETE(m_pObjectListSquare);
-	SAFE_DELETE(m_pSoundListSquare);
 }
 
 LRESULT CMapToolScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
