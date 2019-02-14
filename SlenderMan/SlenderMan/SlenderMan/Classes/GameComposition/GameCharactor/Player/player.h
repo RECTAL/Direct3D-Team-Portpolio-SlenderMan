@@ -24,15 +24,14 @@ public:
 public:		//getter
 	CCameraObject* getCamera(void) { return cameraObject; }
 	CSpotLightObject* getLightObj(void) { return spotObj; }
-	EPlayerState &getPlayerState(void) { return playerState; }
+	int &getPlayerState(void) { return playerState; }
 private:
 	void mouseSenterPos();
 	CSkinnedObject* createPlayer();
 private:
 	CCameraObject* cameraObject;
 	CSpotLightObject* spotObj = nullptr;
-	EPlayerState playerState = EPlayerState::NONE;
-
+	int playerState = (int)EPlayerState::NONE;
 	//CSkinnedObject* playerObject;
 
 };

@@ -14,6 +14,7 @@ void CCharactor::init(void)
 
 void CCharactor::update(void)
 {
+	CObject::update();
 }
 
 void CCharactor::preDraw(void)

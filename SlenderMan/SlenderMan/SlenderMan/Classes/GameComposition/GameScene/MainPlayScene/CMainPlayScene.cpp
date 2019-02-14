@@ -204,7 +204,7 @@ void CMainPlayScene::setStateSound()
 {
 	switch (pPlayer->getPlayerState())
 	{
-	case EPlayerState::WALKGRASS:
+	case (int)EPlayerState::WALKGRASS:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Grass.wav", false);
 		if (m_fRunTime > 8.0f) {
 			GET_SOUND_MANAGER()->setEffectSoundsVolume(1.0f);
@@ -213,21 +213,21 @@ void CMainPlayScene::setStateSound()
 			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.95f);
 		}
 		break;
-	case EPlayerState::WALKROCK:
+	case (int)EPlayerState::WALKROCK:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Rock.wav", false);
 		GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
 		break;
-	case EPlayerState::WALKREED:
+	case (int)EPlayerState::WALKREED:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Reed.wav", false);
 		GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
 		break;
-	case EPlayerState::PICK:
+	case (int)EPlayerState::PICK:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Pick.wav", false);
 		break;
-	case EPlayerState::SLENDER:
+	case (int)EPlayerState::SLENDER:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Slenderman.wav", false);
 		break;
-	case EPlayerState::NONE:
+	case (int)EPlayerState::NONE:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Breathe.wav", false);
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/HeartBeat.wav", false);
 		if (m_fRunTime <= 1.0f) {
@@ -278,7 +278,7 @@ void CMainPlayScene::setBGMSound()
 
 void CMainPlayScene::setTimer()
 {
-	if (pPlayer->getPlayerState() != EPlayerState::NONE)
+	if (pPlayer->getPlayerState() != (int)EPlayerState::NONE)
 	{
 		m_fRunTime += GET_DELTA_TIME();
 		if (m_fRunTime >= 20.0f) m_fRunTime = 20.0f;

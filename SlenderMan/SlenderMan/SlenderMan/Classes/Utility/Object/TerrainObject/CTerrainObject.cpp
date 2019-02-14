@@ -336,8 +336,8 @@ HRESULT CTerrainObject::render()
 		m_pEffect->SetTexture(szVariableName, m_pTex[i]);
 	}
 
-	m_pEffect->SetFloat("g_fFogDensity", 0.55f);
-	m_pEffect->SetFloat("g_fFogEnd", 150.0f);
+	m_pEffect->SetFloat("g_fFogDensity", 0.001f);
+	m_pEffect->SetFloat("g_fFogEnd", 1000.0f);
 
 
 	int nNumSpotLight = m_stParameters.m_nNumSpotLight;
