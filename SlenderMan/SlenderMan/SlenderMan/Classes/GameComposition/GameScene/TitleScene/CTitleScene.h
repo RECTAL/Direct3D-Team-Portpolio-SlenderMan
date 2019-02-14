@@ -64,8 +64,8 @@ private:
 	CSpriteObject_List*		 uiList = nullptr;
 	CSpriteObject_Button*	uiButton[5] = { nullptr };
 
-	CSpriteObject_ScrollBar* soundScrollBar = nullptr;
-	CSpriteObject_Button*	 soundScrollBarButton = nullptr;
+	CSpriteObject_ScrollBar* soundScrollBar[2] = { nullptr };
+	CSpriteObject_Button*	 soundScrollBarButton[2] = { nullptr };
 
 
 

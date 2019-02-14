@@ -44,6 +44,8 @@ enum class EObjType
 	TREE_4,
 	TREE_5,
 	TREE_6,
+	TREE_7,
+	TREE_8,
 	ROCK_0,
 	ROCK_1,
 	WIND,

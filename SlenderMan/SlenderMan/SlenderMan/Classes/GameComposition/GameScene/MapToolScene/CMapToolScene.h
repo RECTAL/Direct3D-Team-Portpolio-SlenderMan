@@ -3,9 +3,9 @@
 #include "../../../Utility/Base/CScene.h"
 
 #define MAX_LIST_BUTTON 4
-#define MAX_TREE 7
+#define MAX_TREE 9
 #define MAX_HOUSE 4
-#define MAX_OBJECT 5
+#define MAX_OBJECT 4
 #define MAX_SOUND 7
 
 class CSpriteObject;
@@ -152,6 +152,7 @@ private:
 	float m_fAngleX = 0.0f;
 	float m_fAngleY = 0.0f;
 	float m_fAngleZ = 0.0f;
+	float m_fPosY = 0.0f;
 
 	float m_fScale = 0.2f;
 };
