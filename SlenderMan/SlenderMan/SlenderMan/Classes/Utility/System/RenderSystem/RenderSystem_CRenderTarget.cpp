@@ -8,18 +8,18 @@ CRenderTarget::CRenderTarget()
 
 CRenderTarget::CRenderTarget(int a_nWidth, int a_nHeight, D3DVIEWPORT9* a_stViewport)
 {
-	m_stRenderTarget.m_pTex = this->createNewTexture(a_nWidth,a_nHeight);
+	m_stRenderTarget.m_pTex = this->createNewTexture(a_nWidth, a_nHeight);
 	m_stRenderTarget.m_pTexSurf = this->createTexSurface(m_stRenderTarget.m_pTex);
 	m_stRenderTarget.m_pDepthStencil = this->createNewDepthStencil(a_nWidth, a_nHeight);
-	
-	if(a_stViewport !=  nullptr)
+
+	if (a_stViewport != nullptr)
 		CopyMemory(&m_stRenderTarget.m_stViewPort, a_stViewport, sizeof(D3DVIEWPORT9));
 
 	m_stRenderTarget.m_nWidth = a_nWidth;
 	m_stRenderTarget.m_nHeight = a_nHeight;
 
 	m_pPlaneMesh = this->createPlaneMesh();
-	m_pCopyEffect = this->createCopyEffect();
+	this->createEffect();
 }
 
 CRenderTarget::~CRenderTarget()
@@ -74,7 +74,7 @@ LPD3DXMESH CRenderTarget::createPlaneMesh()
 	auto OriginMesh = pMesh;
 	OriginMesh->CloneMesh(OriginMesh->GetOptions(), astElements, GET_DEVICE(), &pMesh);
 
-	D3DXComputeNormals(pMesh,(DWORD*)pAdjacency->GetBufferPointer());
+	D3DXComputeNormals(pMesh, (DWORD*)pAdjacency->GetBufferPointer());
 	D3DXComputeTangent(pMesh, 0, 0, 0, TRUE, (DWORD*)pAdjacency->GetBufferPointer());
 
 	SAFE_RELEASE(pAdjacency);
@@ -83,13 +83,12 @@ LPD3DXMESH CRenderTarget::createPlaneMesh()
 	return pMesh;
 }
 
-LPD3DXEFFECT CRenderTarget::createCopyEffect()
+void CRenderTarget::createEffect()
 {
-	LPD3DXEFFECT  pEffect = nullptr;
-
-	pEffect = GET_EFFECT("Resources/Effects/CopyTexture.fx");
-
-	return pEffect;
+	m_pCopyEffect = GET_EFFECT("Resources/Effects/CopyTexture.fx");
+	m_pOutlineEffect = GET_EFFECT("Resources/Effects/Outline.fx");
+	m_pOutlineBlurEffect = GET_EFFECT("Resources/Effects/OutlineBlur.fx");
+	m_pBlendEffect = GET_EFFECT("Resources/Effects/BlendTexture.fx");
 }
 
 void CRenderTarget::preDraw()

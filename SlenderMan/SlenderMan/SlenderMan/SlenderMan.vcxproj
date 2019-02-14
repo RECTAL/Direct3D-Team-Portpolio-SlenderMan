@@ -23,13 +23,13 @@
     <ProjectGuid>{E0F8E15A-0022-4DCE-955B-F851EE94569F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SlenderMan</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -157,7 +157,8 @@
     <ClInclude Include="Classes\Define\KGlobalEnumDefine\KGlobalEnumDefine.h" />
     <ClInclude Include="Classes\Define\KGlobalStructDefine\KGlobalStructDefine.h" />
     <ClInclude Include="Classes\Function\GlobalFunction.h" />
-    <ClInclude Include="Classes\GameComposition\GameObject\Decorate\CDecorate_SoundObj.h" />
+    <ClInclude Include="Classes\GameComposition\GameCharactor\CCharactor.h" />
+    <ClInclude Include="Classes\GameComposition\GameCharactor\Player\player.h" />
     <ClInclude Include="Classes\GameComposition\GameScene\GameOverScene\CGameOverScene.h" />
     <ClInclude Include="Classes\GameComposition\GameScene\LoadingScene\CLoadingScene.h" />
     <ClInclude Include="Classes\GameComposition\GameScene\LoadingScene\Loader\ILoader.h" />
@@ -213,7 +214,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp" />
-    <ClCompile Include="Classes\GameComposition\GameObject\Decorate\CDecorate_SoundObj.cpp" />
+    <ClCompile Include="Classes\GameComposition\GameCharactor\CCharactor.cpp" />
+    <ClCompile Include="Classes\GameComposition\GameCharactor\Player\player.cpp" />
     <ClCompile Include="Classes\GameComposition\GameScene\GameOverScene\CGameOverScene.cpp" />
     <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\CLoadingScene.cpp" />
     <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\Loader\GameOverSceneLoader.cpp" />
@@ -273,10 +275,13 @@
     <ClCompile Include="SlenderMan.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="Resources\Effects\BlendTexture.fx" />
     <FxCompile Include="Resources\Effects\CopyTexture.fx" />
     <FxCompile Include="Resources\Effects\DefaultSkinnedMesh.fx" />
     <FxCompile Include="Resources\Effects\DefaultStaticMesh.fx" />
     <FxCompile Include="Resources\Effects\DefaultTerrain.fx" />
+    <FxCompile Include="Resources\Effects\Outline.fx" />
+    <FxCompile Include="Resources\Effects\OutlineBlur.fx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Datas\realterrain.raw" />

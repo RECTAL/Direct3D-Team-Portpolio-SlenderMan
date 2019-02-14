@@ -14,13 +14,13 @@ class CStage
 public:
 	typedef struct objPacket
 	{
-		EObjType	m_EObjType		= EObjType::NONE;
-		BOOL		m_bIsSkinned	= false;
-		D3DXVECTOR3 m_stPosition	= D3DXVECTOR3(0.0f,0.0f,0.0f);
-		D3DXVECTOR3 m_stForwordVec	= WORLD_FORWARD_DIRECTION;
-		D3DXVECTOR3 m_stUpVec		= WORLD_UP_DIRECTION;
-		D3DXVECTOR3 m_stRightVec	= WORLD_RIGHT_DIRECTION;
-		D3DXVECTOR3 m_stScale		= D3DXVECTOR3(1.0f,1.0f,1.0f);
+		EObjType	m_EObjType = EObjType::NONE;
+		BOOL		m_bIsSkinned = false;
+		D3DXVECTOR3 m_stPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+		D3DXVECTOR3 m_stForwordVec = WORLD_FORWARD_DIRECTION;
+		D3DXVECTOR3 m_stUpVec = WORLD_UP_DIRECTION;
+		D3DXVECTOR3 m_stRightVec = WORLD_RIGHT_DIRECTION;
+		D3DXVECTOR3 m_stScale = D3DXVECTOR3(1.0f, 1.0f, 1.0f);
 	}OBJPACKET;
 
 	typedef struct objContainer
@@ -30,12 +30,12 @@ public:
 		OBJPACKET	m_stObjPacket[MAX_OBJ_CAPACITY];
 	}OBJCONTAINER;
 public:
-	
+
 	virtual ~CStage();
 public:
 	void	init(CTerrainObject::STParameters a_stParameters, std::string m_oObjPacketListFilePath);
 	void	release();
-	void	load(CTerrainObject::STParameters a_stParameters,std::string m_oObjPacketListFilePath);
+	void	load(CTerrainObject::STParameters a_stParameters, std::string m_oObjPacketListFilePath);
 	void	addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsDebug);
 	void	delObj(CRenderObject* a_pRenderObj, D3DXVECTOR3 a_stPosition);
 	void	setCameraObjMain(CCameraObject* a_pCameraObj);
@@ -52,16 +52,20 @@ public:
 	bool	getPickingPosWithTerrain(D3DXVECTOR3& a_stPosition);
 
 
-	CTerrainObject*	getTerrainObj(){ return m_pTerrainObj; }
+	CTerrainObject*	getTerrainObj() { return m_pTerrainObj; }
 	CLightObject*	getDirectionalLightObj() { return m_pDirectionLightObj; }
 	std::vector<CRenderObject*>*	getObjList() { return m_pObjList; }
 	BOOL&	getbIsMaptool() { return m_bIsMaptool; }
 
 private:
-	CCameraObject*	m_pCameraObj =nullptr;
-	CLightObject*	m_pDirectionLightObj=nullptr;
-	CTerrainObject*	m_pTerrainObj= nullptr;
-	OBJCONTAINER* m_pObjPacketList =nullptr;
+	void		createRenderTarget();
+
+
+private:
+	CCameraObject*	m_pCameraObj = nullptr;
+	CLightObject*	m_pDirectionLightObj = nullptr;
+	CTerrainObject*	m_pTerrainObj = nullptr;
+	OBJCONTAINER* m_pObjPacketList = nullptr;
 	std::vector<CRenderObject*>* m_pObjList = nullptr;
 
 

@@ -92,7 +92,7 @@ void CLoadingScene::update(void)
 			SAFE_DELETE(m_pLoader);
 		}
 		if (alpha <= 0)
-			CHANGE_SCENE_DIRECT(m_stNextSceneName, TRUE);
+			CHANGE_SCENE_DIRECT(m_stNextSceneName, FALSE);
 		else
 		{
 			alpha -= 60 * GET_DELTA_TIME();

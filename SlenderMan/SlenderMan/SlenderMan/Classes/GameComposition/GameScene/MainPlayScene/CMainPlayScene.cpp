@@ -19,6 +19,7 @@
 #include "../../../Utility/Manager/CSceneManager.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Button.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Container.h"
+#include "../../../GameComposition/GameCharactor/Player/player.h"
 
 CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
@@ -27,19 +28,20 @@ CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 
 CMainPlayScene::~CMainPlayScene()
 {
-	SAFE_DELETE(m_pCamera);
 	SAFE_DELETE(m_pPlayTime);
-	SAFE_DELETE(m_pSpotObj);
 	SAFE_DELETE(menuContainer);
 	SAFE_DELETE(m_pCamCoderView);
+	SAFE_DELETE(pPlayer);
 }
 
 void CMainPlayScene::init()
 {	
 	CScene::init();
+	ShowCursor(false);
+	
 	if (isFirst)
 	{
-
+		
 		crashFptr = new std::function<void(void)>;
 		beginFptr = new std::function<void(void)>;
 		pressFptr = new std::function<void(void)>;
@@ -47,41 +49,25 @@ void CMainPlayScene::init()
 
 		this->createWindowUI();
 		this->createRenderTarget();
-		this->createCamera();
+		pPlayer = new player;
+		pPlayer->init();
 		this->createContainer();
 		this->createSpriteDefault();
 		this->createLabel();
 
-		m_pSpotObj = this->createSpotObj();
 		isFirst = false;
 
 	}
-	SetCursorPos(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2);
-	mousePosition = GET_MOUSE_POSITION();
 
 	CMapToolScene* pMapToolScene = dynamic_cast<CMapToolScene*>(FIND_SCENE(GAMESCENE_MAPTOOL));
 	pMapToolScene->init();
 	m_pStage = pMapToolScene->getStage();
-	//m_pStage->setCameraObjMain(m_pCamera);
-	//m_pStage->addSpotLightObj(m_pSpotObj);
-	//m_pStage->setObjEffectTechname("FogStaticMesh");
-	//
-	//int nNumSpot = ++m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight;
-	//if (nNumSpot < 10)
-	//{
-	//	m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = m_pSpotObj;
-	//}
-	//
-	//m_pStage->getTerrainObj()->getTechniqueName() = "fogTerrain";
-	//m_pCamera->setPosition(D3DXVECTOR3(100, 200, 100));
 
-
-
-	CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-	CLightObject** ppPointLightObj = new CLightObject*[10];
+	ppSpotLightObj = new CSpotLightObject*[10];
+	ppPointLightObj = new CLightObject*[10];
 
 	CTerrainObject::STParameters stParameters;
-	stParameters.m_pCamera = m_pCamera;
+	stParameters.m_pCamera = pPlayer->getCamera();
 	stParameters.m_vfScale = D3DXVECTOR3(1.0f, 0.010f, 1.0f);
 	stParameters.m_oHeightFilepath = "Resources/Datas/terrain.raw";
 	stParameters.m_oSplatFilepath = "Resources/Textures/Terrain/SplatMap.jpg";
@@ -110,27 +96,26 @@ void CMainPlayScene::init()
 	WIN32_FIND_DATAA fileData;
 	if (FindFirstFile("Resources/Datas/ObjPacket.map", &fileData) != INVALID_HANDLE_VALUE)
 	{
-		m_pStage->setCameraObj(m_pCamera);
+		m_pStage->setCameraObj(pPlayer->getCamera());
 		m_pStage->getbIsMaptool() = FALSE;
 		m_pStage->load(stParameters, "Resources/Datas/ObjPacket.map");
 	}
 	else
 	{
-		m_pStage->setCameraObj(m_pCamera);
+		m_pStage->setCameraObj(pPlayer->getCamera());
 		m_pStage->getbIsMaptool() = FALSE;
 		m_pStage->load(stParameters, "");
 	}
-	m_pStage->setCameraObjMain(m_pCamera);
-	m_pStage->addSpotLightObj(m_pSpotObj);
+	m_pStage->setCameraObjMain(pPlayer->getCamera());
+	m_pStage->addSpotLightObj(pPlayer->getLightObj());
 	m_pStage->getTerrainObj()->getTechniqueName() = "fogTerrain";
 	m_pStage->setObjEffectTechname("FogStaticMesh");
 	int nNumSpot = ++m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight;
 	if (nNumSpot < 10)
 	{
-		m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = m_pSpotObj;
+		m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = pPlayer->getLightObj();
 	}
 	GET_SOUND_MANAGER()->stopAllEffectSounds();
-	m_pCamera->setPosition(D3DXVECTOR3(100, 200, 100));
 	m_fPlayTime = 0.0f;
 }
 
@@ -168,12 +153,6 @@ void CMainPlayScene::createRenderTarget()
 	GET_RENDERTARGET_MANAGER()->addRenderTarget("StageRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
 	GET_RENDERTARGET_MANAGER()->addRenderTarget("CamCoderRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
 
-}
-
-void CMainPlayScene::createCamera()
-{
-	m_pCamera = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
-	m_pCamera->setPosition(D3DXVECTOR3(0.0f, 0.0f, -5.0f));
 }
 
 void CMainPlayScene::createStageSound()
@@ -223,7 +202,7 @@ void CMainPlayScene::createStageSound()
 
 void CMainPlayScene::setStateSound()
 {
-	switch (m_ePlayerState)
+	switch (pPlayer->getPlayerState())
 	{
 	case EPlayerState::WALKGRASS:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Grass.wav", false);
@@ -299,7 +278,7 @@ void CMainPlayScene::setBGMSound()
 
 void CMainPlayScene::setTimer()
 {
-	if (m_ePlayerState != EPlayerState::NONE)
+	if (pPlayer->getPlayerState() != EPlayerState::NONE)
 	{
 		m_fRunTime += GET_DELTA_TIME();
 		if (m_fRunTime >= 20.0f) m_fRunTime = 20.0f;
@@ -355,16 +334,14 @@ void CMainPlayScene::createContainer()
 void CMainPlayScene::update(void)
 {
 	CScene::update();
-	m_pCamera->update();
-	m_pSpotObj->update();
+
 	m_pStage->update();
 	m_pCamCoderView->update();
 	menuContainer->update();
 	setTimer();
 	this->setStateSound();
 	this->setBGMSound();
-
-	m_pSpotObj->setPosition(m_pCamera->getPosition());
+	pPlayer->update();
 	if (isBGMPlay)
 	{
 		this->createStageSound();
@@ -372,70 +349,7 @@ void CMainPlayScene::update(void)
 	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
 		menuContainer->setVisible(!menuContainer->getVisible());
-	}
-
-	float fSpeed = 15.0f;
-
-	if (IS_KEY_DOWN(DIK_LSHIFT)) {
-		fSpeed = 50.0f;
-	}
-
-	// 마우스 화면 조절 
-	POINT movePosition{ mousePosition.x - GET_MOUSE_POSITION().x, mousePosition.y - GET_MOUSE_POSITION().y };
-
-	m_pCamera->rotateByYAxis(-movePosition.x / 5.0f, false);
-	m_pSpotObj->rotateByYAxis(-movePosition.x / 5.0f, false);
-
-	m_pCamera->rotateByXAxis(-movePosition.y / 5.0f);
-	m_pSpotObj->rotateByXAxis(-movePosition.y / 5.0f);
-
-	SetCursorPos(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2);
-
-
-	if (IS_KEY_DOWN(DIK_UP)) {
-		m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
-
-	}
-	else if (IS_KEY_DOWN(DIK_DOWN)) {
-		m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-
-	}
-
-	if (IS_KEY_DOWN(DIK_LEFT)) {
-		m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-
-	}
-	else if (IS_KEY_DOWN(DIK_RIGHT)) {
-		m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
-
-	}
-
-	if (IS_KEY_DOWN(DIK_SPACE)) {
-		m_pCamera->moveByYAxis(10 * GET_DELTA_TIME());
-	}
-
-	if (IS_KEY_DOWN(DIK_W)) {
-
-		m_pCamera->moveByZAxis(fSpeed * GET_DELTA_TIME());
-		m_pSpotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
-		m_ePlayerState = EPlayerState::WALKGRASS;
-	}
-	if (IS_KEY_RELEASED(DIK_W))
-	{
-		m_ePlayerState = EPlayerState::NONE;
-	}
-	if (IS_KEY_DOWN(DIK_S)) {
-		m_pCamera->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-		m_pSpotObj->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-	}
-
-	if (IS_KEY_DOWN(DIK_A)) {
-		m_pCamera->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-		m_pSpotObj->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-	}
-	else if (IS_KEY_DOWN(DIK_D)) {
-		m_pCamera->moveByXAxis(fSpeed * GET_DELTA_TIME());
-		m_pSpotObj->moveByXAxis(fSpeed * GET_DELTA_TIME());
+		ShowCursor(menuContainer->getVisible());
 	}
 
 	m_fPlayTime += GET_DELTA_TIME();
@@ -452,7 +366,7 @@ void CMainPlayScene::draw(void)
 	/***************************************************/
 	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
 	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pDepthStencil);
-	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0.0f);
+	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
 	
 	m_pStage->draw();
 
@@ -461,7 +375,7 @@ void CMainPlayScene::draw(void)
 	/***************************************************/
 	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTexSurf);
 	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pDepthStencil);
-	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0.0f);
+	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
 
 
 	m_pCamCoderView->drawUI();
