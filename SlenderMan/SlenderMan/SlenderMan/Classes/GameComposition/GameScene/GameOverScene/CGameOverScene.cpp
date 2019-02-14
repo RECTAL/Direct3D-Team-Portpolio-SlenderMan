@@ -6,7 +6,6 @@
 #include "../../../Utility/Manager/CInputManager.h"
 #include "../../../Utility/Manager/CSoundManager.h"
 
-
 CGameOverScene::CGameOverScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
 {
@@ -21,7 +20,7 @@ CGameOverScene::~CGameOverScene()
 void CGameOverScene::init()
 {
 	CScene::init();
-
+	//GET_SOUND_MANAGER()->stopAllEffectSounds();
 	if (isFirst)
 	{
 		this->createScene();
@@ -102,5 +101,5 @@ void CGameOverScene::updateSprite(void)
 void CGameOverScene::createSound(void)
 {
 	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/EffectSounds/Noise_3.wav", true);
-	GET_SOUND_MANAGER()->setBackgroundSoundVolume(0.8f);
+	GET_SOUND_MANAGER()->setBackgroundSoundVolume(0.9f);
 }

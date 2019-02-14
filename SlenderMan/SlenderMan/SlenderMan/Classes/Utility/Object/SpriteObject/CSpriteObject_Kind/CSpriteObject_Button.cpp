@@ -2,10 +2,11 @@
 #include "../../../Manager/CResourceManager.h"
 #include "../../../Manager/CInputManager.h"
 #include "../../../System/WindowSystem/WindowSystem_CWindowButton.h"
-CSpriteObject_Button::CSpriteObject_Button(std::string a_stSpriteTexturePath, std::string a_stExtantion, const float width, const float height, int a_nAnimationFrame)
+CSpriteObject_Button::CSpriteObject_Button(std::string a_stSpriteTexturePath, std::string a_stExtantion, const float width, const float height, int a_nAnimationFrame, bool a_bIsCheckBox)
 	:CSpriteObject(a_stSpriteTexturePath, a_stExtantion, width, height, a_nAnimationFrame)
 {
 	m_ECWindowType = CWindowType::BUTTON;
+	m_bIsCheckBox = a_bIsCheckBox;
 }
 
 CSpriteObject_Button::~CSpriteObject_Button()
@@ -17,7 +18,7 @@ void CSpriteObject_Button::update()
 {
 	if (m_bIsVisible)
 	{
-		m_nTextureOffset = 0;
+		if (!m_bIsCheckBox) m_nTextureOffset = 0;
 		
 		m_pWindow->getActiveSize() = SIZE{ (LONG)m_fWidth,(LONG)m_fHeight };
 		m_pWindow->update();
@@ -40,6 +41,7 @@ void CSpriteObject_Button::update()
 			}
 		}
 	}
+
 }
 
 void CSpriteObject_Button::doDrawUI()

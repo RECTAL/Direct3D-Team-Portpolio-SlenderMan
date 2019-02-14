@@ -44,6 +44,8 @@ enum class EObjType
 	TREE_4,
 	TREE_5,
 	TREE_6,
+	TREE_7,
+	TREE_8,
 	ROCK_0,
 	ROCK_1,
 	WIND,
@@ -95,7 +97,6 @@ enum class EStageSound
 	EXIT,			// 탈출 시
 	NONE
 };
-
 
 //! 디버그 타입
 enum class EDebugDrawType
