@@ -53,6 +53,7 @@ void CMapToolScene::init()
 		this->createWindowUI();
 		this->createButtonUI();
 		this->createLabel();
+		this->createCheckBoxButton();
 
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		m_stMouseInfo.m_pRenderObj = (CRenderObject*) new CObject();
@@ -71,8 +72,6 @@ void CMapToolScene::init()
 	m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot] = nullptr;
 	m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
 	m_pStage->delSpotLightObj();
-	
-
 }
 
 void CMapToolScene::createWindowUI()
@@ -170,13 +169,14 @@ void CMapToolScene::createWindowUI()
 			};
 			m_pSpriteListButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
 			// }
-			for (int i = 0; i < MAX_SPRITE_LIST_BUTTON; i++)
+
+			for (int i = 0; i < MAX_LIST_BUTTON; i++)
 			{
 					char name[100];
 					sprintf(name, "uiButton_%d", i);
 					m_pSpriteList->addChildSpriteObject(name, CWindowType::BUTTON, m_pSpriteListButton[i]);
 			}
-
+		
 		m_pSelectWindowContainer->addChildSpriteObject("ButtonList", CWindowType::LIST, m_pSpriteList);
 		m_pSelectWindowContainer->addChildSpriteObject("m_pUpCover", CWindowType::BUTTON, m_pUpCover);
 		m_pSelectWindowContainer->addChildSpriteObject("m_pDownCover", CWindowType::BUTTON, m_pDownCover);
@@ -224,6 +224,8 @@ void CMapToolScene::createButtonUI()
 	{
 		m_pOpenButton->setVisible(false);
 		m_pGoTitleButton->setVisible(false);
+		m_pCollisionButton->setVisible(false);
+		m_pDebugButton->setVisible(false);
 
 		m_pCurrent = m_pOpenButton;
 
@@ -242,6 +244,8 @@ void CMapToolScene::createButtonUI()
 	{
 		m_pOpenButton->setVisible(true);
 		m_pGoTitleButton->setVisible(true);
+		m_pCollisionButton->setVisible(true);
+		m_pDebugButton->setVisible(true);
 
 		m_pCurrent = nullptr;
 
@@ -423,6 +427,9 @@ void CMapToolScene::buttonUpdate()
 	m_pSquareUpCover->update();
 	m_pSaveButton->update();
 	m_pLoadButton->update();
+	m_pCollisionButton->update();
+	m_pDebugButton->update();
+	
 }
 
 void CMapToolScene::listUpdate()
@@ -556,6 +563,14 @@ void CMapToolScene::createTreeButton(void)
 	};
 	m_pTreeButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
 
+	m_pTreeButton[6] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/none", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::NONE;
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+	};
+	m_pTreeButton[6]->init(nullptr, nullptr, nullptr, endFptr, true);
+
 	for (int i = 0; i < MAX_TREE; i++)
 	{
 		char path[MAX_PATH];
@@ -624,6 +639,14 @@ void CMapToolScene::createBuildingButton(void)
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pHouseButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pHouseButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/none", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::NONE;
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+	};
+	m_pHouseButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
 
 	for (int i = 0; i < MAX_HOUSE; i++)
 	{
@@ -702,6 +725,15 @@ void CMapToolScene::createObjectButton(void)
 
 	};
 	m_pObjectButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pObjectButton[4] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/none", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::NONE;
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+	};
+	m_pObjectButton[4]->init(nullptr, nullptr, nullptr, endFptr, true);
+
 	for (int i = 0; i < MAX_OBJECT; i++)
 	{
 		char path[MAX_PATH];
@@ -765,13 +797,57 @@ void CMapToolScene::createSoundButton(void)
 	};
 	m_pSoundButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
 
+	m_pSoundButton[6] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/none", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjType = EObjType::NONE;
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+	};
+	m_pSoundButton[6]->init(nullptr, nullptr, nullptr, endFptr, true);
+
 	for (int i = 0; i < MAX_SOUND; i++)
 	{
 		char path[MAX_PATH];
 		sprintf(path, "test%1d", i);
 		m_pSoundListSquare->addChildSpriteObject(path, CWindowType::BUTTON, m_pSoundButton[i]);
 	}
+}
 
+void CMapToolScene::createCheckBoxButton(void)
+{
+	m_pCollisionButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/collision", "png", 250, 60, 2, true);
+	m_pCollisionButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 250, 40, 0));
+	(*endFptr) = [=](void) -> void
+	{
+		if (m_pCollisionButton->getTextureOffset() == 0) {
+			m_pCollisionButton->getTextureOffset() = 1;
+
+			m_bIsCollision = true;
+		}
+		else {
+			m_pCollisionButton->getTextureOffset() = 0;
+			m_bIsCollision = false;
+		}
+	};
+	m_pCollisionButton->init(nullptr, nullptr, nullptr, endFptr);
+
+	m_pDebugButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/debug", "png", 160, 60, 2, true);
+	m_pDebugButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 250, 120, 0));
+	(*endFptr) = [=](void) -> void
+	{
+		if (m_pDebugButton->getTextureOffset() == 0) {
+			m_pDebugButton->getTextureOffset() = 1;
+		
+			m_bIsDebug = true;
+			m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
+		}
+		else {
+			m_bIsDebug = false;
+			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+			m_pDebugButton->getTextureOffset() = 0;
+		}
+	};
+	m_pDebugButton->init(nullptr, nullptr, nullptr, endFptr);
 }
 
 void CMapToolScene::draw(void)
@@ -796,7 +872,6 @@ void CMapToolScene::drawUI(void)
 
 	this->buttonDrawUI();
 	this->labelDrawUI();
-
 }
 
 void CMapToolScene::buttonDrawUI()
@@ -808,6 +883,8 @@ void CMapToolScene::buttonDrawUI()
 	m_pSquareUpCover->drawUI();
 	m_pSaveButton->drawUI();
 	m_pLoadButton->drawUI();
+	m_pCollisionButton->drawUI();
+	m_pDebugButton->drawUI();
 }
 
 void CMapToolScene::labelDrawUI()
@@ -945,17 +1022,11 @@ void CMapToolScene::inputKey(void)
 		else if (IS_KEY_DOWN(DIK_E)) {
 			m_fScale -= 0.1f * GET_DELTA_TIME();
 		}
-
+		
 		if (IS_KEY_DOWN(DIK_LEFT))		 m_fAngleY += 30.0f * GET_DELTA_TIME();
 		else if (IS_KEY_DOWN(DIK_RIGHT)) m_fAngleY -= 30.0f * GET_DELTA_TIME();
 		else if (IS_KEY_DOWN(DIK_UP))	 m_fAngleX += 30.0f * GET_DELTA_TIME();
 		else if (IS_KEY_DOWN(DIK_DOWN))	 m_fAngleX -= 30.0f * GET_DELTA_TIME();
-
-		if (IS_KEY_PRESSED(DIK_F2))
-		{
-			m_bIsDebug = !m_bIsDebug;
-			m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
-		}
 
 		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, m_fAngleZ));
 		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
@@ -972,6 +1043,8 @@ void CMapToolScene::removeButton(void)
 	SAFE_DELETE(m_pBuildingButton);
 	SAFE_DELETE(m_pTerrainButton);
 	SAFE_DELETE(m_pGoTitleButton);
+	SAFE_DELETE(m_pCollisionButton);
+	SAFE_DELETE(m_pDebugButton);
 	SAFE_DELETE(m_pSquareUpCover);
 
 	if (m_pBackButton != nullptr)
