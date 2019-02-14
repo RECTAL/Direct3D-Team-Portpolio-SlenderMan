@@ -23,17 +23,19 @@ void player::init(void)
 {
 
 	cameraObject = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
-	cameraObject->setPosition(D3DXVECTOR3(0.0f, 0.0f, -5.0f));
+	cameraObject->setPosition(D3DXVECTOR3(0.0f, 0.0f, -15.0f));
 
-	spotObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
+	spotObj = new CSpotLightObject(0, 10.0f, D3DXToRadian(10.0f), D3DXToRadian(25.0f));
+	spotObj->setCameraObj(cameraObject);
 	//playerObject = this->createPlayer();
 }
 
 void player::update(void)
 {
+	CCharactor::update();
 	cameraObject->update();
 	spotObj->update();
-	spotObj->setPosition(cameraObject->getPosition());
+	spotObj->setPosition(D3DXVECTOR3(cameraObject->getPosition().x,cameraObject->getPosition().y,cameraObject->getPosition().z));
 
 	// 마우스 화면 조절 
 
@@ -79,6 +81,7 @@ void player::preDraw(void)
 void player::doDraw(void)
 {
 	//playerObject->draw();
+	spotObj->draw();
 }
 
 void player::postDraw(void)

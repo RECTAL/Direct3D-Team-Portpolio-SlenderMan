@@ -367,9 +367,8 @@ void CMainPlayScene::draw(void)
 	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
 	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pDepthStencil);
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
-	
 	m_pStage->draw();
-
+	pPlayer->draw();
 	/***************************************************/
 	//CamCoderRenderTarget¿¡ draw
 	/***************************************************/
