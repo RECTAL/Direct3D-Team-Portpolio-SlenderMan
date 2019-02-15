@@ -57,6 +57,8 @@ private:
 	void createLabel();
 	void createSpriteDefault();
 	void calcPlayTime(float a_fTime,int& a_nHour,int& a_nMin,int& a_nSec);
+
+	void settingPlayer();
 private:
 	LPD3DXMESH m_pSphere = nullptr;
 

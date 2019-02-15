@@ -6,8 +6,7 @@
 
 class CCameraObject;
 class SpotLightObject;
-class CSkinnedObject;
-
+class CMainPlayScene;
 class player : public CCharactor
 {
 public:
@@ -25,17 +24,18 @@ public:		//getter
 	CCameraObject* getCamera(void) { return cameraObj; }
 	CSpotLightObject* getLightObj(void) { return lightObj; }
 	int &getPlayerState(void) { return playerState; }
+	void mainSceneAddress(CMainPlayScene* address) { mainScene = address; }
 private:
 	void mouseSenterPos();
-	CSkinnedObject* createPlayer();
 protected:
 	void settingCamera();
 	void settingLight();
 private:
-	CCameraObject* cameraObj;
+	CCameraObject* cameraObj = nullptr;
 	CSpotLightObject* lightObj = nullptr;
+	CMainPlayScene* mainScene = nullptr;
 	int playerState = (int)EPlayerState::NONE;
+	bool isEsc = false;
 
-	//CSkinnedObject* playerObject;
 
 };

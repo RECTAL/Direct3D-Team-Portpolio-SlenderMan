@@ -22,57 +22,50 @@ player::~player(void)
 void player::init(void)
 {
 	cameraObj = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
-
 	lightObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
 	lightObj->setCameraObj(cameraObj);
 	this->addChildObject(cameraObj);
 	this->addChildObject(lightObj);
-	//playerObject = this->createPlayer();
+
 }
 
 void player::update(void)
 {
-	CCharactor::update();
-	settingCamera();
-	settingLight();
-	// 마우스 화면 조절 
-	static bool isEsc = false;
-	if (!isEsc)
-		mouseSenterPos();
-	if (IS_KEY_DOWN(DIK_ESCAPE))
-		isEsc = !isEsc;
+	if (!mainScene->getIsMenu())
+	{
+		CCharactor::update();
 
-	float fSpeed = 15.0f;
-	
-	if (IS_KEY_DOWN(DIK_W)) {
-		playerState |= (int)EPlayerState::WALKGRASS;
-		if (IS_KEY_DOWN(DIK_LSHIFT)) {
-			fSpeed = 50.0f;
-			playerState |= (int)EPlayerState::RUN;
+		settingCamera();
+		settingLight();
+		// 마우스 화면 조절 
+		mouseSenterPos();
+
+		float fSpeed = 15.0f;
+
+		if (IS_KEY_DOWN(DIK_W)) {
+			playerState |= (int)EPlayerState::WALKGRASS;
+			if (IS_KEY_DOWN(DIK_LSHIFT)) {
+				fSpeed = 50.0f;
+				playerState |= (int)EPlayerState::RUN;
+			}
+			else if (IS_KEY_RELEASED(DIK_LSHIFT)) {
+				playerState = (int)EPlayerState::NONE;
+			}
+			this->moveByZAxis(fSpeed * GET_DELTA_TIME());
 		}
-		else if (IS_KEY_RELEASED(DIK_LSHIFT)) {
+		if (IS_KEY_RELEASED(DIK_W)) {
 			playerState = (int)EPlayerState::NONE;
 		}
-		this->moveByZAxis(fSpeed * GET_DELTA_TIME());
+		if (IS_KEY_DOWN(DIK_S)) {
+			this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+		}
+		if (IS_KEY_DOWN(DIK_A)) {
+			this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+		}
+		if (IS_KEY_DOWN(DIK_D)) {
+			this->moveByXAxis(fSpeed * GET_DELTA_TIME());
+		}
 	}
-	if (IS_KEY_RELEASED(DIK_W)){
-		playerState = (int)EPlayerState::NONE;
-	}
-	if (IS_KEY_DOWN(DIK_S)) {
-		this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-	}
-	if (IS_KEY_DOWN(DIK_A)) {
-		this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-	}
-	if (IS_KEY_DOWN(DIK_D)) {
-		this->moveByXAxis(fSpeed * GET_DELTA_TIME());
-	}
-	
-	
-	
-	
-	//playerObject->setPosition(D3DXVECTOR3(cameraObject->getPosition().x, cameraObject->getPosition().y, cameraObject->getPosition().z - 100));
-	//playerObject->update();
 }
 
 void player::preDraw(void)
@@ -81,7 +74,6 @@ void player::preDraw(void)
 
 void player::doDraw(void)
 {
-	//playerObject->draw();
 	lightObj->draw();
 }
 
@@ -106,15 +98,6 @@ void player::mouseSenterPos()
 	SetCursorPos(pt.x, pt.y);
 }
 
-CSkinnedObject * player::createPlayer()
-{
-	CSkinnedObject::STParameters stParameters = {
-		"Resources/Meshes/player/player.x",
-		"Resources/Effects/DefaultSkinnedMesh.fx"
-	};
-	return createSkinnedMesh(stParameters);
-}
-
 void player::settingCamera()
 {
 	D3DXVECTOR3	stRightVex3 = this->getRightDirection();
@@ -126,6 +109,7 @@ void player::settingCamera()
 	cameraObj->setUpDirection(sUpVex3);
 	cameraObj->setForwardDirection(stForwardVex3);
 	cameraObj->setPosition(stPosVec3);
+
 }
 
 void player::settingLight()
@@ -133,26 +117,11 @@ void player::settingLight()
 	D3DXVECTOR3	stRightVex3 = this->getRightDirection();
 	D3DXVECTOR3	sUpVex3 = this->getUpDirection();
 	D3DXVECTOR3	stForwardVex3 = this->getForwardDirection();
-	D3DXVECTOR3	stPosVec3 = this->getPosition() + stRightVex3 * 6.0f + sUpVex3 * -5.0f + stForwardVex3 * 5.0f;
-	D3DXVECTOR3 stNewRightVec3;
-	D3DXVECTOR3 stNewUpVec3;
-	D3DXVECTOR3 stNewForwardVec3;
+	D3DXVECTOR3	stPosVec3 = this->getPosition() + stRightVex3 - sUpVex3;
 
-	D3DXMATRIXA16 stRotateMatrix;
-	D3DXMatrixRotationYawPitchRoll(&stRotateMatrix, D3DXToRadian(-30.0f), D3DXToRadian(-25.0f), D3DXToRadian(0.0f));
-
-	D3DXVec3TransformNormal(&stNewRightVec3, &stRightVex3, &stRotateMatrix);
-	D3DXVec3TransformNormal(&stNewUpVec3, &sUpVex3, &stRotateMatrix);
-	D3DXVec3TransformNormal(&stNewForwardVec3, &stForwardVex3, &stRotateMatrix);
-
-	D3DXVec3Normalize(&stNewRightVec3, &stNewRightVec3);
-	D3DXVec3Normalize(&stNewUpVec3, &stNewUpVec3);
-	D3DXVec3Normalize(&stNewForwardVec3, &stNewForwardVec3);
-
-
-	lightObj->setRightDirection(stNewRightVec3);
-	lightObj->setUpDirection(stNewUpVec3);
-	lightObj->setForwardDirection(stNewForwardVec3);
+	lightObj->setRightDirection(stRightVex3);
+	lightObj->setUpDirection(sUpVex3);
+	lightObj->setForwardDirection(stForwardVex3);
 	lightObj->setPosition(stPosVec3);
 
 	static float slowLight = 0.0f;
