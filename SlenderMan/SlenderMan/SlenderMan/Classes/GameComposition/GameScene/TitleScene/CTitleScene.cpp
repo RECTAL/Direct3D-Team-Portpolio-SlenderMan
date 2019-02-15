@@ -36,7 +36,6 @@ CTitleScene::~CTitleScene()
 	SAFE_DELETE(backButton);
 	
 	SAFE_DELETE(optionWindow);
-	SAFE_DELETE(m_pLoadingScene);
 
 	//SAFE_DELETE(soundScrollBar);
 

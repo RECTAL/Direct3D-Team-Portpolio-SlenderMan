@@ -46,6 +46,12 @@ private:
 	void	setPlayState();
 
 public:
+	//getter,setter
+	/*********************************************/
+	//getter
+	/*********************************************/
+	bool getIsMenu() { return m_bIsMenu; }
+public:
 	CSpotLightObject* createSpotObj();
 
 private:
@@ -64,6 +70,7 @@ private:
 	CStage* m_pStage;
 	bool m_bIsFirst = true;
 	bool m_bIsBGMPlay = true;
+	bool m_bIsMenu = false;
 
 	float m_fPlayTime = 0.0f;
 
