@@ -67,26 +67,8 @@ void player::update(void)
 	if (IS_KEY_DOWN(DIK_D)) {
 		this->moveByXAxis(fSpeed * GET_DELTA_TIME());
 	}
-	static float test = 0.0f;
-	static float test2 = 0.0f;
-	if (playerState & (int)EPlayerState::RUN)
-	{
-		test2 += GET_DELTA_TIME() * 5;
-		test += test2;
-		test = min(test, 30.0f);
-		test = max(test, 0.0f);
-		lightObj->rotateByXAxis(test);
-	}
-	else
-	{
-		lightObj->rotateByXAxis(test);
-		test2 += GET_DELTA_TIME() * 5;
-		test -= test2;
-		test = min(test, 30.0f);
-		test = max(test, 0.0f);
-	}
 	
-	printf("test : %f\n", test);
+	
 	
 	
 	//playerObject->setPosition(D3DXVECTOR3(cameraObject->getPosition().x, cameraObject->getPosition().y, cameraObject->getPosition().z - 100));
@@ -147,6 +129,29 @@ void player::settingLight()
 	lightObj->setUpDirection(this->getUpDirection());
 	lightObj->setForwardDirection(this->getForwardDirection());
 	lightObj->setPosition(this->getPosition());
+
+	static float slowLight = 0.0f;
+	static float speed = 5.0f;
+	if (playerState & (int)EPlayerState::RUN)
+	{
+		slowLight += GET_DELTA_TIME() * speed;
+		slowLight = min(slowLight, 30.0f);
+		slowLight = max(slowLight, 0.0f);
+		speed += 0.5f;
+		speed = min(speed, 30.0f);
+		speed = max(speed, 5.0f);
+		lightObj->rotateByXAxis(slowLight);
+	}
+	else
+	{
+		lightObj->rotateByXAxis(slowLight);
+		speed -= 0.3f;
+		speed = min(speed, 30.0f);
+		speed = max(speed, 5.0f);
+		slowLight -= GET_DELTA_TIME() * speed;
+		slowLight = min(slowLight, 30.0f);
+		slowLight = max(slowLight, 0.0f);
+	}
 }
 
 
