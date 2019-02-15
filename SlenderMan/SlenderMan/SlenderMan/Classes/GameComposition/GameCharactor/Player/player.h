@@ -22,16 +22,20 @@ public:
 	virtual void postDraw(void) override;
 
 public:		//getter
-	CCameraObject* getCamera(void) { return cameraObject; }
-	CSpotLightObject* getLightObj(void) { return spotObj; }
+	CCameraObject* getCamera(void) { return cameraObj; }
+	CSpotLightObject* getLightObj(void) { return lightObj; }
 	int &getPlayerState(void) { return playerState; }
 private:
 	void mouseSenterPos();
 	CSkinnedObject* createPlayer();
+protected:
+	void settingCamera();
+	void settingLight();
 private:
-	CCameraObject* cameraObject;
-	CSpotLightObject* spotObj = nullptr;
+	CCameraObject* cameraObj;
+	CSpotLightObject* lightObj = nullptr;
 	int playerState = (int)EPlayerState::NONE;
+
 	//CSkinnedObject* playerObject;
 
 };

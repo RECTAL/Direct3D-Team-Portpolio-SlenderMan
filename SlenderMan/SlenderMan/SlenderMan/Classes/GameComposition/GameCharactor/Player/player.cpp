@@ -21,19 +21,20 @@ player::~player(void)
 
 void player::init(void)
 {
-	cameraObject = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
+	cameraObj = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
 
-	spotObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
-	spotObj->setPosition(D3DXVECTOR3(this->getPosition().x - 10, this->getPosition().y - 5, this->getPosition().z - 5));
-	spotObj->setRotation(D3DXVECTOR3(D3DXToRadian(30), D3DXToRadian(-50), 0.0f));
-	this->addChildObject(cameraObject);
-	this->addChildObject(spotObj);
+	lightObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
+	lightObj->setCameraObj(cameraObj);
+	this->addChildObject(cameraObj);
+	this->addChildObject(lightObj);
 	//playerObject = this->createPlayer();
 }
 
 void player::update(void)
 {
 	CCharactor::update();
+	settingCamera();
+	settingLight();
 	// 마우스 화면 조절 
 	static bool isEsc = false;
 	if (!isEsc)
@@ -53,50 +54,37 @@ void player::update(void)
 			playerState = (int)EPlayerState::NONE;
 		}
 		this->moveByZAxis(fSpeed * GET_DELTA_TIME());
-		for (auto iter : m_oChildObjectList) {
-			iter->moveByZAxis(fSpeed * GET_DELTA_TIME());
-		}
 	}
 	if (IS_KEY_RELEASED(DIK_W)){
 		playerState = (int)EPlayerState::NONE;
 	}
 	if (IS_KEY_DOWN(DIK_S)) {
 		this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-		for (auto iter : m_oChildObjectList) {
-			iter->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-		}
 	}
 	if (IS_KEY_DOWN(DIK_A)) {
 		this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-		for (auto iter : m_oChildObjectList) {
-			iter->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-		}
 	}
 	if (IS_KEY_DOWN(DIK_D)) {
 		this->moveByXAxis(fSpeed * GET_DELTA_TIME());
-		for (auto iter : m_oChildObjectList) {
-			iter->moveByXAxis(fSpeed * GET_DELTA_TIME());
-		}
 	}
 	static float test = 0.0f;
-	
+	static float test2 = 0.0f;
 	if (playerState & (int)EPlayerState::RUN)
 	{
-		test += GET_DELTA_TIME();
-		test = min(test, 20);
-		test = max(test, 0);
-		//cameraObject->rotateByXAxis(-test);
-		//spotObj->rotateByXAxis(test);
+		test2 += GET_DELTA_TIME() * 5;
+		test += test2;
+		test = min(test, 30.0f);
+		test = max(test, 0.0f);
+		lightObj->rotateByXAxis(test);
 	}
 	else
 	{
-		test -= GET_DELTA_TIME();
-		test = min(test, 20);
-		test = max(test, 0);
-		//cameraObject->rotateByXAxis(test);
-		//spotObj->rotateByXAxis(-test);
+		lightObj->rotateByXAxis(test);
+		test2 += GET_DELTA_TIME() * 5;
+		test -= test2;
+		test = min(test, 30.0f);
+		test = max(test, 0.0f);
 	}
-	
 	
 	printf("test : %f\n", test);
 	
@@ -112,6 +100,7 @@ void player::preDraw(void)
 void player::doDraw(void)
 {
 	//playerObject->draw();
+	lightObj->draw();
 }
 
 void player::postDraw(void)
@@ -130,13 +119,7 @@ void player::mouseSenterPos()
 	int dPosY = pt.y - GET_MOUSE_POSITION().y;
 
 	this->rotateByYAxis(-dPosX / 5.0f, false);
-	for (auto iter : m_oChildObjectList) {
-		iter->rotateByYAxis(-dPosX / 5.0f, false);
-	}
 	this->rotateByXAxis(-dPosY / 5.0f);
-	for (auto iter : m_oChildObjectList) {
-		iter->rotateByXAxis(-dPosY / 5.0f);
-	}
 	ClientToScreen(GET_WINDOW_HANDLE(), &pt);
 	SetCursorPos(pt.x, pt.y);
 }
@@ -148,6 +131,22 @@ CSkinnedObject * player::createPlayer()
 		"Resources/Effects/DefaultSkinnedMesh.fx"
 	};
 	return createSkinnedMesh(stParameters);
+}
+
+void player::settingCamera()
+{
+	cameraObj->setRightDirection(this->getRightDirection());
+	cameraObj->setUpDirection(this->getUpDirection());
+	cameraObj->setForwardDirection(this->getForwardDirection());
+	cameraObj->setPosition(this->getPosition());
+}
+
+void player::settingLight()
+{
+	lightObj->setRightDirection(this->getRightDirection());
+	lightObj->setUpDirection(this->getUpDirection());
+	lightObj->setForwardDirection(this->getForwardDirection());
+	lightObj->setPosition(this->getPosition());
 }
 
 
