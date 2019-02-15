@@ -19,22 +19,35 @@ CLoadingScene::CLoadingScene(std::string a_stSceneName)
 CLoadingScene::~CLoadingScene()
 {
 	SAFE_DELETE(m_pLoader);
-	SAFE_DELETE(m_pBackGround);
+	for (int i = 0; i < 3; i++) {
+		SAFE_DELETE(m_pBackGround[i]);
+	}
 }
 
 void CLoadingScene::init()
 {
 	CScene::init();
-	
+
 	m_pLoadThread = new std::thread(std::bind(&CLoadingScene::loadResources, this));
 	m_bIsAllDownLoad = false;
-
 
 	if (isFirst)
 	{
 		this->createBackGround();
 		this->createRenderTarget();
 		isFirst = false;
+	}
+	if (m_stNextSceneName == GAMESCENE_TITLE) {
+		m_nIndex = 0;
+	}
+	else if (m_stNextSceneName == GAMESCENE_MAPTOOL) {
+		m_nIndex = 1;
+	}
+	else if (m_stNextSceneName == GAMESCENE_MAINPLAY) {
+		m_nIndex = 2;
+	}
+	else {
+		m_nIndex = 0;
 	}
 }
 
@@ -79,12 +92,11 @@ void CLoadingScene::createWindowUI()
 void CLoadingScene::update(void)
 {
 	CScene::update();
-	m_pBackGround->update();
+	m_pBackGround[m_nIndex]->update();
 	if(m_pLoader!=nullptr)
 		m_pLoader->IsAllDownLoad(&m_bIsAllDownLoad, 0, true);
 	if (m_bIsAllDownLoad)
 	{
-		//MessageBox(GET_WINDOW_HANDLE(), _T(m_stNextSceneName.c_str()), _T("ok"), S_OK);
 		if (m_pLoader != nullptr)
 		{
 			m_pLoadThread->join();
@@ -92,11 +104,13 @@ void CLoadingScene::update(void)
 			SAFE_DELETE(m_pLoader);
 		}
 		if (alpha <= 0)
+		{
 			CHANGE_SCENE_DIRECT(m_stNextSceneName, FALSE);
+		}
 		else
 		{
-			alpha -= 60 * GET_DELTA_TIME();
-			m_pBackGround->setColor(D3DCOLOR_ARGB((int)alpha, 255, 255, 255));
+			alpha -= 100 * GET_DELTA_TIME();
+			m_pBackGround[m_nIndex]->setColor(D3DCOLOR_ARGB((int)alpha, 255, 255, 255));
 		}
 	}
 	else
@@ -118,11 +132,6 @@ void CLoadingScene::draw(void)
 	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("LoadingRenderTarget")->m_stRenderTarget.m_pDepthStencil);
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0.0f);
 
-
-
-
-
-
 	/***************************************************/
 	//Back Buffer로 재설정
 	/***************************************************/
@@ -134,14 +143,13 @@ void CLoadingScene::draw(void)
 	RunEffectLoop(FIND_RENDERTARGET("LoadingRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
 		FIND_RENDERTARGET("LoadingRenderTarget")->getPlaneMesh()->DrawSubset(0);
 	});
-
-
 }
 
 void CLoadingScene::drawUI(void)
 {
 	CScene::drawUI();
-	m_pBackGround->drawUI();
+
+	m_pBackGround[m_nIndex]->drawUI();
 }
 
 LRESULT CLoadingScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
@@ -155,8 +163,14 @@ LRESULT CLoadingScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPAR
 
 void CLoadingScene::createBackGround(void)
 {
-	m_pBackGround = new CSpriteObject_Default("Resources/Textures/Scene/LoadingScene/load", "png", 1366, 768, 1);
-	m_pBackGround->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
+	m_pBackGround[0] = new CSpriteObject_Default("Resources/Textures/Scene/LoadingScene/load", "png", 1366, 768, 1);
+	
+	m_pBackGround[1] = new CSpriteObject_Default("Resources/Textures/Scene/LoadingScene/mapToolLoad", "png", 1366, 768, 1);
+	
+	m_pBackGround[2] = new CSpriteObject_Default("Resources/Textures/Scene/LoadingScene/mainGameLoad", "png", 1366, 768, 1);
+	for (int i = 0; i < 3; i++) {
+		m_pBackGround[i]->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
+	}
 }
 
 void CLoadingScene::createRenderTarget(void)
@@ -164,15 +178,15 @@ void CLoadingScene::createRenderTarget(void)
 	D3DVIEWPORT9 stViewport;
 	GET_DEVICE()->GetViewport(&stViewport);
 	GET_RENDERTARGET_MANAGER()->addRenderTarget("LoadingRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
-
 }
 
 void CLoadingScene::updateImage(void)
 {
 	static float angle = 0.0f;
-	angle += D3DXToRadian(120*GET_DELTA_TIME());
-	alpha = 255 * cosf(angle)+100;
-	alpha = max(alpha, 150);
+	angle += D3DXToRadian(-180 * GET_DELTA_TIME() * 0.25f);
+	alpha = 255 * cosf(angle) + 100;
+	alpha = max(alpha, 0);
 	alpha = min(alpha, 255);
-	m_pBackGround->setColor(D3DCOLOR_ARGB((int)alpha, 255, 255, 255));
+
+	m_pBackGround[m_nIndex]->setColor(D3DCOLOR_ARGB((int)alpha, 255, 255, 255));
 }

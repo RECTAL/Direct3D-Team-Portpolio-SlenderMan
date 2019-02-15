@@ -47,7 +47,6 @@ private:
 
 public:
 	CSpotLightObject* createSpotObj();
-	bool getIsMenu() { return m_bIsMenu; }
 
 private:
 	void createContainer();
@@ -65,7 +64,6 @@ private:
 	CStage* m_pStage;
 	bool m_bIsFirst = true;
 	bool m_bIsBGMPlay = true;
-	bool m_bIsMenu = false;
 
 	float m_fPlayTime = 0.0f;
 

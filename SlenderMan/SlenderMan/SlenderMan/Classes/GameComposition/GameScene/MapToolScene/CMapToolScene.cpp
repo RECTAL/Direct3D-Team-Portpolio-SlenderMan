@@ -247,13 +247,15 @@ void CMapToolScene::createButtonUI()
 		m_pCloseButton->setVisible(false);
 		m_pBuildingButton->setVisible(false);
 		m_pTerrainButton->setVisible(false);
+		m_pSoundListSquare->setVisible(false);
 	};
 	m_pCloseButton->init(crashFptr, nullptr, nullptr, endFptr);
 
 	m_pBuildingButton->init(nullptr, nullptr, nullptr, nullptr);
 	m_pTerrainButton->init(nullptr, nullptr, nullptr, nullptr);
 
-	m_pBackButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/close", "png", 50, 50, 2);
+	m_pBackButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/listSquareClose", "png", 100, 100, 1);
+	//m_pBackButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 100, 100, 0));
 	m_pBackButton->setVisible(false);
 	(*endFptr) = [=](void) -> void
 	{
@@ -419,8 +421,8 @@ void CMapToolScene::buttonUpdate()
 	m_pCloseButton->update();
 
 	m_pBackButton->getWindow()->setAbsolutePosition(
-		(D3DXVECTOR3(m_pSelectWindowContainer->getWindow()->getAbsolutePosition().x - 50,
-			m_pSelectWindowContainer->getWindow()->getAbsolutePosition().y + 350, 0)));
+		(D3DXVECTOR3(m_pSelectWindowContainer->getWindow()->getAbsolutePosition().x + GET_WINDOW_SIZE().cx - 175,
+			m_pSelectWindowContainer->getWindow()->getAbsolutePosition().y - 275, 0)));
 	m_pBackButton->update();
 
 	m_pSquareUpCover->update();
@@ -710,7 +712,6 @@ void CMapToolScene::createBuildingButton(void)
 		sprintf(path, "test%1d", i);
 		m_pBuildingListSquare->addChildSpriteObject(path, CWindowType::BUTTON, m_pHouseButton[i]);
 	}
-
 }
 
 void CMapToolScene::createObjectButton(void)
@@ -871,7 +872,7 @@ void CMapToolScene::createSoundButton(void)
 void CMapToolScene::createCheckBoxButton(void)
 {
 	m_pCollisionButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/collision", "png", 250, 60, 2, true);
-	m_pCollisionButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 250, 40, 0));
+	m_pCollisionButton->setPosition(D3DXVECTOR3(125, GET_WINDOW_SIZE().cy - 120, 0));
 	(*endFptr) = [=](void) -> void
 	{
 		if (m_pCollisionButton->getTextureOffset() == 0) {
@@ -887,7 +888,7 @@ void CMapToolScene::createCheckBoxButton(void)
 	m_pCollisionButton->init(nullptr, nullptr, nullptr, endFptr);
 
 	m_pDebugButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/debug", "png", 160, 60, 2, true);
-	m_pDebugButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx - 250, 120, 0));
+	m_pDebugButton->setPosition(D3DXVECTOR3(80, GET_WINDOW_SIZE().cy - 60, 0));
 	(*endFptr) = [=](void) -> void
 	{
 		if (m_pDebugButton->getTextureOffset() == 0) {
@@ -920,13 +921,15 @@ void CMapToolScene::draw(void)
 void CMapToolScene::drawUI(void)
 {
 	CScene::drawUI();
+	
 	m_pSelectWindowContainer->drawUI();
+	this->buttonDrawUI();
 	m_pTreeListSquare->drawUI();
 	m_pBuildingListSquare->drawUI();
 	m_pObjectListSquare->drawUI();
 	m_pSoundListSquare->drawUI();
 
-	this->buttonDrawUI();
+
 	this->labelDrawUI();
 
 }
@@ -934,10 +937,10 @@ void CMapToolScene::drawUI(void)
 void CMapToolScene::buttonDrawUI()
 {
 	m_pGoTitleButton->drawUI();
+	m_pSquareUpCover->drawUI();
 	m_pOpenButton->drawUI();
 	m_pCloseButton->drawUI();
 	m_pBackButton->drawUI();
-	m_pSquareUpCover->drawUI();
 	m_pSaveButton->drawUI();
 	m_pLoadButton->drawUI();
 	m_pCollisionButton->drawUI();
