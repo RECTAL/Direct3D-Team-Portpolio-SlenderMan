@@ -117,10 +117,15 @@ CSkinnedObject * player::createPlayer()
 
 void player::settingCamera()
 {
-	cameraObj->setRightDirection(this->getRightDirection());
-	cameraObj->setUpDirection(this->getUpDirection());
-	cameraObj->setForwardDirection(this->getForwardDirection());
-	cameraObj->setPosition(this->getPosition());
+	D3DXVECTOR3	stRightVex3 = this->getRightDirection();
+	D3DXVECTOR3	sUpVex3 = this->getUpDirection();
+	D3DXVECTOR3	stForwardVex3 = this->getForwardDirection();
+	D3DXVECTOR3	stPosVec3 = this->getPosition();
+
+	cameraObj->setRightDirection(stRightVex3);
+	cameraObj->setUpDirection(sUpVex3);
+	cameraObj->setForwardDirection(stForwardVex3);
+	cameraObj->setPosition(stPosVec3);
 }
 
 void player::settingLight()
@@ -153,8 +158,28 @@ void player::settingLight()
 		slowLight = max(slowLight, 0.0f);
 	}
 }
+	D3DXVECTOR3	stRightVex3 = this->getRightDirection();
+	D3DXVECTOR3	sUpVex3 = this->getUpDirection();
+	D3DXVECTOR3	stForwardVex3 = this->getForwardDirection();
+	D3DXVECTOR3	stPosVec3 = this->getPosition() + stRightVex3*6.0f + sUpVex3*-5.0f + stForwardVex3*5.0f;
+	D3DXVECTOR3 stNewRightVec3;
+	D3DXVECTOR3 stNewUpVec3;
+	D3DXVECTOR3 stNewForwardVec3;
+
+	D3DXMATRIXA16 stRotateMatrix;
+	D3DXMatrixRotationYawPitchRoll(&stRotateMatrix, D3DXToRadian(-30.0f), D3DXToRadian(-25.0f), D3DXToRadian(0.0f));
+
+	D3DXVec3TransformNormal(&stNewRightVec3, &stRightVex3, &stRotateMatrix);
+	D3DXVec3TransformNormal(&stNewUpVec3, &sUpVex3, &stRotateMatrix);
+	D3DXVec3TransformNormal(&stNewForwardVec3, &stForwardVex3, &stRotateMatrix);
+
+	D3DXVec3Normalize(&stNewRightVec3, &stNewRightVec3);
+	D3DXVec3Normalize(&stNewUpVec3, &stNewUpVec3);
+	D3DXVec3Normalize(&stNewForwardVec3, &stNewForwardVec3);
 
 
-
-
-
+	lightObj->setRightDirection(stNewRightVec3);
+	lightObj->setUpDirection(stNewUpVec3);
+	lightObj->setForwardDirection(stNewForwardVec3);
+	lightObj->setPosition(stPosVec3);
+}
