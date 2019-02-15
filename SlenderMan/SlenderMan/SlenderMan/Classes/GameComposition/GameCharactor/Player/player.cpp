@@ -41,6 +41,13 @@ void player::init(void)
 
 void player::update(void)
 {
+	if (!mainScene->getIsMenu())
+	{
+		CCharactor::update();
+
+		settingCamera();
+		settingLight();
+		// 마우스 화면 조절 
 	CCharactor::update();
 	m_pSkinnedObj->update();
 	settingCamera();
@@ -49,8 +56,6 @@ void player::update(void)
 	static bool isEsc = false;
 	if (!isEsc)
 		mouseSenterPos();
-	if (IS_KEY_DOWN(DIK_ESCAPE))
-		isEsc = !isEsc;
 
 	float fSpeed = 15.0f;
 	
@@ -94,7 +99,6 @@ void player::preDraw(void)
 
 void player::doDraw(void)
 {
-	//playerObject->draw();
 	lightObj->draw();
 	m_pSkinnedObj->draw();
 }
@@ -142,6 +146,7 @@ void player::settingCamera()
 	cameraObj->setUpDirection(sUpVex3);
 	cameraObj->setForwardDirection(stForwardVex3);
 	cameraObj->setPosition(stPosVec3);
+
 }
 
 void player::settingLight()
@@ -149,26 +154,11 @@ void player::settingLight()
 	D3DXVECTOR3	stRightVex3 = this->getRightDirection();
 	D3DXVECTOR3	sUpVex3 = this->getUpDirection();
 	D3DXVECTOR3	stForwardVex3 = this->getForwardDirection();
-	D3DXVECTOR3	stPosVec3 = this->getPosition() + stRightVex3 * 6.0f + sUpVex3 * -5.0f + stForwardVex3 * 5.0f;
-	D3DXVECTOR3 stNewRightVec3;
-	D3DXVECTOR3 stNewUpVec3;
-	D3DXVECTOR3 stNewForwardVec3;
+	D3DXVECTOR3	stPosVec3 = this->getPosition() + stRightVex3 - sUpVex3;
 
-	D3DXMATRIXA16 stRotateMatrix;
-	D3DXMatrixRotationYawPitchRoll(&stRotateMatrix, D3DXToRadian(-30.0f), D3DXToRadian(-25.0f), D3DXToRadian(0.0f));
-
-	D3DXVec3TransformNormal(&stNewRightVec3, &stRightVex3, &stRotateMatrix);
-	D3DXVec3TransformNormal(&stNewUpVec3, &sUpVex3, &stRotateMatrix);
-	D3DXVec3TransformNormal(&stNewForwardVec3, &stForwardVex3, &stRotateMatrix);
-
-	D3DXVec3Normalize(&stNewRightVec3, &stNewRightVec3);
-	D3DXVec3Normalize(&stNewUpVec3, &stNewUpVec3);
-	D3DXVec3Normalize(&stNewForwardVec3, &stNewForwardVec3);
-
-
-	lightObj->setRightDirection(stNewRightVec3);
-	lightObj->setUpDirection(stNewUpVec3);
-	lightObj->setForwardDirection(stNewForwardVec3);
+	lightObj->setRightDirection(stRightVex3);
+	lightObj->setUpDirection(sUpVex3);
+	lightObj->setForwardDirection(stForwardVex3);
 	lightObj->setPosition(stPosVec3);
 
 	static float slowLight = 0.0f;

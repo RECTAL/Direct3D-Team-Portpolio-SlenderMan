@@ -6,6 +6,7 @@
 
 class CCameraObject;
 class SpotLightObject;
+class CMainPlayScene;
 class CSkinnedObject;
 class CStage;
 class player : public CCharactor
@@ -49,10 +50,12 @@ private:
 private:
 	CCameraObject* cameraObj = nullptr;
 	CSpotLightObject* lightObj = nullptr;
+	CMainPlayScene* mainScene = nullptr;
 	CSkinnedObject*		m_pSkinnedObj = nullptr;
 	CStage*		m_pStage = nullptr;
 
 	int playerState = (int)EPlayerState::NONE;
+	bool isEsc = false;
 
 	fPOINT		m_fTopLeft;
 	fPOINT		m_fBottomRight;
