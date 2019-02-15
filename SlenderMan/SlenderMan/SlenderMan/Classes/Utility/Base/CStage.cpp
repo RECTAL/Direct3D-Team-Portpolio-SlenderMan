@@ -404,6 +404,46 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_7)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Meshes/tree7/tree7.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_8)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Meshes/tree8/tree8.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
 				}
 			}
 		}
@@ -741,6 +781,50 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 					0,ppSpotLightObj,
 					0,ppPointLightObj,
 					"Resources/Meshes/tree6/tree6.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::TREE_7)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Meshes/tree7/tree7.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::TREE_8)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Meshes/tree8/tree8.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
 				CStaticObject* stStaticObj = new CStaticObject(stParameters);

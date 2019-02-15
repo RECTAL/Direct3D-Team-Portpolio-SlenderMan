@@ -19,6 +19,7 @@
 #include "../../../Utility/Manager/CSceneManager.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Button.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Container.h"
+#include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_ScrollBar.h"
 #include "../../../GameComposition/GameCharactor/Player/player.h"
 
 CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
@@ -29,9 +30,10 @@ CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 CMainPlayScene::~CMainPlayScene()
 {
 	SAFE_DELETE(m_pPlayTime);
-	SAFE_DELETE(menuContainer);
 	SAFE_DELETE(m_pCamCoderView);
 	SAFE_DELETE(pPlayer);
+
+	this->releaseUI();
 }
 
 void CMainPlayScene::init()
@@ -39,9 +41,8 @@ void CMainPlayScene::init()
 	CScene::init();
 	ShowCursor(false);
 	
-	if (isFirst)
+	if (m_bIsFirst)
 	{
-		
 		crashFptr = new std::function<void(void)>;
 		beginFptr = new std::function<void(void)>;
 		pressFptr = new std::function<void(void)>;
@@ -55,8 +56,7 @@ void CMainPlayScene::init()
 		this->createSpriteDefault();
 		this->createLabel();
 
-		isFirst = false;
-
+		m_bIsFirst = false;
 	}
 
 	CMapToolScene* pMapToolScene = dynamic_cast<CMapToolScene*>(FIND_SCENE(GAMESCENE_MAPTOOL));
@@ -117,33 +117,12 @@ void CMainPlayScene::init()
 	}
 	GET_SOUND_MANAGER()->stopAllEffectSounds();
 	m_fPlayTime = 0.0f;
+
 }
 
 void CMainPlayScene::createWindowUI()
 {
 	this->createButton();
-
-	menuContainer = new CSpriteObject_Container("Resources/Textures/Scene/MainPlayScene/menuWindow", "png", 500, 500, 1);
-	menuContainer->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
-	menuContainer->setVisible(false);
-	menuContainer->init(nullptr, nullptr, nullptr, nullptr);
-
-	exitButton = new CSpriteObject_Button("Resources/Textures/Scene/MainPlayScene/exit", "png", 100, 100, 2);
-	exitButton->setPosition(D3DXVECTOR3(0, 0, 0));
-	(*crashFptr) = [=](void)->void
-	{
-		exitButton->getTextureOffset() = 1;
-		
-	};
-	(*endFptr) = [=](void)->void
-	{
-		GET_SOUND_MANAGER()->stopAllEffectSounds();
-		CHANGE_SCENE_LOADING(GAMESCENE_TITLE, TRUE);
-	};
-	exitButton->init(crashFptr, nullptr, nullptr, endFptr, true);
-
-
-	menuContainer->addChildSpriteObject("backTitle", CWindowType::BUTTON, exitButton);
 }
 
 void CMainPlayScene::createRenderTarget()
@@ -152,7 +131,6 @@ void CMainPlayScene::createRenderTarget()
 	GET_DEVICE()->GetViewport(&stViewport);
 	GET_RENDERTARGET_MANAGER()->addRenderTarget("StageRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
 	GET_RENDERTARGET_MANAGER()->addRenderTarget("CamCoderRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
-
 }
 
 void CMainPlayScene::createStageSound()
@@ -292,6 +270,16 @@ void CMainPlayScene::setTimer()
 	}
 }
 
+void CMainPlayScene::setVolume()
+{
+	GET_SOUND_MANAGER()->setBackgroundSoundVolume(m_pScrollBar[0]->getSetValue() / 300);
+	GET_SOUND_MANAGER()->setEffectSoundsVolume(m_pScrollBar[1]->getSetValue() / 300);
+}
+
+void CMainPlayScene::setPlayState()
+{
+}
+
 CSpotLightObject * CMainPlayScene::createSpotObj()
 {
 	return new CSpotLightObject(0,300.0f,D3DXToRadian(5.0f),D3DXToRadian(15.0f));
@@ -299,7 +287,92 @@ CSpotLightObject * CMainPlayScene::createSpotObj()
 
 void CMainPlayScene::createButton()
 {
-	
+	// 종료 버튼
+	// {
+	m_pExitButton = new CSpriteObject_Button("Resources/Textures/Scene/MainPlayScene/exit", "png", 100, 50, 2);
+	m_pExitButton->setPosition(D3DXVECTOR3(0, -60, 0));
+	(*crashFptr) = [=](void)->void
+	{
+		m_pExitButton->getTextureOffset() = 1;
+
+	};
+	(*endFptr) = [=](void)->void
+	{
+		GET_SOUND_MANAGER()->stopAllEffectSounds();
+		CHANGE_SCENE_LOADING(GAMESCENE_TITLE, TRUE);
+	};
+	m_pExitButton->init(crashFptr, nullptr, nullptr, endFptr, true, m_pExitButton->getPosition());
+	// }
+
+	// 옵션 버튼
+	// {
+	m_pOptionButton = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/option", "png", 150, 50, 2);
+	m_pOptionButton->setPosition(D3DXVECTOR3(0, 60, 0));
+	(*crashFptr) = [=](void)->void
+	{
+		m_pOptionButton->getTextureOffset() = 1;
+
+	};
+	(*endFptr) = [=](void)->void
+	{
+		m_pMenuContainer->setVisible(false);
+		m_pExitButton->setVisible(false);
+		m_pOptionButton->setVisible(false);
+
+		m_pSoundContainer->setVisible(true);
+		m_pScrollBar[0]->setVisible(true);
+		m_pScrollBar[1]->setVisible(true);
+		m_pBackButton->setVisible(true);
+	};
+	m_pOptionButton->init(crashFptr, nullptr, nullptr, endFptr, true, m_pOptionButton->getPosition());
+
+	m_pBackButton = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/back", "png", 200, 100, 2);
+	(*crashFptr) = [=](void)->void
+	{
+		m_pBackButton->getTextureOffset() = 1;
+	};
+
+	(*endFptr) = [=](void)->void
+	{
+		m_pMenuContainer->setVisible(true);
+		m_pExitButton->setVisible(true);
+		m_pOptionButton->setVisible(true);
+
+		m_pScrollBar[0]->setVisible(false);
+		m_pScrollBar[1]->setVisible(false);
+		m_pSoundContainer->setVisible(false);
+		m_pBackButton->setVisible(false);
+	};
+	m_pBackButton->init(crashFptr, nullptr, nullptr, endFptr, true, D3DXVECTOR3(260.0f, 230.0f, 0.0f));
+	// 사운드 스크롤바
+	// {
+	m_pScrollBar[0] = new CSpriteObject_ScrollBar("Resources/Textures/Scene/TitleScene/whiteCover", "png", 300, 20, 1);
+
+	m_pScrollBarButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/grayCover", "png", 10, 50, 1);
+	m_pScrollBarButton[0]->init(nullptr, nullptr, nullptr, nullptr, true);
+
+	m_pScrollBar[0]->init(nullptr, nullptr, nullptr, nullptr, 0, 300, m_pScrollBarButton[0], true, D3DXVECTOR3(30, -70, 0.0f));
+
+	m_pScrollBar[1] = new CSpriteObject_ScrollBar("Resources/Textures/Scene/TitleScene/whiteCover", "png", 300, 20, 1);
+
+	m_pScrollBarButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/grayCover", "png", 10, 50, 1);
+	m_pScrollBarButton[1]->init(nullptr, nullptr, nullptr, nullptr, true);
+
+	m_pScrollBar[1]->init(nullptr, nullptr, nullptr, nullptr, 0, 300, m_pScrollBarButton[1], true, D3DXVECTOR3(30, 10, 0.0f));
+	// }
+	// }
+}
+
+void CMainPlayScene::releaseUI()
+{
+	SAFE_DELETE(m_pMenuContainer);
+	SAFE_DELETE(m_pSoundContainer);
+	SAFE_DELETE(m_pBackButton);
+	SAFE_DELETE(m_pOptionButton);
+	SAFE_DELETE(m_pScrollBar[0]);
+	SAFE_DELETE(m_pScrollBar[1]);
+	SAFE_DELETE(m_pScrollBarButton[0]);
+	SAFE_DELETE(m_pScrollBarButton[1]);
 }
 
 void CMainPlayScene::createLabel()
@@ -328,7 +401,22 @@ void CMainPlayScene::calcPlayTime(float a_fTime, int & a_nHour, int & a_nMin, in
 
 void CMainPlayScene::createContainer()
 {
-	
+	m_pMenuContainer = new CSpriteObject_Container("Resources/Textures/Scene/MainPlayScene/menuWindow", "png", 500, 500, 1);
+	m_pMenuContainer->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
+	m_pMenuContainer->setVisible(false);
+	m_pMenuContainer->init(nullptr, nullptr, nullptr, nullptr);
+
+	m_pMenuContainer->addChildSpriteObject("backTitle", CWindowType::BUTTON, m_pExitButton);
+	m_pMenuContainer->addChildSpriteObject("option", CWindowType::BUTTON, m_pOptionButton);
+
+	m_pSoundContainer = new CSpriteObject_Container("Resources/Textures/Scene/TitleScene/optionWindow", "png", 800, 640, 1);
+	m_pSoundContainer->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
+	m_pSoundContainer->setVisible(false);
+	m_pSoundContainer->init(nullptr, nullptr, nullptr, nullptr);
+
+	m_pSoundContainer->addChildSpriteObject("backMenu", CWindowType::BUTTON, m_pBackButton);
+	m_pSoundContainer->addChildSpriteObject("BGM", CWindowType::SCROLLBAR, m_pScrollBar[0]);
+	m_pSoundContainer->addChildSpriteObject("Effect", CWindowType::SCROLLBAR, m_pScrollBar[1]);
 }
 
 void CMainPlayScene::update(void)
@@ -337,19 +425,22 @@ void CMainPlayScene::update(void)
 
 	m_pStage->update();
 	m_pCamCoderView->update();
-	menuContainer->update();
+	m_pMenuContainer->update();
+	m_pSoundContainer->update();
 	setTimer();
 	this->setStateSound();
 	this->setBGMSound();
+	this->setVolume();
 	pPlayer->update();
-	if (isBGMPlay)
+	if (m_bIsBGMPlay)
 	{
 		this->createStageSound();
-		isBGMPlay = false;
+		m_bIsBGMPlay = false;
 	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
-		menuContainer->setVisible(!menuContainer->getVisible());
-		ShowCursor(menuContainer->getVisible());
+		m_bIsMenu = !m_bIsMenu;
+		m_pMenuContainer->setVisible(!m_pMenuContainer->getVisible());
+		ShowCursor(m_pMenuContainer->getVisible());
 	}
 
 	m_fPlayTime += GET_DELTA_TIME();
@@ -376,7 +467,6 @@ void CMainPlayScene::draw(void)
 	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTexSurf);
 	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pDepthStencil);
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
-
 
 	m_pCamCoderView->drawUI();
 
@@ -415,7 +505,8 @@ void CMainPlayScene::draw(void)
 void CMainPlayScene::drawUI(void)
 {
 	CScene::drawUI();
-	menuContainer->drawUI();
+	m_pMenuContainer->drawUI();
+	m_pSoundContainer->drawUI();
 }
 
 LRESULT CMainPlayScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)

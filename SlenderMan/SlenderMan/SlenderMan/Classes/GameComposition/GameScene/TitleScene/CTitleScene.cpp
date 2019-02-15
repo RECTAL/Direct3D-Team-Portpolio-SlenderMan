@@ -175,7 +175,7 @@ void CTitleScene::createButtonUI()
 	soundScrollBar[0]->init(nullptr, nullptr, nullptr, nullptr, 0, 300, soundScrollBarButton[0], true, D3DXVECTOR3(30, -70, 0.0f));
 
 	soundScrollBar[1] = new CSpriteObject_ScrollBar("Resources/Textures/Scene/TitleScene/whiteCover", "png", 300, 20, 1);
-	//soundScrollBar[1]->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2+200, 0));
+
 	soundScrollBarButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/grayCover", "png", 10, 50, 1);
 	soundScrollBarButton[1]->init(nullptr, nullptr, nullptr, nullptr, true);
 

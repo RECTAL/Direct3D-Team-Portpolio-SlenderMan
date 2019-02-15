@@ -7,6 +7,7 @@
 class CCameraObject;
 class SpotLightObject;
 class CSkinnedObject;
+class CMainPlayScene;
 
 class player : public CCharactor
 {
@@ -31,6 +32,7 @@ private:
 private:
 	CCameraObject* cameraObject;
 	CSpotLightObject* spotObj = nullptr;
+	CMainPlayScene* m_pMainScene = nullptr;
 	EPlayerState playerState = EPlayerState::NONE;
 
 	//CSkinnedObject* playerObject;

@@ -52,8 +52,6 @@ public:		//getter,setter
 	/**************************************************/
 	CStage*	getStage() { return m_pStage; }
 
-
-
 	/**************************************************/
 	//setter
 	/**************************************************/
@@ -81,17 +79,15 @@ private:
 	void buttonDrawUI();
 	void labelDrawUI();
 
-
 	// 키입력
 	void inputKey(void);
 
 	// 제거
-	void removeButton(void);
+	void removeUI(void);
 	void removeList(void);
 
 private:
 	POINT m_stPrevMousePosition;
-
 
 	CSpriteObject_Container* m_pSelectWindowContainer = nullptr;
 	CSpriteObject_Button* m_pUpCover = nullptr;
@@ -152,7 +148,6 @@ private:
 	float m_fAngleX = 0.0f;
 	float m_fAngleY = 0.0f;
 	float m_fAngleZ = 0.0f;
-	float m_fPosY = 0.0f;
 
 	float m_fScale = 0.2f;
 };

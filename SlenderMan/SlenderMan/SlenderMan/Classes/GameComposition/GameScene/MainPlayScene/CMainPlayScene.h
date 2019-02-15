@@ -6,13 +6,16 @@ class player;
 class CSpriteObject_Button;
 class CSpriteObject_Default;
 class CSpriteObject_Container;
+class CSpriteObject_ScrollBar;
 class CCameraObject;
 class CTerrainObject;
 class CStaticObject;
 class CLightObject;
+class CSpriteObject;
 class CSpotLightObject;
 class CStage;
 class CLabelObject;
+
 class CMainPlayScene :public CScene
 {
 public:		//constructor , destructor
@@ -39,33 +42,44 @@ private:
 	void	setStateSound();
 	void	setBGMSound();
 	void	setTimer();
+	void	setVolume();
+	void	setPlayState();
 
 public:
 	CSpotLightObject* createSpotObj();
+	bool getIsMenu() { return m_bIsMenu; }
+
 private:
 	void createContainer();
 	void createButton();
+	void releaseUI();
 
 	void createLabel();
 	void createSpriteDefault();
-
-
-
 	void calcPlayTime(float a_fTime,int& a_nHour,int& a_nMin,int& a_nSec);
 private:
 	LPD3DXMESH m_pSphere = nullptr;
 
 	CStage* m_pStage;
-	bool isFirst = true;
-	bool isBGMPlay = true;
+	bool m_bIsFirst = true;
+	bool m_bIsBGMPlay = true;
+	bool m_bIsMenu = false;
 
 	float m_fPlayTime = 0.0f;
 
 	CSpriteObject_Default* m_pCamCoderView = nullptr;
 	CLabelObject*		   m_pPlayTime = nullptr;
+	CSpriteObject*		   m_pCurrentSpriteHandle = nullptr;
 
-	CSpriteObject_Button* exitButton = nullptr;
-	CSpriteObject_Container* menuContainer = nullptr;
+	CSpriteObject_Button* m_pExitButton = nullptr;
+	CSpriteObject_Button* m_pOptionButton = nullptr;
+	CSpriteObject_Button* m_pBackButton = nullptr;
+	CSpriteObject_Button* m_pScrollBarButton[2] = { nullptr };
+	
+	CSpriteObject_Container* m_pMenuContainer = nullptr;
+	CSpriteObject_Container* m_pSoundContainer = nullptr;
+	
+	CSpriteObject_ScrollBar* m_pScrollBar[2] = { nullptr };
 
 	EPlayingBGM m_ePlayingBGM = EPlayingBGM::NONE;
 	EStageSound m_eStageSound = EStageSound::STAGE_1;

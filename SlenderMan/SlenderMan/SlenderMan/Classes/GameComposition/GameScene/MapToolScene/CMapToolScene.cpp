@@ -25,16 +25,12 @@ CMapToolScene::CMapToolScene(std::string a_stSceneName)
 
 CMapToolScene::~CMapToolScene()
 {
-	SAFE_DELETE(m_pUpDownScrollBar);
-
-	SAFE_DELETE(m_pSelectWindowContainer);
-
 	SAFE_DELETE(m_pStage);
 	SAFE_DELETE(m_pCamera);
 
 	SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 
-	this->removeButton();
+	this->removeUI();
 	this->removeList();
 }
 
@@ -51,7 +47,6 @@ void CMapToolScene::init()
 		this->createCameraObj();
 		this->createStage();
 		this->createWindowUI();
-		this->createButtonUI();
 		this->createLabel();
 		this->createCheckBoxButton();
 
@@ -77,10 +72,6 @@ void CMapToolScene::init()
 
 void CMapToolScene::createWindowUI()
 {
-	createTreeButton();
-	createBuildingButton();
-	createObjectButton();
-	createSoundButton();
 	/***************************************************/
 	//컨테이너 만들기
 	/***************************************************/
@@ -182,6 +173,8 @@ void CMapToolScene::createWindowUI()
 	m_pSelectWindowContainer->addChildSpriteObject("m_pUpCover", CWindowType::BUTTON, m_pUpCover);
 	m_pSelectWindowContainer->addChildSpriteObject("m_pDownCover", CWindowType::BUTTON, m_pDownCover);
 	m_pSelectWindowContainer->addChildSpriteObject("ScrollBar", CWindowType::SCROLLBAR, m_pUpDownScrollBar);
+
+	this->createButtonUI();
 }
 
 void CMapToolScene::createButtonUI()
@@ -330,6 +323,11 @@ void CMapToolScene::createButtonUI()
 		MessageBox(GET_WINDOW_HANDLE(), _T("Load Complete"), "", S_OK);
 	};
 	m_pLoadButton->init(nullptr, nullptr, nullptr, endFptr);
+
+	this->createTreeButton();
+	this->createBuildingButton();
+	this->createObjectButton();
+	this->createSoundButton();
 }
 
 void CMapToolScene::createCameraObj()
@@ -1065,17 +1063,18 @@ void CMapToolScene::inputKey(void)
 		else if (IS_KEY_DOWN(DIK_RIGHT)) m_fAngleY -= 30.0f * GET_DELTA_TIME();
 		else if (IS_KEY_DOWN(DIK_UP))	 m_fAngleX += 30.0f * GET_DELTA_TIME();
 		else if (IS_KEY_DOWN(DIK_DOWN))	 m_fAngleX -= 30.0f * GET_DELTA_TIME();
-		else if (IS_KEY_DOWN(DIK_PGUP)) m_fPosY += 30.0f*GET_DELTA_TIME();
-		else if (IS_KEY_DOWN(DIK_PGDN)) m_fPosY -= 30.0f*GET_DELTA_TIME();
 
 		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, m_fAngleZ));
 		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
-		m_stMouseInfo.m_pRenderObj->setPosition(D3DXVECTOR3(m_stMouseInfo.m_pRenderObj->getPosition().x, m_stMouseInfo.m_pRenderObj->getPosition().y + m_fPosY, m_stMouseInfo.m_pRenderObj->getPosition().z));
 	}
 }
 
-void CMapToolScene::removeButton(void)
+void CMapToolScene::removeUI(void)
 {
+	SAFE_DELETE(m_pUpDownScrollBar);
+
+	SAFE_DELETE(m_pSelectWindowContainer);
+
 	SAFE_DELETE(m_pScrollBarButton);
 	SAFE_DELETE(m_pSaveButton);
 	SAFE_DELETE(m_pLoadButton);
@@ -1092,7 +1091,7 @@ void CMapToolScene::removeButton(void)
 	{
 		SAFE_DELETE(m_pBackButton);
 	}
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < MAX_LIST_BUTTON; i++)
 	{
 		SAFE_DELETE(m_pSpriteListButton[i]);
 	}

@@ -3,9 +3,11 @@
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CInputManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
+#include "../../../Utility/Manager/CSceneManager.h"
 #include "../../../Utility/Object/CameraObject/CCameraObject.h"
 #include "../../../Utility/Object/LightObject/SpotLightObject/SpotLightObject.h"
 #include "../../../Utility/Object/SkinnedObject/CSkinnedObject.h"
+#include "../../../GameComposition/GameScene/MainPlayScene/CMainPlayScene.h"
 
 player::player()
 {
@@ -17,6 +19,7 @@ player::~player(void)
 	//SAFE_DELETE(playerObject);
 	SAFE_DELETE(cameraObject);
 	SAFE_DELETE(spotObj);
+	SAFE_DELETE(m_pMainScene);
 }
 
 void player::init(void)
@@ -27,6 +30,8 @@ void player::init(void)
 
 	spotObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
 	//playerObject = this->createPlayer();
+
+	m_pMainScene = dynamic_cast<CMainPlayScene*> (FIND_SCENE(GAMESCENE_MAINPLAY));
 }
 
 void player::update(void)
@@ -36,38 +41,37 @@ void player::update(void)
 	spotObj->setPosition(cameraObject->getPosition());
 
 	// 마우스 화면 조절 
+	if (m_pMainScene->getIsMenu() == false) {
+		mouseSenterPos();
 
-	mouseSenterPos();
+		float fSpeed = 15.0f;
 
+		if (IS_KEY_DOWN(DIK_LSHIFT)) {
+			fSpeed = 50.0f;
+		}
+		if (IS_KEY_DOWN(DIK_W)) {
+			cameraObject->moveByZAxis(fSpeed * GET_DELTA_TIME());
+			spotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
+			playerState = EPlayerState::WALKGRASS;
+		}
+		if (IS_KEY_RELEASED(DIK_W))
+		{
+			playerState = EPlayerState::NONE;
+		}
+		if (IS_KEY_DOWN(DIK_S)) {
+			cameraObject->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+			spotObj->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+		}
 
-	float fSpeed = 15.0f;
-
-	if (IS_KEY_DOWN(DIK_LSHIFT)) {
-		fSpeed = 50.0f;
+		if (IS_KEY_DOWN(DIK_A)) {
+			cameraObject->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+			spotObj->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+		}
+		else if (IS_KEY_DOWN(DIK_D)) {
+			cameraObject->moveByXAxis(fSpeed * GET_DELTA_TIME());
+			spotObj->moveByXAxis(fSpeed * GET_DELTA_TIME());
+		}
 	}
-	if (IS_KEY_DOWN(DIK_W)) {
-		cameraObject->moveByZAxis(fSpeed * GET_DELTA_TIME());
-		spotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
-		playerState = EPlayerState::WALKGRASS;
-	}
-	if (IS_KEY_RELEASED(DIK_W))
-	{
-		playerState = EPlayerState::NONE;
-	}
-	if (IS_KEY_DOWN(DIK_S)) {
-		cameraObject->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-		spotObj->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-	}
-
-	if (IS_KEY_DOWN(DIK_A)) {
-		cameraObject->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-		spotObj->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-	}
-	else if (IS_KEY_DOWN(DIK_D)) {
-		cameraObject->moveByXAxis(fSpeed * GET_DELTA_TIME());
-		spotObj->moveByXAxis(fSpeed * GET_DELTA_TIME());
-	}
-
 	//playerObject->setPosition(D3DXVECTOR3(cameraObject->getPosition().x, cameraObject->getPosition().y, cameraObject->getPosition().z - 100));
 	//playerObject->update();
 }
