@@ -24,7 +24,7 @@ public:			// 생성자, 소멸자
 
 	//! 생성자
 	CDebugDraw(CRenderObject *a_pRenderObject,
-		EDebugDrawType a_eDebugDrawType);
+		EDebugDrawType a_eDebugDrawType,BOOL a_bIsDraw = true);
 
 	//! 소멸자
 	virtual ~CDebugDraw(void);
@@ -70,4 +70,6 @@ private:			// private 변수
 
 	CRenderObject *m_pRenderObject = nullptr;
 	EDebugDrawType m_eDebugDrawType = EDebugDrawType::NONE;
+
+	BOOL	m_bIsDraw = true;
 };

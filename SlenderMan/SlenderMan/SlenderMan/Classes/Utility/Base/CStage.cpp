@@ -121,7 +121,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 						m_pObjList[i].push_back(stStaticObj);
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::GRASS)
@@ -141,6 +141,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -161,6 +162,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -181,8 +183,9 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 						m_pObjList[i].push_back(stStaticObj);
+
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDWOODDOCK)
 					{
@@ -201,8 +204,9 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 						m_pObjList[i].push_back(stStaticObj);
+
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PLANTS)
 					{
@@ -221,8 +225,9 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 						m_pObjList[i].push_back(stStaticObj);
+
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::ROUNDWOOD)
 					{
@@ -241,6 +246,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -261,6 +267,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -281,6 +288,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -301,6 +309,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -321,6 +330,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -341,6 +351,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -361,6 +372,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -381,6 +393,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -401,6 +414,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -421,6 +435,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -441,6 +456,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -479,6 +495,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -501,6 +518,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -523,6 +541,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -545,6 +564,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -567,6 +587,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -589,6 +610,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -611,6 +633,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -633,6 +656,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -655,6 +679,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -677,6 +702,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -700,6 +726,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -722,6 +749,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -744,6 +772,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -767,6 +796,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -789,6 +819,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -811,6 +842,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -833,6 +865,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -1122,8 +1155,6 @@ void CStage::draw()
 						if (!pStaticObj->getVisible())pStaticObj->setVisible(true);
 						else
 						{
-							
-							pStaticObj->getbOutLineDraw() = true;
 							if (pStaticObj->getbOutLineDraw()&&!m_bIsMaptool)
 							{
 								/********************************************/

@@ -5,12 +5,16 @@
 #include "../../System/AnimationSystem/AnimationSystem_CAllocateHierarchy.h"
 
 class CAnimationController;
+class CCameraObject;
+class CLightObject;
 //! SkinnedObject 
 class CSkinnedObject : public CRenderObject
 {
 public:
 	struct STParameters
 	{
+		CCameraObject* m_pCameraObj;
+		CLightObject*  m_pDirectionalLight;
 		std::string m_oMeshFilepath;
 		std::string m_oEffectFilepath;
 	};

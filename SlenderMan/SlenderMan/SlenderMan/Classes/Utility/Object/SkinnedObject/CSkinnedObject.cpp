@@ -60,11 +60,24 @@ void CSkinnedObject::stopAnimation(void)
 void CSkinnedObject::preDraw(void)
 {
 	CRenderObject::preDraw();
+	GET_DEVICE()->SetRenderState(D3DRS_LIGHTING, false);
 }
 
 void CSkinnedObject::doDraw(void)
 {
 	CRenderObject::doDraw();
+	D3DXMATRIXA16 stViewMatrix = m_stParameters.m_pCameraObj->getViewMatrix();
+	D3DXMATRIXA16 stProjectionMatrix = m_stParameters.m_pCameraObj->getProjectionMatrix();
+
+	m_pEffect->SetMatrix("g_stViewMatrix", &stViewMatrix);
+	m_pEffect->SetMatrix("g_stProjectionMatrix", &stProjectionMatrix);
+
+	D3DXVECTOR4 stViewPosition(m_stParameters.m_pCameraObj->getPosition(), 1.0f);
+	D3DXVECTOR4 stLightDirection(m_stParameters.m_pDirectionalLight->getForwardDirection(), 0.0f);
+
+	m_pEffect->SetVector("g_stViewPosition", &stViewPosition);
+	m_pEffect->SetVector("g_stLightDirection", &stLightDirection);
+
 
 	this->drawBone(m_pstRootBone);
 }
@@ -149,11 +162,16 @@ void CSkinnedObject::drawMeshContainer(LPD3DXFRAME a_pstFrame, LPD3DXMESHCONTAIN
 					astWorldMatrices[j] = stBoneMatrix * pstBone->m_stCombineMatrix;
 				}
 			}
-			/*
-			
-				EFFECT file Draw!!!!!!
-			
-			*/
+
+			m_pEffect->SetInt("g_nNumBlends", nNumBlends);
+			m_pEffect->SetMatrixArray("g_stWorldMatrices", astWorldMatrices, 4);
+
+			int nAttributeID = stBoneCombination.AttribId;
+			m_pEffect->SetTexture("g_pTexture", pstMeshContainer->m_oTextureList[nAttributeID]);
+
+			RunEffectLoop(m_pEffect, "DefaultSkinnedMesh", [=](int a_nPassNumber) -> void {
+				pstMeshContainer->m_pSkinnedMesh->DrawSubset(i);
+			});
 		}
 	}
 }
@@ -260,18 +278,17 @@ LPD3DXMESH CSkinnedObject::createSkinnedMesh(LPD3DXMESHCONTAINER a_pstMeshContai
 	// {
 	D3DVERTEXELEMENT9 astElements[] = {
 		0, 0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0,
-		0, 12, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0,
-		0, 24, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BINORMAL, 0,
-		0, 36, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT, 0,
-		0, 48, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0,
-
+		0, 12, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0,
+		0, 20, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0,
+		0, 32, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BINORMAL, 0,
+		0, 44, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT, 0,
+		0, 56, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BLENDWEIGHT, 0,
+		D3DDECL_END()
+	};
 		/*
 		스키닝 애니메이션을 처리하기 위해서는 정점 정보에 반드시 뼈대 가중치 정보에
 		해당하는 BLENDWEIGHT 시멘틱이 반드시 포함되어있어야한다.
 		*/
-		0, 56, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BLENDWEIGHT, 0,
-		D3DDECL_END()
-	};
 
 	auto pOriginMesh = pMesh;
 

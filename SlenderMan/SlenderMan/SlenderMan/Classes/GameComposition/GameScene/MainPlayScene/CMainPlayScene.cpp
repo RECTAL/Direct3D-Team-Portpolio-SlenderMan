@@ -50,8 +50,8 @@ void CMainPlayScene::init()
 
 		this->createWindowUI();
 		this->createRenderTarget();
+		this->settingPlayer();
 		pPlayer = new player;
-		pPlayer->init();
 		this->createContainer();
 		this->createSpriteDefault();
 		this->createLabel();
@@ -62,6 +62,8 @@ void CMainPlayScene::init()
 	CMapToolScene* pMapToolScene = dynamic_cast<CMapToolScene*>(FIND_SCENE(GAMESCENE_MAPTOOL));
 	pMapToolScene->init();
 	m_pStage = pMapToolScene->getStage();
+	pPlayer->setStage(m_pStage);
+	pPlayer->init();
 
 	ppSpotLightObj = new CSpotLightObject*[10];
 	ppPointLightObj = new CLightObject*[10];
@@ -117,6 +119,7 @@ void CMainPlayScene::init()
 	}
 	GET_SOUND_MANAGER()->stopAllEffectSounds();
 	m_fPlayTime = 0.0f;
+
 
 }
 
@@ -399,6 +402,14 @@ void CMainPlayScene::calcPlayTime(float a_fTime, int & a_nHour, int & a_nMin, in
 	a_nSec = nTime;
 }
 
+void CMainPlayScene::settingPlayer()
+{
+	pPlayer = new player;
+	pPlayer->init();
+	pPlayer->mainSceneAddress(this);
+	pPlayer->setPosition(D3DXVECTOR3(203.0f, 39.0f, 43.0f));
+}
+
 void CMainPlayScene::createContainer()
 {
 	m_pMenuContainer = new CSpriteObject_Container("Resources/Textures/Scene/MainPlayScene/menuWindow", "png", 500, 500, 1);
@@ -439,7 +450,14 @@ void CMainPlayScene::update(void)
 	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
 		m_pMenuContainer->setVisible(!m_pMenuContainer->getVisible());
-		ShowCursor(m_pMenuContainer->getVisible());
+		//ShowCursor(m_pMenuContainer->getVisible());
+		RECT rc;
+		POINT pt = { 0 ,0 };
+		GetClientRect(GET_WINDOW_HANDLE(), &rc);
+		pt.x = (rc.right - rc.left) / 2;
+		pt.y = (rc.bottom - rc.top) / 2;
+		ClientToScreen(GET_WINDOW_HANDLE(), &pt);
+		SetCursorPos(pt.x, pt.y);
 	}
 
 	m_fPlayTime += GET_DELTA_TIME();

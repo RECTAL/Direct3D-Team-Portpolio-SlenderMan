@@ -1,5 +1,5 @@
 float4x4 g_stWorldMatrices[4];
-float4x4 g_stViewMatirx;
+float4x4 g_stViewMatrix;
 float4x4 g_stProjectionMatrix;
 
 float4  g_stLightDirection;
@@ -42,22 +42,27 @@ VSOutput vs_main(VSInput a_stInput)
         float4x4 stWorldMatrix = g_stWorldMatrices[i];
 
         fLeftWeight -= fWeight;
-        stOutput.m_stPosition +=mul(float4(a_stInput.m_stPosition,1.0f),stWorldMatrix)*fWeight;
+        stOutput.m_stPosition +=mul(float4(a_stInput.m_stPosition,1.0f), stWorldMatrix)*fWeight;
         stOutput.m_stNormal += mul(a_stInput.m_stNormal,(float3x3)stWorldMatrix)*fWeight;
         stOutput.m_stBinormal += mul(a_stInput.m_stBinormal,(float3x3)stWorldMatrix)*fWeight;
         stOutput.m_stTangent += mul(a_stInput.m_stTangent,(float3x3)stWorldMatrix)*fWeight;
     }
 
-    stOutput.m_stPosition += mul(float4(a_stInput.m_stPosition,1.0f),g_stWorldMatrices[0])*fLeftWeight;
+    stOutput.m_stPosition += mul(float4(a_stInput.m_stPosition,1.0f), g_stWorldMatrices[0])*fLeftWeight;
     stOutput.m_stNormal += mul(a_stInput.m_stNormal,(float3x3)g_stWorldMatrices[0])*fLeftWeight;
     stOutput.m_stBinormal += mul(a_stInput.m_stBinormal,(float3x3)g_stWorldMatrices[0])*fLeftWeight;
     stOutput.m_stTangent  += mul(a_stInput.m_stTangent,(float3x3)g_stWorldMatrices[0])*fLeftWeight;
 
     stOutput.m_stPosition.w = 1.0f;
-    float4 stWorldPosition = stOutput.m_stPosition;
+ 
 
-    stOutput.m_stPosition = mul(stWorldPosition,g_stViewMatirx);
-    stOutput.m_stPosition = mul(stWorldPosition,g_stProjectionMatrix);
+	stOutput.m_stNormal = normalize(stOutput.m_stNormal);
+	stOutput.m_stBinormal = normalize(stOutput.m_stBinormal);
+	stOutput.m_stTangent = normalize(stOutput.m_stTangent);
+
+	float4 stWorldPosition = stOutput.m_stPosition;
+    stOutput.m_stPosition = mul(stWorldPosition,g_stViewMatrix);
+    stOutput.m_stPosition = mul(stOutput.m_stPosition,g_stProjectionMatrix);
 
     float3 stLightDirection = g_stLightDirection.xyz;
     stOutput.m_stLightDirection = normalize(stLightDirection);
@@ -102,14 +107,15 @@ float4 ps_main(PSInput a_stInput):COLOR0
     fSpecular = pow(fSpecular,20.0f);
 
     float4 fBaseColor = tex2D(g_pSampler,a_stInput.m_stUV);
+	fBaseColor = tex2D(g_pSampler, a_stInput.m_stUV);
     float4 fDiffuseColor =  float4(fBaseColor.rgb*fDiffuse,1.0f);
     float4 fSpecularColor = float4(fBaseColor.rgb*fSpecular,1.0f);
-    float4 fAmbient =  float4(fAmbient.xyz*0.2f,1.0f);
+    float4 fAmbient =  float4(fBaseColor.xyz*0.2f,1.0f);
 
 
     float4 finalColor;
     finalColor = fDiffuseColor+fSpecularColor+fAmbient;
-
+	finalColor = float4(1.0f, 1.0f, 1.0f, 1.0f);
     return finalColor;
 }
 
