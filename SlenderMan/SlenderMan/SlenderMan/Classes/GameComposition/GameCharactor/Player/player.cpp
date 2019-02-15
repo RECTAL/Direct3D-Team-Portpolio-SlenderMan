@@ -1,5 +1,6 @@
 #include "player.h"
 
+#include "../../../Utility/Base/CStage.h"
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CInputManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
@@ -21,18 +22,27 @@ player::~player(void)
 
 void player::init(void)
 {
-	cameraObj = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
-
-	lightObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
+	if(cameraObj == nullptr)
+		cameraObj = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
+	if (lightObj == nullptr)
+		lightObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
 	lightObj->setCameraObj(cameraObj);
 	this->addChildObject(cameraObj);
 	this->addChildObject(lightObj);
-	//playerObject = this->createPlayer();
+
+	if (m_pSkinnedObj == nullptr)
+	{
+		m_pSkinnedObj = this->createPlayer();
+	}
+	m_pSkinnedObj->setPosition(this->getPosition());
+	m_pSkinnedObj->setVisible(true);
+	m_pSkinnedObj->setScale(D3DXVECTOR3(0.2f, 0.2f, 0.2f));
 }
 
 void player::update(void)
 {
 	CCharactor::update();
+	m_pSkinnedObj->update();
 	settingCamera();
 	settingLight();
 	// 마우스 화면 조절 
@@ -68,11 +78,14 @@ void player::update(void)
 		this->moveByXAxis(fSpeed * GET_DELTA_TIME());
 	}
 	
+	m_fTopLeft.x = this->getPosition().x - m_fCheckRange;
+	m_fTopLeft.y = this->getPosition().z + m_fCheckRange;
+
+
+	m_fBottomRight.x = this->getPosition().x + m_fCheckRange;
+	m_fBottomRight.y = this->getPosition().z - m_fCheckRange;
 	
-	
-	
-	//playerObject->setPosition(D3DXVECTOR3(cameraObject->getPosition().x, cameraObject->getPosition().y, cameraObject->getPosition().z - 100));
-	//playerObject->update();
+	adjustCollisionArea();
 }
 
 void player::preDraw(void)
@@ -83,6 +96,7 @@ void player::doDraw(void)
 {
 	//playerObject->draw();
 	lightObj->draw();
+	m_pSkinnedObj->draw();
 }
 
 void player::postDraw(void)
@@ -109,7 +123,9 @@ void player::mouseSenterPos()
 CSkinnedObject * player::createPlayer()
 {
 	CSkinnedObject::STParameters stParameters = {
-		"Resources/Meshes/player/player.x",
+		cameraObj,
+		m_pStage->getDirectionalLightObj(),
+		"Resources/Meshes/player/player.X",
 		"Resources/Effects/DefaultSkinnedMesh.fx"
 	};
 	return createSkinnedMesh(stParameters);
@@ -176,6 +192,23 @@ void player::settingLight()
 		slowLight -= GET_DELTA_TIME() * speed;
 		slowLight = min(slowLight, 30.0f);
 		slowLight = max(slowLight, 0.0f);
+	}
+}
+
+void player::adjustCollisionArea()
+{
+	if (m_pStage->getTerrainObj() != nullptr)
+	{
+		int nWidth = m_pStage->getTerrainObj()->getCXTerrain();
+		int nHeight = m_pStage->getTerrainObj()->getCZTerrain();
+		
+		if (m_fTopLeft.x < -nWidth / 2) m_fTopLeft.x = -nWidth / 2;
+		if (m_fTopLeft.y > nHeight / 2)m_fTopLeft.y = nHeight;
+
+
+		if (m_fBottomRight.x > nWidth / 2) m_fTopLeft.x = nWidth / 2;
+		if (m_fBottomRight.y < -nHeight / 2)m_fTopLeft.y = -nHeight;
+
 	}
 }
 

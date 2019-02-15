@@ -138,12 +138,12 @@ private:
 	FPTR* crashFptr = nullptr;
 	FPTR* beginFptr = nullptr;
 	FPTR* pressFptr = nullptr;
-	FPTR* endFptr = nullptr;
+	FPTR* endFptr	= nullptr;
 
-	bool isFirst = true;
-	bool isEnableClick = false;
-	bool m_bIsDebug = false;
-	bool m_bIsCollision = false;
+	bool isFirst			= true;
+	bool isEnableClick		= false;
+	bool m_bIsDebug			= false;
+	bool m_bIsCollision		= false;
 
 	float m_fAngleX = 0.0f;
 	float m_fAngleY = 0.0f;

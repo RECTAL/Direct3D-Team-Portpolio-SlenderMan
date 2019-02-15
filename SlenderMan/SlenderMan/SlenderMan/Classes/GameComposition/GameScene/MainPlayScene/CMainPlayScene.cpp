@@ -51,7 +51,6 @@ void CMainPlayScene::init()
 		this->createWindowUI();
 		this->createRenderTarget();
 		pPlayer = new player;
-		pPlayer->init();
 		this->createContainer();
 		this->createSpriteDefault();
 		this->createLabel();
@@ -62,6 +61,8 @@ void CMainPlayScene::init()
 	CMapToolScene* pMapToolScene = dynamic_cast<CMapToolScene*>(FIND_SCENE(GAMESCENE_MAPTOOL));
 	pMapToolScene->init();
 	m_pStage = pMapToolScene->getStage();
+	pPlayer->setStage(m_pStage);
+	pPlayer->init();
 
 	ppSpotLightObj = new CSpotLightObject*[10];
 	ppPointLightObj = new CLightObject*[10];
@@ -117,6 +118,7 @@ void CMainPlayScene::init()
 	}
 	GET_SOUND_MANAGER()->stopAllEffectSounds();
 	m_fPlayTime = 0.0f;
+
 
 }
 

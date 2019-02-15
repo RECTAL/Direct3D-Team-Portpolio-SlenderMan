@@ -35,6 +35,8 @@ public:			// getter, setter
 	//! 최종 경계 구를 반환한다
 	STBoundingSphere getFinalBoundingSphere(void);
 
+	bool&			getbIsCollision() { return m_bIsCollision; }
+
 	//! 그리기 여부를 변경한다
 	void setVisible(bool a_bIsVisible);
 
@@ -68,6 +70,7 @@ protected:			// protected 변수
 
 	bool m_bIsVisible = false;
 	bool m_bIsDebugEnable = false;
+	bool m_bIsCollision = false;
 
 	CDebugDraw *m_pDebugDraw = nullptr;
 

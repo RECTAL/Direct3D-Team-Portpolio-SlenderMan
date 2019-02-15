@@ -120,7 +120,7 @@ void CRenderObject::setDebugEnable(bool a_bIsDebugEnable, EDebugDrawType a_eDebu
 			SAFE_DELETE(m_pDebugDraw);
 		}
 		else {
-			m_pDebugDraw = new CDebugDraw(this, a_eDebugDrawType);
+			m_pDebugDraw = new CDebugDraw(this, a_eDebugDrawType,m_bIsCollision);
 			m_pDebugDraw->setPosition(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 
 			this->addChildObject(m_pDebugDraw);

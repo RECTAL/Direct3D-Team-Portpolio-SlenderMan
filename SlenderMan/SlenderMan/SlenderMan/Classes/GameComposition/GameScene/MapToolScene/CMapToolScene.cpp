@@ -469,6 +469,8 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -486,6 +488,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -504,6 +507,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -522,6 +526,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -541,6 +546,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[4]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -559,6 +565,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -577,6 +584,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[6]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -595,6 +603,7 @@ void CMapToolScene::createTreeButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[7]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -603,6 +612,10 @@ void CMapToolScene::createTreeButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+
+		m_stMouseInfo.m_pRenderObj = (CRenderObject*) new CObject();
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pTreeButton[8]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -636,6 +649,7 @@ void CMapToolScene::createBuildingButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pHouseButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -654,6 +668,7 @@ void CMapToolScene::createBuildingButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pHouseButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -672,6 +687,7 @@ void CMapToolScene::createBuildingButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pHouseButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -680,6 +696,10 @@ void CMapToolScene::createBuildingButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		
+		m_stMouseInfo.m_pRenderObj = (CRenderObject*) new CObject();
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pHouseButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -714,6 +734,7 @@ void CMapToolScene::createObjectButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pObjectButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -732,6 +753,7 @@ void CMapToolScene::createObjectButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pObjectButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -750,6 +772,7 @@ void CMapToolScene::createObjectButton(void)
 			"Resources/Effects/DefaultStaticMesh.fx"
 		};
 		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pObjectButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -758,6 +781,10 @@ void CMapToolScene::createObjectButton(void)
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_bIsSkinned = false;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+
+		m_stMouseInfo.m_pRenderObj = (CRenderObject*) new CObject();
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
 	m_pObjectButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
@@ -872,6 +899,7 @@ void CMapToolScene::createCheckBoxButton(void)
 		else {
 			m_bIsDebug = false;
 			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+			m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
 			m_pDebugButton->getTextureOffset() = 0;
 		}
 	};
@@ -1039,13 +1067,14 @@ void CMapToolScene::inputKey(void)
 				if (m_pStage->getPickingPosWithTerrain(stPos))
 				{
 					CStage::OBJPACKET objPacket;
-					objPacket.m_bIsSkinned = m_stMouseInfo.m_bIsSkinned;
-					objPacket.m_EObjType = m_stMouseInfo.m_eObjType;
-					objPacket.m_stPosition = stPos;
-					objPacket.m_stScale = m_stMouseInfo.m_pRenderObj->getScale();
+					objPacket.m_bIsCollision = m_bIsCollision;
+					objPacket.m_bIsSkinned	 = m_stMouseInfo.m_bIsSkinned;
+					objPacket.m_EObjType	 = m_stMouseInfo.m_eObjType;
+					objPacket.m_stPosition   = stPos;
+					objPacket.m_stScale      = m_stMouseInfo.m_pRenderObj->getScale();
 					objPacket.m_stForwordVec = m_stMouseInfo.m_pRenderObj->getForwardDirection();
-					objPacket.m_stUpVec = m_stMouseInfo.m_pRenderObj->getUpDirection();
-					objPacket.m_stRightVec = m_stMouseInfo.m_pRenderObj->getRightDirection();
+					objPacket.m_stUpVec      = m_stMouseInfo.m_pRenderObj->getUpDirection();
+					objPacket.m_stRightVec   = m_stMouseInfo.m_pRenderObj->getRightDirection();
 
 					m_pStage->addObj(objPacket, stPos, m_bIsDebug);
 				}

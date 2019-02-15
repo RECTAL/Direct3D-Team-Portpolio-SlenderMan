@@ -2,7 +2,7 @@
 #include "../../Function/GlobalFunction.h"
 #include "../Manager/CDeviceManager.h"
 
-CDebugDraw::CDebugDraw(CRenderObject * a_pRenderObject, EDebugDrawType a_eDebugDrawType)
+CDebugDraw::CDebugDraw(CRenderObject * a_pRenderObject, EDebugDrawType a_eDebugDrawType,BOOL a_bIsDraw)
 	:
 	m_pRenderObject(a_pRenderObject),
 	m_eDebugDrawType(a_eDebugDrawType)
@@ -17,6 +17,8 @@ CDebugDraw::CDebugDraw(CRenderObject * a_pRenderObject, EDebugDrawType a_eDebugD
 	
 	m_stBoundingSphere = m_pRenderObject->getBoundingSphere();
 	m_pBoundingSphere = this->createBoundingSphere(m_stBoundingSphere);
+
+	m_bIsDraw = a_bIsDraw;
 	
 }
 
@@ -38,15 +40,17 @@ void CDebugDraw::preDraw(void)
 void CDebugDraw::doDraw(void)
 {
 	CRenderObject::doDraw();
+	if (m_bIsDraw)
+	{
+		if (m_eDebugDrawType == EDebugDrawType::BOX) {
+			this->drawBoundingBox();
+		}
+		else {
+			this->drawBoundingSphere();
+		}
 
-	if (m_eDebugDrawType == EDebugDrawType::BOX) {
-		this->drawBoundingBox();
+		this->drawGuideLine();
 	}
-	else {
-		this->drawBoundingSphere();
-	}
-
-	this->drawGuideLine();
 }
 
 void CDebugDraw::postDraw(void)
