@@ -9,6 +9,7 @@ class CSpriteObject_Container;
 class CSpriteObject_List;
 class CSpriteObject_Default;
 class CSpriteObject_ScrollBar;
+class CLoadingScene;
 
 
 class CTitleScene :public CScene
@@ -70,6 +71,7 @@ private:
 
 
 	CSpriteObject*			 m_pCurrentSpriteHandle = nullptr;
+	CLoadingScene*			 m_pLoadingScene = nullptr;
 
 	FPTR* crashFptr = nullptr;
 	FPTR* beginFptr = nullptr;

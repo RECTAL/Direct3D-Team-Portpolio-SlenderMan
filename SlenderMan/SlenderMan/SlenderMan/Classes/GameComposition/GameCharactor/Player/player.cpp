@@ -39,7 +39,7 @@ void player::update(void)
 	static bool isEsc = false;
 	if (!isEsc)
 		mouseSenterPos();
-	if (IS_KEY_DOWN(DIK_ESCAPE))
+	if (IS_KEY_PRESSED(DIK_ESCAPE))
 		isEsc = !isEsc;
 
 	float fSpeed = 15.0f;

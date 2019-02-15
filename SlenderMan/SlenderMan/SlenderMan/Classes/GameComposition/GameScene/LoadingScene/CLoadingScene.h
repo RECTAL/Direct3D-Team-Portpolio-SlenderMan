@@ -60,7 +60,8 @@ private:	// private ÇÔ¼ö
 
 private:
 	
-	CSpriteObject_Default * m_pBackGround = nullptr;
+	CSpriteObject_Default * m_pBackGround[3] = { nullptr };
+	int m_nIndex = 0;
 	float alpha = 0.0f;
 
 	bool isFirst = true;

@@ -277,7 +277,7 @@ void CMainPlayScene::setVolume()
 }
 
 void CMainPlayScene::setPlayState()
-{
+{	
 }
 
 CSpotLightObject * CMainPlayScene::createSpotObj()
@@ -438,7 +438,6 @@ void CMainPlayScene::update(void)
 		m_bIsBGMPlay = false;
 	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
-		m_bIsMenu = !m_bIsMenu;
 		m_pMenuContainer->setVisible(!m_pMenuContainer->getVisible());
 		ShowCursor(m_pMenuContainer->getVisible());
 	}

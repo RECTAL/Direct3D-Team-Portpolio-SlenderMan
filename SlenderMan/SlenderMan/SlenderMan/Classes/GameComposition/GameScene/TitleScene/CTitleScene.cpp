@@ -12,6 +12,7 @@
 #include "../../../Utility/Manager/CDeviceManager.h"
 #include "../../../Utility/Manager/CSoundManager.h"
 #include "../../../Function/GlobalFunction.h"
+#include "../LoadingScene/CLoadingScene.h"
 
 CTitleScene::CTitleScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
@@ -35,6 +36,7 @@ CTitleScene::~CTitleScene()
 	SAFE_DELETE(backButton);
 	
 	SAFE_DELETE(optionWindow);
+	SAFE_DELETE(m_pLoadingScene);
 
 	//SAFE_DELETE(soundScrollBar);
 
@@ -60,6 +62,8 @@ void CTitleScene::init()
 	}
 	GET_SOUND_MANAGER()->stopAllEffectSounds();
 	isStartSound = true;
+	m_pLoadingScene = dynamic_cast<CLoadingScene *> (FIND_SCENE(GAMESCENE_LOADING));
+	
 }
 
 void CTitleScene::createWindowUI()
@@ -163,6 +167,7 @@ void CTitleScene::createButtonUI()
 	(*endFptr) = [=](void) -> void
 	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
+		m_pLoadingScene->setNextSceneName(GAMESCENE_MAINPLAY);
 		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
@@ -208,6 +213,7 @@ void CTitleScene::createButtonUI()
 	(*endFptr) = [=](void) -> void
 	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
+		m_pLoadingScene->setNextSceneName(GAMESCENE_MAPTOOL);
 		CHANGE_SCENE_LOADING(GAMESCENE_MAPTOOL,TRUE);
 	};
 
