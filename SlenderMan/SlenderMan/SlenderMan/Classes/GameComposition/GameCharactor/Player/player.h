@@ -7,7 +7,6 @@
 class CCameraObject;
 class SpotLightObject;
 class CSkinnedObject;
-class CMainPlayScene;
 
 class player : public CCharactor
 {
@@ -23,17 +22,19 @@ public:
 	virtual void postDraw(void) override;
 
 public:		//getter
-	CCameraObject* getCamera(void) { return cameraObject; }
-	CSpotLightObject* getLightObj(void) { return spotObj; }
-	EPlayerState &getPlayerState(void) { return playerState; }
+	CCameraObject* getCamera(void) { return cameraObj; }
+	CSpotLightObject* getLightObj(void) { return lightObj; }
+	int &getPlayerState(void) { return playerState; }
 private:
 	void mouseSenterPos();
 	CSkinnedObject* createPlayer();
+protected:
+	void settingCamera();
+	void settingLight();
 private:
-	CCameraObject* cameraObject;
-	CSpotLightObject* spotObj = nullptr;
-	CMainPlayScene* m_pMainScene = nullptr;
-	EPlayerState playerState = EPlayerState::NONE;
+	CCameraObject* cameraObj;
+	CSpotLightObject* lightObj = nullptr;
+	int playerState = (int)EPlayerState::NONE;
 
 	//CSkinnedObject* playerObject;
 

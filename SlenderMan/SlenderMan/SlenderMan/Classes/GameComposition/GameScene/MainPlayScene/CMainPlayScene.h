@@ -92,7 +92,7 @@ private:
 	CSpotLightObject** ppSpotLightObj;
 	CLightObject** ppPointLightObj;
 
-	player* pPlayer;
+	player* pPlayer = nullptr;
 
 	// 움직인 시간
 	float m_fRunTime = 0.0f;

@@ -8,7 +8,7 @@ class CLightObject : public CObject
 {
 public:			// constructor , destructor
 	CLightObject(int a_nIndex);
-
+	virtual ~CLightObject();
 public:			// interface 
 	virtual void update(void) override;						//! 상태를 갱신한다
 

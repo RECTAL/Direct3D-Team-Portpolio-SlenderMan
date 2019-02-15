@@ -242,7 +242,7 @@ float4 ps_main(STOutput a_stInput) : COLOR0
 		}
 		else continue;
 
-		fSpotLightColor.rgb += lerp(float3(0.0f, 0.0f, 0.0f), stSpotColor.rgb,  min(fSpotDistance /fDistance,5.0f));
+		fSpotLightColor.rgb += lerp(float3(0.0f, 0.0f, 0.0f), stSpotColor.rgb,  min(fSpotDistance /fDistance,7.0f));
 	}
 
 

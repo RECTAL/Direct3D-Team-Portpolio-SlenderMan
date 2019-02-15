@@ -24,11 +24,12 @@ player::~player(void)
 
 void player::init(void)
 {
+	cameraObj = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
 
-	cameraObject = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
-	cameraObject->setPosition(D3DXVECTOR3(0.0f, 0.0f, -5.0f));
-
-	spotObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
+	lightObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
+	lightObj->setCameraObj(cameraObj);
+	this->addChildObject(cameraObj);
+	this->addChildObject(lightObj);
 	//playerObject = this->createPlayer();
 
 	m_pMainScene = dynamic_cast<CMainPlayScene*> (FIND_SCENE(GAMESCENE_MAINPLAY));
@@ -36,42 +37,45 @@ void player::init(void)
 
 void player::update(void)
 {
-	cameraObject->update();
-	spotObj->update();
-	spotObj->setPosition(cameraObject->getPosition());
-
+	CCharactor::update();
+	settingCamera();
+	settingLight();
 	// 마우스 화면 조절 
-	if (m_pMainScene->getIsMenu() == false) {
+	static bool isEsc = false;
+	if (!isEsc)
 		mouseSenterPos();
+	if (IS_KEY_DOWN(DIK_ESCAPE))
+		isEsc = !isEsc;
 
-		float fSpeed = 15.0f;
-
+	float fSpeed = 15.0f;
+	
+	if (IS_KEY_DOWN(DIK_W)) {
+		playerState |= (int)EPlayerState::WALKGRASS;
 		if (IS_KEY_DOWN(DIK_LSHIFT)) {
 			fSpeed = 50.0f;
+			playerState |= (int)EPlayerState::RUN;
 		}
-		if (IS_KEY_DOWN(DIK_W)) {
-			cameraObject->moveByZAxis(fSpeed * GET_DELTA_TIME());
-			spotObj->moveByZAxis(fSpeed * GET_DELTA_TIME());
-			playerState = EPlayerState::WALKGRASS;
+		else if (IS_KEY_RELEASED(DIK_LSHIFT)) {
+			playerState = (int)EPlayerState::NONE;
 		}
-		if (IS_KEY_RELEASED(DIK_W))
-		{
-			playerState = EPlayerState::NONE;
-		}
-		if (IS_KEY_DOWN(DIK_S)) {
-			cameraObject->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-			spotObj->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-		}
-
-		if (IS_KEY_DOWN(DIK_A)) {
-			cameraObject->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-			spotObj->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-		}
-		else if (IS_KEY_DOWN(DIK_D)) {
-			cameraObject->moveByXAxis(fSpeed * GET_DELTA_TIME());
-			spotObj->moveByXAxis(fSpeed * GET_DELTA_TIME());
-		}
+		this->moveByZAxis(fSpeed * GET_DELTA_TIME());
 	}
+	if (IS_KEY_RELEASED(DIK_W)){
+		playerState = (int)EPlayerState::NONE;
+	}
+	if (IS_KEY_DOWN(DIK_S)) {
+		this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+	}
+	if (IS_KEY_DOWN(DIK_A)) {
+		this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+	}
+	if (IS_KEY_DOWN(DIK_D)) {
+		this->moveByXAxis(fSpeed * GET_DELTA_TIME());
+	}
+	
+	
+	
+	
 	//playerObject->setPosition(D3DXVECTOR3(cameraObject->getPosition().x, cameraObject->getPosition().y, cameraObject->getPosition().z - 100));
 	//playerObject->update();
 }
@@ -83,6 +87,7 @@ void player::preDraw(void)
 void player::doDraw(void)
 {
 	//playerObject->draw();
+	lightObj->draw();
 }
 
 void player::postDraw(void)
@@ -100,12 +105,8 @@ void player::mouseSenterPos()
 	int dPosX = pt.x - GET_MOUSE_POSITION().x;
 	int dPosY = pt.y - GET_MOUSE_POSITION().y;
 
-	cameraObject->rotateByYAxis(-dPosX / 5.0f, false);
-	spotObj->rotateByYAxis(-dPosX / 5.0f, false);
-
-	cameraObject->rotateByXAxis(-dPosY / 5.0f);
-	spotObj->rotateByXAxis(-dPosY / 5.0f);
-
+	this->rotateByYAxis(-dPosX / 5.0f, false);
+	this->rotateByXAxis(-dPosY / 5.0f);
 	ClientToScreen(GET_WINDOW_HANDLE(), &pt);
 	SetCursorPos(pt.x, pt.y);
 }
@@ -119,5 +120,71 @@ CSkinnedObject * player::createPlayer()
 	return createSkinnedMesh(stParameters);
 }
 
+void player::settingCamera()
+{
+	D3DXVECTOR3	stRightVex3 = this->getRightDirection();
+	D3DXVECTOR3	sUpVex3 = this->getUpDirection();
+	D3DXVECTOR3	stForwardVex3 = this->getForwardDirection();
+	D3DXVECTOR3	stPosVec3 = this->getPosition();
+
+	cameraObj->setRightDirection(stRightVex3);
+	cameraObj->setUpDirection(sUpVex3);
+	cameraObj->setForwardDirection(stForwardVex3);
+	cameraObj->setPosition(stPosVec3);
+}
+
+void player::settingLight()
+{
+	lightObj->setRightDirection(this->getRightDirection());
+	lightObj->setUpDirection(this->getUpDirection());
+	lightObj->setForwardDirection(this->getForwardDirection());
+	lightObj->setPosition(this->getPosition());
+
+	static float slowLight = 0.0f;
+	static float speed = 5.0f;
+	if (playerState & (int)EPlayerState::RUN)
+	{
+		slowLight += GET_DELTA_TIME() * speed;
+		slowLight = min(slowLight, 30.0f);
+		slowLight = max(slowLight, 0.0f);
+		speed += 0.5f;
+		speed = min(speed, 30.0f);
+		speed = max(speed, 5.0f);
+		lightObj->rotateByXAxis(slowLight);
+	}
+	else
+	{
+		lightObj->rotateByXAxis(slowLight);
+		speed -= 0.3f;
+		speed = min(speed, 30.0f);
+		speed = max(speed, 5.0f);
+		slowLight -= GET_DELTA_TIME() * speed;
+		slowLight = min(slowLight, 30.0f);
+		slowLight = max(slowLight, 0.0f);
+	}
+}
+	D3DXVECTOR3	stRightVex3 = this->getRightDirection();
+	D3DXVECTOR3	sUpVex3 = this->getUpDirection();
+	D3DXVECTOR3	stForwardVex3 = this->getForwardDirection();
+	D3DXVECTOR3	stPosVec3 = this->getPosition() + stRightVex3*6.0f + sUpVex3*-5.0f + stForwardVex3*5.0f;
+	D3DXVECTOR3 stNewRightVec3;
+	D3DXVECTOR3 stNewUpVec3;
+	D3DXVECTOR3 stNewForwardVec3;
+
+	D3DXMATRIXA16 stRotateMatrix;
+	D3DXMatrixRotationYawPitchRoll(&stRotateMatrix, D3DXToRadian(-30.0f), D3DXToRadian(-25.0f), D3DXToRadian(0.0f));
+
+	D3DXVec3TransformNormal(&stNewRightVec3, &stRightVex3, &stRotateMatrix);
+	D3DXVec3TransformNormal(&stNewUpVec3, &sUpVex3, &stRotateMatrix);
+	D3DXVec3TransformNormal(&stNewForwardVec3, &stForwardVex3, &stRotateMatrix);
+
+	D3DXVec3Normalize(&stNewRightVec3, &stNewRightVec3);
+	D3DXVec3Normalize(&stNewUpVec3, &stNewUpVec3);
+	D3DXVec3Normalize(&stNewForwardVec3, &stNewForwardVec3);
 
 
+	lightObj->setRightDirection(stNewRightVec3);
+	lightObj->setUpDirection(stNewUpVec3);
+	lightObj->setForwardDirection(stNewForwardVec3);
+	lightObj->setPosition(stPosVec3);
+}

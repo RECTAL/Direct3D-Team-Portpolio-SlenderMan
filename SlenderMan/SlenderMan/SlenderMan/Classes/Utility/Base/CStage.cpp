@@ -1176,6 +1176,7 @@ void CStage::draw()
 	/***************************************************/
 	if (!m_bIsMaptool)
 	{
+		GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 		GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
 
 		D3DXMatrixIdentity(&stWorldMatrix);
@@ -1197,6 +1198,7 @@ void CStage::draw()
 		RunEffectLoop(FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_pBlendEffect, "BlendTexture", [=](int nPassNum)->void {
 			FIND_RENDERTARGET("OutlineMeshRenderTarget")->getPlaneMesh()->DrawSubset(0);
 		});
+		GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
 	}
 }
 

@@ -67,14 +67,15 @@ enum class EObjType
 
 enum class EPlayerState
 {
-	WALKGRASS,	// 풀 밟는 소리
-	WALKROCK,	// 돌 밟는 소리
-	WALKREED,	// 갈대 밟는 소리
-	PICK,		// 쪽지 회수
-	SLENDER,	// 슬랜더맨 만남
-	HEARTBEAT,	// 심박수가 올라간
-	DIE,		// 죽은 상태
-	NONE
+	WALKGRASS = 0x0001,	// 풀 밟는 소리
+	WALKROCK = 0x0002,	// 돌 밟는 소리
+	WALKREED = 0x0004,	// 갈대 밟는 소리
+	PICK = 0x0008,		// 쪽지 회수
+	SLENDER = 0x0010,	// 슬랜더맨 만남
+	HEARTBEAT = 0x0020,	// 심박수가 올라간
+	DIE = 0x0040,		// 죽은 상태
+	RUN = 0x0080,		// 달리는 상태
+	NONE = 0x0000
 };
 
 enum class EPlayingBGM

@@ -11,6 +11,10 @@ CLightObject::CLightObject(int a_nIndex)
 	m_stLight.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
+CLightObject::~CLightObject()
+{
+}
+
 bool CLightObject::getLightEnable(void)
 {
 	return m_bIsEnable;
