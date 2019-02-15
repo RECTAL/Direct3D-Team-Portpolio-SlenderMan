@@ -564,6 +564,9 @@
     <ClCompile Include="Classes\Utility\Debug\CDebugDraw.cpp">
       <Filter>Classes\Global\Utility\Debug</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameCharactor\CCharactor.cpp">
+      <Filter>Classes\GameComposition\GameCharactor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Effects\CopyTexture.fx">
@@ -585,6 +588,9 @@
       <Filter>Resources\Effects</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Effects\BlendTexture.fx">
+      <Filter>Resources\Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Effects\spotLightRay.fx">
       <Filter>Resources\Effects</Filter>
     </FxCompile>
   </ItemGroup>

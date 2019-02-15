@@ -12,6 +12,7 @@
 #include "../../../Utility/Manager/CDeviceManager.h"
 #include "../../../Utility/Manager/CSoundManager.h"
 #include "../../../Function/GlobalFunction.h"
+#include "../LoadingScene/CLoadingScene.h"
 
 CTitleScene::CTitleScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
@@ -60,6 +61,8 @@ void CTitleScene::init()
 	}
 	GET_SOUND_MANAGER()->stopAllEffectSounds();
 	isStartSound = true;
+	m_pLoadingScene = dynamic_cast<CLoadingScene *> (FIND_SCENE(GAMESCENE_LOADING));
+	
 }
 
 void CTitleScene::createWindowUI()
@@ -89,7 +92,8 @@ void CTitleScene::createWindowUI()
 	(*endFptr) = [=](void)->void
 	{
 		m_pCurrentSpriteHandle = nullptr;
-		soundScrollBar->setVisible(false);
+		soundScrollBar[0]->setVisible(false);
+		soundScrollBar[1]->setVisible(false);
 		optionWindow->setVisible(false);
 	};
 	backButton->init(
@@ -102,7 +106,8 @@ void CTitleScene::createWindowUI()
 	);
 
 	optionWindow->addChildSpriteObject("backButton", CWindowType::BUTTON, backButton);
-	optionWindow->addChildSpriteObject("soundScroll", CWindowType::SCROLLBAR, soundScrollBar);
+	optionWindow->addChildSpriteObject("bgmSoundScroll", CWindowType::SCROLLBAR, soundScrollBar[0]);
+	optionWindow->addChildSpriteObject("effectSoundScroll", CWindowType::SCROLLBAR, soundScrollBar[1]);
 
 	/********************************************************/
 	//ui ¸®½ºÆ®
@@ -161,16 +166,24 @@ void CTitleScene::createButtonUI()
 	(*endFptr) = [=](void) -> void
 	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
+		m_pLoadingScene->setNextSceneName(GAMESCENE_MAINPLAY);
 		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
 
-	soundScrollBar = new CSpriteObject_ScrollBar("Resources/Textures/Scene/TitleScene/whiteCover", "png", 300, 20, 1);
+	soundScrollBar[0] = new CSpriteObject_ScrollBar("Resources/Textures/Scene/TitleScene/whiteCover", "png", 300, 20, 1);
 
-	soundScrollBarButton = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/grayCover", "png", 10, 50, 1);
-	soundScrollBarButton->init(nullptr, nullptr, nullptr, nullptr, true);
+	soundScrollBarButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/grayCover", "png", 10, 50, 1);
+	soundScrollBarButton[0]->init(nullptr, nullptr, nullptr, nullptr, true);
 
-	soundScrollBar->init(nullptr, nullptr, nullptr, nullptr, 0, 300, soundScrollBarButton, true, D3DXVECTOR3(0, -180, 0.0f));
+	soundScrollBar[0]->init(nullptr, nullptr, nullptr, nullptr, 0, 300, soundScrollBarButton[0], true, D3DXVECTOR3(30, -70, 0.0f));
+
+	soundScrollBar[1] = new CSpriteObject_ScrollBar("Resources/Textures/Scene/TitleScene/whiteCover", "png", 300, 20, 1);
+
+	soundScrollBarButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/grayCover", "png", 10, 50, 1);
+	soundScrollBarButton[1]->init(nullptr, nullptr, nullptr, nullptr, true);
+
+	soundScrollBar[1]->init(nullptr, nullptr, nullptr, nullptr, 0, 300, soundScrollBarButton[1], true, D3DXVECTOR3(30, 10, 0.0f));
 
 	optionButton = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/option", "png", 350, 60, 2);
 	optionButton->setPosition(D3DXVECTOR3(370, 490, 0));
@@ -184,7 +197,8 @@ void CTitleScene::createButtonUI()
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
 		m_pCurrentSpriteHandle = optionWindow;
 		optionWindow->setVisible(true);
-		soundScrollBar->setVisible(true);
+		soundScrollBar[0]->setVisible(true);
+		soundScrollBar[1]->setVisible(true);
 	};
 	optionButton->init(crashFptr, nullptr, nullptr, endFptr);
 
@@ -198,6 +212,7 @@ void CTitleScene::createButtonUI()
 	(*endFptr) = [=](void) -> void
 	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
+		m_pLoadingScene->setNextSceneName(GAMESCENE_MAPTOOL);
 		CHANGE_SCENE_LOADING(GAMESCENE_MAPTOOL,TRUE);
 	};
 
@@ -239,7 +254,8 @@ void CTitleScene::update(void)
 	{
 		m_pCurrentSpriteHandle->update();
 	}
-	printf("%f\n", soundScrollBar->getSetValue());
+	printf("bgmSound: %f\n", soundScrollBar[0]->getSetValue() / 300);
+	printf("effectSound: %f\n", soundScrollBar[1]->getSetValue() / 300);
 
 	if (isStartSound)
 	{
@@ -309,7 +325,8 @@ void CTitleScene::buttonImageDrawUI()
 void CTitleScene::setVolume()
 {
 	if (m_pCurrentSpriteHandle == optionWindow) {
-		GET_SOUND_MANAGER()->setBackgroundSoundVolume(soundScrollBar->getSetValue() / 300);
+		GET_SOUND_MANAGER()->setBackgroundSoundVolume(soundScrollBar[0]->getSetValue() / 300);
+		GET_SOUND_MANAGER()->setEffectSoundsVolume(soundScrollBar[1]->getSetValue() / 300);
 	}
 }
 

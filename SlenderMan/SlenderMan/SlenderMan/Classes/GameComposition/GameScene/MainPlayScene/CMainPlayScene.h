@@ -2,16 +2,20 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
+class player;
 class CSpriteObject_Button;
 class CSpriteObject_Default;
 class CSpriteObject_Container;
+class CSpriteObject_ScrollBar;
 class CCameraObject;
 class CTerrainObject;
 class CStaticObject;
 class CLightObject;
+class CSpriteObject;
 class CSpotLightObject;
 class CStage;
 class CLabelObject;
+
 class CMainPlayScene :public CScene
 {
 public:		//constructor , destructor
@@ -34,47 +38,56 @@ public:		//public override function
 
 private:
 	void	createRenderTarget();
-	void	createCamera();
 	void	createStageSound();
 	void	setStateSound();
 	void	setBGMSound();
 	void	setTimer();
+	void	setVolume();
+	void	setPlayState();
 
 public:
+	//getter,setter
+	/*********************************************/
+	//getter
+	/*********************************************/
+	bool getIsMenu() { return m_bIsMenu; }
+public:
 	CSpotLightObject* createSpotObj();
+
 private:
 	void createContainer();
 	void createButton();
+	void releaseUI();
 
 	void createLabel();
 	void createSpriteDefault();
-
-
-
 	void calcPlayTime(float a_fTime,int& a_nHour,int& a_nMin,int& a_nSec);
+
+	void settingPlayer();
 private:
-	POINT pt;
-	DWORD mousePositionX = 0;
-	DWORD mousePositionY = 0;
-
-	CCameraObject* m_pCamera = nullptr;
-	CSpotLightObject* m_pSpotObj = nullptr;
-
 	LPD3DXMESH m_pSphere = nullptr;
 
 	CStage* m_pStage;
-	bool isFirst = true;
-	bool isBGMPlay = true;
+	bool m_bIsFirst = true;
+	bool m_bIsBGMPlay = true;
+	bool m_bIsMenu = false;
 
 	float m_fPlayTime = 0.0f;
 
 	CSpriteObject_Default* m_pCamCoderView = nullptr;
 	CLabelObject*		   m_pPlayTime = nullptr;
+	CSpriteObject*		   m_pCurrentSpriteHandle = nullptr;
 
-	CSpriteObject_Button* exitButton = nullptr;
-	CSpriteObject_Container* menuContainer = nullptr;
+	CSpriteObject_Button* m_pExitButton = nullptr;
+	CSpriteObject_Button* m_pOptionButton = nullptr;
+	CSpriteObject_Button* m_pBackButton = nullptr;
+	CSpriteObject_Button* m_pScrollBarButton[2] = { nullptr };
+	
+	CSpriteObject_Container* m_pMenuContainer = nullptr;
+	CSpriteObject_Container* m_pSoundContainer = nullptr;
+	
+	CSpriteObject_ScrollBar* m_pScrollBar[2] = { nullptr };
 
-	EPlayerState m_ePlayerState = EPlayerState::NONE;
 	EPlayingBGM m_ePlayingBGM = EPlayingBGM::NONE;
 	EStageSound m_eStageSound = EStageSound::STAGE_1;
 
@@ -85,6 +98,8 @@ private:
 
 	CSpotLightObject** ppSpotLightObj;
 	CLightObject** ppPointLightObj;
+
+	player* pPlayer = nullptr;
 
 	// 움직인 시간
 	float m_fRunTime = 0.0f;

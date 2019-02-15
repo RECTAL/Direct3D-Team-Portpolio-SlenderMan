@@ -9,6 +9,7 @@ class CSpriteObject_Container;
 class CSpriteObject_List;
 class CSpriteObject_Default;
 class CSpriteObject_ScrollBar;
+class CLoadingScene;
 
 
 class CTitleScene :public CScene
@@ -64,12 +65,13 @@ private:
 	CSpriteObject_List*		 uiList = nullptr;
 	CSpriteObject_Button*	uiButton[5] = { nullptr };
 
-	CSpriteObject_ScrollBar* soundScrollBar = nullptr;
-	CSpriteObject_Button*	 soundScrollBarButton = nullptr;
+	CSpriteObject_ScrollBar* soundScrollBar[2] = { nullptr };
+	CSpriteObject_Button*	 soundScrollBarButton[2] = { nullptr };
 
 
 
 	CSpriteObject*			 m_pCurrentSpriteHandle = nullptr;
+	CLoadingScene*			 m_pLoadingScene = nullptr;
 
 	FPTR* crashFptr = nullptr;
 	FPTR* beginFptr = nullptr;

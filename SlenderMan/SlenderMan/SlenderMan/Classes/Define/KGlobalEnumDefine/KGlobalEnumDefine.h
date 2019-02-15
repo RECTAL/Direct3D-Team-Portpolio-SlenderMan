@@ -44,6 +44,8 @@ enum class EObjType
 	TREE_4,
 	TREE_5,
 	TREE_6,
+	TREE_7,
+	TREE_8,
 	ROCK_0,
 	ROCK_1,
 	WIND,
@@ -52,19 +54,28 @@ enum class EObjType
 	CROW,
 	FIRE,
 	OWL,
+	PAGE_1,
+	PAGE_2,
+	PAGE_3,
+	PAGE_4,
+	PAGE_5,
+	PAGE_6,
+	PAGE_7,
+	PAGE_8,
 	NONE = -1
 };
 
 enum class EPlayerState
 {
-	WALKGRASS,	// 풀 밟는 소리
-	WALKROCK,	// 돌 밟는 소리
-	WALKREED,	// 갈대 밟는 소리
-	PICK,		// 쪽지 회수
-	SLENDER,	// 슬랜더맨 만남
-	HEARTBEAT,	// 심박수가 올라간
-	DIE,		// 죽은 상태
-	NONE
+	WALKGRASS = 0x0001,	// 풀 밟는 소리
+	WALKROCK = 0x0002,	// 돌 밟는 소리
+	WALKREED = 0x0004,	// 갈대 밟는 소리
+	PICK = 0x0008,		// 쪽지 회수
+	SLENDER = 0x0010,	// 슬랜더맨 만남
+	HEARTBEAT = 0x0020,	// 심박수가 올라간
+	DIE = 0x0040,		// 죽은 상태
+	RUN = 0x0080,		// 달리는 상태
+	NONE = 0x0000
 };
 
 enum class EPlayingBGM
@@ -95,7 +106,6 @@ enum class EStageSound
 	EXIT,			// 탈출 시
 	NONE
 };
-
 
 //! 디버그 타입
 enum class EDebugDrawType

@@ -16,6 +16,7 @@ public:
 	{
 		EObjType	m_EObjType = EObjType::NONE;
 		BOOL		m_bIsSkinned = false;
+		BOOL		m_bIsCollision = false;
 		D3DXVECTOR3 m_stPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		D3DXVECTOR3 m_stForwordVec = WORLD_FORWARD_DIRECTION;
 		D3DXVECTOR3 m_stUpVec = WORLD_UP_DIRECTION;

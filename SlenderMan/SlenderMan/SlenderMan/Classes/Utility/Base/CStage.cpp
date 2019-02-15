@@ -121,7 +121,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 						m_pObjList[i].push_back(stStaticObj);
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::GRASS)
@@ -141,6 +141,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -161,6 +162,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -181,8 +183,9 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 						m_pObjList[i].push_back(stStaticObj);
+
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDWOODDOCK)
 					{
@@ -201,8 +204,9 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 						m_pObjList[i].push_back(stStaticObj);
+
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PLANTS)
 					{
@@ -221,8 +225,9 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 						m_pObjList[i].push_back(stStaticObj);
+
 					}
 					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::ROUNDWOOD)
 					{
@@ -241,6 +246,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -261,6 +267,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -281,6 +288,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -301,6 +309,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -321,6 +330,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -341,6 +351,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -361,6 +372,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -381,6 +393,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -401,6 +414,49 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_7)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Meshes/tree7/tree7.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+
+						m_pObjList[i].push_back(stStaticObj);
+					}
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_8)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CStaticObject::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Meshes/tree8/tree8.X",
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CStaticObject* stStaticObj = new CStaticObject(stParameters);
+						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
@@ -439,6 +495,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -461,6 +518,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -483,6 +541,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -505,6 +564,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -527,6 +587,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -549,6 +610,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -571,6 +633,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -593,6 +656,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -615,6 +679,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -637,6 +702,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -660,6 +726,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -682,6 +749,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -704,6 +772,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -727,6 +796,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -749,6 +819,53 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::TREE_7)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Meshes/tree7/tree7.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+				stStaticObj->setVisible(false);
+				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stStaticObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::TREE_8)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CStaticObject::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Meshes/tree8/tree8.X",
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CStaticObject* stStaticObj = new CStaticObject(stParameters);
+				stStaticObj->setPosition(a_stPacket.m_stPosition);
+				stStaticObj->setScale(a_stPacket.m_stScale);
+				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
@@ -1038,8 +1155,6 @@ void CStage::draw()
 						if (!pStaticObj->getVisible())pStaticObj->setVisible(true);
 						else
 						{
-							
-							pStaticObj->getbOutLineDraw() = true;
 							if (pStaticObj->getbOutLineDraw()&&!m_bIsMaptool)
 							{
 								/********************************************/
@@ -1092,6 +1207,7 @@ void CStage::draw()
 	/***************************************************/
 	if (!m_bIsMaptool)
 	{
+		GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 		GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
 
 		D3DXMatrixIdentity(&stWorldMatrix);
@@ -1113,6 +1229,7 @@ void CStage::draw()
 		RunEffectLoop(FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_pBlendEffect, "BlendTexture", [=](int nPassNum)->void {
 			FIND_RENDERTARGET("OutlineMeshRenderTarget")->getPlaneMesh()->DrawSubset(0);
 		});
+		GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
 	}
 }
 
