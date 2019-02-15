@@ -51,7 +51,6 @@ void CMainPlayScene::init()
 		this->createWindowUI();
 		this->createRenderTarget();
 		this->settingPlayer();
-		pPlayer = new player;
 		this->createContainer();
 		this->createSpriteDefault();
 		this->createLabel();
@@ -405,9 +404,7 @@ void CMainPlayScene::calcPlayTime(float a_fTime, int & a_nHour, int & a_nMin, in
 void CMainPlayScene::settingPlayer()
 {
 	pPlayer = new player;
-	pPlayer->init();
-	pPlayer->mainSceneAddress(this);
-	pPlayer->setPosition(D3DXVECTOR3(203.0f, 39.0f, 43.0f));
+	pPlayer->setMainSceneAddress(this);
 }
 
 void CMainPlayScene::createContainer()

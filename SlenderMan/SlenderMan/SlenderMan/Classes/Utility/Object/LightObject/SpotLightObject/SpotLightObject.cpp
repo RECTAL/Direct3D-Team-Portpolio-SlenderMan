@@ -78,7 +78,7 @@ void CSpotLightObject::draw(void)
 	D3DXVECTOR4		stViewPosition = D3DXVECTOR4(m_pCameraObj->getPosition(),1.0f);
 	
 	float fFresnel		= 1.0f;
-	float fAlphaOffset	= 0.3f;
+	float fAlphaOffset	= 0.5f;
 	float fNoiseSpeed	= 0.2f;
 	float fAmbient		= 0.2f;
 	float fIntensity	= 0.3f;

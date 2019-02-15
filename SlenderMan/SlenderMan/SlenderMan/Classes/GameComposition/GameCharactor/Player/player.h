@@ -36,6 +36,7 @@ public:		//getter,setter
 	//setter
 	/**********************************************/
 	void	setStage(CStage* a_pStage) { m_pStage = a_pStage; }
+	void	setMainSceneAddress(CMainPlayScene* address) { mainScene = address; }
 private:
 	void mouseSenterPos();
 	CSkinnedObject* createPlayer();

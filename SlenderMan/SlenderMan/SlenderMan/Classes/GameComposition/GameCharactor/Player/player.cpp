@@ -26,6 +26,8 @@ void player::init(void)
 		cameraObj = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
 	if (lightObj == nullptr)
 		lightObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
+
+	this->setPosition(D3DXVECTOR3(203.0f, 39.0f, 43.0f));
 	lightObj->setCameraObj(cameraObj);
 	this->addChildObject(cameraObj);
 	this->addChildObject(lightObj);
@@ -44,53 +46,49 @@ void player::update(void)
 	if (!mainScene->getIsMenu())
 	{
 		CCharactor::update();
-
+		m_pSkinnedObj->update();
 		settingCamera();
 		settingLight();
 		// 마우스 화면 조절 
-	CCharactor::update();
-	m_pSkinnedObj->update();
-	settingCamera();
-	settingLight();
-	// 마우스 화면 조절 
-	static bool isEsc = false;
-	if (!isEsc)
-		mouseSenterPos();
+		static bool isEsc = false;
+		if (!isEsc)
+			mouseSenterPos();
 
-	float fSpeed = 15.0f;
-	
-	if (IS_KEY_DOWN(DIK_W)) {
-		playerState |= (int)EPlayerState::WALKGRASS;
-		if (IS_KEY_DOWN(DIK_LSHIFT)) {
-			fSpeed = 50.0f;
-			playerState |= (int)EPlayerState::RUN;
+		float fSpeed = 15.0f;
+
+		if (IS_KEY_DOWN(DIK_W)) {
+			playerState |= (int)EPlayerState::WALKGRASS;
+			if (IS_KEY_DOWN(DIK_LSHIFT)) {
+				fSpeed = 50.0f;
+				playerState |= (int)EPlayerState::RUN;
+			}
+			else if (IS_KEY_RELEASED(DIK_LSHIFT)) {
+				playerState = (int)EPlayerState::NONE;
+			}
+			this->moveByZAxis(fSpeed * GET_DELTA_TIME());
 		}
-		else if (IS_KEY_RELEASED(DIK_LSHIFT)) {
+		if (IS_KEY_RELEASED(DIK_W)) {
 			playerState = (int)EPlayerState::NONE;
 		}
-		this->moveByZAxis(fSpeed * GET_DELTA_TIME());
-	}
-	if (IS_KEY_RELEASED(DIK_W)){
-		playerState = (int)EPlayerState::NONE;
-	}
-	if (IS_KEY_DOWN(DIK_S)) {
-		this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-	}
-	if (IS_KEY_DOWN(DIK_A)) {
-		this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
-	}
-	if (IS_KEY_DOWN(DIK_D)) {
-		this->moveByXAxis(fSpeed * GET_DELTA_TIME());
-	}
-	
-	m_fTopLeft.x = this->getPosition().x - m_fCheckRange;
-	m_fTopLeft.y = this->getPosition().z + m_fCheckRange;
+		if (IS_KEY_DOWN(DIK_S)) {
+			this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+		}
+		if (IS_KEY_DOWN(DIK_A)) {
+			this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+		}
+		if (IS_KEY_DOWN(DIK_D)) {
+			this->moveByXAxis(fSpeed * GET_DELTA_TIME());
+		}
+
+		m_fTopLeft.x = this->getPosition().x - m_fCheckRange;
+		m_fTopLeft.y = this->getPosition().z + m_fCheckRange;
 
 
-	m_fBottomRight.x = this->getPosition().x + m_fCheckRange;
-	m_fBottomRight.y = this->getPosition().z - m_fCheckRange;
-	
-	adjustCollisionArea();
+		m_fBottomRight.x = this->getPosition().x + m_fCheckRange;
+		m_fBottomRight.y = this->getPosition().z - m_fCheckRange;
+
+		adjustCollisionArea();
+	}
 }
 
 void player::preDraw(void)
