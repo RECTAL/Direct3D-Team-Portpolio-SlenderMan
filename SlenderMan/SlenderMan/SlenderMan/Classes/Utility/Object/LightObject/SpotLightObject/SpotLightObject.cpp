@@ -67,10 +67,10 @@ void CSpotLightObject::draw(void)
 	D3DXMATRIXA16	stSpotScaleMatrix;
 	D3DXMATRIXA16	stSpotTransMatrix;
 	D3DXMatrixTranslation(&stSpotTransMatrix, 0.0f, 0.0f, 0.0f);
-	D3DXMatrixRotationX(&stSpotRotateMatrix, D3DXToRadian(0.0f));
+	D3DXMatrixRotationYawPitchRoll(&stSpotRotateMatrix, D3DXToRadian(0.0f), D3DXToRadian(0.0f), D3DXToRadian(0.0f));
 	D3DXMatrixScaling(&stSpotScaleMatrix, 1.0f, 1.0f, 1.0f);
 	stSpotWorldMatrix = stSpotScaleMatrix * stSpotRotateMatrix*stSpotTransMatrix;
-	D3DXMATRIXA16	stSpotFinalMatrix	= stSpotWorldMatrix * this->getFinalWorldMatrix();
+	D3DXMATRIXA16	stSpotFinalMatrix	= stSpotWorldMatrix * this->getWorldMatrix();
 
 	D3DXMATRIXA16	stViewMatrix		= m_pCameraObj->getViewMatrix();
 	D3DXMATRIXA16	stProjectionMatrix	= m_pCameraObj->getProjectionMatrix();
