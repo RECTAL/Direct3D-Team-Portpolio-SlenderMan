@@ -43,9 +43,11 @@ private:
 private:
 	void settingCamera();
 	void settingLight();
+	void settingSkinnedObj();
 
 
 	void adjustCollisionArea();
+	bool checkCollisionArea();
 	
 
 private:
@@ -58,7 +60,18 @@ private:
 	int playerState = (int)EPlayerState::NONE;
 	bool isEsc = false;
 
+
+
+	bool m_bIsLeft	= false;
+	bool m_bIsRight	= false;
+	bool m_bIsFront = false;
+	bool m_bIsBack	= false;
+
+	D3DXVECTOR3 m_stSkinnedRightVec3;
+	D3DXVECTOR3 m_stSkinnedUpVec3;
+	D3DXVECTOR3	m_stSkinnedForwardVec3;
+
 	fPOINT		m_fTopLeft;
 	fPOINT		m_fBottomRight;
-	float		m_fCheckRange = 20.0f;
+	float		m_fCheckRange = 3.0f;
 };

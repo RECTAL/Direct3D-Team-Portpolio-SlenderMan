@@ -112,6 +112,7 @@ void CRenderObject::setVisible(bool a_bIsVisible)
 
 void CRenderObject::setDebugEnable(bool a_bIsDebugEnable, EDebugDrawType a_eDebugDrawType)
 {
+	if (m_pDebugDraw != nullptr)m_pDebugDraw->setbDraw(m_bIsCollision);
 	if (m_bIsDebugEnable != a_bIsDebugEnable) {
 		m_bIsDebugEnable = a_bIsDebugEnable;
 

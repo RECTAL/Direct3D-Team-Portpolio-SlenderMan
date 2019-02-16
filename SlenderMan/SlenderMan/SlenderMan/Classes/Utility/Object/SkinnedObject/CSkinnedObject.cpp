@@ -21,6 +21,12 @@ CSkinnedObject::CSkinnedObject(const STParameters & a_rstParameters)
 
 	m_pEffect = GET_EFFECT(a_rstParameters.m_oEffectFilepath);
 	m_pMesh = this->createSkinnedMeshFromX(a_rstParameters.m_oMeshFilepath);
+
+	auto stBoundingBox = CreateBoundingBox(m_pMesh);
+	auto stBoundingSphere = CreateBoundingSphere(m_pMesh);
+
+	this->setBoundingBox(stBoundingBox);
+	this->setBoundingSphere(stBoundingSphere);
 }
 
 CSkinnedObject::~CSkinnedObject(void)

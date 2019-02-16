@@ -1,5 +1,5 @@
 #include "player.h"
-
+#include "../../../Function/GlobalFunction.h"
 #include "../../../Utility/Base/CStage.h"
 #include "../../../Utility/Manager/CWindowManager.h"
 #include "../../../Utility/Manager/CInputManager.h"
@@ -46,9 +46,13 @@ void player::update(void)
 	if (!mainScene->getIsMenu())
 	{
 		CCharactor::update();
-		m_pSkinnedObj->update();
+		
 		settingCamera();
 		settingLight();
+		settingSkinnedObj();
+
+		m_pSkinnedObj->update();
+		
 		// 마우스 화면 조절 
 		static bool isEsc = false;
 		if (!isEsc)
@@ -56,8 +60,14 @@ void player::update(void)
 
 		float fSpeed = 15.0f;
 
+		m_bIsLeft = false;
+		m_bIsRight = false;
+		m_bIsFront = false;
+		m_bIsBack = false;
+
 		if (IS_KEY_DOWN(DIK_W)) {
 			playerState |= (int)EPlayerState::WALKGRASS;
+			m_bIsFront = true;
 			if (IS_KEY_DOWN(DIK_LSHIFT)) {
 				fSpeed = 50.0f;
 				playerState |= (int)EPlayerState::RUN;
@@ -72,22 +82,34 @@ void player::update(void)
 		}
 		if (IS_KEY_DOWN(DIK_S)) {
 			this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+			m_bIsBack = true;
 		}
 		if (IS_KEY_DOWN(DIK_A)) {
 			this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+			m_bIsLeft = true;
 		}
 		if (IS_KEY_DOWN(DIK_D)) {
 			this->moveByXAxis(fSpeed * GET_DELTA_TIME());
+			m_bIsRight = true;
 		}
 
 		m_fTopLeft.x = this->getPosition().x - m_fCheckRange;
-		m_fTopLeft.y = this->getPosition().z + m_fCheckRange;
+		m_fTopLeft.y = this->getPosition().z - m_fCheckRange;
 
 
 		m_fBottomRight.x = this->getPosition().x + m_fCheckRange;
-		m_fBottomRight.y = this->getPosition().z - m_fCheckRange;
+		m_fBottomRight.y = this->getPosition().z + m_fCheckRange;
 
 		adjustCollisionArea();
+		
+		if (this->checkCollisionArea())
+		{
+			if(m_bIsFront)this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+			if(m_bIsBack)this->moveByZAxis(fSpeed * GET_DELTA_TIME());
+			if(m_bIsLeft)this->moveByXAxis(fSpeed * GET_DELTA_TIME());
+			if(m_bIsRight)this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+		}
+
 	}
 }
 
@@ -183,6 +205,24 @@ void player::settingLight()
 	}
 }
 
+void player::settingSkinnedObj()
+{
+	m_stSkinnedRightVec3 = -cameraObj->getRightDirection();
+	m_stSkinnedUpVec3 = WORLD_UP_DIRECTION;
+	m_stSkinnedForwardVec3;
+	D3DXVec3Cross(&m_stSkinnedForwardVec3, &m_stSkinnedRightVec3, &m_stSkinnedUpVec3);
+	D3DXVec3Cross(&m_stSkinnedRightVec3, &m_stSkinnedUpVec3, &m_stSkinnedForwardVec3);
+	D3DXVec3Normalize(&m_stSkinnedRightVec3, &m_stSkinnedRightVec3);
+	D3DXVec3Normalize(&m_stSkinnedUpVec3, &m_stSkinnedUpVec3);
+	D3DXVec3Normalize(&m_stSkinnedForwardVec3, &m_stSkinnedForwardVec3);
+
+	m_pSkinnedObj->setPosition(cameraObj->getPosition() + D3DXVECTOR3(0.0f, -13.0f, 0.0f) + m_stSkinnedForwardVec3 * 1.5f);
+
+	m_pSkinnedObj->setRightDirection(m_stSkinnedRightVec3);
+	m_pSkinnedObj->setUpDirection(m_stSkinnedUpVec3);
+	m_pSkinnedObj->setForwardDirection(m_stSkinnedForwardVec3);
+}
+
 void player::adjustCollisionArea()
 {
 	if (m_pStage->getTerrainObj() != nullptr)
@@ -191,12 +231,59 @@ void player::adjustCollisionArea()
 		int nHeight = m_pStage->getTerrainObj()->getCZTerrain();
 		
 		if (m_fTopLeft.x < -nWidth / 2) m_fTopLeft.x = -nWidth / 2;
-		if (m_fTopLeft.y > nHeight / 2)m_fTopLeft.y = nHeight;
+		if (m_fTopLeft.y < -nHeight / 2)m_fTopLeft.y = -nHeight/2;
 
 
-		if (m_fBottomRight.x > nWidth / 2) m_fTopLeft.x = nWidth / 2;
-		if (m_fBottomRight.y < -nHeight / 2)m_fTopLeft.y = -nHeight;
+		if (m_fBottomRight.x > nWidth / 2) m_fBottomRight.x = nWidth / 2;
+		if (m_fBottomRight.y > nHeight / 2)m_fBottomRight.y = nHeight/2;
 
 	}
+}
+
+bool player::checkCollisionArea()
+{
+	bool isCollision = false;
+	if (m_pStage->getTerrainObj() != nullptr)
+	{
+		int nTerrainWidth = m_pStage->getTerrainObj()->getCXTerrain();
+		int nTerrainHeight = m_pStage->getTerrainObj()->getCZTerrain();
+		int nWidth = m_pStage->getTerrainObj()->getCXDIB();
+		int nScaleX = m_pStage->getTerrainObj()->getScale().x;
+		int nScaleZ = m_pStage->getTerrainObj()->getScale().z;
+
+
+		D3DXVECTOR3 stTopLeftPos = D3DXVECTOR3((m_fTopLeft.x + nTerrainWidth / 2) / nScaleX, 0, (m_fTopLeft.y + nTerrainHeight / 2) / nScaleZ);
+		D3DXVECTOR3 stBottomRightPos = D3DXVECTOR3((m_fBottomRight.x + nTerrainWidth / 2) / nScaleX, 0, (m_fBottomRight.y + nTerrainHeight / 2) / nScaleZ);
+		int xTopLeftIndex	  = (int)stTopLeftPos.x;
+		int zTopLeftIndex	  = (int)stTopLeftPos.z;
+		int xBottomRightIndex = (int)stBottomRightPos.x;
+		int zBottomRightIndex = (int)stBottomRightPos.z;
+
+		int dxIndex = xBottomRightIndex - xTopLeftIndex;
+		int dyIndex = zBottomRightIndex - zTopLeftIndex;
+
+		std::vector<CRenderObject*> oCollionObjList;
+		for (int i = 0; i <= dyIndex; i++)
+		{
+			for (int j = 0; j <= dxIndex; j++)
+			{
+				int nIndex = (zTopLeftIndex + i)*nWidth + (xTopLeftIndex + j);
+				for (auto iter : m_pStage->getObjList()[nIndex])
+				{
+					if (iter->getbIsCollision())oCollionObjList.push_back(iter);
+				}
+			}
+		}
+
+		for (auto iter : oCollionObjList)
+		{
+			if (IsIntersectBox(m_pSkinnedObj->getBoundingBox(), iter->getBoundingBox()))
+			{
+				isCollision = true;
+				break;
+			}
+		}
+	}
+	return isCollision;
 }
 
