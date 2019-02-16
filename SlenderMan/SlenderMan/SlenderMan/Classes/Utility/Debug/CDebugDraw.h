@@ -60,6 +60,10 @@ private:			// private 함수
 	//! 경계 구를 생성한다
 	LPD3DXMESH createBoundingSphere(const STBoundingSphere &a_rstBoundingSphere);
 
+public:
+	void	setbDraw(BOOL a_bDraw) { m_bIsDraw = a_bDraw; }
+
+
 private:			// private 변수
 
 	STBoundingBox m_stBoundingBox;

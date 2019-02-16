@@ -257,7 +257,7 @@ bool CTerrainObject::terrainPicking(D3DXVECTOR3& a_stPosition)
 	{
 		if (SUCCEEDED(pIndexBuffer->Lock(0, (m_cxDIB - 1)*(m_czDIB - 1) * 2 * sizeof(DWORD) * 3, (void**)&pIndices, 0)))
 		{
-			for (int i = 0; i < m_nTriangles * 3; i += 3)
+			for (int i = 0; i < m_nTriangles * 3; i += 6)
 			{
 				if (D3DXIntersectTri(&pVertices[pIndices[i]].m_stPosition, &pVertices[pIndices[i + 1]].m_stPosition, &pVertices[pIndices[i + 2]].m_stPosition,
 					&ray.m_stOrigin, &ray.m_stDirection, &fu, &fv, NULL))
@@ -274,17 +274,33 @@ bool CTerrainObject::terrainPicking(D3DXVECTOR3& a_stPosition)
 					a_stPosition = pVertices[pIndices[i]].m_stPosition + du + dv;
 					isPicking = true;
 				}
+				else if (D3DXIntersectTri(&pVertices[pIndices[i+3]].m_stPosition, &pVertices[pIndices[i + 5]].m_stPosition, &pVertices[pIndices[i + 4]].m_stPosition,
+					&ray.m_stOrigin, &ray.m_stDirection, &fu, &fv, NULL))
+				{
+
+					D3DXVECTOR3 du;
+					D3DXVec3Normalize(&du, &(pVertices[pIndices[i + 5]].m_stPosition - pVertices[pIndices[i+3]].m_stPosition));
+					du *= fu;
+
+					D3DXVECTOR3 dv;
+					D3DXVec3Normalize(&dv, &(pVertices[pIndices[i + 4]].m_stPosition - pVertices[pIndices[i+3]].m_stPosition));
+					dv *= fv;
+
+					a_stPosition = pVertices[pIndices[i+3]].m_stPosition + du + dv;
+					isPicking = true;
+				}
+				if (isPicking)break;
 			}
 			pIndexBuffer->Unlock();
 		}
+		m_pTerrainMesh->UnlockVertexBuffer();
 	}
-	m_pTerrainMesh->UnlockVertexBuffer();
 	return isPicking;
 }
 
 int CTerrainObject::findIndex(D3DXVECTOR3 a_stPosition)
 {
-	D3DXVECTOR3 stPosition = D3DXVECTOR3((a_stPosition.x + m_cxTerrain / 2) / m_stScale.x, 0, (a_stPosition.y + m_cxTerrain / 2) / m_stScale.y);
+	D3DXVECTOR3 stPosition = D3DXVECTOR3((a_stPosition.x + m_cxTerrain / 2) / m_stScale.x, 0, (a_stPosition.z + m_czTerrain / 2) / m_stScale.y);
 	int xIndex = (int)stPosition.x;
 	int zIndex = (int)stPosition.z;
 

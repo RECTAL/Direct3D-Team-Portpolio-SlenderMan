@@ -879,10 +879,14 @@ void CMapToolScene::createCheckBoxButton(void)
 			m_pCollisionButton->getTextureOffset() = 1;
 
 			m_bIsCollision = true;
+			m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
+			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug,EDebugDrawType::BOX);
 		}
 		else {
 			m_pCollisionButton->getTextureOffset() = 0;
 			m_bIsCollision = false;
+			m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
+			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 		}
 	};
 	m_pCollisionButton->init(nullptr, nullptr, nullptr, endFptr);
@@ -895,6 +899,7 @@ void CMapToolScene::createCheckBoxButton(void)
 			m_pDebugButton->getTextureOffset() = 1;
 		
 			m_bIsDebug = true;
+			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 			m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
 		}
 		else {
@@ -913,8 +918,8 @@ void CMapToolScene::draw(void)
 	m_pStage->draw();
 	if (m_stMouseInfo.m_eObjType != EObjType::NONE&&m_stMouseInfo.m_bDraw)
 	{
-		m_stMouseInfo.m_pRenderObj->draw();
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+		m_stMouseInfo.m_pRenderObj->draw();
 	}
 }
 
@@ -1096,9 +1101,9 @@ void CMapToolScene::inputKey(void)
 		else if (IS_KEY_DOWN(DIK_UP))	 m_fAngleX += 30.0f * GET_DELTA_TIME();
 		else if (IS_KEY_DOWN(DIK_DOWN))	 m_fAngleX -= 30.0f * GET_DELTA_TIME();
 
-		m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, m_fAngleZ));
-		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
 	}
+	m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, m_fAngleZ));
+	m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
 }
 
 void CMapToolScene::removeUI(void)
