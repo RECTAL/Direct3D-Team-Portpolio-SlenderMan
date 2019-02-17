@@ -41,6 +41,7 @@ private:
 	void	createStageSound();
 	void	setStateSound();
 	void	setBGMSound();
+	void	setEffectVolume(EPlayingBGM ePlayBGM, float a_fVolume);
 	void	setTimer();
 	void	setVolume();
 	void	setPlayState();
@@ -57,6 +58,7 @@ public:
 private:
 	void createContainer();
 	void createButton();
+	void selectEffectSound();
 	void releaseUI();
 
 	void createLabel();

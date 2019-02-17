@@ -5,7 +5,7 @@
 #include "../Object/StaticObject/CStaticObject.h"
 #include "../Object/CameraObject/CCameraObject.h"
 #include "../Object/LightObject/CLightObject.h"
-
+#include "../../GameComposition/GameObject/Decorate/CDecorate_SoundObj.h"
 #include "../../Function/GlobalFunction.h"
 #include "../Manager/CWindowManager.h"
 #include "../Manager/CDeviceManager.h"
@@ -56,6 +56,7 @@ void CStage::release()
 			delete[] m_pObjList;
 			m_pObjList = nullptr;
 		}
+		m_oSoundObjList.clear();
 		SAFE_DELETE(m_pTerrainObj);
 	}
 
@@ -460,6 +461,95 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::CRIKET)
+					{
+						CDecorate_SoundObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj
+						};
+						CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters,EPlayingBGM::CRIKET);
+						stSoundObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stSoundObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stSoundObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						m_pObjList[i].push_back(stSoundObj);
+						m_oSoundObjList.push_back(stSoundObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::CROW)
+					{
+						CDecorate_SoundObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj
+						};
+						CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::CROW);
+						stSoundObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stSoundObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stSoundObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						m_pObjList[i].push_back(stSoundObj);
+						m_oSoundObjList.push_back(stSoundObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::FIRE)
+					{
+						CDecorate_SoundObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj
+						};
+						CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::FIRE);
+						stSoundObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stSoundObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stSoundObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						m_pObjList[i].push_back(stSoundObj);
+						m_oSoundObjList.push_back(stSoundObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OWL)
+					{
+						CDecorate_SoundObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj
+						};
+						CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::OWL);
+						stSoundObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stSoundObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stSoundObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						m_pObjList[i].push_back(stSoundObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::WIND)
+					{
+						CDecorate_SoundObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj
+						};
+						CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::WIND);
+						stSoundObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stSoundObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stSoundObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						m_pObjList[i].push_back(stSoundObj);
+						m_oSoundObjList.push_back(stSoundObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::RAIN)
+					{
+						CDecorate_SoundObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj
+						};
+						CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::RAIN);
+						stSoundObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stSoundObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stSoundObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						m_pObjList[i].push_back(stSoundObj);
+						m_oSoundObjList.push_back(stSoundObj);
+					}
 				}
 			}
 		}
@@ -475,6 +565,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 		if (m_pObjPacketList[nIndex].m_nObjCapacity[i] == GOUST_VALUE)
 		{
 			m_pObjPacketList[nIndex].m_nObjCapacity[i] = (int)a_stPacket.m_EObjType;
+			m_pObjPacketList[nIndex].m_stObjPacket[i].m_EClasses = a_stPacket.m_EClasses;
 			m_pObjPacketList[nIndex].m_stObjPacket[i] = a_stPacket;
 
 			if (a_stPacket.m_EObjType == EObjType::DESK)
@@ -870,7 +961,109 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
-			m_pObjPacketList[nIndex].m_nPivot++;
+			else if (a_stPacket.m_EObjType == EObjType::CRIKET)
+			{
+				CDecorate_SoundObj::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj
+				};
+				CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters,EPlayingBGM::CRIKET);
+				stSoundObj->setPosition(a_stPacket.m_stPosition);
+				stSoundObj->setScale(a_stPacket.m_stScale);
+				stSoundObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
+				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
+				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stSoundObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stSoundObj);
+				m_oSoundObjList.push_back(stSoundObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::CROW)
+			{
+				CDecorate_SoundObj::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj
+				};
+				CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::CROW);
+				stSoundObj->setPosition(a_stPacket.m_stPosition);
+				stSoundObj->setScale(a_stPacket.m_stScale);
+				stSoundObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
+				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
+				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stSoundObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stSoundObj);
+				m_oSoundObjList.push_back(stSoundObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::FIRE)
+			{
+				CDecorate_SoundObj::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj
+				};
+				CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::FIRE);
+				stSoundObj->setPosition(a_stPacket.m_stPosition);
+				stSoundObj->setScale(a_stPacket.m_stScale);
+				stSoundObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
+				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
+				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stSoundObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stSoundObj);
+				m_oSoundObjList.push_back(stSoundObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::OWL)
+			{
+				CDecorate_SoundObj::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj
+				};
+				CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::OWL);
+				stSoundObj->setPosition(a_stPacket.m_stPosition);
+				stSoundObj->setScale(a_stPacket.m_stScale);
+				stSoundObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
+				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
+				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stSoundObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stSoundObj);
+				m_oSoundObjList.push_back(stSoundObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::RAIN)
+			{
+				CDecorate_SoundObj::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj
+				};
+				CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::RAIN);
+				stSoundObj->setPosition(a_stPacket.m_stPosition);
+				stSoundObj->setScale(a_stPacket.m_stScale);
+				stSoundObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
+				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
+				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision&0;
+				stSoundObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stSoundObj);
+				m_oSoundObjList.push_back(stSoundObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::WIND)
+			{
+				CDecorate_SoundObj::STParameters stParameters =
+				{
+					m_pCameraObj,m_pDirectionLightObj
+				};
+				CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::WIND);
+				stSoundObj->setPosition(a_stPacket.m_stPosition);
+				stSoundObj->setScale(a_stPacket.m_stScale);
+				stSoundObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
+				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
+				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision&0;
+				stSoundObj->setVisible(false);
+				m_pObjList[nIndex].push_back(stSoundObj);
+				m_oSoundObjList.push_back(stSoundObj);
+				}
+				m_pObjPacketList[nIndex].m_nPivot++;
 			break;
 		}
 	}
@@ -918,13 +1111,13 @@ void CStage::setCameraObj(CCameraObject * a_pCameraObj)
 				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
 				else
 				{
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::SKINNED)
 					{
 						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
 
 
 					}
-					else
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::STATIC)
 					{
 						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
 						pStaticObj->getSTParameters().m_pCamera = pCameraObj;
@@ -950,12 +1143,12 @@ void CStage::setObjEffectTechname(std::string a_stTechname)
 				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
 				else
 				{
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::SKINNED)
 					{
 						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
 
 					}
-					else
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::STATIC)
 					{
 						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
 						pStaticObj->getTechniqueName() = a_stTechname;
@@ -980,14 +1173,15 @@ void CStage::setObjDebugMode(bool a_bIsDebug, EDebugDrawType a_eDebugMode)
 			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
 			{
 				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_SOUND)continue;
 				else
 				{
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::SKINNED)
 					{
 						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
 
 					}
-					else
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::STATIC)
 					{
 						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
 						pStaticObj->setDebugEnable(a_bIsDebug, eDebugMode);
@@ -1012,15 +1206,16 @@ void CStage::addSpotLightObj(CSpotLightObject * a_pSpotLightObj)
 			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
 			{
 				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_SOUND)continue;
 				else
 				{
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::SKINNED)
 					{
 						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
 
 
 					}
-					else
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::STATIC)
 					{
 						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
 						int nNumSpot = ++pStaticObj->getSTParameters().m_nNumSpotLight;
@@ -1046,15 +1241,16 @@ void CStage::delSpotLightObj()
 			for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
 			{
 				if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_SOUND)continue;
 				else
 				{
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+					if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::SKINNED)
 					{
 						CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
 
 
 					}
-					else
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::STATIC)
 					{
 						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
 						pStaticObj->getSTParameters().m_nNumSpotLight = max(pStaticObj->getSTParameters().m_nNumSpotLight - 1, 0);
@@ -1102,15 +1298,20 @@ void CStage::update()
 			if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
 			else
 			{
-				if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::SKINNED)
 				{
 					CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
 
 				}
-				else
+				else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::STATIC)
 				{
 					CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
 					pStaticObj->update();
+				}
+				else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_SOUND)
+				{
+					CDecorate_SoundObj* pSoundObj = dynamic_cast<CDecorate_SoundObj*>(m_pObjList[i][j]);
+					pSoundObj->update();
 				}
 			}
 		}
@@ -1142,12 +1343,12 @@ void CStage::draw()
 			if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
 			else
 			{
-				if (m_pObjPacketList[i].m_stObjPacket[j].m_bIsSkinned)
+				if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::SKINNED)
 				{
 					CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
 
 				}
-				else
+				else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::STATIC)
 				{
 					CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
 					if (pStaticObj->getSTParameters().m_pCamera->getCameraFrustum()->IsInSphere(pStaticObj->getFinalBoundingSphere()))
@@ -1196,6 +1397,16 @@ void CStage::draw()
 								pStaticObj->draw();
 							}
 						}
+					}
+				}
+				else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_SOUND)
+				{
+					if (m_bIsMaptool)
+					{
+						CDecorate_SoundObj* pSoundObj = dynamic_cast<CDecorate_SoundObj*>(m_pObjList[i][j]);
+						if (!pSoundObj->getVisible())pSoundObj->setVisible(true);
+						else
+							pSoundObj->draw();
 					}
 				}
 			}

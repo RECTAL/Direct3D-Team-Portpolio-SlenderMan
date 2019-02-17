@@ -1,5 +1,6 @@
 #include "CMapToolScene.h"
 
+#include "../../GameObject/Decorate/CDecorate_SoundObj.h"
 #include "../../../Utility/../Function/GlobalFunction.h"
 #include "../../../Utility/Base/CStage.h"
 #include"../../../Utility/Base/CObject.h"
@@ -459,7 +460,7 @@ void CMapToolScene::createTreeButton(void)
 
 	m_pTreeButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree1", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_1;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -478,7 +479,7 @@ void CMapToolScene::createTreeButton(void)
 
 	m_pTreeButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree2", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_2;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -497,7 +498,7 @@ void CMapToolScene::createTreeButton(void)
 
 	m_pTreeButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree3", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_3;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -516,7 +517,7 @@ void CMapToolScene::createTreeButton(void)
 
 	m_pTreeButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree4", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_4;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -535,7 +536,7 @@ void CMapToolScene::createTreeButton(void)
 
 	m_pTreeButton[4] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree5", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_5;
 		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(0.005f, 0.005f, 0.005f));
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
@@ -555,7 +556,7 @@ void CMapToolScene::createTreeButton(void)
 
 	m_pTreeButton[5] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree6", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_6;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -574,7 +575,7 @@ void CMapToolScene::createTreeButton(void)
 
 	m_pTreeButton[6] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree7", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_7;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -593,7 +594,7 @@ void CMapToolScene::createTreeButton(void)
 
 	m_pTreeButton[7] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/tree8", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::TREE_8;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -612,7 +613,7 @@ void CMapToolScene::createTreeButton(void)
 
 	m_pTreeButton[8] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/none", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 
@@ -639,7 +640,7 @@ void CMapToolScene::createBuildingButton(void)
 
 	m_pHouseButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/oldHouse", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::OLDHOUSE;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -658,7 +659,7 @@ void CMapToolScene::createBuildingButton(void)
 
 	m_pHouseButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/woodHouse", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::WOODHOUSE;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -677,7 +678,7 @@ void CMapToolScene::createBuildingButton(void)
 
 	m_pHouseButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/oldWoodDock", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::OLDWOODDOCK;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -696,7 +697,7 @@ void CMapToolScene::createBuildingButton(void)
 
 	m_pHouseButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/none", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		
@@ -723,7 +724,7 @@ void CMapToolScene::createObjectButton(void)
 
 	m_pObjectButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/urbanDebris", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::URBANDEBRIS;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -742,7 +743,7 @@ void CMapToolScene::createObjectButton(void)
 
 	m_pObjectButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/plants", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::PLANTS;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -761,7 +762,7 @@ void CMapToolScene::createObjectButton(void)
 
 	m_pObjectButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/roundWood", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::ROUNDWOOD;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 		CStaticObject::STParameters stParameters =
@@ -780,7 +781,7 @@ void CMapToolScene::createObjectButton(void)
 
 	m_pObjectButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/none", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 
@@ -807,57 +808,102 @@ void CMapToolScene::createSoundButton(void)
 
 	m_pSoundButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/criket", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_SOUND;
 		m_stMouseInfo.m_eObjType = EObjType::CRIKET;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CDecorate_SoundObj::STParameters stParameters = {
+		m_pCamera,m_pStage->getDirectionalLightObj()
+		};
+
+		m_stMouseInfo.m_pRenderObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::CRIKET);
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(1.0f, 1.0f, 1.0f));
 	};
 	m_pSoundButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
 	m_pSoundButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/crow", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_SOUND;
 		m_stMouseInfo.m_eObjType = EObjType::CROW;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CDecorate_SoundObj::STParameters stParameters = {
+		m_pCamera,m_pStage->getDirectionalLightObj()
+		};
+
+		m_stMouseInfo.m_pRenderObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::CROW);
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(1.0f, 1.0f, 1.0f));
 	};
 	m_pSoundButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 
 	m_pSoundButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/fire", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_SOUND;
 		m_stMouseInfo.m_eObjType = EObjType::FIRE;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CDecorate_SoundObj::STParameters stParameters = {
+		m_pCamera,m_pStage->getDirectionalLightObj()
+		};
+
+		m_stMouseInfo.m_pRenderObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::FIRE);
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(1.0f, 1.0f, 1.0f));
 	};
 	m_pSoundButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
 	m_pSoundButton[3] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/owl", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_SOUND;
 		m_stMouseInfo.m_eObjType = EObjType::OWL;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CDecorate_SoundObj::STParameters stParameters = {
+		m_pCamera,m_pStage->getDirectionalLightObj()
+		};
+
+		m_stMouseInfo.m_pRenderObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::OWL);
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(1.0f, 1.0f, 1.0f));
 	};
 	m_pSoundButton[3]->init(nullptr, nullptr, nullptr, endFptr, true);
 
 	m_pSoundButton[4] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/rain", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_SOUND;
 		m_stMouseInfo.m_eObjType = EObjType::RAIN;
-			if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+
+		CDecorate_SoundObj::STParameters stParameters = {
+			m_pCamera,m_pStage->getDirectionalLightObj()
+		};
+
+		m_stMouseInfo.m_pRenderObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::RAIN);
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(1.0f, 1.0f, 1.0f));
 	};
 	m_pSoundButton[4]->init(nullptr, nullptr, nullptr, endFptr, true);
 
 	m_pSoundButton[5] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/wind", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_SOUND;
 		m_stMouseInfo.m_eObjType = EObjType::WIND;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CDecorate_SoundObj::STParameters stParameters = {
+			m_pCamera,m_pStage->getDirectionalLightObj()
+		};
+
+		m_stMouseInfo.m_pRenderObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::WIND);
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(1.0f, 1.0f, 1.0f));
+
 	};
 	m_pSoundButton[5]->init(nullptr, nullptr, nullptr, endFptr, true);
 
 	m_pSoundButton[6] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/none", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_bIsSkinned = false;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_SOUND;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+
+		CDecorate_SoundObj::STParameters stParameters = {
+			m_pCamera,m_pStage->getDirectionalLightObj()
+		};
+
+		m_stMouseInfo.m_pRenderObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::NONE);
+		m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(1.0f, 1.0f, 1.0f));
 	};
 	m_pSoundButton[6]->init(nullptr, nullptr, nullptr, endFptr, true);
 
@@ -880,13 +926,19 @@ void CMapToolScene::createCheckBoxButton(void)
 
 			m_bIsCollision = true;
 			m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
-			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug,EDebugDrawType::BOX);
+			if (m_stMouseInfo.m_eObjClasses != EObjClasses::DECORATE_SOUND)
+			{
+				m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+			}
 		}
 		else {
 			m_pCollisionButton->getTextureOffset() = 0;
 			m_bIsCollision = false;
 			m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
-			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+			if (m_stMouseInfo.m_eObjClasses != EObjClasses::DECORATE_SOUND)
+			{
+				m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+			}
 		}
 	};
 	m_pCollisionButton->init(nullptr, nullptr, nullptr, endFptr);
@@ -899,14 +951,20 @@ void CMapToolScene::createCheckBoxButton(void)
 			m_pDebugButton->getTextureOffset() = 1;
 		
 			m_bIsDebug = true;
-			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+			if (m_stMouseInfo.m_eObjClasses != EObjClasses::DECORATE_SOUND)
+			{
+				m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+			}
 			m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
 		}
 		else {
-			m_bIsDebug = false;
-			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
-			m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
 			m_pDebugButton->getTextureOffset() = 0;
+			m_bIsDebug = false;
+			if (m_stMouseInfo.m_eObjClasses != EObjClasses::DECORATE_SOUND)
+			{
+				m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+			}
+			m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
 		}
 	};
 	m_pDebugButton->init(nullptr, nullptr, nullptr, endFptr);
@@ -918,7 +976,8 @@ void CMapToolScene::draw(void)
 	m_pStage->draw();
 	if (m_stMouseInfo.m_eObjType != EObjType::NONE&&m_stMouseInfo.m_bDraw)
 	{
-		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+		if(m_stMouseInfo.m_eObjClasses != EObjClasses::DECORATE_SOUND)
+			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 		m_stMouseInfo.m_pRenderObj->draw();
 	}
 }
@@ -1076,7 +1135,7 @@ void CMapToolScene::inputKey(void)
 				{
 					CStage::OBJPACKET objPacket;
 					objPacket.m_bIsCollision = m_bIsCollision;
-					objPacket.m_bIsSkinned	 = m_stMouseInfo.m_bIsSkinned;
+					objPacket.m_EClasses	 = m_stMouseInfo.m_eObjClasses;
 					objPacket.m_EObjType	 = m_stMouseInfo.m_eObjType;
 					objPacket.m_stPosition   = stPos;
 					objPacket.m_stScale      = m_stMouseInfo.m_pRenderObj->getScale();

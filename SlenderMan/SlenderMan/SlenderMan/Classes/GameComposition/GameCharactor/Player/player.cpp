@@ -27,7 +27,7 @@ void player::init(void)
 	if (lightObj == nullptr)
 		lightObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
 
-	this->setPosition(D3DXVECTOR3(203.0f, 39.0f, 43.0f));
+	this->setPosition(D3DXVECTOR3(203.0f, 50.0f, 43.0f));
 	lightObj->setCameraObj(cameraObj);
 	this->addChildObject(cameraObj);
 	this->addChildObject(lightObj);
@@ -65,7 +65,15 @@ void player::update(void)
 		m_bIsFront = false;
 		m_bIsBack = false;
 
-		if (IS_KEY_DOWN(DIK_W)) {
+		m_fTopLeft.x = this->getPosition().x - m_fCheckRange;
+		m_fTopLeft.y = this->getPosition().z - m_fCheckRange;
+
+
+		m_fBottomRight.x = this->getPosition().x + m_fCheckRange;
+		m_fBottomRight.y = this->getPosition().z + m_fCheckRange;
+
+
+		if (IS_KEY_DOWN(DIK_W)&&!checkCollisionTerrain(EDirection::FRONT)) {
 			playerState |= (int)EPlayerState::WALKGRASS;
 			m_bIsFront = true;
 			if (IS_KEY_DOWN(DIK_LSHIFT)) {
@@ -75,24 +83,33 @@ void player::update(void)
 			else if (IS_KEY_RELEASED(DIK_LSHIFT)) {
 				playerState = (int)EPlayerState::NONE;
 			}
+			
 			this->moveByZAxis(fSpeed * GET_DELTA_TIME());
 		}
 		if (IS_KEY_RELEASED(DIK_W)) {
 			playerState = (int)EPlayerState::NONE;
 		}
-		if (IS_KEY_DOWN(DIK_S)) {
-			this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+		if (IS_KEY_DOWN(DIK_S)&& !checkCollisionTerrain(EDirection::BACK)) {
+				this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
 			m_bIsBack = true;
 		}
-		if (IS_KEY_DOWN(DIK_A)) {
+		if (IS_KEY_DOWN(DIK_A)&& !checkCollisionTerrain(EDirection::LEFT)) {
 			this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
 			m_bIsLeft = true;
 		}
-		if (IS_KEY_DOWN(DIK_D)) {
+		if (IS_KEY_DOWN(DIK_D)&& !checkCollisionTerrain(EDirection::RIGHT)) {
 			this->moveByXAxis(fSpeed * GET_DELTA_TIME());
 			m_bIsRight = true;
 		}
+		if (IS_KEY_PRESSED(DIK_SPACE)&&!m_bIsJump)
+		{
+			m_bIsJump = true;
+			m_fJumpTime = 0.0f;
+			m_fYVelocity = 14.0f;
+		}
 
+		adjustJump();
+		
 		m_fTopLeft.x = this->getPosition().x - m_fCheckRange;
 		m_fTopLeft.y = this->getPosition().z - m_fCheckRange;
 
@@ -104,6 +121,7 @@ void player::update(void)
 		
 		if (this->checkCollisionArea())
 		{
+			if (m_bIsJump)m_fYVelocity = 0.0f;
 			if(m_bIsFront)this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
 			if(m_bIsBack)this->moveByZAxis(fSpeed * GET_DELTA_TIME());
 			if(m_bIsLeft)this->moveByXAxis(fSpeed * GET_DELTA_TIME());
@@ -223,6 +241,44 @@ void player::settingSkinnedObj()
 	m_pSkinnedObj->setForwardDirection(m_stSkinnedForwardVec3);
 }
 
+void player::adjustJump()
+{
+	if (!m_bIsJump)
+	{
+		float fTerrainHeight = m_pStage->getTerrainObj()->getHeight(this->getPosition());
+		float fPlayerHeight = this->getPosition().y;
+		if (fPlayerHeight - fTerrainHeight > 15.0f)
+		{
+			m_bIsJump = true;
+			m_fJumpTime = 0.0f;
+			m_fYVelocity = 0.0f;
+		}
+		else
+		{
+			D3DXVECTOR3 stPos = { this->getPosition().x,fTerrainHeight + 15.0f,this->getPosition().z };
+			this->setPosition(stPos);
+		}
+	}
+
+	if (m_bIsJump)
+	{
+		m_fYVelocity += -GRAVITY * m_fJumpTime;
+		this->moveByYAxis(m_fYVelocity * GET_DELTA_TIME(), false);
+		m_fJumpTime += GET_DELTA_TIME();
+
+		float fTerrainHeight = m_pStage->getTerrainObj()->getHeight(this->getPosition());
+		float fPlayerHeight = this->getPosition().y;
+		if (m_fYVelocity < 0.0f&&fPlayerHeight - fTerrainHeight < 15.0f)
+		{
+			D3DXVECTOR3 stPos = { this->getPosition().x,fTerrainHeight + 15.0f,this->getPosition().z };
+			this->setPosition(stPos);
+			m_fJumpTime = 0.0f;
+			m_fYVelocity = 0.0f;
+			m_bIsJump = false;
+		}
+	}
+}
+
 void player::adjustCollisionArea()
 {
 	if (m_pStage->getTerrainObj() != nullptr)
@@ -284,6 +340,85 @@ bool player::checkCollisionArea()
 			}
 		}
 	}
+	return isCollision;
+}
+
+bool player::checkCollisionTerrain(EDirection a_eDirection)
+{
+	bool isCollision = false;
+	if (a_eDirection == EDirection::FRONT)
+	{
+		m_stSkinnedRay.m_stOrigin = cameraObj->getPosition();
+		D3DXVec3Normalize(&m_stSkinnedRay.m_stDirection, &m_stSkinnedForwardVec3);
+		//m_stSkinnedRay.m_stDirection = m_stSkinnedForwardVec3;
+	}
+	else if (a_eDirection == EDirection::BACK)
+	{
+		m_stSkinnedRay.m_stOrigin = cameraObj->getPosition();
+		m_stSkinnedRay.m_stDirection = -m_stSkinnedForwardVec3;
+	}
+	else if (a_eDirection == EDirection::RIGHT)
+	{
+		m_stSkinnedRay.m_stOrigin = cameraObj->getPosition();
+		m_stSkinnedRay.m_stDirection = -m_stSkinnedRightVec3;
+	}
+	else if (a_eDirection == EDirection::LEFT)
+	{
+		m_stSkinnedRay.m_stOrigin = cameraObj->getPosition();
+		m_stSkinnedRay.m_stDirection = m_stSkinnedRightVec3;
+	}
+
+	int nTerrainWidth = m_pStage->getTerrainObj()->getCXTerrain();
+	int nTerrainHeight = m_pStage->getTerrainObj()->getCZTerrain();
+	int nWidth = m_pStage->getTerrainObj()->getCXDIB();
+	int nScaleX = m_pStage->getTerrainObj()->getScale().x;
+	int nScaleZ = m_pStage->getTerrainObj()->getScale().z;
+
+
+	D3DXVECTOR3 stTopLeftPos = D3DXVECTOR3((m_fTopLeft.x + nTerrainWidth / 2) / nScaleX, 0, (m_fTopLeft.y + nTerrainHeight / 2) / nScaleZ);
+	D3DXVECTOR3 stBottomRightPos = D3DXVECTOR3((m_fBottomRight.x + nTerrainWidth / 2) / nScaleX, 0, (m_fBottomRight.y + nTerrainHeight / 2) / nScaleZ);
+	int xTopLeftIndex = (int)stTopLeftPos.x;
+	int zTopLeftIndex = (int)stTopLeftPos.z;
+	int xBottomRightIndex = (int)stBottomRightPos.x;
+	int zBottomRightIndex = (int)stBottomRightPos.z;
+
+	int dxIndex = xBottomRightIndex - xTopLeftIndex;
+	int dyIndex = zBottomRightIndex - zTopLeftIndex;
+
+	D3DXVECTOR3* pHeightMap = m_pStage->getTerrainObj()->getHeightMap();
+	D3DXVECTOR3 pPos[3];
+	for (int i = 0; i <= dyIndex; i++)
+	{
+		for (int j = 0; j <= dxIndex; j++)
+		{
+			int nIndex = (zTopLeftIndex + i)*nWidth + (xTopLeftIndex + j);
+			pPos[0] = D3DXVECTOR3(pHeightMap[nIndex]);
+			pPos[1] = D3DXVECTOR3(pHeightMap[nIndex+1]);
+			pPos[2] = D3DXVECTOR3(pHeightMap[nIndex+nWidth]);
+			float fDistance = 0.0f;
+			if (D3DXIntersectTri(&pPos[0], &pPos[1], &pPos[2], &m_stSkinnedRay.m_stOrigin, &m_stSkinnedRay.m_stDirection, NULL, NULL, &fDistance))
+			{
+				if (fDistance < 60.0f)
+				{
+					isCollision = true;
+					break;
+				}
+			}
+			pPos[0] = D3DXVECTOR3(pHeightMap[nIndex + nWidth + 1]);
+			pPos[1] = D3DXVECTOR3(pHeightMap[nIndex + nWidth]);
+			pPos[2] = D3DXVECTOR3(pHeightMap[nIndex + 1]);
+			if (D3DXIntersectTri(&pPos[0], &pPos[1], &pPos[2], &m_stSkinnedRay.m_stOrigin, &m_stSkinnedRay.m_stDirection, NULL, NULL, &fDistance))
+			{
+				if (fDistance < 60.0f)
+				{
+					isCollision = true;
+					break;
+				}
+			}
+		}
+		if(isCollision)break;
+	}
+	ZeroMemory(&m_stSkinnedRay, sizeof(m_stSkinnedRay));
 	return isCollision;
 }
 
