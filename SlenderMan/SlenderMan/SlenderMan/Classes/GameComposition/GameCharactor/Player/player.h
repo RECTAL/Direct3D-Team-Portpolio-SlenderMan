@@ -3,6 +3,7 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../CCharactor.h"
 
+#define GRAVITY			1.8f
 
 class CCameraObject;
 class SpotLightObject;
@@ -28,6 +29,7 @@ public:		//getter,setter
 	/**********************************************/
 	CCameraObject* getCamera(void) { return cameraObj; }
 	CSpotLightObject* getLightObj(void) { return lightObj; }
+	CSkinnedObject*	getSkinnedObj(void) { return m_pSkinnedObj; }
 	int &getPlayerState(void) { return playerState; }
 
 
@@ -46,9 +48,10 @@ private:
 	void settingSkinnedObj();
 
 
+	void adjustJump();
 	void adjustCollisionArea();
 	bool checkCollisionArea();
-	
+	bool checkCollisionTerrain(EDirection a_eDirection);
 
 private:
 	CCameraObject* cameraObj = nullptr;
@@ -71,7 +74,15 @@ private:
 	D3DXVECTOR3 m_stSkinnedUpVec3;
 	D3DXVECTOR3	m_stSkinnedForwardVec3;
 
+	bool		m_bIsJump	 = false;
+	float		m_fJumpTime	 = 0.0f;
+	float		m_fYVelocity = 0.0f;
+
 	fPOINT		m_fTopLeft;
 	fPOINT		m_fBottomRight;
+	STRay		m_stCameraForwardRay;
+	STRay		m_stSkinnedRay;
+
+
 	float		m_fCheckRange = 3.0f;
 };

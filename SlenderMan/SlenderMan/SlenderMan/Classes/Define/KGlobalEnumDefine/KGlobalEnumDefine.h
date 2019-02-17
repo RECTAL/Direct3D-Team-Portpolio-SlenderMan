@@ -1,5 +1,12 @@
 #pragma once
 
+enum class EDirection
+{
+	LEFT,
+	RIGHT,
+	FRONT,
+	BACK
+};
 
 //! MouseInput Enum Class
 enum class EMouseInput
@@ -25,6 +32,11 @@ enum class CWindowType
 	LIST,
 	SCROLLBAR,
 	NONE
+};
+
+enum class EObjClasses
+{
+	SKINNED,STATIC,DECORATE_SOUND,NONE
 };
 
 enum class EObjType

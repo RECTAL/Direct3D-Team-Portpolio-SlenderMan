@@ -32,6 +32,7 @@ public:			// getter, setter
 	//! 배경음 볼륨을 변경한다
 	void setBackgroundSoundVolume(float a_fVolume);
 
+
 public:			// public 함수
 
 	//! 싱글턴
@@ -45,6 +46,9 @@ public:			// public 함수
 
 	//! 배경음을 재생한다
 	CSoundObject * playBackgroundSound(const std::string &a_rFilepath, bool a_bIsLoop = true);
+
+
+	void setEffectSoundVolume(const std::string &a_rFilepath, float a_fVolume);
 
 	//! 효과음을 중지한다
 	void stopAllEffectSounds(void);

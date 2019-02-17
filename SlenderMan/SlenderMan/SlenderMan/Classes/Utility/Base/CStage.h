@@ -9,13 +9,14 @@
 
 class CCameraObject;
 class CRenderObject;
+class CDecorate_SoundObj;
 class CStage
 {
 public:
 	typedef struct objPacket
 	{
 		EObjType	m_EObjType = EObjType::NONE;
-		BOOL		m_bIsSkinned = false;
+		EObjClasses	m_EClasses = EObjClasses::NONE;
 		BOOL		m_bIsCollision = false;
 		D3DXVECTOR3 m_stPosition = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
 		D3DXVECTOR3 m_stForwordVec = WORLD_FORWARD_DIRECTION;
@@ -56,6 +57,7 @@ public:
 	CTerrainObject*	getTerrainObj() { return m_pTerrainObj; }
 	CLightObject*	getDirectionalLightObj() { return m_pDirectionLightObj; }
 	std::vector<CRenderObject*>*	getObjList() { return m_pObjList; }
+	std::vector<CDecorate_SoundObj*> getSoundObjList() { return m_oSoundObjList; }
 	BOOL&	getbIsMaptool() { return m_bIsMaptool; }
 
 private:
@@ -68,7 +70,7 @@ private:
 	CTerrainObject*	m_pTerrainObj = nullptr;
 	OBJCONTAINER* m_pObjPacketList = nullptr;
 	std::vector<CRenderObject*>* m_pObjList = nullptr;
-
+	std::vector<CDecorate_SoundObj*> m_oSoundObjList;
 
 
 	BOOL	m_bIsMaptool = false;
