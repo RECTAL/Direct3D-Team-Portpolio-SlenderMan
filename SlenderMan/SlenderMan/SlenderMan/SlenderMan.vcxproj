@@ -159,6 +159,7 @@
     <ClInclude Include="Classes\Function\GlobalFunction.h" />
     <ClInclude Include="Classes\GameComposition\GameCharactor\CCharactor.h" />
     <ClInclude Include="Classes\GameComposition\GameCharactor\Player\player.h" />
+    <ClInclude Include="Classes\GameComposition\GameObject\Decorate\CDecorate_BillboardObj.h" />
     <ClInclude Include="Classes\GameComposition\GameObject\Decorate\CDecorate_SoundObj.h" />
     <ClInclude Include="Classes\GameComposition\GameScene\GameOverScene\CGameOverScene.h" />
     <ClInclude Include="Classes\GameComposition\GameScene\LoadingScene\CLoadingScene.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="Classes\Function\GlobalFunction.cpp" />
     <ClCompile Include="Classes\GameComposition\GameCharactor\CCharactor.cpp" />
     <ClCompile Include="Classes\GameComposition\GameCharactor\Player\player.cpp" />
+    <ClCompile Include="Classes\GameComposition\GameObject\Decorate\CDecorate_BillboardObj.cpp" />
     <ClCompile Include="Classes\GameComposition\GameObject\Decorate\CDecorate_SoundObj.cpp" />
     <ClCompile Include="Classes\GameComposition\GameScene\GameOverScene\CGameOverScene.cpp" />
     <ClCompile Include="Classes\GameComposition\GameScene\LoadingScene\CLoadingScene.cpp" />
