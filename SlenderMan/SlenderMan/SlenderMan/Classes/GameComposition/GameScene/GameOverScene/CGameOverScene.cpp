@@ -25,6 +25,7 @@ void CGameOverScene::init()
 	{
 		this->createScene();
 		createSound();
+		isFirst = false;
 	}
 }
 

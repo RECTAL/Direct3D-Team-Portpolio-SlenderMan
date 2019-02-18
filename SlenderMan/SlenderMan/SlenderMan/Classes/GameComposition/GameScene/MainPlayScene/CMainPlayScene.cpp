@@ -119,7 +119,8 @@ void CMainPlayScene::init()
 	GET_SOUND_MANAGER()->stopAllEffectSounds();
 	m_fPlayTime = 0.0f;
 
-
+	FIND_SCENE(GAMESCENE_VICTORY)->init();
+	FIND_SCENE(GAMESCENE_GAMEOVER)->init();
 }
 
 void CMainPlayScene::createWindowUI()
@@ -457,7 +458,7 @@ void CMainPlayScene::update(void)
 		ClientToScreen(GET_WINDOW_HANDLE(), &pt);
 		SetCursorPos(pt.x, pt.y);
 	}
-
+	
 	m_fPlayTime += GET_DELTA_TIME();
 }
 
