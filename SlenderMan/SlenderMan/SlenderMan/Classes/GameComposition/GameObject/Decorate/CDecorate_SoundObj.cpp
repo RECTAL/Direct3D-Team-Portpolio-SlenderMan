@@ -1,4 +1,6 @@
 #include "CDecorate_SoundObj.h"
+#include "../../../Utility/Debug/CDebugDraw.h"
+#include "../../../Utility/Manager/CResourceManager.h"
 #include "../../../Utility/Object/CameraObject/CCameraObject.h"
 #include "../../../Utility/Object/LightObject/CLightObject.h"
 #include "../../../Function/GlobalFunction.h"
@@ -7,6 +9,7 @@ CDecorate_SoundObj::CDecorate_SoundObj(STParameters & a_rstParameters, EPlayingB
 	:m_stParameters(a_rstParameters), m_eSoundType(a_eSound)
 {
 	this->createSphereMesh();
+	this->createMatrial();
 
 	auto stBoundingBox = CreateBoundingBox(m_pMesh);
 	auto stBoundingSphere = CreateBoundingSphere(m_pMesh);
@@ -14,42 +17,48 @@ CDecorate_SoundObj::CDecorate_SoundObj(STParameters & a_rstParameters, EPlayingB
 	this->setBoundingBox(stBoundingBox);
 	this->setBoundingSphere(stBoundingSphere);
 
+	m_pDebugDraw = new CDebugDraw(this, EDebugDrawType::SPHERE, true);
+	m_pEffect = GET_EFFECT("Resources/Effects/DefaultSoundObj.fx");
 }
 
 CDecorate_SoundObj::~CDecorate_SoundObj()
 {
-	delete[] m_stParameters.m_pSpotLight;
-	delete[] m_stParameters.m_pPointLight;
+	SAFE_DELETE(m_pDebugDraw);
+
 }
 
 void CDecorate_SoundObj::preDraw(void)
 {
 	D3DXMATRIXA16 stWorldMatrix;
 	D3DXMatrixTranslation(&stWorldMatrix, this->getPosition().x, this->getPosition().y, this->getPosition().z);
-	GET_DEVICE()->SetTransform(D3DTS_WORLD, &stWorldMatrix);
-	GET_DEVICE()->SetTransform(D3DTS_VIEW, &m_stParameters.m_pCamera->getViewMatrix());
-	GET_DEVICE()->SetTransform(D3DTS_PROJECTION, &m_stParameters.m_pCamera->getProjectionMatrix());
+	
+	m_pEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+	m_pEffect->SetMatrix("g_stViewMatrix", &m_stParameters.m_pCamera->getViewMatrix());
+	m_pEffect->SetMatrix("g_stProjectionMatrix", &m_stParameters.m_pCamera->getProjectionMatrix());
+	
+	m_pEffect->SetVector("g_stLightDirection", &D3DXVECTOR4(m_stParameters.m_pDirectional->getForwardDirection(), 1.0f));
+	m_pEffect->SetVector("g_stViewPosition", &D3DXVECTOR4(m_stParameters.m_pCamera->getPosition(), 1.0f));
 
-	m_stParameters.m_pDirectional->setLightEnable(true);
-	GET_DEVICE()->SetMaterial(&m_stMtrl);
+	m_pEffect->SetVector("g_stColor", &m_stColor);
+
 }
 
 void CDecorate_SoundObj::postDraw(void)
 {
-	m_stParameters.m_pDirectional->setLightEnable(false);
-	GET_DEVICE()->SetMaterial(NULL);
+	m_pDebugDraw->draw();
 }
 
 void CDecorate_SoundObj::doDraw(void)
 {
 	CRenderObject::doDraw();
-
+	RunEffectLoop(m_pEffect, "DefaultColor", [=](int nPassNum)->void {
+		m_pMesh->DrawSubset(0);
+	});
 }
 
 void CDecorate_SoundObj::update(void)
 {
 	CObject::update();
-
 }
 
 void CDecorate_SoundObj::createSphereMesh()
@@ -64,45 +73,27 @@ void CDecorate_SoundObj::createMatrial()
 {
 	if (m_eSoundType == EPlayingBGM::CROW)
 	{
-		m_stMtrl.Diffuse = D3DCOLORVALUE{ 1.0f,0.0f,1.0f,1.0f };
-		m_stMtrl.Ambient = D3DCOLORVALUE{ 0.0f,0.0f,0.0f,1.0f };
-		m_stMtrl.Specular = D3DCOLORVALUE{ 1.0f,1.0f,1.0f,1.0f };
-		m_stMtrl.Power = 25.0f;
+		m_stColor = D3DXVECTOR4{ 1.0f,0.0f,1.0f,1.0f };
 	}
 	else if (m_eSoundType == EPlayingBGM::CRIKET)
 	{
-		m_stMtrl.Diffuse = D3DCOLORVALUE{ 0.0f,1.0f,0.0f,1.0f };
-		m_stMtrl.Ambient = D3DCOLORVALUE{ 0.0f,0.0f,0.0f,1.0f };
-		m_stMtrl.Specular = D3DCOLORVALUE{ 1.0f,1.0f,1.0f,1.0f };
-		m_stMtrl.Power = 25.0f;
+		m_stColor = D3DXVECTOR4{ 0.0f,1.0f,0.0f,1.0f };
 	}
 	else if (m_eSoundType == EPlayingBGM::FIRE)
 	{
-		m_stMtrl.Diffuse = D3DCOLORVALUE{ 1.0f,0.0f,0.0f,1.0f };
-		m_stMtrl.Ambient = D3DCOLORVALUE{ 0.0f,0.0f,0.0f,1.0f };
-		m_stMtrl.Specular = D3DCOLORVALUE{ 1.0f,1.0f,1.0f,1.0f };
-		m_stMtrl.Power = 25.0f;
+		m_stColor = D3DXVECTOR4{ 1.0f,0.0f,0.0f,1.0f };
 	}
 	else if (m_eSoundType == EPlayingBGM::OWL)
 	{
-		m_stMtrl.Diffuse = D3DCOLORVALUE{ 0.5f,0.5f,0.5f,1.0f };
-		m_stMtrl.Ambient = D3DCOLORVALUE{ 0.0f,0.0f,0.0f,1.0f };
-		m_stMtrl.Specular = D3DCOLORVALUE{ 1.0f,1.0f,1.0f,1.0f };
-		m_stMtrl.Power = 25.0f;
+		m_stColor = D3DXVECTOR4{ 0.5f,0.5f,0.5f,1.0f };
 	}
 	else if (m_eSoundType == EPlayingBGM::RAIN)
 	{
-		m_stMtrl.Diffuse = D3DCOLORVALUE{ 0.0f,0.0f,1.0f,1.0f };
-		m_stMtrl.Ambient = D3DCOLORVALUE{ 0.0f,0.0f,0.0f,1.0f };
-		m_stMtrl.Specular = D3DCOLORVALUE{ 1.0f,1.0f,1.0f,1.0f };
-		m_stMtrl.Power = 25.0f;
+		m_stColor = D3DXVECTOR4{ 0.0f,0.0f,1.0f,1.0f };
 	}
 	else if (m_eSoundType == EPlayingBGM::WIND)
 	{
-		m_stMtrl.Diffuse = D3DCOLORVALUE{ 0.5f,0.7f,1.0f,1.0f };
-		m_stMtrl.Ambient = D3DCOLORVALUE{ 0.0f,0.0f,0.0f,1.0f };
-		m_stMtrl.Specular = D3DCOLORVALUE{ 1.0f,1.0f,1.0f,1.0f };
-		m_stMtrl.Power = 25.0f;
+		m_stColor = D3DXVECTOR4{ 0.5f,0.7f,1.0f,1.0f };
 	}
 	else 
 	{

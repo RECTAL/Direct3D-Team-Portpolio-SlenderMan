@@ -38,7 +38,6 @@ public:
 	LPD3DXEFFECT	getEffect() { return m_pEffect; }
 	std::string&	getTechniqueName() { return m_stTechniqueName; }
 	STParameters&	getSTParameters() { return m_stParameters; }
-	bool&			getbOutLineDraw() { return m_bIsOutlineDraw; }
 
 
 	virtual void update(void) override;		//! interface : IUpdateable
@@ -50,7 +49,6 @@ protected:
 
 	STStaticMesh m_stStaticMesh;
 	STParameters m_stParameters;
-	bool		m_bIsOutlineDraw = false;
 	std::string	m_stTechniqueName = "DefaultStaticMesh";
 
 private:

@@ -298,6 +298,37 @@ bool CTerrainObject::terrainPicking(D3DXVECTOR3& a_stPosition)
 	return isPicking;
 }
 
+int CTerrainObject::getHeight(D3DXVECTOR3 a_stPosition)
+{
+	float fMapPositionX = ((m_cxTerrain/ 2.0f) + a_stPosition.x) / m_stScale.x;
+	float fMapPositionZ = ((m_czTerrain / 2.0f) - a_stPosition.z) / m_stScale.y;
+
+	int nMapIndexX = (int)fMapPositionX;
+	int nMapIndexZ = (int)fMapPositionZ;
+	int nBaseIndex = (nMapIndexZ * m_cxDIB) + nMapIndexX;
+
+	float fLTHeight = m_pHeightMap[nBaseIndex].y;
+	float fRTHeight = m_pHeightMap[nBaseIndex + 1].y;
+	float fLBHeight = m_pHeightMap[nBaseIndex + m_cxDIB].y;
+	float fRBHeight = m_pHeightMap[nBaseIndex + m_cxDIB + 1].y;
+
+	float fDeltaX = fMapPositionX - nMapIndexX;
+	float fDeltaZ = fMapPositionZ - nMapIndexZ;
+
+	// 위치가 왼쪽 삼각형 위에 있을 경우
+	if (1.0f - fDeltaX > fDeltaZ) {
+		float fDeltaHeightX = (fRTHeight - fLTHeight) * fDeltaX;
+		float fDeltaHeightZ = (fLBHeight - fLTHeight) * fDeltaZ;
+
+		return fLTHeight + fDeltaHeightX + fDeltaHeightZ;
+	}
+
+	float fDeltaHeightX = (fLBHeight - fRBHeight) * (1.0f - fDeltaX);
+	float fDeltaHeightZ = (fRTHeight - fRBHeight) * (1.0f - fDeltaZ);
+
+	return fRBHeight + fDeltaHeightX + fDeltaHeightZ;
+}
+
 int CTerrainObject::findIndex(D3DXVECTOR3 a_stPosition)
 {
 	D3DXVECTOR3 stPosition = D3DXVECTOR3((a_stPosition.x + m_cxTerrain / 2) / m_stScale.x, 0, (a_stPosition.z + m_czTerrain / 2) / m_stScale.y);

@@ -24,7 +24,7 @@ private:
 	struct MouseInfo
 	{
 		bool m_bDraw = false;
-		bool m_bIsSkinned = false;
+		EObjClasses	   m_eObjClasses = EObjClasses::NONE;
 		EObjType	   m_eObjType = EObjType::NONE;
 		CRenderObject* m_pRenderObj = nullptr;
 	};

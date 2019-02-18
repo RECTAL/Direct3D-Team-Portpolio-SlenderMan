@@ -13,15 +13,6 @@ public:
 	{
 		CCameraObject*	m_pCamera;
 		CLightObject*	m_pDirectional;
-
-		int	m_nNumSpotLight;
-		CSpotLightObject**	m_pSpotLight;
-
-		int m_nNumPointLight;
-		CLightObject**	m_pPointLight;
-
-		std::string m_oMeshFilepath;
-		std::string m_oEffectFilepath;
 	};
 
 public:			//constructor , destructor
@@ -37,6 +28,8 @@ protected:		//interface
 public:
 	LPD3DXMESH		getMesh() { return m_pMesh; }
 	STParameters&	getSTParameters() { return m_stParameters; }
+	EPlayingBGM		getSoundType() { return m_eSoundType; }
+
 
 	virtual void update(void) override;		//! interface : IUpdateable
 
@@ -47,6 +40,9 @@ private:
 protected:
 	D3DMATERIAL9	m_stMtrl;
 	LPD3DXMESH		m_pMesh = nullptr;
+	LPD3DXEFFECT	m_pEffect = nullptr;
+
+	D3DXVECTOR4		m_stColor;
 	STParameters	m_stParameters;
 	EPlayingBGM		m_eSoundType;
 private:

@@ -21,6 +21,7 @@
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Container.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_ScrollBar.h"
 #include "../../../GameComposition/GameCharactor/Player/player.h"
+#include "../../GameObject/Decorate/CDecorate_SoundObj.h"
 
 CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
@@ -183,9 +184,9 @@ void CMainPlayScene::createStageSound()
 
 void CMainPlayScene::setStateSound()
 {
-	switch (pPlayer->getPlayerState())
+	
+	if (pPlayer->getPlayerState()&(int)EPlayerState::WALKGRASS)
 	{
-	case (int)EPlayerState::WALKGRASS:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Grass.wav", false);
 		if (m_fRunTime > 8.0f) {
 			GET_SOUND_MANAGER()->setEffectSoundsVolume(1.0f);
@@ -193,22 +194,27 @@ void CMainPlayScene::setStateSound()
 		else if (m_fRunTime > 6.0f) {
 			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.95f);
 		}
-		break;
-	case (int)EPlayerState::WALKROCK:
+	}
+	else if (pPlayer->getPlayerState()&(int)EPlayerState::WALKROCK)
+	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Rock.wav", false);
 		GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
-		break;
-	case (int)EPlayerState::WALKREED:
+	}
+	else if (pPlayer->getPlayerState()&(int)EPlayerState::WALKREED)
+	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Reed.wav", false);
 		GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
-		break;
-	case (int)EPlayerState::PICK:
+	}
+	else if (pPlayer->getPlayerState()&(int)EPlayerState::PICK)
+	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Pick.wav", false);
-		break;
-	case (int)EPlayerState::SLENDER:
+	}
+	else if (pPlayer->getPlayerState()&(int)EPlayerState::SLENDER)
+	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Slenderman.wav", false);
-		break;
-	case (int)EPlayerState::NONE:
+	}
+	else if (pPlayer->getPlayerState()&(int)EPlayerState::NONE)
+	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Breathe.wav", false);
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/HeartBeat.wav", false);
 		if (m_fRunTime <= 1.0f) {
@@ -217,8 +223,8 @@ void CMainPlayScene::setStateSound()
 		else if (m_fRunTime <= 3.0f) {
 			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.95f);
 		}
-		break;
 	}
+
 }
 
 void CMainPlayScene::setBGMSound()
@@ -232,7 +238,7 @@ void CMainPlayScene::setBGMSound()
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Rain.wav", false);
 		break;
 	case EPlayingBGM::CRIKET:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Criket.wav", false);
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Cricket.wav", false);
 		break;
 	case EPlayingBGM::CROW:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Crow.wav", false);
@@ -251,6 +257,51 @@ void CMainPlayScene::setBGMSound()
 		break;
 	case EPlayingBGM::NOISE_3:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_3.wav", false);
+		break;
+	case EPlayingBGM::NONE:
+		break;
+	}
+}
+
+void CMainPlayScene::setEffectVolume(EPlayingBGM ePlayBGM, float a_fVolume)
+{
+	switch (ePlayBGM)
+	{
+	case EPlayingBGM::WIND:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Wind.wav", false);
+		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Wind.wav", a_fVolume);
+		break;
+	case EPlayingBGM::RAIN:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Rain.wav", false);
+		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Rain.wav", a_fVolume);
+		break;
+	case EPlayingBGM::CRIKET:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Cricket.wav", false);
+		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Criket.wav", a_fVolume);
+		break;
+	case EPlayingBGM::CROW:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Crow.wav", false);
+		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Crow.wav", a_fVolume);
+		break;
+	case EPlayingBGM::FIRE:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Fire.wav", false);
+		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Fire.wav", a_fVolume);
+		break;
+	case EPlayingBGM::OWL:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Owl.wav", false);
+		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Owl.wav", a_fVolume);
+		break;
+	case EPlayingBGM::NOISE_1:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
+		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Noise_1.wav", a_fVolume);
+		break;
+	case EPlayingBGM::NOISE_2:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
+		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Noise_2.wav", a_fVolume);
+		break;
+	case EPlayingBGM::NOISE_3:
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_3.wav", false);
+		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Noise_3.wav", a_fVolume);
 		break;
 	case EPlayingBGM::NONE:
 		break;
@@ -366,6 +417,46 @@ void CMainPlayScene::createButton()
 	// }
 }
 
+void CMainPlayScene::selectEffectSound()
+{
+	float fDistance[6];
+	CDecorate_SoundObj* pSoundObj[6];
+	for (int i = 0; i < 6; i++)
+	{
+		fDistance[i] = 100000.0f;
+		pSoundObj[i] = nullptr;
+	}
+
+	for (auto iter : m_pStage->getSoundObjList())
+	{
+		int nIndex = (int)iter->getSoundType() - (int)EPlayingBGM::CRIKET;
+		D3DXVECTOR3 deltaVec = pPlayer->getPosition() - iter->getPosition();
+		float deltaLength = D3DXVec3Length(&deltaVec);
+
+		if (deltaLength < fDistance[nIndex])
+		{
+			fDistance[nIndex] = deltaLength;
+			pSoundObj[nIndex] = iter;
+		}
+	}
+
+
+	for (int i = 0; i < 6; i++)
+	{
+		if (pSoundObj[i] == nullptr)continue;
+		else
+		{
+			if (IsIntersectSphere(pPlayer->getSkinnedObj()->getFinalBoundingSphere(), pSoundObj[i]->getFinalBoundingSphere()))
+			{
+				float fVolume = 1 - fDistance[i] / pSoundObj[i]->getFinalBoundingSphere().m_fRadius;
+				fVolume = max(0.5, fVolume);
+				fVolume = min(1, fVolume);
+				setEffectVolume(pSoundObj[i]->getSoundType(), fVolume);
+			}
+		}
+	}
+}
+
 void CMainPlayScene::releaseUI()
 {
 	SAFE_DELETE(m_pMenuContainer);
@@ -437,13 +528,14 @@ void CMainPlayScene::update(void)
 	m_pMenuContainer->update();
 	m_pSoundContainer->update();
 	setTimer();
+	pPlayer->update();
 	this->setStateSound();
 	this->setBGMSound();
+	this->selectEffectSound();
 	this->setVolume();
-	pPlayer->update();
 	if (m_bIsBGMPlay)
 	{
-		this->createStageSound();
+		//this->createStageSound();
 		m_bIsBGMPlay = false;
 	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {

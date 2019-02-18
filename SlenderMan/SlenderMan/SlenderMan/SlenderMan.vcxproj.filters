@@ -385,6 +385,12 @@
     <ClInclude Include="Classes\Utility\Debug\CDebugDraw.h">
       <Filter>Classes\Global\Utility\Debug</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameObject\Decorate\CDecorate_SoundObj.h">
+      <Filter>Classes\GameComposition\GameObject\Decorate</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameObject\Decorate\CDecorate_BillboardObj.h">
+      <Filter>Classes\GameComposition\GameObject\Decorate</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -567,6 +573,12 @@
     <ClCompile Include="Classes\GameComposition\GameCharactor\CCharactor.cpp">
       <Filter>Classes\GameComposition\GameCharactor</Filter>
     </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameObject\Decorate\CDecorate_SoundObj.cpp">
+      <Filter>Classes\GameComposition\GameObject\Decorate</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameObject\Decorate\CDecorate_BillboardObj.cpp">
+      <Filter>Classes\GameComposition\GameObject\Decorate</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Effects\CopyTexture.fx">
@@ -591,6 +603,9 @@
       <Filter>Resources\Effects</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Effects\spotLightRay.fx">
+      <Filter>Resources\Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Effects\DefaultSoundObj.fx">
       <Filter>Resources\Effects</Filter>
     </FxCompile>
   </ItemGroup>

@@ -88,6 +88,17 @@ CSoundObject * CSoundManager::playBackgroundSound(const std::string & a_rFilepat
 	return m_pBackgroundSound;
 }
 
+void CSoundManager::setEffectSoundVolume(const std::string & a_rFilepath, float a_fVolume)
+{
+	if (m_oEffectSoundContainer.find(a_rFilepath) != m_oEffectSoundContainer.end()) {
+		auto oIterator = m_oEffectSoundContainer.find(a_rFilepath);
+		for (auto iter : oIterator->second)
+		{
+			iter->setVolume(a_fVolume);
+		}
+	}
+}
+
 void CSoundManager::stopAllEffectSounds(void)
 {
 	for (auto &rValueType : m_oEffectSoundContainer) {
