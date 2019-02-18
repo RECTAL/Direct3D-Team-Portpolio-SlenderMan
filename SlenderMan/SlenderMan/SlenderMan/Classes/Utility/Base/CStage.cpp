@@ -126,7 +126,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 						m_pObjList[i].push_back(stStaticObj);
 					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::GRASS)
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::GRASS)
 					{
 						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
 						CLightObject** ppPointLightObj = new CLightObject*[10];
@@ -147,7 +147,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::MOUNTAIN)
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::MOUNTAIN)
 					{
 						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
 						CLightObject** ppPointLightObj = new CLightObject*[10];
@@ -168,7 +168,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDHOUSE)
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDHOUSE)
 					{
 						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
 						CLightObject** ppPointLightObj = new CLightObject*[10];
@@ -189,7 +189,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						m_pObjList[i].push_back(stStaticObj);
 
 					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDWOODDOCK)
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDWOODDOCK)
 					{
 						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
 						CLightObject** ppPointLightObj = new CLightObject*[10];
@@ -210,7 +210,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						m_pObjList[i].push_back(stStaticObj);
 
 					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PLANTS)
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PLANTS)
 					{
 						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
 						CLightObject** ppPointLightObj = new CLightObject*[10];
@@ -231,7 +231,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						m_pObjList[i].push_back(stStaticObj);
 
 					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::ROUNDWOOD)
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::ROUNDWOOD)
 					{
 						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
 						CLightObject** ppPointLightObj = new CLightObject*[10];
@@ -252,7 +252,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::URBANDEBRIS)
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::URBANDEBRIS)
 					{
 						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
 						CLightObject** ppPointLightObj = new CLightObject*[10];
@@ -273,7 +273,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::WOODHOUSE)
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::WOODHOUSE)
 					{
 						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
 						CLightObject** ppPointLightObj = new CLightObject*[10];
@@ -294,180 +294,13 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_1)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CStaticObject::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Meshes/tree1/tree1.X",
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CStaticObject* stStaticObj = new CStaticObject(stParameters);
-						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stStaticObj);
-					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_2)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CStaticObject::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Meshes/tree2/tree2.X",
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CStaticObject* stStaticObj = new CStaticObject(stParameters);
-						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stStaticObj);
-					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_3)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CStaticObject::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Meshes/tree3/tree3.X",
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CStaticObject* stStaticObj = new CStaticObject(stParameters);
-						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stStaticObj);
-					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_4)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CStaticObject::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Meshes/tree4/tree4.X",
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CStaticObject* stStaticObj = new CStaticObject(stParameters);
-						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stStaticObj);
-					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_5)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CStaticObject::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Meshes/tree5/tree5.X",
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CStaticObject* stStaticObj = new CStaticObject(stParameters);
-						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stStaticObj);
-					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_6)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CStaticObject::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Meshes/tree6/tree6.X",
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CStaticObject* stStaticObj = new CStaticObject(stParameters);
-						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stStaticObj);
-					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_7)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CStaticObject::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Meshes/tree7/tree7.X",
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CStaticObject* stStaticObj = new CStaticObject(stParameters);
-						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stStaticObj);
-					}
-					if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::TREE_8)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CStaticObject::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Meshes/tree8/tree8.X",
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CStaticObject* stStaticObj = new CStaticObject(stParameters);
-						stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stStaticObj);
-					}
+				
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::CRIKET)
 					{
 						CDecorate_SoundObj::STParameters stParameters = {
 							m_pCameraObj,m_pDirectionLightObj
 						};
-						CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters,EPlayingBGM::CRIKET);
+						CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::CRIKET);
 						stSoundObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
 						stSoundObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
 						stSoundObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
@@ -551,181 +384,56 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						m_pObjList[i].push_back(stSoundObj);
 						m_oSoundObjList.push_back(stSoundObj);
 					}
-					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_1)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CDecorate_BillboardObj::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Textures/object/page1","png",1,
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+					for (int k = 0; k < 8; k++) {
+						char cTreeMeshIndex[MAX_PATH];
+						sprintf(cTreeMeshIndex, "Resources/Meshes/tree%d/tree%d.X", k + 1, k + 1);
+						if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == ((EObjType)((int)EObjType::TREE_1 + k)))
+						{
+							CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+							CLightObject** ppPointLightObj = new CLightObject*[10];
+							CStaticObject::STParameters stParameters = {
+								m_pCameraObj,m_pDirectionLightObj,
+								0,ppSpotLightObj,
+								0,ppPointLightObj,
+								cTreeMeshIndex,
+								"Resources/Effects/DefaultStaticMesh.fx"
+							};
+							CStaticObject* stStaticObj = new CStaticObject(stParameters);
+							stStaticObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+							stStaticObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+							stStaticObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+							stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+							stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+							stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
-						m_pObjList[i].push_back(stBillboardObj);
-						m_oBillboardObj.push_back(stBillboardObj);
+							m_pObjList[i].push_back(stStaticObj);
+						}
 					}
-					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_2)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CDecorate_BillboardObj::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Textures/object/page2","png",1,
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+					for (int k = 0; k < 8; k++) {
+						char TextureIndex[MAX_PATH];
+						sprintf(TextureIndex, "Resources/Textures/object/page%d", i + 1);
+						if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == ((EObjType)((int)EObjType::PAGE_1 + k)))
+						{
+							CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+							CLightObject** ppPointLightObj = new CLightObject*[10];
+							CDecorate_BillboardObj::STParameters stParameters = {
+								m_pCameraObj,m_pDirectionLightObj,
+								0,ppSpotLightObj,
+								0,ppPointLightObj,
+								TextureIndex,"png",1,
+								"Resources/Effects/DefaultStaticMesh.fx"
+							};
+							CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+							stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+							stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+							stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+							stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+							stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+							stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
-						m_pObjList[i].push_back(stBillboardObj);
-						m_oBillboardObj.push_back(stBillboardObj);
-					}
-					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_3)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CDecorate_BillboardObj::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Textures/object/page3","png",1,
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stBillboardObj);
-						m_oBillboardObj.push_back(stBillboardObj);
-					}
-					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_4)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CDecorate_BillboardObj::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Textures/object/page4","png",1,
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stBillboardObj);
-						m_oBillboardObj.push_back(stBillboardObj);
-					}
-					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_5)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CDecorate_BillboardObj::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Textures/object/page5","png",1,
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stBillboardObj);
-						m_oBillboardObj.push_back(stBillboardObj);
-					}
-					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_6)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CDecorate_BillboardObj::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Textures/object/page6","png",1,
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stBillboardObj);
-						m_oBillboardObj.push_back(stBillboardObj);
-					}
-					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_7)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CDecorate_BillboardObj::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Textures/object/page7","png",1,
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stBillboardObj);
-						m_oBillboardObj.push_back(stBillboardObj);
-					}
-					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_8)
-					{
-						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-						CLightObject** ppPointLightObj = new CLightObject*[10];
-						CDecorate_BillboardObj::STParameters stParameters = {
-							m_pCameraObj,m_pDirectionLightObj,
-							0,ppSpotLightObj,
-							0,ppPointLightObj,
-							"Resources/Textures/object/page8","png",1,
-							"Resources/Effects/DefaultStaticMesh.fx"
-						};
-						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
-						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
-						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
-						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
-						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
-						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
-						m_pObjList[i].push_back(stBillboardObj);
-						m_oBillboardObj.push_back(stBillboardObj);
+							m_pObjList[i].push_back(stBillboardObj);
+							m_oBillboardObj.push_back(stBillboardObj);
+						}
 					}
 				}
 			}
@@ -952,199 +660,14 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
-			else if (a_stPacket.m_EObjType == EObjType::TREE_1)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CStaticObject::STParameters stParameters =
-				{
-					m_pCameraObj,m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Meshes/tree1/tree1.X",
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CStaticObject* stStaticObj = new CStaticObject(stParameters);
-				stStaticObj->setPosition(a_stPacket.m_stPosition);
-				stStaticObj->setScale(a_stPacket.m_stScale);
-				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
-				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
-				stStaticObj->setVisible(false);
-				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stStaticObj);
-				int a = 0;
-			}
-			else if (a_stPacket.m_EObjType == EObjType::TREE_2)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CStaticObject::STParameters stParameters =
-				{
-					m_pCameraObj,m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Meshes/tree2/tree2.X",
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CStaticObject* stStaticObj = new CStaticObject(stParameters);
-				stStaticObj->setPosition(a_stPacket.m_stPosition);
-				stStaticObj->setScale(a_stPacket.m_stScale);
-				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
-				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
-				stStaticObj->setVisible(false);
-				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stStaticObj);
-			}
-			else if (a_stPacket.m_EObjType == EObjType::TREE_3)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CStaticObject::STParameters stParameters =
-				{
-					m_pCameraObj,m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Meshes/tree3/tree3.X",
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CStaticObject* stStaticObj = new CStaticObject(stParameters);
-				stStaticObj->setPosition(a_stPacket.m_stPosition);
-				stStaticObj->setScale(a_stPacket.m_stScale);
-				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
-				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
-				stStaticObj->setVisible(false);
-				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stStaticObj);
-			}
-			else if (a_stPacket.m_EObjType == EObjType::TREE_4)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CStaticObject::STParameters stParameters =
-				{
-					m_pCameraObj,m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Meshes/tree4/tree4.X",
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CStaticObject* stStaticObj = new CStaticObject(stParameters);
-				stStaticObj->setPosition(a_stPacket.m_stPosition);
-				stStaticObj->setScale(a_stPacket.m_stScale);
-				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
-				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
-				stStaticObj->setVisible(false);
-				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stStaticObj);
-			}
-			else if (a_stPacket.m_EObjType == EObjType::TREE_5)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
 
-				CStaticObject::STParameters stParameters =
-				{
-					m_pCameraObj,m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Meshes/tree5/tree5.X",
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CStaticObject* stStaticObj = new CStaticObject(stParameters);
-				stStaticObj->setPosition(a_stPacket.m_stPosition);
-				stStaticObj->setScale(a_stPacket.m_stScale);
-				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
-				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
-				stStaticObj->setVisible(false);
-				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stStaticObj);
-			}
-			else if (a_stPacket.m_EObjType == EObjType::TREE_6)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CStaticObject::STParameters stParameters =
-				{
-					m_pCameraObj,m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Meshes/tree6/tree6.X",
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CStaticObject* stStaticObj = new CStaticObject(stParameters);
-				stStaticObj->setPosition(a_stPacket.m_stPosition);
-				stStaticObj->setScale(a_stPacket.m_stScale);
-				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
-				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
-				stStaticObj->setVisible(false);
-				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stStaticObj);
-			}
-			else if (a_stPacket.m_EObjType == EObjType::TREE_7)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CStaticObject::STParameters stParameters =
-				{
-					m_pCameraObj,m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Meshes/tree7/tree7.X",
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CStaticObject* stStaticObj = new CStaticObject(stParameters);
-				stStaticObj->setPosition(a_stPacket.m_stPosition);
-				stStaticObj->setScale(a_stPacket.m_stScale);
-				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
-				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
-				stStaticObj->setVisible(false);
-				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stStaticObj);
-			}
-			else if (a_stPacket.m_EObjType == EObjType::TREE_8)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CStaticObject::STParameters stParameters =
-				{
-					m_pCameraObj,m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Meshes/tree8/tree8.X",
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CStaticObject* stStaticObj = new CStaticObject(stParameters);
-				stStaticObj->setPosition(a_stPacket.m_stPosition);
-				stStaticObj->setScale(a_stPacket.m_stScale);
-				stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
-				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
-				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
-				stStaticObj->setVisible(false);
-				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stStaticObj);
-			}
 			else if (a_stPacket.m_EObjType == EObjType::CRIKET)
 			{
 				CDecorate_SoundObj::STParameters stParameters =
 				{
 					m_pCameraObj,m_pDirectionLightObj
 				};
-				CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters,EPlayingBGM::CRIKET);
+				CDecorate_SoundObj* stSoundObj = new CDecorate_SoundObj(stParameters, EPlayingBGM::CRIKET);
 				stSoundObj->setPosition(a_stPacket.m_stPosition);
 				stSoundObj->setScale(a_stPacket.m_stScale);
 				stSoundObj->setForwardDirection(a_stPacket.m_stForwordVec);
@@ -1218,7 +741,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stSoundObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
 				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
-				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision&0;
+				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
 				stSoundObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stSoundObj);
 				m_oSoundObjList.push_back(stSoundObj);
@@ -1240,200 +763,63 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				m_pObjList[nIndex].push_back(stSoundObj);
 				m_oSoundObjList.push_back(stSoundObj);
 			}
-			else if (a_stPacket.m_EObjType == EObjType::PAGE_1)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CDecorate_BillboardObj::STParameters stParameters =
+			for (int i = 0; i < 8; i++) {
+				char cTreeMeshIndex[MAX_PATH];
+				sprintf(cTreeMeshIndex, "Resources/Meshes/tree%d/tree%d.X", i + 1, i + 1);
+				if (a_stPacket.m_EObjType == ((EObjType)((int)EObjType::TREE_1 + i)))
 				{
-					m_pCameraObj, m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Textures/object/page1","png",1,
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-				stBillboardObj->setPosition(a_stPacket.m_stPosition);
-				stBillboardObj->setScale(a_stPacket.m_stScale);
-				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
-				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
-				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
-				stBillboardObj->setVisible(false);
-				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stBillboardObj);
-				m_oBillboardObj.push_back(stBillboardObj);
+					CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+					CLightObject** ppPointLightObj = new CLightObject*[10];
+					CStaticObject::STParameters stParameters =
+					{
+						m_pCameraObj,m_pDirectionLightObj,
+						0,ppSpotLightObj,
+						0,ppPointLightObj,
+						cTreeMeshIndex,
+						"Resources/Effects/DefaultStaticMesh.fx"
+					};
+					CStaticObject* stStaticObj = new CStaticObject(stParameters);
+					stStaticObj->setPosition(a_stPacket.m_stPosition);
+					stStaticObj->setScale(a_stPacket.m_stScale);
+					stStaticObj->setForwardDirection(a_stPacket.m_stForwordVec);
+					stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
+					stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
+					stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+					stStaticObj->setVisible(false);
+					stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+					m_pObjList[nIndex].push_back(stStaticObj);
+				}
 			}
-			else if (a_stPacket.m_EObjType == EObjType::PAGE_2)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CDecorate_BillboardObj::STParameters stParameters =
+			for (int i = 0; i < 8; i++) {
+				char cTextureIndex[MAX_PATH];
+				sprintf(cTextureIndex, "Resources/Textures/object/page%d", i + 1);
+				if (a_stPacket.m_EObjType == ((EObjType)((int)EObjType::PAGE_1 + i)))
 				{
-					m_pCameraObj, m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Textures/object/page2","png",1,
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-				stBillboardObj->setPosition(a_stPacket.m_stPosition);
-				stBillboardObj->setScale(a_stPacket.m_stScale);
-				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
-				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
-				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
-				stBillboardObj->setVisible(false);
-				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stBillboardObj);
-				m_oBillboardObj.push_back(stBillboardObj);
+					CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+					CLightObject** ppPointLightObj = new CLightObject*[10];
+					CDecorate_BillboardObj::STParameters stParameters =
+					{
+						m_pCameraObj, m_pDirectionLightObj,
+						0,ppSpotLightObj,
+						0,ppPointLightObj,
+						cTextureIndex,"png",1,
+						"Resources/Effects/DefaultStaticMesh.fx"
+					};
+					CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+					stBillboardObj->setPosition(a_stPacket.m_stPosition);
+					stBillboardObj->setScale(a_stPacket.m_stScale);
+					stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
+					stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
+					stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
+					stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+					stBillboardObj->setVisible(false);
+					stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+					m_pObjList[nIndex].push_back(stBillboardObj);
+					m_oBillboardObj.push_back(stBillboardObj);
+				}
 			}
-			else if (a_stPacket.m_EObjType == EObjType::PAGE_3)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CDecorate_BillboardObj::STParameters stParameters =
-				{
-					m_pCameraObj, m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Textures/object/page3","png",1,
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-				stBillboardObj->setPosition(a_stPacket.m_stPosition);
-				stBillboardObj->setScale(a_stPacket.m_stScale);
-				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
-				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
-				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
-				stBillboardObj->setVisible(false);
-				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stBillboardObj);
-				m_oBillboardObj.push_back(stBillboardObj);
-			}
-			else if (a_stPacket.m_EObjType == EObjType::PAGE_4)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CDecorate_BillboardObj::STParameters stParameters =
-				{
-					m_pCameraObj, m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Textures/object/page4","png",1,
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-				stBillboardObj->setPosition(a_stPacket.m_stPosition);
-				stBillboardObj->setScale(a_stPacket.m_stScale);
-				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
-				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
-				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
-				stBillboardObj->setVisible(false);
-				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stBillboardObj);
-				m_oBillboardObj.push_back(stBillboardObj);
-			}
-			else if (a_stPacket.m_EObjType == EObjType::PAGE_5)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CDecorate_BillboardObj::STParameters stParameters =
-				{
-					m_pCameraObj, m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Textures/object/page5","png",1,
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-				stBillboardObj->setPosition(a_stPacket.m_stPosition);
-				stBillboardObj->setScale(a_stPacket.m_stScale);
-				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
-				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
-				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
-				stBillboardObj->setVisible(false);
-				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stBillboardObj);
-				m_oBillboardObj.push_back(stBillboardObj);
-			}
-			else if (a_stPacket.m_EObjType == EObjType::PAGE_6)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CDecorate_BillboardObj::STParameters stParameters =
-				{
-					m_pCameraObj, m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Textures/object/page6","png",1,
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-				stBillboardObj->setPosition(a_stPacket.m_stPosition);
-				stBillboardObj->setScale(a_stPacket.m_stScale);
-				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
-				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
-				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
-				stBillboardObj->setVisible(false);
-				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stBillboardObj);
-				m_oBillboardObj.push_back(stBillboardObj);
-			}
-			else if (a_stPacket.m_EObjType == EObjType::PAGE_7)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CDecorate_BillboardObj::STParameters stParameters =
-				{
-					m_pCameraObj, m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Textures/object/page7","png",1,
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-				stBillboardObj->setPosition(a_stPacket.m_stPosition);
-				stBillboardObj->setScale(a_stPacket.m_stScale);
-				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
-				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
-				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
-				stBillboardObj->setVisible(false);
-				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stBillboardObj);
-				m_oBillboardObj.push_back(stBillboardObj);
-			}
-			else if (a_stPacket.m_EObjType == EObjType::PAGE_8)
-			{
-				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
-				CLightObject** ppPointLightObj = new CLightObject*[10];
-				CDecorate_BillboardObj::STParameters stParameters =
-				{
-					m_pCameraObj, m_pDirectionLightObj,
-					0,ppSpotLightObj,
-					0,ppPointLightObj,
-					"Resources/Textures/object/page8","png",1,
-					"Resources/Effects/DefaultStaticMesh.fx"
-				};
-				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
-				stBillboardObj->setPosition(a_stPacket.m_stPosition);
-				stBillboardObj->setScale(a_stPacket.m_stScale);
-				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
-				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
-				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
-				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
-				stBillboardObj->setVisible(false);
-				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
-				m_pObjList[nIndex].push_back(stBillboardObj);
-				m_oBillboardObj.push_back(stBillboardObj);
-			}
-		
-				m_pObjPacketList[nIndex].m_nPivot++;
+
+			m_pObjPacketList[nIndex].m_nPivot++;
 			break;
 		}
 	}

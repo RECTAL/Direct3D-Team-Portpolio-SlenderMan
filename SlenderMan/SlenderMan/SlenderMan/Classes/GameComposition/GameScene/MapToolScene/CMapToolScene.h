@@ -7,7 +7,7 @@
 #define MAX_HOUSE 4
 #define MAX_OBJECT 4
 #define MAX_SOUND 7
-#define MAX_PAGE 8
+#define MAX_PAGE 9
 
 class CSpriteObject;
 class CSpriteObject_ScrollBar;
