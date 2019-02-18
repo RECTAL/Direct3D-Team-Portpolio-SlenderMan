@@ -54,9 +54,7 @@ void player::update(void)
 		m_pSkinnedObj->update();
 		
 		// 마우스 화면 조절 
-		static bool isEsc = false;
-		if (!isEsc)
-			mouseSenterPos();
+		mouseSenterPos();
 
 		float fSpeed = 15.0f;
 
@@ -68,11 +66,10 @@ void player::update(void)
 		m_fTopLeft.x = this->getPosition().x - m_fCheckRange;
 		m_fTopLeft.y = this->getPosition().z - m_fCheckRange;
 
-
 		m_fBottomRight.x = this->getPosition().x + m_fCheckRange;
 		m_fBottomRight.y = this->getPosition().z + m_fCheckRange;
 
-
+	
 		if (IS_KEY_DOWN(DIK_W)&&!checkCollisionTerrain(EDirection::FRONT)) {
 			playerState |= (int)EPlayerState::WALKGRASS;
 			m_bIsFront = true;
@@ -118,7 +115,8 @@ void player::update(void)
 		m_fBottomRight.y = this->getPosition().z + m_fCheckRange;
 
 		adjustCollisionArea();
-		
+		settingAnimation();
+
 		if (this->checkCollisionArea())
 		{
 			if (m_bIsJump)m_fYVelocity = 0.0f;
@@ -127,7 +125,6 @@ void player::update(void)
 			if(m_bIsLeft)this->moveByXAxis(fSpeed * GET_DELTA_TIME());
 			if(m_bIsRight)this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
 		}
-
 	}
 }
 
@@ -155,11 +152,35 @@ void player::mouseSenterPos()
 
 	int dPosX = pt.x - GET_MOUSE_POSITION().x;
 	int dPosY = pt.y - GET_MOUSE_POSITION().y;
-
+	
+	static bool isFirst = true;
+	if (isFirst) 
+	{
+		dPosX = 0;
+		dPosY = 0;
+		isFirst = false;
+	}
+	
 	this->rotateByYAxis(-dPosX / 5.0f, false);
-	this->rotateByXAxis(-dPosY / 5.0f);
+
+	static int maxRotateY = 0;
+	maxRotateY += dPosY;
+	if (maxRotateY >= -371 && maxRotateY <= 371) 
+		this->rotateByXAxis(-dPosY / 5.0f);
+	if (maxRotateY <= -371)
+		maxRotateY = -371;
+	else if (maxRotateY >= 371)
+		maxRotateY = 371;
+
 	ClientToScreen(GET_WINDOW_HANDLE(), &pt);
 	SetCursorPos(pt.x, pt.y);
+	
+	printf("Y : %d\n", maxRotateY);
+	printf("dPosY : %d\n", dPosY);
+	//printf("right.X : %f, right.Y : %f, right.Z : %f\n", this->getRightDirection().x, this->getRightDirection().y, this->getRightDirection().z);
+	//printf("up.X : %f, up.Y : %f, up.Z : %f\n", this->getUpDirection().x, this->getUpDirection().y, this->getUpDirection().z);
+	//printf("forward.X : %f, forward.Y : %f, forward.Z : %f\n", this->getForwardDirection().x, this->getForwardDirection().y, this->getForwardDirection().z);
+
 }
 
 CSkinnedObject * player::createPlayer()
@@ -239,6 +260,25 @@ void player::settingSkinnedObj()
 	m_pSkinnedObj->setRightDirection(m_stSkinnedRightVec3);
 	m_pSkinnedObj->setUpDirection(m_stSkinnedUpVec3);
 	m_pSkinnedObj->setForwardDirection(m_stSkinnedForwardVec3);
+}
+
+void player::settingAnimation()
+{
+	auto playerAnimationList = m_pSkinnedObj->getAnimationNameList();
+	if (playerState == (int)EPlayerState::NONE)
+	{
+		m_pSkinnedObj->playAnimation(playerAnimationList[0], true);
+	}
+	else if (playerState == (int)EPlayerState::WALKGRASS ||
+		playerState == (int)EPlayerState::WALKREED ||
+		playerState == (int)EPlayerState::WALKROCK)
+	{
+		m_pSkinnedObj->playAnimation(playerAnimationList[1], true);
+	}
+	else if (playerState == (int)EPlayerState::RUN)
+	{
+		m_pSkinnedObj->playAnimation(playerAnimationList[2], true);
+	}
 }
 
 void player::adjustJump()
