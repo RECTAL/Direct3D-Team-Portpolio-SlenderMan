@@ -535,7 +535,7 @@ void CMainPlayScene::update(void)
 	this->setVolume();
 	if (m_bIsBGMPlay)
 	{
-		//this->createStageSound();
+		this->createStageSound();
 		m_bIsBGMPlay = false;
 	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {

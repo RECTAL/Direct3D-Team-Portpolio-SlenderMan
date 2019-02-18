@@ -10,6 +10,7 @@
 class CCameraObject;
 class CRenderObject;
 class CDecorate_SoundObj;
+class CDecorate_BillboardObj;
 class CStage
 {
 public:
@@ -58,6 +59,7 @@ public:
 	CLightObject*	getDirectionalLightObj() { return m_pDirectionLightObj; }
 	std::vector<CRenderObject*>*	getObjList() { return m_pObjList; }
 	std::vector<CDecorate_SoundObj*> getSoundObjList() { return m_oSoundObjList; }
+	std::vector<CDecorate_BillboardObj*> getBillboardObjList() { return m_oBillboardObj;}
 	BOOL&	getbIsMaptool() { return m_bIsMaptool; }
 
 private:
@@ -71,6 +73,7 @@ private:
 	OBJCONTAINER* m_pObjPacketList = nullptr;
 	std::vector<CRenderObject*>* m_pObjList = nullptr;
 	std::vector<CDecorate_SoundObj*> m_oSoundObjList;
+	std::vector<CDecorate_BillboardObj*> m_oBillboardObj;
 
 
 	BOOL	m_bIsMaptool = false;

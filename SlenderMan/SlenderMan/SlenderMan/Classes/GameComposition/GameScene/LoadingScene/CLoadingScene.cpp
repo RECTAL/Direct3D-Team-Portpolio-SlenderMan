@@ -185,7 +185,7 @@ void CLoadingScene::updateImage(void)
 	static float angle = 0.0f;
 	angle += D3DXToRadian(-180 * GET_DELTA_TIME() * 0.25f);
 	alpha = 255 * cosf(angle) + 100;
-	alpha = max(alpha, 0);
+	alpha = max(alpha, 50);
 	alpha = min(alpha, 255);
 
 	m_pBackGround[m_nIndex]->setColor(D3DCOLOR_ARGB((int)alpha, 255, 255, 255));
