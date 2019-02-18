@@ -17,6 +17,7 @@
 #include "../../../Utility/Manager/CInputManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CSceneManager.h"
+#include "../../../Utility/Manager/CResourceManager.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Button.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Container.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_ScrollBar.h"
@@ -33,6 +34,8 @@ CMainPlayScene::~CMainPlayScene()
 {
 	SAFE_DELETE(m_pPlayTime);
 	SAFE_DELETE(m_pCamCoderView);
+	SAFE_DELETE(m_pNoiseImage);
+	SAFE_DELETE(m_pColorNoiseImage);
 	SAFE_DELETE(pPlayer);
 	SAFE_DELETE(pSlenderMan);
 
@@ -130,6 +133,12 @@ void CMainPlayScene::init()
 
 	FIND_SCENE(GAMESCENE_VICTORY)->init();
 	FIND_SCENE(GAMESCENE_GAMEOVER)->init();
+
+	m_fHardNoiseValue = 0.0f;
+	m_fNoiseValue = 0.0f;
+	m_nNoiseLevel = 0.0f;
+	m_fDeadTime = 0.0f;
+	m_fNoiseTime = 0.0f;
 }
 
 void CMainPlayScene::createWindowUI()
@@ -143,6 +152,7 @@ void CMainPlayScene::createRenderTarget()
 	GET_DEVICE()->GetViewport(&stViewport);
 	GET_RENDERTARGET_MANAGER()->addRenderTarget("StageRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
 	GET_RENDERTARGET_MANAGER()->addRenderTarget("CamCoderRenderTarget", new CRenderTarget(GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, &stViewport));
+
 }
 
 void CMainPlayScene::createStageSound()
@@ -487,6 +497,13 @@ void CMainPlayScene::createSpriteDefault()
 {
 	m_pCamCoderView = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/camCoderView", "png", 1366, 768, 1);
 	m_pCamCoderView->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx/2.0f, GET_WINDOW_SIZE().cy / 2.0f,0.0f));
+
+	m_pNoiseImage = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/noise", "png", 1366, 768, 4);
+	m_pNoiseImage->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
+
+	
+	m_pColorNoiseImage = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/HardNoise", "png", 1366, 768, 4);
+	m_pColorNoiseImage->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
 }
 
 void CMainPlayScene::calcPlayTime(float a_fTime, int & a_nHour, int & a_nMin, int & a_nSec)
@@ -550,6 +567,8 @@ void CMainPlayScene::update(void)
 
 	m_pStage->update();
 	m_pCamCoderView->update();
+	m_pNoiseImage->update();
+	m_pColorNoiseImage->update();
 	m_pMenuContainer->update();
 	m_pSoundContainer->update();
 	setTimer();
@@ -578,8 +597,63 @@ void CMainPlayScene::update(void)
 		ClientToScreen(GET_WINDOW_HANDLE(), &pt);
 		SetCursorPos(pt.x, pt.y);
 	}
-	
+
+	if (pSlenderMan->getbIsSpawn())
+	{
+		D3DXVECTOR3 delta = pSlenderMan->getPosition() - pPlayer->getPosition();
+		float deltaLength = D3DXVec3Length(&delta);
+
+		if(deltaLength <=pSlenderMan->getBoundingSphere().m_fRadius)
+			m_nNoiseLevel++;
+		else
+		{
+			m_nNoiseLevel -= 2;
+			m_nNoiseLevel = max(0, m_nNoiseLevel);
+		}
+	}
+
+	if (m_nNoiseLevel >= 50)
+	{
+		m_fNoiseValue += 0.5f*GET_DELTA_TIME();
+		if (m_fNoiseValue > 0.7f)m_fNoiseValue = 0.7f;
+	}
+	else
+	{
+		m_fNoiseValue -= GET_DELTA_TIME();
+		if (m_fNoiseValue < 0.0f)m_fNoiseValue = 0.0f;
+	}
+
+	if (m_nNoiseLevel >= 100)
+	{
+		m_fHardNoiseValue += 0.5f*GET_DELTA_TIME();
+		if (m_fHardNoiseValue > 0.7f)
+		{
+			m_fDeadTime += GET_DELTA_TIME();
+			m_fHardNoiseValue = 0.7f;
+			if(m_fDeadTime>6.0f)
+				CHANGE_SCENE_DIRECT(GAMESCENE_GAMEOVER, TRUE);
+		}
+	}
+	else
+	{
+		m_fHardNoiseValue -= 0.5f*GET_DELTA_TIME();
+		if (m_fHardNoiseValue < 0.0f)m_fHardNoiseValue = 0.0f;
+
+		m_fDeadTime -= GET_DELTA_TIME();
+		if (m_fDeadTime < 0.0f)m_fDeadTime = 0.0f;
+	}
+
 	m_fPlayTime += GET_DELTA_TIME();
+
+	if (m_fNoiseValue >= 0.5f)
+	{
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
+	}
+	if (m_fHardNoiseValue >= 0.5f)
+	{
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
+	}
+
 }
 
 void CMainPlayScene::draw(void)
@@ -605,7 +679,6 @@ void CMainPlayScene::draw(void)
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
 
 	m_pCamCoderView->drawUI();
-
 	char str[100];
 	int nHour = 0, nMin = 0, nSec = 0;
 	this->calcPlayTime(m_fPlayTime, nHour, nMin, nSec);
@@ -623,6 +696,24 @@ void CMainPlayScene::draw(void)
 	});
 
 
+
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pTexture", FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTex);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pBlendTexture", m_pNoiseImage->getSpriteTexture()[m_pNoiseImage->getTextureOffset()]);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pNoiseTexture", m_pColorNoiseImage->getSpriteTexture()[m_pColorNoiseImage->getTextureOffset()]);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue", m_fNoiseValue);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue2", m_fHardNoiseValue);
+
+
+
+	GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+	RunEffectLoop(FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect, "LerpTexture", [=](int nPassNum)->void {
+		FIND_RENDERTARGET("CamCoderRenderTarget")->getPlaneMesh()->DrawSubset(0);
+	});
+
+	GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+	
+	
 	/***************************************************/
 	//Back Buffer로 재설정
 	/***************************************************/

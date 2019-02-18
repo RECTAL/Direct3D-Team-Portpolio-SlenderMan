@@ -287,6 +287,8 @@
     <FxCompile Include="Resources\Effects\DefaultSoundObj.fx" />
     <FxCompile Include="Resources\Effects\DefaultStaticMesh.fx" />
     <FxCompile Include="Resources\Effects\DefaultTerrain.fx" />
+    <FxCompile Include="Resources\Effects\LerpTexture.fx" />
+    <FxCompile Include="Resources\Effects\NoiseTexture .fx" />
     <FxCompile Include="Resources\Effects\Outline.fx" />
     <FxCompile Include="Resources\Effects\OutlineBlur.fx" />
     <FxCompile Include="Resources\Effects\spotLightRay.fx" />

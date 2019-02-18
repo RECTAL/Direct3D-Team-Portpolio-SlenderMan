@@ -17,8 +17,9 @@ slenderman::slenderman(CStaticObject::STParameters a_stParameters)
 
 	this->setBoundingBox(stBoundingBox);
 	this->setBoundingSphere(stBoundingSphere);
+	this->setScale(D3DXVECTOR3(5.0f, 5.0f, 5.0f));
 
-	m_pStaticObj->setScale(D3DXVECTOR3(5.0f, 5.0f, 5.0f));
+	m_pStaticObj->setScale(D3DXVECTOR3(7.0f, 7.0f, 7.0f));
 }
 
 slenderman::~slenderman(void)
@@ -104,20 +105,20 @@ void slenderman::spawnSlenderMan()
 			int rZVal = RandomIntValue(1, 2);
 			if (rXVal == 1)
 			{
-				stPosition.x += RandomFloatValue(6.0f, 10.0f);
+				stPosition.x += RandomFloatValue(50.0f, 70.0f);
 			}
 			else
 			{
-				stPosition.x -= RandomFloatValue(6.0f, 10.0f);
+				stPosition.x -= RandomFloatValue(50.0f, 70.0f);
 			}
 			
 			if (rZVal == 1)
 			{
-				stPosition.z += RandomFloatValue(6.0f, 10.0f);
+				stPosition.z += RandomFloatValue(50.0f, 70.0f);
 			}
 			else
 			{
-				stPosition.z -= RandomFloatValue(6.0f, 10.0f);
+				stPosition.z -= RandomFloatValue(50.0f, 70.0f);
 			}
 			stPosition.y = m_pStage->getTerrainObj()->getHeight(stPosition);
 			this->setPosition(stPosition);
@@ -142,5 +143,5 @@ void slenderman::delSpotLight()
 void slenderman::createSphereMesh()
 {
 	if (m_pSphere != nullptr)SAFE_RELEASE(m_pSphere);
-	D3DXCreateSphere(GET_DEVICE(), 8.0f, 10.0f, 10.0f, &m_pSphere, NULL);
+	D3DXCreateSphere(GET_DEVICE(), 90.0f, 50.0f, 50.0f, &m_pSphere, NULL);
 }

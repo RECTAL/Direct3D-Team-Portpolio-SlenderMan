@@ -89,6 +89,8 @@ void CRenderTarget::createEffect()
 	m_pOutlineEffect = GET_EFFECT("Resources/Effects/Outline.fx");
 	m_pOutlineBlurEffect = GET_EFFECT("Resources/Effects/OutlineBlur.fx");
 	m_pBlendEffect = GET_EFFECT("Resources/Effects/BlendTexture.fx");
+	m_pLerpEffect = GET_EFFECT("Resources/Effects/LerpTexture.fx");
+	m_pNoiseEffect = GET_EFFECT("Resources/Effects/NoiseTexture.fx");
 }
 
 void CRenderTarget::preDraw()

@@ -32,9 +32,6 @@
     <Filter Include="Resources\Effects">
       <UniqueIdentifier>{ac183f0d-6469-4cf9-ba7e-5ee81ed04ea2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Meshes">
-      <UniqueIdentifier>{9e96ce34-4840-4700-b95e-963812290da2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Sounds">
       <UniqueIdentifier>{ccc81ee2-446d-4aea-9d81-a9fc9398231e}</UniqueIdentifier>
     </Filter>
@@ -208,6 +205,9 @@
     </Filter>
     <Filter Include="Classes\Global\Utility\Debug">
       <UniqueIdentifier>{8df4e159-1b26-4d5c-b1bd-97044ce5e01b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Meshes">
+      <UniqueIdentifier>{9e96ce34-4840-4700-b95e-963812290da2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -612,6 +612,12 @@
       <Filter>Resources\Effects</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Effects\DefaultSoundObj.fx">
+      <Filter>Resources\Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Effects\NoiseTexture .fx">
+      <Filter>Resources\Effects</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Effects\LerpTexture.fx">
       <Filter>Resources\Effects</Filter>
     </FxCompile>
   </ItemGroup>
