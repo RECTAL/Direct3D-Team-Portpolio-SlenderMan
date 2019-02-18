@@ -22,6 +22,7 @@
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_ScrollBar.h"
 #include "../../../GameComposition/GameCharactor/Player/player.h"
 #include "../../GameObject/Decorate/CDecorate_SoundObj.h"
+#include "../../GameCharactor/AI/SlenderMan/AI_SlenderMan.h"
 
 CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
@@ -33,6 +34,7 @@ CMainPlayScene::~CMainPlayScene()
 	SAFE_DELETE(m_pPlayTime);
 	SAFE_DELETE(m_pCamCoderView);
 	SAFE_DELETE(pPlayer);
+	SAFE_DELETE(pSlenderMan);
 
 	this->releaseUI();
 }
@@ -64,6 +66,12 @@ void CMainPlayScene::init()
 	m_pStage = pMapToolScene->getStage();
 	pPlayer->setStage(m_pStage);
 	pPlayer->init();
+
+	this->settingSlenderMan();
+	pSlenderMan->setPlayer(pPlayer);
+	pSlenderMan->setStage(m_pStage);
+	pSlenderMan->addSpotLight(pPlayer->getLightObj());
+	pSlenderMan->init();
 
 	ppSpotLightObj = new CSpotLightObject*[10];
 	ppPointLightObj = new CLightObject*[10];
@@ -499,6 +507,23 @@ void CMainPlayScene::settingPlayer()
 	pPlayer->setMainSceneAddress(this);
 }
 
+void CMainPlayScene::settingSlenderMan()
+{
+	ppSpotLightObj = new CSpotLightObject*[10];
+	ppPointLightObj = new CLightObject*[10];
+	CStaticObject::STParameters stParameters =
+	{
+		pPlayer->getCamera(),
+		m_pStage->getDirectionalLightObj(),
+		0,ppSpotLightObj,
+		0,ppPointLightObj,
+		"Resources/Meshes/slenderMan/slenderMan.X",
+		"Resources/Effects/DefaultStaticMesh.fx"
+	};
+	if (pSlenderMan != nullptr)SAFE_DELETE(pSlenderMan);
+	pSlenderMan = new slenderman(stParameters);
+}
+
 void CMainPlayScene::createContainer()
 {
 	m_pMenuContainer = new CSpriteObject_Container("Resources/Textures/Scene/MainPlayScene/menuWindow", "png", 500, 500, 1);
@@ -529,13 +554,16 @@ void CMainPlayScene::update(void)
 	m_pSoundContainer->update();
 	setTimer();
 	pPlayer->update();
+
+	pSlenderMan->spawnSlenderMan();
+	pSlenderMan->update();
 	this->setStateSound();
 	this->setBGMSound();
 	this->selectEffectSound();
 	this->setVolume();
 	if (m_bIsBGMPlay)
 	{
-		//this->createStageSound();
+		this->createStageSound();
 		m_bIsBGMPlay = false;
 	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
@@ -568,6 +596,7 @@ void CMainPlayScene::draw(void)
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
 	m_pStage->draw();
 	pPlayer->draw();
+	pSlenderMan->draw();
 	/***************************************************/
 	//CamCoderRenderTarget¿¡ draw
 	/***************************************************/

@@ -32,11 +32,10 @@ public:
 	CSkinnedObject* createSkinnedMesh(CSkinnedObject::STParameters stParameters);
 	CStaticObject* createStaticMesh(CStaticObject::STParameters stParameters);
 
-private:
+protected:
 	CSkinnedObject::STParameters m_pSkinnedParameters;
 	CStaticObject::STParameters m_pStaticParameters;
 
-protected:
 	STRay m_stRay;
 
 
