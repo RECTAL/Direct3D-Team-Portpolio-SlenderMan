@@ -6,6 +6,7 @@
 #include "../Object/CameraObject/CCameraObject.h"
 #include "../Object/LightObject/CLightObject.h"
 #include "../../GameComposition/GameObject/Decorate/CDecorate_SoundObj.h"
+#include "../../GameComposition//GameObject/Decorate/CDecorate_BillboardObj.h"
 #include "../../Function/GlobalFunction.h"
 #include "../Manager/CWindowManager.h"
 #include "../Manager/CDeviceManager.h"
@@ -550,6 +551,182 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						m_pObjList[i].push_back(stSoundObj);
 						m_oSoundObjList.push_back(stSoundObj);
 					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_1)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CDecorate_BillboardObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Textures/object/page1","png",1,
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+
+						m_pObjList[i].push_back(stBillboardObj);
+						m_oBillboardObj.push_back(stBillboardObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_2)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CDecorate_BillboardObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Textures/object/page2","png",1,
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+
+						m_pObjList[i].push_back(stBillboardObj);
+						m_oBillboardObj.push_back(stBillboardObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_3)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CDecorate_BillboardObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Textures/object/page3","png",1,
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+
+						m_pObjList[i].push_back(stBillboardObj);
+						m_oBillboardObj.push_back(stBillboardObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_4)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CDecorate_BillboardObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Textures/object/page4","png",1,
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+
+						m_pObjList[i].push_back(stBillboardObj);
+						m_oBillboardObj.push_back(stBillboardObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_5)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CDecorate_BillboardObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Textures/object/page5","png",1,
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+
+						m_pObjList[i].push_back(stBillboardObj);
+						m_oBillboardObj.push_back(stBillboardObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_6)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CDecorate_BillboardObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Textures/object/page6","png",1,
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+
+						m_pObjList[i].push_back(stBillboardObj);
+						m_oBillboardObj.push_back(stBillboardObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_7)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CDecorate_BillboardObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Textures/object/page7","png",1,
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+
+						m_pObjList[i].push_back(stBillboardObj);
+						m_oBillboardObj.push_back(stBillboardObj);
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PAGE_8)
+					{
+						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+						CLightObject** ppPointLightObj = new CLightObject*[10];
+						CDecorate_BillboardObj::STParameters stParameters = {
+							m_pCameraObj,m_pDirectionLightObj,
+							0,ppSpotLightObj,
+							0,ppPointLightObj,
+							"Resources/Textures/object/page8","png",1,
+							"Resources/Effects/DefaultStaticMesh.fx"
+						};
+						CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+						stBillboardObj->setPosition(m_pObjPacketList[i].m_stObjPacket[j].m_stPosition);
+						stBillboardObj->setScale(m_pObjPacketList[i].m_stObjPacket[j].m_stScale);
+						stBillboardObj->setForwardDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stForwordVec);
+						stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
+						stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
+						stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+
+						m_pObjList[i].push_back(stBillboardObj);
+						m_oBillboardObj.push_back(stBillboardObj);
+					}
 				}
 			}
 		}
@@ -1058,11 +1235,204 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stSoundObj->setForwardDirection(a_stPacket.m_stForwordVec);
 				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
 				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
-				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision&0;
+				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
 				stSoundObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stSoundObj);
 				m_oSoundObjList.push_back(stSoundObj);
-				}
+			}
+			else if (a_stPacket.m_EObjType == EObjType::PAGE_1)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CDecorate_BillboardObj::STParameters stParameters =
+				{
+					m_pCameraObj, m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Textures/object/page1","png",1,
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+				stBillboardObj->setPosition(a_stPacket.m_stPosition);
+				stBillboardObj->setScale(a_stPacket.m_stScale);
+				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
+				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
+				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stBillboardObj->setVisible(false);
+				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stBillboardObj);
+				m_oBillboardObj.push_back(stBillboardObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::PAGE_2)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CDecorate_BillboardObj::STParameters stParameters =
+				{
+					m_pCameraObj, m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Textures/object/page2","png",1,
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+				stBillboardObj->setPosition(a_stPacket.m_stPosition);
+				stBillboardObj->setScale(a_stPacket.m_stScale);
+				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
+				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
+				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stBillboardObj->setVisible(false);
+				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stBillboardObj);
+				m_oBillboardObj.push_back(stBillboardObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::PAGE_3)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CDecorate_BillboardObj::STParameters stParameters =
+				{
+					m_pCameraObj, m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Textures/object/page3","png",1,
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+				stBillboardObj->setPosition(a_stPacket.m_stPosition);
+				stBillboardObj->setScale(a_stPacket.m_stScale);
+				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
+				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
+				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stBillboardObj->setVisible(false);
+				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stBillboardObj);
+				m_oBillboardObj.push_back(stBillboardObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::PAGE_4)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CDecorate_BillboardObj::STParameters stParameters =
+				{
+					m_pCameraObj, m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Textures/object/page4","png",1,
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+				stBillboardObj->setPosition(a_stPacket.m_stPosition);
+				stBillboardObj->setScale(a_stPacket.m_stScale);
+				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
+				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
+				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stBillboardObj->setVisible(false);
+				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stBillboardObj);
+				m_oBillboardObj.push_back(stBillboardObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::PAGE_5)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CDecorate_BillboardObj::STParameters stParameters =
+				{
+					m_pCameraObj, m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Textures/object/page5","png",1,
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+				stBillboardObj->setPosition(a_stPacket.m_stPosition);
+				stBillboardObj->setScale(a_stPacket.m_stScale);
+				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
+				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
+				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stBillboardObj->setVisible(false);
+				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stBillboardObj);
+				m_oBillboardObj.push_back(stBillboardObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::PAGE_6)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CDecorate_BillboardObj::STParameters stParameters =
+				{
+					m_pCameraObj, m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Textures/object/page6","png",1,
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+				stBillboardObj->setPosition(a_stPacket.m_stPosition);
+				stBillboardObj->setScale(a_stPacket.m_stScale);
+				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
+				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
+				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stBillboardObj->setVisible(false);
+				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stBillboardObj);
+				m_oBillboardObj.push_back(stBillboardObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::PAGE_7)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CDecorate_BillboardObj::STParameters stParameters =
+				{
+					m_pCameraObj, m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Textures/object/page7","png",1,
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+				stBillboardObj->setPosition(a_stPacket.m_stPosition);
+				stBillboardObj->setScale(a_stPacket.m_stScale);
+				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
+				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
+				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stBillboardObj->setVisible(false);
+				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stBillboardObj);
+				m_oBillboardObj.push_back(stBillboardObj);
+			}
+			else if (a_stPacket.m_EObjType == EObjType::PAGE_8)
+			{
+				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
+				CLightObject** ppPointLightObj = new CLightObject*[10];
+				CDecorate_BillboardObj::STParameters stParameters =
+				{
+					m_pCameraObj, m_pDirectionLightObj,
+					0,ppSpotLightObj,
+					0,ppPointLightObj,
+					"Resources/Textures/object/page8","png",1,
+					"Resources/Effects/DefaultStaticMesh.fx"
+				};
+				CDecorate_BillboardObj* stBillboardObj = new CDecorate_BillboardObj(stParameters);
+				stBillboardObj->setPosition(a_stPacket.m_stPosition);
+				stBillboardObj->setScale(a_stPacket.m_stScale);
+				stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
+				stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
+				stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
+				stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stBillboardObj->setVisible(false);
+				stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
+				m_pObjList[nIndex].push_back(stBillboardObj);
+				m_oBillboardObj.push_back(stBillboardObj);
+			}
+		
 				m_pObjPacketList[nIndex].m_nPivot++;
 			break;
 		}
