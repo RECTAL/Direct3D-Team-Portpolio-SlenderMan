@@ -303,6 +303,12 @@ int CTerrainObject::getHeight(D3DXVECTOR3 a_stPosition)
 	float fMapPositionX = ((m_cxTerrain/ 2.0f) + a_stPosition.x) / m_stScale.x;
 	float fMapPositionZ = ((m_czTerrain / 2.0f) - a_stPosition.z) / m_stScale.y;
 
+	fMapPositionX = min(fMapPositionX, m_cxDIB-1);
+	fMapPositionX = max(fMapPositionX, 0);
+
+	fMapPositionZ = min(fMapPositionZ, m_czDIB - 1);
+	fMapPositionZ = max(fMapPositionZ, 0);
+
 	int nMapIndexX = (int)fMapPositionX;
 	int nMapIndexZ = (int)fMapPositionZ;
 	int nBaseIndex = (nMapIndexZ * m_cxDIB) + nMapIndexX;

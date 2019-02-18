@@ -391,6 +391,9 @@
     <ClInclude Include="Classes\GameComposition\GameObject\Decorate\CDecorate_BillboardObj.h">
       <Filter>Classes\GameComposition\GameObject\Decorate</Filter>
     </ClInclude>
+    <ClInclude Include="Classes\GameComposition\GameCharactor\AI\SlenderMan\AI_SlenderMan.h">
+      <Filter>Classes\GameComposition\GameCharactor\AI\SlenderMan</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Classes\Function\GlobalFunction.cpp">
@@ -578,6 +581,9 @@
     </ClCompile>
     <ClCompile Include="Classes\GameComposition\GameObject\Decorate\CDecorate_BillboardObj.cpp">
       <Filter>Classes\GameComposition\GameObject\Decorate</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameCharactor\AI\SlenderMan\AI_SlenderMan.cpp">
+      <Filter>Classes\GameComposition\GameCharactor\AI\SlenderMan</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
