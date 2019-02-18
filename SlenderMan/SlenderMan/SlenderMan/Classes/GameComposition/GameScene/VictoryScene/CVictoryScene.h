@@ -2,6 +2,7 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
+class CSpriteObject_Default;
 
 class CVictoryScene :public CScene
 {
@@ -18,6 +19,8 @@ public:		//public override function
 	virtual void init()override;					//override	: CScene
 
 
+private:
+	CSpriteObject_Default* background = nullptr;
 
-
+	bool isFirst = true;
 };

@@ -46,6 +46,7 @@ private:
 	void settingCamera();
 	void settingLight();
 	void settingSkinnedObj();
+	void settingAnimation();
 
 
 	void adjustJump();
@@ -84,5 +85,5 @@ private:
 	STRay		m_stSkinnedRay;
 
 
-	float		m_fCheckRange = 3.0f;
+	float		m_fCheckRange = 15.0f;
 };

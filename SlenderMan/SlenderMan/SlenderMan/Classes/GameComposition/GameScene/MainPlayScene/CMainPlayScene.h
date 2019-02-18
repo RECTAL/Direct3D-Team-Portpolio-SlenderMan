@@ -2,6 +2,7 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
+
 class player;
 class CSpriteObject_Button;
 class CSpriteObject_Default;
@@ -15,7 +16,7 @@ class CSpriteObject;
 class CSpotLightObject;
 class CStage;
 class CLabelObject;
-
+class slenderman;
 class CMainPlayScene :public CScene
 {
 public:		//constructor , destructor
@@ -66,6 +67,7 @@ private:
 	void calcPlayTime(float a_fTime,int& a_nHour,int& a_nMin,int& a_nSec);
 
 	void settingPlayer();
+	void settingSlenderMan();
 private:
 	LPD3DXMESH m_pSphere = nullptr;
 
@@ -77,6 +79,8 @@ private:
 	float m_fPlayTime = 0.0f;
 
 	CSpriteObject_Default* m_pCamCoderView = nullptr;
+	CSpriteObject_Default* m_pNoiseImage = nullptr;
+	CSpriteObject_Default* m_pColorNoiseImage = nullptr;
 	CLabelObject*		   m_pPlayTime = nullptr;
 	CSpriteObject*		   m_pCurrentSpriteHandle = nullptr;
 
@@ -102,7 +106,13 @@ private:
 	CLightObject** ppPointLightObj;
 
 	player* pPlayer = nullptr;
+	slenderman* pSlenderMan = nullptr;
 
+	int	m_nNoiseLevel = 0.0f;
+	float m_fDeadTime = 0.0f;
+	float m_fNoiseValue = 0.0f;
+	float m_fHardNoiseValue = 0.0f;
+	float m_fNoiseTime = 0.0f;
 	// 움직인 시간
 	float m_fRunTime = 0.0f;
 };

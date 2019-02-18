@@ -24,8 +24,9 @@ void CGameOverScene::init()
 	if (isFirst)
 	{
 		this->createScene();
-		createSound();
+		isFirst = false;
 	}
+	m_bIsStartSound = true;
 }
 
 void CGameOverScene::createWindowUI()
@@ -37,6 +38,10 @@ void CGameOverScene::update(void)
 	CScene::update();
 	m_fCurrentTime += GET_DELTA_TIME();
 	updateSprite();
+	if (m_bIsStartSound) {
+		createSound();
+		m_bIsStartSound = false;
+	}
 }
 
 void CGameOverScene::draw(void)

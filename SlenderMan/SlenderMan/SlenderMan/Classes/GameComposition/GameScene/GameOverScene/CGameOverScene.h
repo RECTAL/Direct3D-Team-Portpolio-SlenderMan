@@ -35,4 +35,5 @@ private:	//private º¯¼ö
 	float m_fCurrentTime = 0.0f;
 
 	bool isFirst = true;
+	bool m_bIsStartSound;
 };

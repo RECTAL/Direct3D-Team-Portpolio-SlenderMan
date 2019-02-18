@@ -53,6 +53,8 @@ public:
 	LPD3DXEFFECT	m_pOutlineEffect = nullptr;
 	LPD3DXEFFECT	m_pOutlineBlurEffect = nullptr;
 	LPD3DXEFFECT	m_pBlendEffect = nullptr;
+	LPD3DXEFFECT	m_pLerpEffect = nullptr;
+	LPD3DXEFFECT	m_pNoiseEffect = nullptr;
 private:
 	LPD3DXMESH	m_pPlaneMesh = nullptr;
 };

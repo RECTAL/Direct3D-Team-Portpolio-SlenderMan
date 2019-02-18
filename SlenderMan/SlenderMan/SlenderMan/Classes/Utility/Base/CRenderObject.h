@@ -37,6 +37,8 @@ public:			// getter, setter
 
 	bool&			getbIsCollision() { return m_bIsCollision; }
 
+	bool&			getbOutLineDraw() { return m_bIsOutlineDraw; }
+
 	//! 그리기 여부를 변경한다
 	void setVisible(bool a_bIsVisible);
 
@@ -71,6 +73,7 @@ protected:			// protected 변수
 	bool m_bIsVisible = false;
 	bool m_bIsDebugEnable = false;
 	bool m_bIsCollision = false;
+	bool m_bIsOutlineDraw = false;
 
 	CDebugDraw *m_pDebugDraw = nullptr;
 

@@ -2,11 +2,12 @@
 #include "../../../Define/KGlobalDefine.h"
 #include "../../../Utility/Base/CScene.h"
 
-#define MAX_LIST_BUTTON 4
+#define MAX_LIST_BUTTON 5
 #define MAX_TREE 9
 #define MAX_HOUSE 4
 #define MAX_OBJECT 4
 #define MAX_SOUND 7
+#define MAX_PAGE 9
 
 class CSpriteObject;
 class CSpriteObject_ScrollBar;
@@ -73,6 +74,7 @@ private:
 	void createBuildingButton(void);
 	void createObjectButton(void);
 	void createSoundButton(void);
+	void createPageButton(void);
 	void createCheckBoxButton(void);
 
 	// 버튼 그리기
@@ -101,8 +103,6 @@ private:
 
 	CSpriteObject_Button* m_pOpenButton = nullptr;
 	CSpriteObject_Button* m_pCloseButton = nullptr;
-	CSpriteObject_Button* m_pBuildingButton = nullptr;
-	CSpriteObject_Button* m_pTerrainButton = nullptr;
 	CSpriteObject_Button* m_pBackButton = nullptr;
 	CSpriteObject_Button* m_pGoTitleButton = nullptr;
 	CSpriteObject_Button* m_pCollisionButton = nullptr;
@@ -112,6 +112,7 @@ private:
 	CSpriteObject_Button* m_pHouseButton[MAX_HOUSE] = { nullptr };
 	CSpriteObject_Button* m_pObjectButton[MAX_OBJECT] = { nullptr };
 	CSpriteObject_Button* m_pSoundButton[MAX_SOUND] = { nullptr };
+	CSpriteObject_Button* m_pPageButton[MAX_PAGE] = { nullptr };
 
 	CSpriteObject_Button* m_pSaveButton = nullptr;
 	CSpriteObject_Button* m_pLoadButton = nullptr;
@@ -126,10 +127,11 @@ private:
 	CSpriteObject_ListSquare* m_pBuildingListSquare = nullptr;
 	CSpriteObject_ListSquare* m_pObjectListSquare = nullptr;
 	CSpriteObject_ListSquare* m_pSoundListSquare = nullptr;
+	CSpriteObject_ListSquare* m_pPageListSquare = nullptr;
 
 	CLabelObject*		m_pScaleLabel;
+	CLabelObject*		m_pOffsetLabel;
 	CLabelObject*		m_pRotateLabel;
-
 
 	MouseInfo		m_stMouseInfo;
 
@@ -150,4 +152,5 @@ private:
 	float m_fAngleZ = 0.0f;
 
 	float m_fScale = 0.2f;
+	float m_fOffesetY = 0.0f;
 };
