@@ -78,6 +78,7 @@ private:
 
 	float m_fPlayTime = 0.0f;
 
+	CSpriteObject_Default* m_pBlackScreen = nullptr;
 	CSpriteObject_Default* m_pCamCoderView = nullptr;
 	CSpriteObject_Default* m_pNoiseImage = nullptr;
 	CSpriteObject_Default* m_pColorNoiseImage = nullptr;
@@ -115,4 +116,6 @@ private:
 	float m_fNoiseTime = 0.0f;
 	// 움직인 시간
 	float m_fRunTime = 0.0f;
+
+	int noteCount = 0;
 };

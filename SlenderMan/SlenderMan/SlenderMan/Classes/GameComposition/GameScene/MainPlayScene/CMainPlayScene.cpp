@@ -485,6 +485,7 @@ void CMainPlayScene::releaseUI()
 	SAFE_DELETE(m_pScrollBar[1]);
 	SAFE_DELETE(m_pScrollBarButton[0]);
 	SAFE_DELETE(m_pScrollBarButton[1]);
+	SAFE_DELETE(m_pBlackScreen);
 }
 
 void CMainPlayScene::createLabel()
@@ -495,8 +496,11 @@ void CMainPlayScene::createLabel()
 
 void CMainPlayScene::createSpriteDefault()
 {
+	m_pBlackScreen = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/blackCover", "png", GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, 1);
+	m_pBlackScreen->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
+
 	m_pCamCoderView = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/camCoderView", "png", 1366, 768, 1);
-	m_pCamCoderView->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx/2.0f, GET_WINDOW_SIZE().cy / 2.0f,0.0f));
+	m_pCamCoderView->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
 
 	m_pNoiseImage = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/noise", "png", 1366, 768, 4);
 	m_pNoiseImage->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
@@ -654,6 +658,22 @@ void CMainPlayScene::update(void)
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
 	}
 
+	if (IS_KEY_PRESSED(DIK_O)) {
+		noteCount++;
+	}
+	if (noteCount >= 8)
+	{
+		if (IS_KEY_DOWN(DIK_P))
+		{
+			static int alpha = 0;
+			alpha++;
+			m_pBlackScreen->setColor(D3DCOLOR_ARGB(10, 0, 0, 0));
+			m_pBlackScreen->update();
+
+		}
+		CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+	}
+
 }
 
 void CMainPlayScene::draw(void)
@@ -677,7 +697,7 @@ void CMainPlayScene::draw(void)
 	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTexSurf);
 	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pDepthStencil);
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
-
+	GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 	m_pCamCoderView->drawUI();
 	char str[100];
 	int nHour = 0, nMin = 0, nSec = 0;
@@ -687,15 +707,17 @@ void CMainPlayScene::draw(void)
 	m_pPlayTime->setString(str);
 	m_pPlayTime->drawUI();
 
-
+	GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
 	FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect->SetMatrix("g_stWorldMatrix",&stWorldMatrix);
 	FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect->SetTexture("g_pTexture",FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTex);
 
 	RunEffectLoop(FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
 		FIND_RENDERTARGET("StageRenderTarget")->getPlaneMesh()->DrawSubset(0);
 	});
-
-
+	if (noteCount >= 8)
+	{
+		m_pBlackScreen->drawUI();
+	}
 
 	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
 	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pTexture", FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTex);
@@ -725,7 +747,6 @@ void CMainPlayScene::draw(void)
 	RunEffectLoop(FIND_RENDERTARGET("CamCoderRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
 		FIND_RENDERTARGET("CamCoderRenderTarget")->getPlaneMesh()->DrawSubset(0);
 	});
-
 
 }
 
