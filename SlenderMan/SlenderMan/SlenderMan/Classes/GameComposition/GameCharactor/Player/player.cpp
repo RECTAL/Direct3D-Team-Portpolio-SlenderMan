@@ -27,7 +27,7 @@ void player::init(void)
 	if (lightObj == nullptr)
 		lightObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
 
-	this->setPosition(D3DXVECTOR3(203.0f, 50.0f, 43.0f));
+	this->setPosition(D3DXVECTOR3(190.0f, 50.0f, 20.0f));
 	lightObj->setCameraObj(cameraObj);
 	this->addChildObject(cameraObj);
 	this->addChildObject(lightObj);
@@ -38,7 +38,7 @@ void player::init(void)
 	}
 	m_pSkinnedObj->setPosition(this->getPosition());
 	m_pSkinnedObj->setVisible(true);
-	m_pSkinnedObj->setScale(D3DXVECTOR3(0.2f, 0.2f, 0.2f));
+	m_pSkinnedObj->setScale(D3DXVECTOR3(0.1f, 0.1f, 0.1f));
 }
 
 void player::update(void)

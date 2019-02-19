@@ -70,11 +70,11 @@ void CMainPlayScene::init()
 	pPlayer->setStage(m_pStage);
 	pPlayer->init();
 
-	this->settingSlenderMan();
-	pSlenderMan->setPlayer(pPlayer);
-	pSlenderMan->setStage(m_pStage);
-	pSlenderMan->addSpotLight(pPlayer->getLightObj());
-	pSlenderMan->init();
+	//this->settingSlenderMan();
+	//pSlenderMan->setPlayer(pPlayer);
+	//pSlenderMan->setStage(m_pStage);
+	//pSlenderMan->addSpotLight(pPlayer->getLightObj());
+	//pSlenderMan->init();
 
 	ppSpotLightObj = new CSpotLightObject*[10];
 	ppPointLightObj = new CLightObject*[10];
@@ -574,8 +574,8 @@ void CMainPlayScene::update(void)
 	setTimer();
 	pPlayer->update();
 
-	pSlenderMan->spawnSlenderMan();
-	pSlenderMan->update();
+	//pSlenderMan->spawnSlenderMan();
+	//pSlenderMan->update();
 	this->setStateSound();
 	this->setBGMSound();
 	this->selectEffectSound();
@@ -598,19 +598,19 @@ void CMainPlayScene::update(void)
 		SetCursorPos(pt.x, pt.y);
 	}
 
-	if (pSlenderMan->getbIsSpawn())
-	{
-		D3DXVECTOR3 delta = pSlenderMan->getPosition() - pPlayer->getPosition();
-		float deltaLength = D3DXVec3Length(&delta);
-
-		if(deltaLength <=pSlenderMan->getBoundingSphere().m_fRadius)
-			m_nNoiseLevel++;
-		else
-		{
-			m_nNoiseLevel -= 2;
-			m_nNoiseLevel = max(0, m_nNoiseLevel);
-		}
-	}
+	//if (pSlenderMan->getbIsSpawn())
+	//{
+	//	D3DXVECTOR3 delta = pSlenderMan->getPosition() - pPlayer->getPosition();
+	//	float deltaLength = D3DXVec3Length(&delta);
+	//
+	//	if(deltaLength <=pSlenderMan->getBoundingSphere().m_fRadius)
+	//		m_nNoiseLevel++;
+	//	else
+	//	{
+	//		m_nNoiseLevel -= 2;
+	//		m_nNoiseLevel = max(0, m_nNoiseLevel);
+	//	}
+	//}
 
 	if (m_nNoiseLevel >= 50)
 	{
@@ -670,7 +670,7 @@ void CMainPlayScene::draw(void)
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
 	m_pStage->draw();
 	pPlayer->draw();
-	pSlenderMan->draw();
+	//pSlenderMan->draw();
 	/***************************************************/
 	//CamCoderRenderTarget¿¡ draw
 	/***************************************************/
