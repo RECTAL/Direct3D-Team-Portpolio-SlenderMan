@@ -688,7 +688,7 @@ void CMapToolScene::createObjectButton(void)
 
 	m_pObjectButton[MAX_OBJECT - 1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/none", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::NONE;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 
@@ -801,7 +801,7 @@ void CMapToolScene::createSoundButton(void)
 
 	m_pSoundButton[MAX_SOUND - 1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/none", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_SOUND;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::NONE;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 
@@ -835,7 +835,7 @@ void CMapToolScene::createPageButton(void)
 		sprintf(cPageMeshIndex, "Resources/Textures/object/page%d", i + 1);
 		m_pPageButton[i] = new CSpriteObject_Button(cPageIconIndex, "png", 100, 100, 1);
 		(*endFptr) = [=](void)->void {
-			m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
+			m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_BILLBOARD;
 			m_stMouseInfo.m_eObjType = ((EObjType)((int)EObjType::PAGE_1 + i));
 			if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 			CDecorate_BillboardObj::STParameters stParameters =
@@ -855,7 +855,7 @@ void CMapToolScene::createPageButton(void)
 
 	m_pPageButton[MAX_PAGE - 1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/none", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::NONE;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 

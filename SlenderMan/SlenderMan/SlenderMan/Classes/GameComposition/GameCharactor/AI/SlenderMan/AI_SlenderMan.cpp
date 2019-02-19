@@ -143,5 +143,5 @@ void slenderman::delSpotLight()
 void slenderman::createSphereMesh()
 {
 	if (m_pSphere != nullptr)SAFE_RELEASE(m_pSphere);
-	D3DXCreateSphere(GET_DEVICE(), 90.0f, 50.0f, 50.0f, &m_pSphere, NULL);
+	D3DXCreateSphere(GET_DEVICE(), 3.0f, 50.0f, 50.0f, &m_pSphere, NULL);
 }

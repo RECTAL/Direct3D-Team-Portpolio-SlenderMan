@@ -59,7 +59,7 @@ public:
 	CLightObject*	getDirectionalLightObj() { return m_pDirectionLightObj; }
 	std::vector<CRenderObject*>*	getObjList() { return m_pObjList; }
 	std::vector<CDecorate_SoundObj*> getSoundObjList() { return m_oSoundObjList; }
-	std::vector<CDecorate_BillboardObj*> getBillboardObjList() { return m_oBillboardObj;}
+	std::vector<CDecorate_BillboardObj*> getPaperObjList() { return m_oPaperObjList;}
 	BOOL&	getbIsMaptool() { return m_bIsMaptool; }
 
 private:
@@ -73,7 +73,7 @@ private:
 	OBJCONTAINER* m_pObjPacketList = nullptr;
 	std::vector<CRenderObject*>* m_pObjList = nullptr;
 	std::vector<CDecorate_SoundObj*> m_oSoundObjList;
-	std::vector<CDecorate_BillboardObj*> m_oBillboardObj;
+	std::vector<CDecorate_BillboardObj*> m_oPaperObjList;
 
 
 	BOOL	m_bIsMaptool = false;

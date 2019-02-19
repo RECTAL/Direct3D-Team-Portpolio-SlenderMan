@@ -58,6 +58,7 @@ public:
 
 private:
 	void	createPlaneMesh();
+	LPD3DXMESH	createPlaneMeshWithX();
 
 
 protected:
