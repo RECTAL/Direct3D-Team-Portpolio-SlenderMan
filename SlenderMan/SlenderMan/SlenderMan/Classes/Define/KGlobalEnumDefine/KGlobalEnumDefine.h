@@ -36,7 +36,7 @@ enum class CWindowType
 
 enum class EObjClasses
 {
-	SKINNED,STATIC,DECORATE_SOUND,NONE
+	SKINNED,STATIC,DECORATE_SOUND,DECORATE_BILLBOARD,NONE
 };
 
 enum class EObjType
@@ -48,7 +48,7 @@ enum class EObjType
 	OLDWOODDOCK,
 	PLANTS,
 	ROUNDWOOD,
-	URBANDEBRIS,
+	LOG,
 	WOODHOUSE,
 	TREE_1,
 	TREE_2,

@@ -255,6 +255,8 @@ void CMapToolScene::createButtonUI()
 
 		m_pCurrent = m_pOpenButton;
 
+		m_pLoadButton->setVisible(true);
+		m_pSaveButton->setVisible(true);
 		m_pSelectWindowContainer->setVisible(true);
 		m_pCloseButton->setVisible(true);
 	};
@@ -273,6 +275,8 @@ void CMapToolScene::createButtonUI()
 
 		m_pCurrent = nullptr;
 
+		m_pLoadButton->setVisible(false);
+		m_pSaveButton->setVisible(false);
 		m_pSelectWindowContainer->setVisible(false);
 		m_pCloseButton->setVisible(false);
 		m_pSoundListSquare->setVisible(false);
@@ -300,6 +304,7 @@ void CMapToolScene::createButtonUI()
 
 	m_pSaveButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ButtonIcon/save", "png", 50, 50, 1);
 	m_pSaveButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy - 25, 0));
+	m_pSaveButton->setVisible(false);
 	(*endFptr) = [=](void)->void
 	{
 		MessageBox(GET_WINDOW_HANDLE(), _T("Save"), "", S_OK);
@@ -310,6 +315,7 @@ void CMapToolScene::createButtonUI()
 
 	m_pLoadButton = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ButtonIcon/load", "png", 50, 50, 1);
 	m_pLoadButton->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2 + 55, GET_WINDOW_SIZE().cy - 25, 0));
+	m_pLoadButton->setVisible(false);
 	(*endFptr) = [=](void)->void
 	{
 		MessageBox(GET_WINDOW_HANDLE(), _T("Load"), "", S_OK);
@@ -626,26 +632,7 @@ void CMapToolScene::createObjectButton(void)
 	m_pObjectListSquare->setVisible(false);
 	m_pObjectListSquare->init(nullptr, nullptr, nullptr, nullptr);
 
-	m_pObjectButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/urbanDebris", "png", 100, 100, 1);
-	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
-		m_stMouseInfo.m_eObjType = EObjType::URBANDEBRIS;
-		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
-		CStaticObject::STParameters stParameters =
-		{
-			m_pCamera,m_pStage->getDirectionalLightObj(),
-			0,NULL,
-			0,NULL,
-			"Resources/Meshes/urbanDebris/urbanDebris.X",
-			"Resources/Effects/DefaultStaticMesh.fx"
-		};
-		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
-		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
-		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
-	};
-	m_pObjectButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
-
-	m_pObjectButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/plants", "png", 100, 100, 1);
+	m_pObjectButton[0] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/plants", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::PLANTS;
@@ -662,9 +649,9 @@ void CMapToolScene::createObjectButton(void)
 		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
-	m_pObjectButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
+	m_pObjectButton[0]->init(nullptr, nullptr, nullptr, endFptr, true);
 
-	m_pObjectButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/roundWood", "png", 100, 100, 1);
+	m_pObjectButton[1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/roundWood", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
 		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
 		m_stMouseInfo.m_eObjType = EObjType::ROUNDWOOD;
@@ -681,11 +668,30 @@ void CMapToolScene::createObjectButton(void)
 		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 	};
+	m_pObjectButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
+
+	m_pObjectButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/log", "png", 100, 100, 1);
+	(*endFptr) = [=](void)->void {
+		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
+		m_stMouseInfo.m_eObjType = EObjType::LOG;
+		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
+		CStaticObject::STParameters stParameters =
+		{
+			m_pCamera,m_pStage->getDirectionalLightObj(),
+			0,NULL,
+			0,NULL,
+			"Resources/Meshes/log/log.X",
+			"Resources/Effects/DefaultStaticMesh.fx"
+		};
+		m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
+		m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
+		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+	};
 	m_pObjectButton[2]->init(nullptr, nullptr, nullptr, endFptr, true);
 
 	m_pObjectButton[MAX_OBJECT - 1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/none", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::NONE;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 
@@ -798,7 +804,7 @@ void CMapToolScene::createSoundButton(void)
 
 	m_pSoundButton[MAX_SOUND - 1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/none", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_SOUND;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::NONE;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 
@@ -833,7 +839,7 @@ void CMapToolScene::createPageButton(void)
 		std::string str = cPageMeshIndex;
 		m_pPageButton[i] = new CSpriteObject_Button(cPageIconIndex, "png", 100, 100, 1);
 		(*endFptr) = [=](void)->void {
-			m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
+			m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_BILLBOARD;
 			m_stMouseInfo.m_eObjType = ((EObjType)((int)EObjType::PAGE_1 + i));
 			if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 			CDecorate_BillboardObj::STParameters stParameters =
@@ -853,7 +859,7 @@ void CMapToolScene::createPageButton(void)
 
 	m_pPageButton[MAX_PAGE - 1] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListSquareIcon/none", "png", 100, 100, 1);
 	(*endFptr) = [=](void)->void {
-		m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
+		m_stMouseInfo.m_eObjClasses = EObjClasses::NONE;
 		m_stMouseInfo.m_eObjType = EObjType::NONE;
 		if (m_stMouseInfo.m_pRenderObj != nullptr) SAFE_DELETE(m_stMouseInfo.m_pRenderObj);
 
@@ -888,7 +894,7 @@ void CMapToolScene::createCheckBoxButton(void)
 				m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
 			}
 		}
-		else {
+		else if(m_pCollisionButton->getTextureOffset() == 1) {
 			m_pCollisionButton->getTextureOffset() = 0;
 			m_bIsCollision = false;
 			m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
@@ -914,7 +920,7 @@ void CMapToolScene::createCheckBoxButton(void)
 			}
 			m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
 		}
-		else {
+		else if(m_pDebugButton->getTextureOffset() == 1){
 			m_pDebugButton->getTextureOffset() = 0;
 			m_bIsDebug = false;
 			if (m_stMouseInfo.m_eObjClasses != EObjClasses::DECORATE_SOUND)
@@ -1150,8 +1156,13 @@ void CMapToolScene::removeUI(void)
 	SAFE_DELETE(m_pOpenButton);
 	SAFE_DELETE(m_pCloseButton);
 	SAFE_DELETE(m_pGoTitleButton);
-	SAFE_DELETE(m_pCollisionButton);
-	SAFE_DELETE(m_pDebugButton);
+
+	if (m_pCollisionButton != nullptr) {
+		SAFE_DELETE(m_pCollisionButton);
+	}
+	if (m_pDebugButton != nullptr) {
+		SAFE_DELETE(m_pDebugButton);
+	}
 	SAFE_DELETE(m_pSquareUpCover);
 
 	if (m_pBackButton != nullptr)
