@@ -74,6 +74,7 @@ void CMainPlayScene::init()
 	pSlenderMan->setPlayer(pPlayer);
 	pSlenderMan->setStage(m_pStage);
 	pSlenderMan->addSpotLight(pPlayer->getLightObj());
+	pSlenderMan->getStaticObj()->getTechniqueName() = "FogStaticMesh";
 	pSlenderMan->init();
 
 	ppSpotLightObj = new CSpotLightObject*[10];

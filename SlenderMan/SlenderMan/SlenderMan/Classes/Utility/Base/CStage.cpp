@@ -58,6 +58,7 @@ void CStage::release()
 			m_pObjList = nullptr;
 		}
 		m_oSoundObjList.clear();
+		m_oPaperObjList.clear();
 		SAFE_DELETE(m_pTerrainObj);
 	}
 
@@ -432,7 +433,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 							stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
 
 							m_pObjList[i].push_back(stBillboardObj);
-							m_oBillboardObj.push_back(stBillboardObj);
+							m_oPaperObjList.push_back(stBillboardObj);
 						}
 					}
 				}
@@ -813,9 +814,8 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 					stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
 					stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
 					stBillboardObj->setVisible(false);
-					stBillboardObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 					m_pObjList[nIndex].push_back(stBillboardObj);
-					m_oBillboardObj.push_back(stBillboardObj);
+					m_oPaperObjList.push_back(stBillboardObj);
 				}
 			}
 
@@ -878,6 +878,16 @@ void CStage::setCameraObj(CCameraObject * a_pCameraObj)
 						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
 						pStaticObj->getSTParameters().m_pCamera = pCameraObj;
 					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_SOUND)
+					{
+						CDecorate_SoundObj* pSoundObj = dynamic_cast<CDecorate_SoundObj*>(m_pObjList[i][j]);
+						pSoundObj->getSTParameters().m_pCamera = pCameraObj;
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_BILLBOARD)
+					{
+						CDecorate_BillboardObj* pBillboard = dynamic_cast<CDecorate_BillboardObj*>(m_pObjList[i][j]);
+						pBillboard->getSTParameters().m_pCamera = pCameraObj;
+					}
 				}
 			}
 		}
@@ -909,6 +919,12 @@ void CStage::setObjEffectTechname(std::string a_stTechname)
 						CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
 						pStaticObj->getTechniqueName() = a_stTechname;
 					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_BILLBOARD)
+					{
+						CDecorate_BillboardObj* pBillboard = dynamic_cast<CDecorate_BillboardObj*>(m_pObjList[i][j]);
+						pBillboard->getTechniqueName() = a_stTechname;
+					}
+
 				}
 			}
 		}
@@ -978,6 +994,13 @@ void CStage::addSpotLightObj(CSpotLightObject * a_pSpotLightObj)
 						if (nNumSpot < 10)
 							pStaticObj->getSTParameters().m_pSpotLight[nNumSpot - 1] = pSpotLight;
 					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_BILLBOARD)
+					{
+						CDecorate_BillboardObj* pBillboard = dynamic_cast<CDecorate_BillboardObj*>(m_pObjList[i][j]);
+						int nNumSpot = ++pBillboard->getSTParameters().m_nNumSpotLight;
+						if (nNumSpot < 10)
+							pBillboard->getSTParameters().m_pSpotLight[nNumSpot - 1] = pSpotLight;
+					}
 				}
 			}
 		}
@@ -1012,6 +1035,13 @@ void CStage::delSpotLightObj()
 						pStaticObj->getSTParameters().m_nNumSpotLight = max(pStaticObj->getSTParameters().m_nNumSpotLight - 1, 0);
 						int nNumSpot = pStaticObj->getSTParameters().m_nNumSpotLight;
 						pStaticObj->getSTParameters().m_pSpotLight[nNumSpot] = nullptr;
+					}
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_BILLBOARD)
+					{
+						CDecorate_BillboardObj* pBillboard = dynamic_cast<CDecorate_BillboardObj*>(m_pObjList[i][j]);
+						pBillboard->getSTParameters().m_nNumSpotLight = max(pBillboard->getSTParameters().m_nNumSpotLight - 1, 0);
+						int nNumSpot = pBillboard->getSTParameters().m_nNumSpotLight;
+						pBillboard->getSTParameters().m_pSpotLight[nNumSpot] = nullptr;
 					}
 				}
 			}
@@ -1069,6 +1099,11 @@ void CStage::update()
 					CDecorate_SoundObj* pSoundObj = dynamic_cast<CDecorate_SoundObj*>(m_pObjList[i][j]);
 					pSoundObj->update();
 				}
+				else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_BILLBOARD)
+				{
+					CDecorate_BillboardObj* pBillboard = dynamic_cast<CDecorate_BillboardObj*>(m_pObjList[i][j]);
+					pBillboard->update();
+				}
 			}
 		}
 	}
@@ -1112,6 +1147,7 @@ void CStage::draw()
 						if (!pStaticObj->getVisible())pStaticObj->setVisible(true);
 						else
 						{
+							pStaticObj->getbOutLineDraw() = true;
 							if (pStaticObj->getbOutLineDraw()&&!m_bIsMaptool)
 							{
 								/********************************************/
@@ -1164,6 +1200,57 @@ void CStage::draw()
 						else
 							pSoundObj->draw();
 					}
+				}
+				else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_BILLBOARD)
+				{
+					CDecorate_BillboardObj* pBillboard = dynamic_cast<CDecorate_BillboardObj*>(m_pObjList[i][j]);
+					if (pBillboard->getSTParameters().m_pCamera->getCameraFrustum()->IsInSphere(pBillboard->getFinalBoundingSphere()))
+					{
+						if (!pBillboard->getVisible())pBillboard->setVisible(true);
+						else
+						{
+							pBillboard->getbOutLineDraw() = true;
+							if (pBillboard->getbOutLineDraw() && !m_bIsMaptool)
+							{
+								/********************************************/
+								//OutlineRenderTarget¿¡ Draw
+								/********************************************/
+								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineRenderTarget")->m_stRenderTarget.m_pTexSurf);
+
+								D3DXMATRIXA16	stWorldMatrix = pBillboard->getFinalWorldMatrix();
+								D3DXMATRIXA16	stViewMatrix = pBillboard->getSTParameters().m_pCamera->getViewMatrix();
+								D3DXMATRIXA16	stProjectionMatrix = pBillboard->getSTParameters().m_pCamera->getProjectionMatrix();
+
+								GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, false);
+
+								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stViewMatrix", &stViewMatrix);
+								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stProjectionMatrix", &stProjectionMatrix);
+
+
+								RunEffectLoop(FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect, "outline", [=](int nPassNum)->void {
+									pBillboard->getMesh()->DrawSubset(0);
+								});
+
+								GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, true);
+								/********************************************/
+								//OutlineMeshRenderTarget¿¡ Draw
+								/********************************************/
+								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_stRenderTarget.m_pTexSurf);
+								pBillboard->draw();
+
+								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+
+							}
+							else
+							{
+								if (!m_bIsMaptool)
+									GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+								pBillboard->draw();
+							}
+						}
+					}
+
 				}
 			}
 		}

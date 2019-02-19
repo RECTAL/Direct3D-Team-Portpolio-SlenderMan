@@ -12,13 +12,14 @@ CDecorate_BillboardObj::CDecorate_BillboardObj(STParameters & a_rstParameters)
 	:
 	m_stParameters(a_rstParameters)
 {
+	m_nAnimationCount = a_rstParameters.m_nFrame;
 	m_pEffect = GET_EFFECT(a_rstParameters.m_oEffectFilepath);
-	this->createPlaneMesh();
+	m_pMesh = this->createPlaneMeshWithX();
 	for (int i = 0; i < m_nAnimationCount; i++)
 	{
 		char path[MAX_PATH];
 		sprintf(path, "%s_%d.%s", a_rstParameters.m_oTextureFilepath.c_str(), i, a_rstParameters.m_stExtantion.c_str());
-		m_oSpriteTexture.push_back(GET_TEXTURE(a_rstParameters.m_oTextureFilepath,GOUST_VALUE, GOUST_VALUE));
+		m_oSpriteTexture.push_back(GET_TEXTURE(path,GOUST_VALUE, GOUST_VALUE));
 	}
 	
 	auto stBoundingBox = CreateBoundingBox(m_pMesh);
@@ -26,7 +27,6 @@ CDecorate_BillboardObj::CDecorate_BillboardObj(STParameters & a_rstParameters)
 
 	this->setBoundingBox(stBoundingBox);
 	this->setBoundingSphere(stBoundingSphere);
-	
 }
 
 CDecorate_BillboardObj::~CDecorate_BillboardObj()
@@ -115,19 +115,24 @@ void CDecorate_BillboardObj::preDraw(void)
 	m_pEffect->SetFloatArray("g_fPointDistance", fPointDistance, 10);
 
 	m_pEffect->SetTexture("g_pTexture", m_oSpriteTexture[m_nTextureOffset]);
+
+	GET_DEVICE()->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 }
 
 void CDecorate_BillboardObj::postDraw(void)
 {
 	CRenderObject::postDraw();
+	GET_DEVICE()->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
 
 void CDecorate_BillboardObj::doDraw(void)
 {
 	CRenderObject::doDraw();
+
 	RunEffectLoop(m_pEffect, m_stTechniqueName.c_str(), [=](int nPassNum)->void {
 		m_pMesh->DrawSubset(0);
 	});
+
 }
 
 void CDecorate_BillboardObj::update(void)
@@ -145,7 +150,7 @@ void CDecorate_BillboardObj::update(void)
 
 void CDecorate_BillboardObj::createPlaneMesh()
 {
-	D3DVERTEXELEMENT9 astElements[] = {
+	/*D3DVERTEXELEMENT9 astElements[] = {
 		0, 0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0,
 		0, 12, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0,
 		0, 20, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0,
@@ -158,7 +163,7 @@ void CDecorate_BillboardObj::createPlaneMesh()
 	);
 
 	STVertex* pVertices = nullptr;
-	if (SUCCEEDED(m_pMesh->LockVertexBuffer(0, (void**)pVertices)))
+	if (SUCCEEDED(m_pMesh->LockVertexBuffer(0, (void**)&pVertices)))
 	{
 		pVertices[0].m_stPosition = D3DXVECTOR3(-1.0f, 1.0f, 0.0f);
 		pVertices[0].m_stUV		  = D3DXVECTOR2( 0.0f, 0.0f);
@@ -182,6 +187,33 @@ void CDecorate_BillboardObj::createPlaneMesh()
 		m_pMesh->UnlockVertexBuffer();
 	}
 	D3DXComputeNormals(m_pMesh, NULL);
-	D3DXComputeTangent(m_pMesh,0,0,0,TRUE,NULL);
+	D3DXComputeTangent(m_pMesh,0,0,0,TRUE,NULL);*/
 
+}
+
+LPD3DXMESH CDecorate_BillboardObj::createPlaneMeshWithX()
+{
+	LPD3DXMESH pMesh = nullptr;
+	LPD3DXBUFFER pAdjacency = nullptr;
+	D3DXLoadMeshFromX(_T("Resources/Meshes/Plane/plane.x"), D3DXMESH_MANAGED, GET_DEVICE(), &pAdjacency, nullptr, nullptr, nullptr, &pMesh);
+
+	D3DVERTEXELEMENT9 astElements[] = {
+		0, 0,  D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0,
+		0, 12, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0,
+		0, 20, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,	 0,
+		0, 32, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BINORMAL, 0,
+		0, 44, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT,  0,
+		D3DDECL_END()
+	};
+
+	auto OriginMesh = pMesh;
+	OriginMesh->CloneMesh(OriginMesh->GetOptions(), astElements, GET_DEVICE(), &pMesh);
+
+	D3DXComputeNormals(pMesh, (DWORD*)pAdjacency->GetBufferPointer());
+	D3DXComputeTangent(pMesh, 0, 0, 0, TRUE, (DWORD*)pAdjacency->GetBufferPointer());
+
+	SAFE_RELEASE(pAdjacency);
+	SAFE_RELEASE(OriginMesh);
+
+	return pMesh;
 }
