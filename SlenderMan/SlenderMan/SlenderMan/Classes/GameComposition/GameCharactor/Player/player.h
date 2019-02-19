@@ -24,9 +24,9 @@ public:
 	virtual void postDraw(void) override;
 
 public:		//getter,setter
-	/**********************************************/
-	//getter
-	/**********************************************/
+			/**********************************************/
+			//getter
+			/**********************************************/
 	CCameraObject* getCamera(void) { return cameraObj; }
 	CSpotLightObject* getLightObj(void) { return lightObj; }
 	CSkinnedObject*	getSkinnedObj(void) { return m_pSkinnedObj; }
@@ -38,7 +38,7 @@ public:		//getter,setter
 	//setter
 	/**********************************************/
 	void	setStage(CStage* a_pStage) { m_pStage = a_pStage; }
-	void	setMainSceneAddress(CMainPlayScene* address) { mainScene = address; }
+	void setMainSceneAddress(CMainPlayScene* address) { mainScene = address; }
 private:
 	void mouseSenterPos();
 	CSkinnedObject* createPlayer();
@@ -46,8 +46,6 @@ private:
 	void settingCamera();
 	void settingLight();
 	void settingSkinnedObj();
-	void settingAnimation();
-
 
 	void adjustJump();
 	void adjustCollisionArea();
@@ -66,17 +64,17 @@ private:
 
 
 
-	bool m_bIsLeft	= false;
-	bool m_bIsRight	= false;
+	bool m_bIsLeft = false;
+	bool m_bIsRight = false;
 	bool m_bIsFront = false;
-	bool m_bIsBack	= false;
+	bool m_bIsBack = false;
 
 	D3DXVECTOR3 m_stSkinnedRightVec3;
 	D3DXVECTOR3 m_stSkinnedUpVec3;
 	D3DXVECTOR3	m_stSkinnedForwardVec3;
 
-	bool		m_bIsJump	 = false;
-	float		m_fJumpTime	 = 0.0f;
+	bool		m_bIsJump = false;
+	float		m_fJumpTime = 0.0f;
 	float		m_fYVelocity = 0.0f;
 
 	fPOINT		m_fTopLeft;
@@ -85,5 +83,9 @@ private:
 	STRay		m_stSkinnedRay;
 
 
-	float		m_fCheckRange = 15.0f;
+	float		m_fCheckRange = 3.0f;
+
+	bool isPlay = false;
+	bool isRun = false;
+
 };

@@ -22,7 +22,7 @@ player::~player(void)
 
 void player::init(void)
 {
-	if(cameraObj == nullptr)
+	if (cameraObj == nullptr)
 		cameraObj = new CCameraObject((float)GET_WINDOW_SIZE().cx / (float)GET_WINDOW_SIZE().cy);
 	if (lightObj == nullptr)
 		lightObj = new CSpotLightObject(0, 300.0f, D3DXToRadian(5.0f), D3DXToRadian(15.0f));
@@ -46,17 +46,17 @@ void player::update(void)
 	if (!mainScene->getIsMenu())
 	{
 		CCharactor::update();
-		
+
 		settingCamera();
 		settingLight();
 		settingSkinnedObj();
 
 		m_pSkinnedObj->update();
-		
-		// 마우스 화면 조절 
-		mouseSenterPos();
 
-		float fSpeed = 15.0f;
+		// 마우스 화면 조절 
+		static bool isEsc = false;
+		if (!isEsc)
+			mouseSenterPos();
 
 		m_bIsLeft = false;
 		m_bIsRight = false;
@@ -66,39 +66,59 @@ void player::update(void)
 		m_fTopLeft.x = this->getPosition().x - m_fCheckRange;
 		m_fTopLeft.y = this->getPosition().z - m_fCheckRange;
 
+
 		m_fBottomRight.x = this->getPosition().x + m_fCheckRange;
 		m_fBottomRight.y = this->getPosition().z + m_fCheckRange;
 
-	
-		if (IS_KEY_DOWN(DIK_W)&&!checkCollisionTerrain(EDirection::FRONT)) {
+		float fSpeed = 15.0f;
+		auto aniList = m_pSkinnedObj->getAnimationNameList();
+
+
+		if (IS_KEY_DOWN(DIK_W) && !checkCollisionTerrain(EDirection::FRONT)) {
 			playerState |= (int)EPlayerState::WALKGRASS;
 			m_bIsFront = true;
+			if (!isPlay)
+			{
+				m_pSkinnedObj->playAnimation(aniList[1], true);
+				isPlay = true;
+			}
 			if (IS_KEY_DOWN(DIK_LSHIFT)) {
-				fSpeed = 50.0f;
+				fSpeed = 25.0f;
 				playerState |= (int)EPlayerState::RUN;
+				if (isPlay && !isRun)
+				{
+					m_pSkinnedObj->playAnimation(aniList[2], true);
+					isPlay = true;
+					isRun = true;
+				}
 			}
 			else if (IS_KEY_RELEASED(DIK_LSHIFT)) {
 				playerState = (int)EPlayerState::NONE;
+				m_pSkinnedObj->playAnimation(aniList[0], true);
+				isPlay = false;
+				isRun = false;
 			}
-			
+
 			this->moveByZAxis(fSpeed * GET_DELTA_TIME());
 		}
-		if (IS_KEY_RELEASED(DIK_W)) {
+		else if (IS_KEY_RELEASED(DIK_W)) {
 			playerState = (int)EPlayerState::NONE;
+			m_pSkinnedObj->playAnimation(aniList[0], true);
+			isPlay = false;
 		}
-		if (IS_KEY_DOWN(DIK_S)&& !checkCollisionTerrain(EDirection::BACK)) {
-				this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+		if (IS_KEY_DOWN(DIK_S) && !checkCollisionTerrain(EDirection::BACK)) {
+			this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
 			m_bIsBack = true;
 		}
-		if (IS_KEY_DOWN(DIK_A)&& !checkCollisionTerrain(EDirection::LEFT)) {
+		if (IS_KEY_DOWN(DIK_A) && !checkCollisionTerrain(EDirection::LEFT)) {
 			this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
 			m_bIsLeft = true;
 		}
-		if (IS_KEY_DOWN(DIK_D)&& !checkCollisionTerrain(EDirection::RIGHT)) {
+		if (IS_KEY_DOWN(DIK_D) && !checkCollisionTerrain(EDirection::RIGHT)) {
 			this->moveByXAxis(fSpeed * GET_DELTA_TIME());
 			m_bIsRight = true;
 		}
-		if (IS_KEY_PRESSED(DIK_SPACE)&&!m_bIsJump)
+		if (IS_KEY_PRESSED(DIK_SPACE) && !m_bIsJump)
 		{
 			m_bIsJump = true;
 			m_fJumpTime = 0.0f;
@@ -106,7 +126,7 @@ void player::update(void)
 		}
 
 		adjustJump();
-		
+
 		m_fTopLeft.x = this->getPosition().x - m_fCheckRange;
 		m_fTopLeft.y = this->getPosition().z - m_fCheckRange;
 
@@ -115,15 +135,14 @@ void player::update(void)
 		m_fBottomRight.y = this->getPosition().z + m_fCheckRange;
 
 		adjustCollisionArea();
-		settingAnimation();
 
 		if (this->checkCollisionArea())
 		{
 			if (m_bIsJump)m_fYVelocity = 0.0f;
-			if(m_bIsFront)this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
-			if(m_bIsBack)this->moveByZAxis(fSpeed * GET_DELTA_TIME());
-			if(m_bIsLeft)this->moveByXAxis(fSpeed * GET_DELTA_TIME());
-			if(m_bIsRight)this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
+			if (m_bIsFront)this->moveByZAxis(-fSpeed * GET_DELTA_TIME());
+			if (m_bIsBack)this->moveByZAxis(fSpeed * GET_DELTA_TIME());
+			if (m_bIsLeft)this->moveByXAxis(fSpeed * GET_DELTA_TIME());
+			if (m_bIsRight)this->moveByXAxis(-fSpeed * GET_DELTA_TIME());
 		}
 	}
 }
@@ -144,6 +163,7 @@ void player::postDraw(void)
 
 void player::mouseSenterPos()
 {
+	static int testInt = 0;
 	RECT rc;
 	POINT pt = { 0 ,0 };
 	GetClientRect(GET_WINDOW_HANDLE(), &rc);
@@ -152,35 +172,35 @@ void player::mouseSenterPos()
 
 	int dPosX = pt.x - GET_MOUSE_POSITION().x;
 	int dPosY = pt.y - GET_MOUSE_POSITION().y;
-	
-	static bool isFirst = true;
-	if (isFirst) 
+
+	static bool first = true;
+	if (first)
 	{
 		dPosX = 0;
 		dPosY = 0;
-		isFirst = false;
+		first = false;
 	}
-	
-	this->rotateByYAxis(-dPosX / 5.0f, false);
+	testInt += dPosY;
+	if (testInt > 372)
+	{
+		testInt -= dPosY;
+		dPosY = 0;
+	}
+	else if (testInt < -372)
+	{
+		testInt -= dPosY;
+		dPosY = 0;
+	}
 
-	static int maxRotateY = 0;
-	maxRotateY += dPosY;
-	if (maxRotateY >= -371 && maxRotateY <= 371) 
-		this->rotateByXAxis(-dPosY / 5.0f);
-	if (maxRotateY <= -371)
-		maxRotateY = -371;
-	else if (maxRotateY >= 371)
-		maxRotateY = 371;
+	this->rotateByYAxis((float)-dPosX / 5.0f, false);
+	this->rotateByXAxis((float)-dPosY / 5.0f);
+
+
 
 	ClientToScreen(GET_WINDOW_HANDLE(), &pt);
 	SetCursorPos(pt.x, pt.y);
-	
-	printf("Y : %d\n", maxRotateY);
-	printf("dPosY : %d\n", dPosY);
-	//printf("right.X : %f, right.Y : %f, right.Z : %f\n", this->getRightDirection().x, this->getRightDirection().y, this->getRightDirection().z);
-	//printf("up.X : %f, up.Y : %f, up.Z : %f\n", this->getUpDirection().x, this->getUpDirection().y, this->getUpDirection().z);
-	//printf("forward.X : %f, forward.Y : %f, forward.Z : %f\n", this->getForwardDirection().x, this->getForwardDirection().y, this->getForwardDirection().z);
 
+	printf("testInt : %d\n", testInt);
 }
 
 CSkinnedObject * player::createPlayer()
@@ -262,25 +282,6 @@ void player::settingSkinnedObj()
 	m_pSkinnedObj->setForwardDirection(m_stSkinnedForwardVec3);
 }
 
-void player::settingAnimation()
-{
-	auto playerAnimationList = m_pSkinnedObj->getAnimationNameList();
-	if (playerState == (int)EPlayerState::NONE)
-	{
-		m_pSkinnedObj->playAnimation(playerAnimationList[0], true);
-	}
-	else if (playerState == (int)EPlayerState::WALKGRASS ||
-		playerState == (int)EPlayerState::WALKREED ||
-		playerState == (int)EPlayerState::WALKROCK)
-	{
-		m_pSkinnedObj->playAnimation(playerAnimationList[1], true);
-	}
-	else if (playerState == (int)EPlayerState::RUN)
-	{
-		m_pSkinnedObj->playAnimation(playerAnimationList[2], true);
-	}
-}
-
 void player::adjustJump()
 {
 	if (!m_bIsJump)
@@ -325,13 +326,13 @@ void player::adjustCollisionArea()
 	{
 		int nWidth = m_pStage->getTerrainObj()->getCXTerrain();
 		int nHeight = m_pStage->getTerrainObj()->getCZTerrain();
-		
+
 		if (m_fTopLeft.x < -nWidth / 2) m_fTopLeft.x = -nWidth / 2;
-		if (m_fTopLeft.y < -nHeight / 2)m_fTopLeft.y = -nHeight/2;
+		if (m_fTopLeft.y < -nHeight / 2)m_fTopLeft.y = -nHeight / 2;
 
 
 		if (m_fBottomRight.x > nWidth / 2) m_fBottomRight.x = nWidth / 2;
-		if (m_fBottomRight.y > nHeight / 2)m_fBottomRight.y = nHeight/2;
+		if (m_fBottomRight.y > nHeight / 2)m_fBottomRight.y = nHeight / 2;
 
 	}
 }
@@ -350,8 +351,8 @@ bool player::checkCollisionArea()
 
 		D3DXVECTOR3 stTopLeftPos = D3DXVECTOR3((m_fTopLeft.x + nTerrainWidth / 2) / nScaleX, 0, (m_fTopLeft.y + nTerrainHeight / 2) / nScaleZ);
 		D3DXVECTOR3 stBottomRightPos = D3DXVECTOR3((m_fBottomRight.x + nTerrainWidth / 2) / nScaleX, 0, (m_fBottomRight.y + nTerrainHeight / 2) / nScaleZ);
-		int xTopLeftIndex	  = (int)stTopLeftPos.x;
-		int zTopLeftIndex	  = (int)stTopLeftPos.z;
+		int xTopLeftIndex = (int)stTopLeftPos.x;
+		int zTopLeftIndex = (int)stTopLeftPos.z;
 		int xBottomRightIndex = (int)stBottomRightPos.x;
 		int zBottomRightIndex = (int)stBottomRightPos.z;
 
@@ -433,8 +434,8 @@ bool player::checkCollisionTerrain(EDirection a_eDirection)
 		{
 			int nIndex = (zTopLeftIndex + i)*nWidth + (xTopLeftIndex + j);
 			pPos[0] = D3DXVECTOR3(pHeightMap[nIndex]);
-			pPos[1] = D3DXVECTOR3(pHeightMap[nIndex+1]);
-			pPos[2] = D3DXVECTOR3(pHeightMap[nIndex+nWidth]);
+			pPos[1] = D3DXVECTOR3(pHeightMap[nIndex + 1]);
+			pPos[2] = D3DXVECTOR3(pHeightMap[nIndex + nWidth]);
 			float fDistance = 0.0f;
 			if (D3DXIntersectTri(&pPos[0], &pPos[1], &pPos[2], &m_stSkinnedRay.m_stOrigin, &m_stSkinnedRay.m_stDirection, NULL, NULL, &fDistance))
 			{
@@ -456,7 +457,7 @@ bool player::checkCollisionTerrain(EDirection a_eDirection)
 				}
 			}
 		}
-		if(isCollision)break;
+		if (isCollision)break;
 	}
 	ZeroMemory(&m_stSkinnedRay, sizeof(m_stSkinnedRay));
 	return isCollision;
