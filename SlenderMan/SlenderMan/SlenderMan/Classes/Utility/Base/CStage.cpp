@@ -59,6 +59,7 @@ void CStage::release()
 		}
 		m_oSoundObjList.clear();
 		m_oPaperObjList.clear();
+		m_oRenderObjList.clear();
 		SAFE_DELETE(m_pTerrainObj);
 	}
 
@@ -125,7 +126,10 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						stStaticObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stStaticObj->getObjClasses() = EObjClasses::STATIC;
 						m_pObjList[i].push_back(stStaticObj);
+						m_oRenderObjList.push_back(stStaticObj);
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::GRASS)
 					{
@@ -145,8 +149,10 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
+						stStaticObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stStaticObj->getObjClasses() = EObjClasses::STATIC;
 						m_pObjList[i].push_back(stStaticObj);
+						m_oRenderObjList.push_back(stStaticObj);
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::MOUNTAIN)
 					{
@@ -166,8 +172,10 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
+						stStaticObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stStaticObj->getObjClasses() = EObjClasses::STATIC;
 						m_pObjList[i].push_back(stStaticObj);
+						m_oRenderObjList.push_back(stStaticObj);
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDHOUSE)
 					{
@@ -187,7 +195,10 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						stStaticObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stStaticObj->getObjClasses() = EObjClasses::STATIC;
 						m_pObjList[i].push_back(stStaticObj);
+						m_oRenderObjList.push_back(stStaticObj);
 
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OLDWOODDOCK)
@@ -208,7 +219,10 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						stStaticObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stStaticObj->getObjClasses() = EObjClasses::STATIC;
 						m_pObjList[i].push_back(stStaticObj);
+						m_oRenderObjList.push_back(stStaticObj);
 
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::PLANTS)
@@ -229,7 +243,10 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						stStaticObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stStaticObj->getObjClasses() = EObjClasses::STATIC;
 						m_pObjList[i].push_back(stStaticObj);
+						m_oRenderObjList.push_back(stStaticObj);
 
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::ROUNDWOOD)
@@ -250,8 +267,10 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
+						stStaticObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stStaticObj->getObjClasses() = EObjClasses::STATIC;
 						m_pObjList[i].push_back(stStaticObj);
+						m_oRenderObjList.push_back(stStaticObj);
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::LOG)
 					{
@@ -271,8 +290,10 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
+						stStaticObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stStaticObj->getObjClasses() = EObjClasses::STATIC;
 						m_pObjList[i].push_back(stStaticObj);
+						m_oRenderObjList.push_back(stStaticObj);
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::WOODHOUSE)
 					{
@@ -292,8 +313,10 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
+						stStaticObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stStaticObj->getObjClasses() = EObjClasses::STATIC;
 						m_pObjList[i].push_back(stStaticObj);
+						m_oRenderObjList.push_back(stStaticObj);
 					}
 				
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::CRIKET)
@@ -308,8 +331,11 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						stSoundObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 						m_pObjList[i].push_back(stSoundObj);
 						m_oSoundObjList.push_back(stSoundObj);
+						m_oRenderObjList.push_back(stSoundObj);
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::CROW)
 					{
@@ -323,8 +349,11 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						stSoundObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 						m_pObjList[i].push_back(stSoundObj);
 						m_oSoundObjList.push_back(stSoundObj);
+						m_oRenderObjList.push_back(stSoundObj);
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::FIRE)
 					{
@@ -338,8 +367,11 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						stSoundObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 						m_pObjList[i].push_back(stSoundObj);
 						m_oSoundObjList.push_back(stSoundObj);
+						m_oRenderObjList.push_back(stSoundObj);
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::OWL)
 					{
@@ -353,7 +385,11 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						stSoundObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 						m_pObjList[i].push_back(stSoundObj);
+						m_oSoundObjList.push_back(stSoundObj);
+						m_oRenderObjList.push_back(stSoundObj);
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::WIND)
 					{
@@ -367,8 +403,11 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						stSoundObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 						m_pObjList[i].push_back(stSoundObj);
 						m_oSoundObjList.push_back(stSoundObj);
+						m_oRenderObjList.push_back(stSoundObj);
 					}
 					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::RAIN)
 					{
@@ -382,8 +421,11 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 						stSoundObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 						stSoundObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 						stSoundObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
+						stSoundObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+						stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 						m_pObjList[i].push_back(stSoundObj);
 						m_oSoundObjList.push_back(stSoundObj);
+						m_oRenderObjList.push_back(stSoundObj);
 					}
 					for (int k = 0; k < 8; k++) {
 						char cTreeMeshIndex[MAX_PATH];
@@ -406,8 +448,10 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 							stStaticObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 							stStaticObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 							stStaticObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
+							stStaticObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+							stStaticObj->getObjClasses() = EObjClasses::STATIC;
 							m_pObjList[i].push_back(stStaticObj);
+							m_oRenderObjList.push_back(stStaticObj);
 						}
 					}
 					for (int k = 0; k < 8; k++) {
@@ -431,9 +475,11 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 							stBillboardObj->setUpDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stUpVec);
 							stBillboardObj->setRightDirection(m_pObjPacketList[i].m_stObjPacket[j].m_stRightVec);
 							stBillboardObj->getbIsCollision() = m_pObjPacketList[i].m_stObjPacket[j].m_bIsCollision;
-
+							stBillboardObj->getObjType() = m_pObjPacketList[i].m_stObjPacket[j].m_EObjType;
+							stBillboardObj->getObjClasses() = EObjClasses::DECORATE_BILLBOARD;
 							m_pObjList[i].push_back(stBillboardObj);
 							m_oPaperObjList.push_back(stBillboardObj);
+							m_oRenderObjList.push_back(stBillboardObj);
 						}
 					}
 				}
@@ -473,9 +519,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+				stStaticObj->getObjType() = a_stPacket.m_EObjType;
+				stStaticObj->getObjClasses() = EObjClasses::STATIC;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
+				m_oRenderObjList.push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::GRASS)
 			{
@@ -496,9 +545,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+				stStaticObj->getObjType() = a_stPacket.m_EObjType;
+				stStaticObj->getObjClasses() = EObjClasses::STATIC;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
+				m_oRenderObjList.push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::MOUNTAIN)
 			{
@@ -519,9 +571,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+				stStaticObj->getObjType() = a_stPacket.m_EObjType;
+				stStaticObj->getObjClasses() = EObjClasses::STATIC;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
+				m_oRenderObjList.push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::OLDHOUSE)
 			{
@@ -542,9 +597,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+				stStaticObj->getObjType() = a_stPacket.m_EObjType;
+				stStaticObj->getObjClasses() = EObjClasses::STATIC;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
+				m_oRenderObjList.push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::OLDWOODDOCK)
 			{
@@ -565,9 +623,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+				stStaticObj->getObjType() = a_stPacket.m_EObjType;
+				stStaticObj->getObjClasses() = EObjClasses::STATIC;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
+				m_oRenderObjList.push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::PLANTS)
 			{
@@ -588,9 +649,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+				stStaticObj->getObjType() = a_stPacket.m_EObjType;
+				stStaticObj->getObjClasses() = EObjClasses::STATIC;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
+				m_oRenderObjList.push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::ROUNDWOOD)
 			{
@@ -611,9 +675,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+				stStaticObj->getObjType() = a_stPacket.m_EObjType;
+				stStaticObj->getObjClasses() = EObjClasses::STATIC;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
+				m_oRenderObjList.push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::LOG)
 			{
@@ -634,9 +701,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+				stStaticObj->getObjType() = a_stPacket.m_EObjType;
+				stStaticObj->getObjClasses() = EObjClasses::STATIC;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
+				m_oRenderObjList.push_back(stStaticObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::WOODHOUSE)
 			{
@@ -657,9 +727,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 				stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 				stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+				stStaticObj->getObjType() = a_stPacket.m_EObjType;
+				stStaticObj->getObjClasses() = EObjClasses::STATIC;
 				stStaticObj->setVisible(false);
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
+				m_oRenderObjList.push_back(stStaticObj);
 			}
 
 			else if (a_stPacket.m_EObjType == EObjType::CRIKET)
@@ -675,9 +748,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
 				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
 				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stSoundObj->getObjType() = a_stPacket.m_EObjType;
+				stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 				stSoundObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stSoundObj);
 				m_oSoundObjList.push_back(stSoundObj);
+				m_oRenderObjList.push_back(stSoundObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::CROW)
 			{
@@ -692,9 +768,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
 				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
 				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stSoundObj->getObjType() = a_stPacket.m_EObjType;
+				stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 				stSoundObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stSoundObj);
 				m_oSoundObjList.push_back(stSoundObj);
+				m_oRenderObjList.push_back(stSoundObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::FIRE)
 			{
@@ -709,9 +788,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
 				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
 				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stSoundObj->getObjType() = a_stPacket.m_EObjType;
+				stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 				stSoundObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stSoundObj);
 				m_oSoundObjList.push_back(stSoundObj);
+				m_oRenderObjList.push_back(stSoundObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::OWL)
 			{
@@ -726,9 +808,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
 				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
 				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stSoundObj->getObjType() = a_stPacket.m_EObjType;
+				stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 				stSoundObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stSoundObj);
 				m_oSoundObjList.push_back(stSoundObj);
+				m_oRenderObjList.push_back(stSoundObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::RAIN)
 			{
@@ -743,9 +828,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
 				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
 				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stSoundObj->getObjType() = a_stPacket.m_EObjType;
+				stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 				stSoundObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stSoundObj);
 				m_oSoundObjList.push_back(stSoundObj);
+				m_oRenderObjList.push_back(stSoundObj);
 			}
 			else if (a_stPacket.m_EObjType == EObjType::WIND)
 			{
@@ -760,9 +848,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stSoundObj->setUpDirection(a_stPacket.m_stUpVec);
 				stSoundObj->setRightDirection(a_stPacket.m_stRightVec);
 				stSoundObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+				stSoundObj->getObjType() = a_stPacket.m_EObjType;
+				stSoundObj->getObjClasses() = EObjClasses::DECORATE_SOUND;
 				stSoundObj->setVisible(false);
 				m_pObjList[nIndex].push_back(stSoundObj);
 				m_oSoundObjList.push_back(stSoundObj);
+				m_oRenderObjList.push_back(stSoundObj);
 			}
 			for (int i = 0; i < 8; i++) {
 				char cTreeMeshIndex[MAX_PATH];
@@ -786,9 +877,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 					stStaticObj->setUpDirection(a_stPacket.m_stUpVec);
 					stStaticObj->setRightDirection(a_stPacket.m_stRightVec);
 					stStaticObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+					stStaticObj->getObjType() = a_stPacket.m_EObjType;
+					stStaticObj->getObjClasses() = EObjClasses::STATIC;
 					stStaticObj->setVisible(false);
 					stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 					m_pObjList[nIndex].push_back(stStaticObj);
+					m_oRenderObjList.push_back(stStaticObj);
 				}
 			}
 			for (int i = 0; i < 8; i++) {
@@ -813,9 +907,12 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 					stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
 					stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
 					stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision;
+					stBillboardObj->getObjType() = a_stPacket.m_EObjType;
+					stBillboardObj->getObjClasses() = EObjClasses::DECORATE_BILLBOARD;
 					stBillboardObj->setVisible(false);
 					m_pObjList[nIndex].push_back(stBillboardObj);
 					m_oPaperObjList.push_back(stBillboardObj);
+					m_oRenderObjList.push_back(stBillboardObj);
 				}
 			}
 
@@ -1127,135 +1224,130 @@ void CStage::draw()
 	D3DXMATRIXA16	stViewMatrix;
 	D3DXMATRIXA16	stProjectionMatrix;
 
-	for (int i = 0; i < fWidth*fHeight; i++)
+
+	
+	for (auto iter : m_oRenderObjList)
 	{
-		for (int j = 0; j < MAX_OBJ_CAPACITY; j++)
+		if (iter->getObjClasses() == EObjClasses::SKINNED)
 		{
-			if (m_pObjPacketList[i].m_nObjCapacity[j] == GOUST_VALUE)break;
-			else
+			CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(iter);
+
+		}
+		else if (iter->getObjClasses() == EObjClasses::STATIC)
+		{
+			CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(iter);
+			if (pStaticObj->getSTParameters().m_pCamera->getCameraFrustum()->IsInSphere(pStaticObj->getFinalBoundingSphere()))
 			{
-				if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::SKINNED)
+				if (!pStaticObj->getVisible())pStaticObj->setVisible(true);
+				else
 				{
-					CSkinnedObject* pSkinnedObj = dynamic_cast<CSkinnedObject*>(m_pObjList[i][j]);
-
-				}
-				else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::STATIC)
-				{
-					CStaticObject* pStaticObj = dynamic_cast<CStaticObject*>(m_pObjList[i][j]);
-					if (pStaticObj->getSTParameters().m_pCamera->getCameraFrustum()->IsInSphere(pStaticObj->getFinalBoundingSphere()))
+					
+					if (pStaticObj->getbOutLineDraw()&&!m_bIsMaptool)
 					{
-						if (!pStaticObj->getVisible())pStaticObj->setVisible(true);
-						else
-						{
-							
-							if (pStaticObj->getbOutLineDraw()&&!m_bIsMaptool)
-							{
-								/********************************************/
-								//OutlineRenderTarget에 Draw
-								/********************************************/
-								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineRenderTarget")->m_stRenderTarget.m_pTexSurf);
-							
-								D3DXMATRIXA16	stWorldMatrix = pStaticObj->getFinalWorldMatrix();
-								D3DXMATRIXA16	stViewMatrix = pStaticObj->getSTParameters().m_pCamera->getViewMatrix();
-								D3DXMATRIXA16	stProjectionMatrix = pStaticObj->getSTParameters().m_pCamera->getProjectionMatrix();
-							
-								GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, false);
-							
-								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
-								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stViewMatrix", &stViewMatrix);
-								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stProjectionMatrix", &stProjectionMatrix);
-							
-							
-								RunEffectLoop(FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect, "outline", [=](int nPassNum)->void {
-									for (int i = 0; i < pStaticObj->getStaticMesh().m_nNumMaterials; ++i) {
-										pStaticObj->getStaticMesh().m_pStaticMesh->DrawSubset(i);
-									}
-								});
-							
-								GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, true);
-								/********************************************/
-								//OutlineMeshRenderTarget에 Draw
-								/********************************************/
-								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_stRenderTarget.m_pTexSurf);
-								pStaticObj->draw();
-
-								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
-
+						/********************************************/
+						//OutlineRenderTarget에 Draw
+						/********************************************/
+						GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineRenderTarget")->m_stRenderTarget.m_pTexSurf);
+					
+						D3DXMATRIXA16	stWorldMatrix = pStaticObj->getFinalWorldMatrix();
+						D3DXMATRIXA16	stViewMatrix = pStaticObj->getSTParameters().m_pCamera->getViewMatrix();
+						D3DXMATRIXA16	stProjectionMatrix = pStaticObj->getSTParameters().m_pCamera->getProjectionMatrix();
+					
+						GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, false);
+					
+						FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+						FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stViewMatrix", &stViewMatrix);
+						FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stProjectionMatrix", &stProjectionMatrix);
+					
+					
+						RunEffectLoop(FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect, "outline", [=](int nPassNum)->void {
+							for (int i = 0; i < pStaticObj->getStaticMesh().m_nNumMaterials; ++i) {
+								pStaticObj->getStaticMesh().m_pStaticMesh->DrawSubset(i);
 							}
-							else
-							{
-								if(!m_bIsMaptool)
-									GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
-								pStaticObj->getbOutLineDraw() = false;
-								pStaticObj->draw();
-							}
-						}
+						});
+					
+						GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, true);
+						/********************************************/
+						//OutlineMeshRenderTarget에 Draw
+						/********************************************/
+						GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_stRenderTarget.m_pTexSurf);
+						pStaticObj->draw();
+
+						GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+
 					}
-				}
-				else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_SOUND)
-				{
-					if (m_bIsMaptool)
+					else
 					{
-						CDecorate_SoundObj* pSoundObj = dynamic_cast<CDecorate_SoundObj*>(m_pObjList[i][j]);
-						if (!pSoundObj->getVisible())pSoundObj->setVisible(true);
-						else
-							pSoundObj->draw();
+						if(!m_bIsMaptool)
+							GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+						pStaticObj->getbOutLineDraw() = false;
+						pStaticObj->draw();
 					}
-				}
-				else if (m_pObjPacketList[i].m_stObjPacket[j].m_EClasses == EObjClasses::DECORATE_BILLBOARD)
-				{
-					CDecorate_BillboardObj* pBillboard = dynamic_cast<CDecorate_BillboardObj*>(m_pObjList[i][j]);
-					if (pBillboard->getSTParameters().m_pCamera->getCameraFrustum()->IsInSphere(pBillboard->getFinalBoundingSphere()))
-					{
-						if (!pBillboard->getVisible())pBillboard->setVisible(true);
-						else
-						{
-							
-							if (pBillboard->getbOutLineDraw() && !m_bIsMaptool)
-							{
-								/********************************************/
-								//OutlineRenderTarget에 Draw
-								/********************************************/
-								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineRenderTarget")->m_stRenderTarget.m_pTexSurf);
-
-								D3DXMATRIXA16	stWorldMatrix = pBillboard->getFinalWorldMatrix();
-								D3DXMATRIXA16	stViewMatrix = pBillboard->getSTParameters().m_pCamera->getViewMatrix();
-								D3DXMATRIXA16	stProjectionMatrix = pBillboard->getSTParameters().m_pCamera->getProjectionMatrix();
-
-								GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, false);
-
-								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
-								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stViewMatrix", &stViewMatrix);
-								FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stProjectionMatrix", &stProjectionMatrix);
-
-
-								RunEffectLoop(FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect, "outline", [=](int nPassNum)->void {
-									pBillboard->getMesh()->DrawSubset(0);
-								});
-
-								GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, true);
-								/********************************************/
-								//OutlineMeshRenderTarget에 Draw
-								/********************************************/
-								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_stRenderTarget.m_pTexSurf);
-								pBillboard->draw();
-
-								GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
-
-							}
-							else
-							{
-								if (!m_bIsMaptool)
-									GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
-								pBillboard->getbOutLineDraw() = false;
-								if(!pBillboard->getbIsGet())
-									pBillboard->draw();
-							}
-						}
-					}
-
 				}
 			}
+		}
+		else if (iter->getObjClasses() == EObjClasses::DECORATE_SOUND)
+		{
+			if (m_bIsMaptool)
+			{
+				CDecorate_SoundObj* pSoundObj = dynamic_cast<CDecorate_SoundObj*>(iter);
+				if (!pSoundObj->getVisible())pSoundObj->setVisible(true);
+				else
+					pSoundObj->draw();
+			}
+		}
+		else if (iter->getObjClasses() == EObjClasses::DECORATE_BILLBOARD)
+		{
+			CDecorate_BillboardObj* pBillboard = dynamic_cast<CDecorate_BillboardObj*>(iter);
+			if (pBillboard->getSTParameters().m_pCamera->getCameraFrustum()->IsInSphere(pBillboard->getFinalBoundingSphere()))
+			{
+				if (!pBillboard->getVisible())pBillboard->setVisible(true);
+				else
+				{
+					
+					if (pBillboard->getbOutLineDraw() && !m_bIsMaptool)
+					{
+						/********************************************/
+						//OutlineRenderTarget에 Draw
+						/********************************************/
+						GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineRenderTarget")->m_stRenderTarget.m_pTexSurf);
+
+						D3DXMATRIXA16	stWorldMatrix = pBillboard->getFinalWorldMatrix();
+						D3DXMATRIXA16	stViewMatrix = pBillboard->getSTParameters().m_pCamera->getViewMatrix();
+						D3DXMATRIXA16	stProjectionMatrix = pBillboard->getSTParameters().m_pCamera->getProjectionMatrix();
+
+						GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, false);
+
+						FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+						FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stViewMatrix", &stViewMatrix);
+						FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect->SetMatrix("g_stProjectionMatrix", &stProjectionMatrix);
+
+
+						RunEffectLoop(FIND_RENDERTARGET("OutlineRenderTarget")->m_pOutlineEffect, "outline", [=](int nPassNum)->void {
+							pBillboard->getMesh()->DrawSubset(0);
+						});
+
+						GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, true);
+						/********************************************/
+						//OutlineMeshRenderTarget에 Draw
+						/********************************************/
+						GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("OutlineMeshRenderTarget")->m_stRenderTarget.m_pTexSurf);
+						pBillboard->draw();
+
+						GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+
+					}
+					else
+					{
+						if (!m_bIsMaptool)
+							GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+						pBillboard->getbOutLineDraw() = false;
+						if(!pBillboard->getbIsGet())
+							pBillboard->draw();
+					}
+				}
+			}
+
 		}
 	}
 
