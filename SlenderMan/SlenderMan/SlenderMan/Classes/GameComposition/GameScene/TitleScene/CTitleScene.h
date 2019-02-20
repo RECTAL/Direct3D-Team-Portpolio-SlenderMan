@@ -62,16 +62,12 @@ private:
 	CSpriteObject_Container* optionWindow = nullptr;
 	CSpriteObject_Button* backButton = nullptr;
 
-	CSpriteObject_List*		 uiList = nullptr;
-	CSpriteObject_Button*	uiButton[5] = { nullptr };
-
 	CSpriteObject_ScrollBar* soundScrollBar[2] = { nullptr };
 	CSpriteObject_Button*	 soundScrollBarButton[2] = { nullptr };
 
 
 
 	CSpriteObject*			 m_pCurrentSpriteHandle = nullptr;
-	CLoadingScene*			 m_pLoadingScene = nullptr;
 
 	FPTR* crashFptr = nullptr;
 	FPTR* beginFptr = nullptr;

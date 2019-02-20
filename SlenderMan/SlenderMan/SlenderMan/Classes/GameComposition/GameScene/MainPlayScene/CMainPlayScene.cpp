@@ -47,7 +47,6 @@ CMainPlayScene::~CMainPlayScene()
 void CMainPlayScene::init()
 {	
 	CScene::init();
-	ShowCursor(false);
 	
 	if (m_bIsFirst)
 	{
@@ -153,6 +152,7 @@ void CMainPlayScene::init()
 	m_fNoiseTime = 0.0f;
 
 	m_bIsGameClear = false;
+	m_bIsShowCursor = FALSE;
 }
 
 void CMainPlayScene::createWindowUI()
@@ -557,6 +557,8 @@ void CMainPlayScene::drawFindPage()
 	
 }
 
+
+
 void CMainPlayScene::createContainer()
 {
 	m_pMenuContainer = new CSpriteObject_Container("Resources/Textures/Scene/MainPlayScene/menuWindow", "png", 500, 500, 1);
@@ -579,28 +581,6 @@ void CMainPlayScene::createContainer()
 
 void CMainPlayScene::update(void)
 {
-	CScene::update();
-
-	m_pStage->update();
-	m_pCamCoderView->update();
-	m_pNoiseImage->update();
-	m_pColorNoiseImage->update();
-	m_pMenuContainer->update();
-	m_pSoundContainer->update();
-	setTimer();
-	pPlayer->update();
-
-	pSlenderMan->spawnSlenderMan();
-	pSlenderMan->update();
-	this->setStateSound();
-	this->setBGMSound();
-	this->selectEffectSound();
-	this->setVolume();
-	if (m_bIsBGMPlay)
-	{
-		this->createStageSound();
-		m_bIsBGMPlay = false;
-	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
 		m_bIsMenu = !m_bIsMenu;
 		m_pMenuContainer->setVisible(m_bIsMenu);
@@ -613,90 +593,125 @@ void CMainPlayScene::update(void)
 		ClientToScreen(GET_WINDOW_HANDLE(), &pt);
 		SetCursorPos(pt.x, pt.y);
 	}
-	ShowCursor(m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible());
-
-	if (pSlenderMan->getbIsSpawn())
+	m_pMenuContainer->update();
+	m_pSoundContainer->update();
+	if (!m_bIsMenu)
 	{
-		D3DXVECTOR3 delta = pSlenderMan->getPosition() - pPlayer->getPosition();
-		float deltaLength = D3DXVec3Length(&delta);
+		CScene::update();
+		if (m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible())
+		{
+			m_bIsShowCursor = TRUE;
+		}
+		else
+			m_bIsShowCursor = FALSE;
 
-		if(deltaLength <=pSlenderMan->getBoundingSphere().m_fRadius)
-			m_nNoiseLevel++;
+		ShowCursor(m_bIsShowCursor);
+		GET_DEVICE()->ShowCursor(m_bIsShowCursor);
+
+		m_pStage->update();
+		m_pCamCoderView->update();
+		m_pNoiseImage->update();
+		m_pColorNoiseImage->update();
+
+		setTimer();
+		pPlayer->update();
+
+		pSlenderMan->spawnSlenderMan();
+		pSlenderMan->update();
+		this->setStateSound();
+		this->setBGMSound();
+		this->selectEffectSound();
+		this->setVolume();
+		if (m_bIsBGMPlay)
+		{
+			this->createStageSound();
+			m_bIsBGMPlay = false;
+		}
+
+
+		if (pSlenderMan->getbIsSpawn())
+		{
+			D3DXVECTOR3 delta = pSlenderMan->getPosition() - pPlayer->getPosition();
+			float deltaLength = D3DXVec3Length(&delta);
+
+			if (deltaLength <= pSlenderMan->getBoundingSphere().m_fRadius)
+				m_nNoiseLevel++;
+			else
+			{
+				m_nNoiseLevel -= 1.5f;
+				m_nNoiseLevel = max(0, m_nNoiseLevel);
+			}
+		}
 		else
 		{
-			m_nNoiseLevel-=1.5f;
+			m_nNoiseLevel -= 2;
 			m_nNoiseLevel = max(0, m_nNoiseLevel);
 		}
-	}
-	else
-	{
-		m_nNoiseLevel -= 2;
-		m_nNoiseLevel = max(0, m_nNoiseLevel);
-	}
-	
-	if (m_nNoiseLevel >= 50)
-	{
-		m_fNoiseValue += 0.5f*GET_DELTA_TIME();
-		if (m_fNoiseValue > 0.7f)m_fNoiseValue = 0.7f;
-	}
-	else
-	{
-		m_fNoiseValue -= GET_DELTA_TIME();
-		if (m_fNoiseValue < 0.0f)m_fNoiseValue = 0.0f;
-	}
 
-	if (m_nNoiseLevel >= 100)
-	{
-		m_fHardNoiseValue += 0.5f*GET_DELTA_TIME();
-		if (m_fHardNoiseValue > 0.7f)
+		if (m_nNoiseLevel >= 50)
 		{
-			m_fDeadTime += GET_DELTA_TIME();
-			m_fHardNoiseValue = 0.7f;
-			if(m_fDeadTime>6.0f)
-				CHANGE_SCENE_DIRECT(GAMESCENE_GAMEOVER, TRUE);
+			m_fNoiseValue += 0.5f*GET_DELTA_TIME();
+			if (m_fNoiseValue > 0.7f)m_fNoiseValue = 0.7f;
 		}
-	}
-	else
-	{
-		m_fHardNoiseValue -= 0.5f*GET_DELTA_TIME();
-		if (m_fHardNoiseValue < 0.0f)m_fHardNoiseValue = 0.0f;
-
-		m_fDeadTime -= GET_DELTA_TIME();
-		if (m_fDeadTime < 0.0f)m_fDeadTime = 0.0f;
-	}
-
-	m_fPlayTime += GET_DELTA_TIME();
-
-	if (m_fNoiseValue >= 0.5f)
-	{
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
-	}
-	if (m_fHardNoiseValue >= 0.5f)
-	{
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
-	}
-
-	bool isCheck = true;
-	for (auto iter : m_pStage->getPaperObjList())
-	{
-		if (!iter->getbIsGet())
+		else
 		{
-			isCheck = false;
-			break;
+			m_fNoiseValue -= GET_DELTA_TIME();
+			if (m_fNoiseValue < 0.0f)m_fNoiseValue = 0.0f;
 		}
-	}
-	if (isCheck)
-	{
-		m_bIsGameClear = true;
-	}
-	if (m_bIsGameClear)
-	{
-		m_fBlackValue += 0.2f*GET_DELTA_TIME();
-	}
 
-	if (m_fBlackValue>=1.0f)
-	{
-		CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+		if (m_nNoiseLevel >= 100)
+		{
+			m_fHardNoiseValue += 0.5f*GET_DELTA_TIME();
+			if (m_fHardNoiseValue > 0.7f)
+			{
+				m_fDeadTime += GET_DELTA_TIME();
+				m_fHardNoiseValue = 0.7f;
+				if (m_fDeadTime > 6.0f)
+					CHANGE_SCENE_DIRECT(GAMESCENE_GAMEOVER, TRUE);
+			}
+		}
+		else
+		{
+			m_fHardNoiseValue -= 0.5f*GET_DELTA_TIME();
+			if (m_fHardNoiseValue < 0.0f)m_fHardNoiseValue = 0.0f;
+
+			m_fDeadTime -= GET_DELTA_TIME();
+			if (m_fDeadTime < 0.0f)m_fDeadTime = 0.0f;
+		}
+
+		m_fPlayTime += GET_DELTA_TIME();
+
+		if (m_fNoiseValue >= 0.5f)
+		{
+			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
+		}
+		if (m_fHardNoiseValue >= 0.5f)
+		{
+			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
+		}
+
+		bool isCheck = true;
+		for (auto iter : m_pStage->getPaperObjList())
+		{
+			if (!iter->getbIsGet())
+			{
+				isCheck = false;
+				break;
+			}
+		}
+		if (isCheck)
+		{
+			//m_bIsGameClear = true;
+		}
+		if (m_bIsGameClear)
+		{
+			m_fBlackValue += 0.2f*GET_DELTA_TIME();
+		}
+
+		if (m_fBlackValue >= 1.0f)
+		{
+			CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+		}
 	}
 }
 

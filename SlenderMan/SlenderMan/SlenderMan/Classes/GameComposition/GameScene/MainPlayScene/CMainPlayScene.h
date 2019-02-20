@@ -69,6 +69,8 @@ private:
 	void settingPlayer();
 	void settingSlenderMan();
 	void drawFindPage();
+
+
 private:
 	LPD3DXMESH m_pSphere = nullptr;
 
@@ -107,6 +109,9 @@ private:
 
 	CSpotLightObject** ppSpotLightObj;
 	CLightObject** ppPointLightObj;
+
+
+
 
 	player* pPlayer = nullptr;
 	slenderman* pSlenderMan = nullptr;

@@ -1,5 +1,6 @@
 #include "Classes/Utility/Base/CDirect3DApplication.h"
 
+
 int WINAPI _tWinMain(HINSTANCE a_hInstance,
 	HINSTANCE a_hPrevInstance,
 	TCHAR *a_pszCommand,

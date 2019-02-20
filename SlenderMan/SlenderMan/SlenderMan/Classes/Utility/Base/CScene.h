@@ -43,5 +43,6 @@ public:		//getter,setter
 
 protected:
 	std::string m_stSceneName;
+	BOOL m_bIsShowCursor = FALSE;
 
 };

@@ -39,10 +39,6 @@ CTitleScene::~CTitleScene()
 
 	//SAFE_DELETE(soundScrollBar);
 
-	/*for (int i = 0; i < 5; i++)
-	{
-		SAFE_DELETE(uiButton[i]);
-	}*/
 }
 
 void CTitleScene::init()
@@ -61,7 +57,6 @@ void CTitleScene::init()
 	}
 	GET_SOUND_MANAGER()->stopAllEffectSounds();
 	isStartSound = true;
-	m_pLoadingScene = dynamic_cast<CLoadingScene *> (FIND_SCENE(GAMESCENE_LOADING));
 	
 }
 
@@ -135,7 +130,6 @@ void CTitleScene::createButtonUI()
 	(*endFptr) = [=](void) -> void
 	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
-		m_pLoadingScene->setNextSceneName(GAMESCENE_MAINPLAY);
 		CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
 	};
 	playButton->init(crashFptr, nullptr, nullptr, endFptr);
@@ -181,7 +175,6 @@ void CTitleScene::createButtonUI()
 	(*endFptr) = [=](void) -> void
 	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Click.wav", false);
-		m_pLoadingScene->setNextSceneName(GAMESCENE_MAPTOOL);
 		CHANGE_SCENE_LOADING(GAMESCENE_MAPTOOL,TRUE);
 	};
 
@@ -213,6 +206,7 @@ void CTitleScene::createSound()
 void CTitleScene::update(void)
 {
 	CScene::update();
+	
 	this->defaultImageUpdate();
 	if (m_pCurrentSpriteHandle == nullptr)
 	{
@@ -223,8 +217,6 @@ void CTitleScene::update(void)
 	{
 		m_pCurrentSpriteHandle->update();
 	}
-	
-
 	if (isStartSound)
 	{
 		createSound();
@@ -275,7 +267,6 @@ void CTitleScene::drawUI(void)
 	optionWindow->drawUI();
 
 	
-	//uiList->drawUI();
 }
 
 void CTitleScene::defaultImageDrawUI()
