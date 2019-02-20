@@ -412,7 +412,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 					}
 					for (int k = 0; k < 8; k++) {
 						char TextureIndex[MAX_PATH];
-						sprintf(TextureIndex, "Resources/Textures/object/page%d", i + 1);
+						sprintf(TextureIndex, "Resources/Textures/object/page%d", k + 1);
 						if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == ((EObjType)((int)EObjType::PAGE_1 + k)))
 						{
 							CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
@@ -812,7 +812,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 					stBillboardObj->setForwardDirection(a_stPacket.m_stForwordVec);
 					stBillboardObj->setUpDirection(a_stPacket.m_stUpVec);
 					stBillboardObj->setRightDirection(a_stPacket.m_stRightVec);
-					stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision & 0;
+					stBillboardObj->getbIsCollision() = a_stPacket.m_bIsCollision;
 					stBillboardObj->setVisible(false);
 					m_pObjList[nIndex].push_back(stBillboardObj);
 					m_oPaperObjList.push_back(stBillboardObj);
@@ -1147,7 +1147,7 @@ void CStage::draw()
 						if (!pStaticObj->getVisible())pStaticObj->setVisible(true);
 						else
 						{
-							pStaticObj->getbOutLineDraw() = true;
+							
 							if (pStaticObj->getbOutLineDraw()&&!m_bIsMaptool)
 							{
 								/********************************************/
@@ -1186,6 +1186,7 @@ void CStage::draw()
 							{
 								if(!m_bIsMaptool)
 									GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+								pStaticObj->getbOutLineDraw() = false;
 								pStaticObj->draw();
 							}
 						}
@@ -1209,7 +1210,7 @@ void CStage::draw()
 						if (!pBillboard->getVisible())pBillboard->setVisible(true);
 						else
 						{
-							pBillboard->getbOutLineDraw() = true;
+							
 							if (pBillboard->getbOutLineDraw() && !m_bIsMaptool)
 							{
 								/********************************************/
@@ -1246,7 +1247,9 @@ void CStage::draw()
 							{
 								if (!m_bIsMaptool)
 									GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
-								pBillboard->draw();
+								pBillboard->getbOutLineDraw() = false;
+								if(!pBillboard->getbIsGet())
+									pBillboard->draw();
 							}
 						}
 					}

@@ -9,6 +9,7 @@
 #include "../../../Utility/Object/LightObject/SpotLightObject/SpotLightObject.h"
 #include "../../../Utility/Object/SkinnedObject/CSkinnedObject.h"
 #include "../../../GameComposition/GameScene/MainPlayScene/CMainPlayScene.h"
+#include "../../GameObject/Decorate/CDecorate_BillboardObj.h"
 
 player::player()
 {
@@ -125,6 +126,7 @@ void player::update(void)
 			m_fYVelocity = 14.0f;
 		}
 
+		checkPaperObj();
 		adjustJump();
 
 		m_fTopLeft.x = this->getPosition().x - m_fCheckRange;
@@ -275,7 +277,7 @@ void player::settingSkinnedObj()
 	D3DXVec3Normalize(&m_stSkinnedUpVec3, &m_stSkinnedUpVec3);
 	D3DXVec3Normalize(&m_stSkinnedForwardVec3, &m_stSkinnedForwardVec3);
 
-	m_pSkinnedObj->setPosition(cameraObj->getPosition() + D3DXVECTOR3(0.0f, -13.0f, 0.0f) + m_stSkinnedForwardVec3 * 1.5f);
+	m_pSkinnedObj->setPosition(cameraObj->getPosition() + D3DXVECTOR3(0.0f, -13.0f, 0.0f) + m_stSkinnedForwardVec3 * 2.4f);
 
 	m_pSkinnedObj->setRightDirection(m_stSkinnedRightVec3);
 	m_pSkinnedObj->setUpDirection(m_stSkinnedUpVec3);
@@ -383,6 +385,42 @@ bool player::checkCollisionArea()
 	}
 	return isCollision;
 }
+
+void player::checkPaperObj()
+{
+	STRay stRay;
+	stRay.m_stDirection = cameraObj->getForwardDirection();
+	stRay.m_stOrigin = cameraObj->getPosition();
+	for (auto iter : m_pStage->getPaperObjList())
+	{
+		if (IsIntersectRaySphere(stRay, iter->getFinalBoundingSphere())&&!iter->getbIsGet())
+		{
+			D3DXVECTOR3 deltaVec = iter->getFinalBoundingSphere().m_stCenter - stRay.m_stOrigin;
+			float deltaLength = D3DXVec3Length(&deltaVec);
+			if (deltaLength < 60.0f)
+				iter->getbOutLineDraw() = true;
+			else
+				iter->getbOutLineDraw() = false;
+		}
+		else
+		{
+			iter->getbOutLineDraw() = false;
+		}
+	}
+
+	if (IS_KEY_PRESSED(DIK_G))
+	{
+		for (auto iter : m_pStage->getPaperObjList())
+		{
+			if (!iter->getbIsGet()&& iter->getbOutLineDraw())
+			{
+				iter->getbIsGet() = true;
+			}
+		}
+	}
+
+}
+
 
 bool player::checkCollisionTerrain(EDirection a_eDirection)
 {

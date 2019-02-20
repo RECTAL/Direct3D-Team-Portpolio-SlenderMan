@@ -68,8 +68,8 @@ void CDecorate_BillboardObj::preDraw(void)
 	m_pEffect->SetVector("g_stViewPosition", &stViewPosition);
 
 
-	m_pEffect->SetFloat("g_fFogDensity", 0.001f);
-	m_pEffect->SetFloat("g_fFogEnd", 1000.0f);
+	m_pEffect->SetFloat("g_fFogDensity", 0.55f);
+	m_pEffect->SetFloat("g_fFogEnd", 50.0f);
 
 
 	int nNumSpotLight = m_stParameters.m_nNumSpotLight;

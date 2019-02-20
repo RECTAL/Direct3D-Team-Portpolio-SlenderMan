@@ -51,6 +51,7 @@ private:
 	void adjustCollisionArea();
 	bool checkCollisionArea();
 	bool checkCollisionTerrain(EDirection a_eDirection);
+	void checkPaperObj();
 
 private:
 	CCameraObject* cameraObj = nullptr;

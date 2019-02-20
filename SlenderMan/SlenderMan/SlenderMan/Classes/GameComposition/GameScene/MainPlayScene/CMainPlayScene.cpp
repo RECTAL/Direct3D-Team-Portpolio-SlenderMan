@@ -23,6 +23,7 @@
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_ScrollBar.h"
 #include "../../../GameComposition/GameCharactor/Player/player.h"
 #include "../../GameObject/Decorate/CDecorate_SoundObj.h"
+#include "../../GameObject/Decorate/CDecorate_BillboardObj.h"
 #include "../../GameCharactor/AI/SlenderMan/AI_SlenderMan.h"
 
 CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
@@ -74,7 +75,7 @@ void CMainPlayScene::init()
 	pSlenderMan->setPlayer(pPlayer);
 	pSlenderMan->setStage(m_pStage);
 	pSlenderMan->addSpotLight(pPlayer->getLightObj());
-	pSlenderMan->getStaticObj()->getTechniqueName() = "FogStaticMesh";
+	//pSlenderMan->getStaticObj()->getTechniqueName() = "FogStaticMesh";
 	pSlenderMan->init();
 
 	ppSpotLightObj = new CSpotLightObject*[10];
@@ -124,11 +125,19 @@ void CMainPlayScene::init()
 	m_pStage->addSpotLightObj(pPlayer->getLightObj());
 	m_pStage->getTerrainObj()->getTechniqueName() = "fogTerrain";
 	m_pStage->setObjEffectTechname("FogStaticMesh");
+
 	int nNumSpot = ++m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight;
 	if (nNumSpot < 10)
 	{
 		m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = pPlayer->getLightObj();
 	}
+
+
+	for (auto iter : m_pStage->getPaperObjList())
+	{
+		iter->getbIsGet() = false;
+	}
+
 	GET_SOUND_MANAGER()->stopAllEffectSounds();
 	m_fPlayTime = 0.0f;
 
@@ -137,9 +146,12 @@ void CMainPlayScene::init()
 
 	m_fHardNoiseValue = 0.0f;
 	m_fNoiseValue = 0.0f;
+	m_fBlackValue = 0.0f;
 	m_nNoiseLevel = 0.0f;
 	m_fDeadTime = 0.0f;
 	m_fNoiseTime = 0.0f;
+
+	m_bIsGameClear = false;
 }
 
 void CMainPlayScene::createWindowUI()
@@ -486,6 +498,7 @@ void CMainPlayScene::releaseUI()
 	SAFE_DELETE(m_pScrollBar[1]);
 	SAFE_DELETE(m_pScrollBarButton[0]);
 	SAFE_DELETE(m_pScrollBarButton[1]);
+	SAFE_DELETE(m_pBlackScreen);
 }
 
 void CMainPlayScene::createLabel()
@@ -496,8 +509,11 @@ void CMainPlayScene::createLabel()
 
 void CMainPlayScene::createSpriteDefault()
 {
+	m_pBlackScreen = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/blackCover", "png", GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, 1);
+	m_pBlackScreen->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
+
 	m_pCamCoderView = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/camCoderView", "png", 1366, 768, 1);
-	m_pCamCoderView->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx/2.0f, GET_WINDOW_SIZE().cy / 2.0f,0.0f));
+	m_pCamCoderView->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
 
 	m_pNoiseImage = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/noise", "png", 1366, 768, 4);
 	m_pNoiseImage->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
@@ -655,6 +671,28 @@ void CMainPlayScene::update(void)
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
 	}
 
+	bool isCheck = true;
+	for (auto iter : m_pStage->getPaperObjList())
+	{
+		if (!iter->getbIsGet())
+		{
+			isCheck = false;
+			break;
+		}
+	}
+	if (isCheck)
+	{
+		m_bIsGameClear = true;
+	}
+	if (m_bIsGameClear)
+	{
+		m_fBlackValue += 0.2f*GET_DELTA_TIME();
+	}
+
+	if (m_fBlackValue>=1.0f)
+	{
+		CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+	}
 }
 
 void CMainPlayScene::draw(void)
@@ -704,6 +742,7 @@ void CMainPlayScene::draw(void)
 	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pNoiseTexture", m_pColorNoiseImage->getSpriteTexture()[m_pColorNoiseImage->getTextureOffset()]);
 	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue", m_fNoiseValue);
 	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue2", m_fHardNoiseValue);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue3", m_fBlackValue);
 
 
 

@@ -109,37 +109,6 @@ void CTitleScene::createWindowUI()
 	optionWindow->addChildSpriteObject("bgmSoundScroll", CWindowType::SCROLLBAR, soundScrollBar[0]);
 	optionWindow->addChildSpriteObject("effectSoundScroll", CWindowType::SCROLLBAR, soundScrollBar[1]);
 
-	/********************************************************/
-	//ui 리스트
-	/********************************************************/
-	/*uiList = new CSpriteObject_List("Resources/Textures/Scene/TitleScene/ExWindow", "png", 300, 310, 1);
-	uiList->setPosition(D3DXVECTOR3(1300, 500, 0));
-	uiList->setVisible(false);
-	uiList->init(nullptr, nullptr, nullptr, nullptr);*/
-	/**********************************************/
-	//리스트 안의 내용 삽입
-	/**********************************************/
-	/*for (int i = 0; i < 5; i++)
-	{
-		uiButton[i] = new CSpriteObject_Button("Resources/Textures/Scene/TitleScene/gameStart", "png", 200,80,1);
-		uiButton[i]->setPosition(uiList->getPosition());
-		
-		(*endFptr) = [=](void)->void
-		{
-			CHANGE_SCENE_LOADING(GAMESCENE_MAINPLAY,TRUE);
-		};
-		uiButton[i]->init(
-			nullptr,
-			nullptr,
-			nullptr,
-			endFptr,
-			true,
-			D3DXVECTOR3(0.0f, 0.0f, 0.0f)
-		);
-		char name[100];
-		sprintf(name, "uiButton_%d", i);
-		uiList->addChildSpriteObject(name, CWindowType::BUTTON, uiButton[i]);
-	}*/
 }
 	 
 void CTitleScene::createDefaultUI()
@@ -254,8 +223,7 @@ void CTitleScene::update(void)
 	{
 		m_pCurrentSpriteHandle->update();
 	}
-	printf("bgmSound: %f\n", soundScrollBar[0]->getSetValue() / 300);
-	printf("effectSound: %f\n", soundScrollBar[1]->getSetValue() / 300);
+	
 
 	if (isStartSound)
 	{
@@ -263,6 +231,9 @@ void CTitleScene::update(void)
 		isStartSound = false;
 	}
 	this->setVolume();
+
+	printf("bgmSound: %f\n", soundScrollBar[0]->getSetValue() / 300);
+	printf("effectSound: %f\n", soundScrollBar[1]->getSetValue() / 300);
 }
 
 void CTitleScene::defaultImageUpdate()
@@ -325,8 +296,8 @@ void CTitleScene::buttonImageDrawUI()
 void CTitleScene::setVolume()
 {
 	if (m_pCurrentSpriteHandle == optionWindow) {
-		GET_SOUND_MANAGER()->setBackgroundSoundVolume(soundScrollBar[0]->getSetValue() / 300);
-		GET_SOUND_MANAGER()->setEffectSoundsVolume(soundScrollBar[1]->getSetValue() / 300);
+		GET_SOUND_MANAGER()->setBackgroundSoundVolume(soundScrollBar[0]->getSetValue() / 100);
+		GET_SOUND_MANAGER()->setEffectSoundsVolume(soundScrollBar[1]->getSetValue() / 100);
 	}
 }
 

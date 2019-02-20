@@ -8,6 +8,7 @@ texture g_pNoiseTexture;
 
 float   g_fBlendValue;
 float   g_fBlendValue2;
+float	g_fBlendValue3;
 
 struct VSInput
 {
@@ -72,6 +73,7 @@ float4 ps_main(PSInput a_stInput):COLOR
 
 	stFinalColor = lerp(stFinalColor, noiseColor, g_fBlendValue2);
 	
+	stFinalColor.rgb = stFinalColor.rgb*(1-g_fBlendValue3);
 
     return stFinalColor;
 }

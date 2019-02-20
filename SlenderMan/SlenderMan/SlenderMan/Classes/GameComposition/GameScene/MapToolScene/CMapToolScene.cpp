@@ -69,6 +69,16 @@ void CMapToolScene::init()
 	m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot] = nullptr;
 	m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
 	m_pStage->delSpotLightObj();
+
+	m_pStage->getTerrainObj()->getTechniqueName() = "DefaultTerrain";
+	m_pStage->setObjEffectTechname("DefaultStaticMesh");
+
+
+	for (auto iter : m_pStage->getPaperObjList())
+	{
+		iter->getbIsGet() = false;
+	}
+
 	m_pStage->getbIsMaptool() = TRUE;
 }
 
@@ -497,6 +507,7 @@ void CMapToolScene::createTreeButton(void)
 		char cTreeMeshIndex[MAX_PATH];
 		sprintf(cTreeIconIndex, "Resources/Textures/Scene/MapToolScene/ListSquareIcon/tree%d", i + 1);
 		sprintf(cTreeMeshIndex, "Resources/Meshes/tree%d/tree%d.X", i + 1, i + 1);
+		std::string str = cTreeMeshIndex;
 		m_pTreeButton[i] = new CSpriteObject_Button(cTreeIconIndex, "png", 100, 100, 1);
 		(*endFptr) = [=](void)->void {
 			m_stMouseInfo.m_eObjClasses = EObjClasses::STATIC;
@@ -508,9 +519,11 @@ void CMapToolScene::createTreeButton(void)
 				m_pCamera,m_pStage->getDirectionalLightObj(),
 				0,NULL,
 				0,NULL,
-				cTreeMeshIndex,
+				str.c_str(),
 				"Resources/Effects/DefaultStaticMesh.fx"
 			};
+
+
 			m_stMouseInfo.m_pRenderObj = new CStaticObject(stParameters);
 			m_stMouseInfo.m_pRenderObj->getbIsCollision() = m_bIsCollision;
 			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
@@ -832,6 +845,7 @@ void CMapToolScene::createPageButton(void)
 		char cPageMeshIndex[MAX_PATH];
 		sprintf(cPageIconIndex, "Resources/Textures/Scene/MapToolScene/ListSquareIcon/page%d", i + 1);
 		sprintf(cPageMeshIndex, "Resources/Textures/object/page%d", i + 1);
+		std::string str = cPageMeshIndex;
 		m_pPageButton[i] = new CSpriteObject_Button(cPageIconIndex, "png", 100, 100, 1);
 		(*endFptr) = [=](void)->void {
 			m_stMouseInfo.m_eObjClasses = EObjClasses::DECORATE_BILLBOARD;
@@ -842,7 +856,7 @@ void CMapToolScene::createPageButton(void)
 				m_pCamera,m_pStage->getDirectionalLightObj(),
 				0,NULL,
 				0,NULL,
-				cPageMeshIndex,"png",1,
+				str.c_str(),"png",1,
 				"Resources/Effects/DefaultStaticMesh.fx"
 			};
 			m_stMouseInfo.m_pRenderObj = new CDecorate_BillboardObj(stParameters);
@@ -1140,6 +1154,9 @@ void CMapToolScene::inputKey(void)
 	}
 	m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, m_fAngleZ));
 	m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
+
+
+	
 }
 
 void CMapToolScene::removeUI(void)
