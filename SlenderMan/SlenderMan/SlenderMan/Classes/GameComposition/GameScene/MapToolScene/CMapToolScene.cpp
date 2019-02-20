@@ -69,6 +69,16 @@ void CMapToolScene::init()
 	m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot] = nullptr;
 	m_pStage->setObjDebugMode(m_bIsDebug, EDebugDrawType::BOX);
 	m_pStage->delSpotLightObj();
+
+	m_pStage->getTerrainObj()->getTechniqueName() = "DefaultTerrain";
+	m_pStage->setObjEffectTechname("DefaultStaticMesh");
+
+
+	for (auto iter : m_pStage->getPaperObjList())
+	{
+		iter->getbIsGet() = false;
+	}
+
 	m_pStage->getbIsMaptool() = TRUE;
 }
 

@@ -54,6 +54,8 @@ public:
 	STParameters&	getSTParameters() { return m_stParameters; }
 	oSpriteTexture	getSpriteTexture() { return m_oSpriteTexture; }
 
+	bool&			getbIsGet() { return m_bIsGet; }
+
 	virtual void update(void) override;		//! interface : IUpdateable
 
 private:
@@ -68,6 +70,8 @@ protected:
 	LPDIRECT3DTEXTURE9		m_pTexture;
 	STParameters			m_stParameters;
 	oSpriteTexture			m_oSpriteTexture;
+
+	bool					m_bIsGet = false;
 
 	float m_fAnimationTimer = 0.0f;
 	int m_nTextureOffset = 0;

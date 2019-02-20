@@ -75,6 +75,7 @@ private:
 	bool m_bIsFirst = true;
 	bool m_bIsBGMPlay = true;
 	bool m_bIsMenu = false;
+	bool m_bIsGameClear = false;
 
 	float m_fPlayTime = 0.0f;
 

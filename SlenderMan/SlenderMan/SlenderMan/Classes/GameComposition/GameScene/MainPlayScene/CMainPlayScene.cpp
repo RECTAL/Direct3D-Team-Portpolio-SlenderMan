@@ -23,6 +23,7 @@
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_ScrollBar.h"
 #include "../../../GameComposition/GameCharactor/Player/player.h"
 #include "../../GameObject/Decorate/CDecorate_SoundObj.h"
+#include "../../GameObject/Decorate/CDecorate_BillboardObj.h"
 #include "../../GameCharactor/AI/SlenderMan/AI_SlenderMan.h"
 
 CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
@@ -74,7 +75,7 @@ void CMainPlayScene::init()
 	pSlenderMan->setPlayer(pPlayer);
 	pSlenderMan->setStage(m_pStage);
 	pSlenderMan->addSpotLight(pPlayer->getLightObj());
-	pSlenderMan->getStaticObj()->getTechniqueName() = "FogStaticMesh";
+	//pSlenderMan->getStaticObj()->getTechniqueName() = "FogStaticMesh";
 	pSlenderMan->init();
 
 	ppSpotLightObj = new CSpotLightObject*[10];
@@ -124,11 +125,19 @@ void CMainPlayScene::init()
 	m_pStage->addSpotLightObj(pPlayer->getLightObj());
 	m_pStage->getTerrainObj()->getTechniqueName() = "fogTerrain";
 	m_pStage->setObjEffectTechname("FogStaticMesh");
+
 	int nNumSpot = ++m_pStage->getTerrainObj()->getSTParameters().m_nNumSpotLight;
 	if (nNumSpot < 10)
 	{
 		m_pStage->getTerrainObj()->getSTParameters().m_pSpotLight[nNumSpot - 1] = pPlayer->getLightObj();
 	}
+
+
+	for (auto iter : m_pStage->getPaperObjList())
+	{
+		iter->getbIsGet() = false;
+	}
+
 	GET_SOUND_MANAGER()->stopAllEffectSounds();
 	m_fPlayTime = 0.0f;
 
@@ -140,6 +149,8 @@ void CMainPlayScene::init()
 	m_nNoiseLevel = 0.0f;
 	m_fDeadTime = 0.0f;
 	m_fNoiseTime = 0.0f;
+
+	m_bIsGameClear = false;
 }
 
 void CMainPlayScene::createWindowUI()
@@ -655,6 +666,24 @@ void CMainPlayScene::update(void)
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
 	}
 
+	bool isCheck = true;
+	for (auto iter : m_pStage->getPaperObjList())
+	{
+		if (!iter->getbIsGet())
+		{
+			isCheck = false;
+			break;
+		}
+	}
+	if (isCheck)
+	{
+		m_bIsGameClear = true;
+	}
+
+	if (m_bIsGameClear)
+	{
+		CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+	}
 }
 
 void CMainPlayScene::draw(void)
