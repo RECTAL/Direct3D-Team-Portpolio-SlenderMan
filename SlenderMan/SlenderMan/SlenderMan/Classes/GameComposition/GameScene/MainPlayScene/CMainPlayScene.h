@@ -79,7 +79,6 @@ private:
 
 	float m_fPlayTime = 0.0f;
 
-	CSpriteObject_Default* m_pBlackScreen = nullptr;
 	CSpriteObject_Default* m_pCamCoderView = nullptr;
 	CSpriteObject_Default* m_pNoiseImage = nullptr;
 	CSpriteObject_Default* m_pColorNoiseImage = nullptr;
@@ -110,7 +109,7 @@ private:
 	player* pPlayer = nullptr;
 	slenderman* pSlenderMan = nullptr;
 
-	int	m_nNoiseLevel = 0.0f;
+	float m_nNoiseLevel = 0.0f;
 	float m_fDeadTime = 0.0f;
 	float m_fNoiseValue = 0.0f;
 	float m_fHardNoiseValue = 0.0f;

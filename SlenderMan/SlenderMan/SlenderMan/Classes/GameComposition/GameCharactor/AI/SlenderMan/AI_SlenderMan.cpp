@@ -39,14 +39,18 @@ void slenderman::update(void)
 	m_pStaticObj->setPosition(this->getPosition());
 	setStaticRotate();
 	m_pStaticObj->update();
+
+	m_fSpawnTime -= GET_DELTA_TIME();
 	if (m_bIsSpawn)
 	{
-		m_fSpawnTime -= GET_DELTA_TIME();
 		if (m_fSpawnTime < 0.0f)
 		{
-			m_fSpawnTime = 0.0f;
 			m_bIsSpawn = false;
 		}
+	}
+	if (m_fSpawnTime < -20.0f)
+	{
+		reSpwan = true;
 	}
 }
 
@@ -93,8 +97,9 @@ void slenderman::setStaticRotate()
 
 void slenderman::spawnSlenderMan()
 {
-	if (!m_bIsSpawn)
+	if (reSpwan)
 	{
+		reSpwan = false;
 		m_bIsSpawn = true;
 		m_fSpawnTime = RandomFloatValue(8.0f, 12.0f);
 
@@ -143,5 +148,5 @@ void slenderman::delSpotLight()
 void slenderman::createSphereMesh()
 {
 	if (m_pSphere != nullptr)SAFE_RELEASE(m_pSphere);
-	D3DXCreateSphere(GET_DEVICE(), 90.0f, 50.0f, 50.0f, &m_pSphere, NULL); // 90.0f -> 1.0f
+	D3DXCreateSphere(GET_DEVICE(), 75.0f, 50.0f, 50.0f, &m_pSphere, NULL); // 90.0f -> 1.0f
 }

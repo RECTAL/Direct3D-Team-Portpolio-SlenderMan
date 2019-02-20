@@ -18,7 +18,6 @@ public:			// interface
 private:
 	LPD3DXMESH		createSpotMesh();
 	LPD3DXEFFECT	createSpotEffect();
-	LPD3DXMESH		createTestMesh();
 
 public:
 	float m_fRange;
@@ -28,5 +27,4 @@ public:
 	CCameraObject*	m_pCameraObj = nullptr;
 	STStaticMesh 	m_stSpotMesh;
 	LPD3DXEFFECT	m_pEffect = nullptr;
-	LPD3DXMESH		m_pTestMesh = nullptr;
 };

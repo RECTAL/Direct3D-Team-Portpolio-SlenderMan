@@ -546,7 +546,7 @@ void CMapToolScene::createTreeButton(void)
 	for (int i = 0; i < MAX_TREE; i++)
 	{
 		char path[MAX_PATH];
-		sprintf(path, "test%1d", i);
+		sprintf(path, "TreeButton%1d", i);
 		m_pTreeListSquare->addChildSpriteObject(path, CWindowType::BUTTON, m_pTreeButton[i]);
 	}
 }
@@ -630,7 +630,7 @@ void CMapToolScene::createBuildingButton(void)
 	for (int i = 0; i < MAX_HOUSE; i++)
 	{
 		char path[MAX_PATH];
-		sprintf(path, "test%1d", i);
+		sprintf(path, "HouseButton%1d", i);
 		m_pBuildingListSquare->addChildSpriteObject(path, CWindowType::BUTTON, m_pHouseButton[i]);
 	}
 }
@@ -714,7 +714,7 @@ void CMapToolScene::createObjectButton(void)
 	for (int i = 0; i < MAX_OBJECT; i++)
 	{
 		char path[MAX_PATH];
-		sprintf(path, "test%1d", i);
+		sprintf(path, "ObjectButton%1d", i);
 		m_pObjectListSquare->addChildSpriteObject(path, CWindowType::BUTTON, m_pObjectButton[i]);
 	}
 }
@@ -830,7 +830,7 @@ void CMapToolScene::createSoundButton(void)
 	for (int i = 0; i < MAX_SOUND; i++)
 	{
 		char path[MAX_PATH];
-		sprintf(path, "test%1d", i);
+		sprintf(path, "SoundButton%1d", i);
 		m_pSoundListSquare->addChildSpriteObject(path, CWindowType::BUTTON, m_pSoundButton[i]);
 	}
 }
@@ -882,7 +882,7 @@ void CMapToolScene::createPageButton(void)
 	for (int i = 0; i < MAX_PAGE; i++)
 	{
 		char path[MAX_PATH];
-		sprintf(path, "test%1d", i);
+		sprintf(path, "PageButton%1d", i);
 		m_pPageListSquare->addChildSpriteObject(path, CWindowType::BUTTON, m_pPageButton[i]);
 	}
 
