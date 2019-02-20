@@ -153,4 +153,5 @@ private:
 
 	float m_fScale = 0.2f;
 	float m_fOffesetY = 0.0f;
+
 };

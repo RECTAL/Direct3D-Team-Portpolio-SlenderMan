@@ -89,7 +89,7 @@ void CSpriteObject_ScrollBar::init(std::function<void(void)>* a_pCrashCallBackFu
 	if (m_fWidth > m_fHeight)
 	{
 		float x = m_pSpriteButton->getWindow()->getAbsolutePosition().x;
-		m_stMoveOffset = D3DXVECTOR3(x - m_pWindow->getAbsolutePosition().x, 0.0f, 0.0f);
+		m_stMoveOffset = D3DXVECTOR3(x - m_pWindow->getAbsolutePosition().x + m_fMaxVal / 2, 0.0f, 0.0f);
 	}
 	else
 	{

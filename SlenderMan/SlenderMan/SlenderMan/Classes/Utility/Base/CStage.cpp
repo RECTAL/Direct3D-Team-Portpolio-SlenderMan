@@ -253,7 +253,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 
 						m_pObjList[i].push_back(stStaticObj);
 					}
-					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::URBANDEBRIS)
+					else if (m_pObjPacketList[i].m_stObjPacket[j].m_EObjType == EObjType::LOG)
 					{
 						CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
 						CLightObject** ppPointLightObj = new CLightObject*[10];
@@ -261,7 +261,7 @@ void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oOb
 							m_pCameraObj,m_pDirectionLightObj,
 							0,ppSpotLightObj,
 							0,ppPointLightObj,
-							"Resources/Meshes/urbanDebris/urbanDebris.X",
+							"Resources/Meshes/log/log.X",
 							"Resources/Effects/DefaultStaticMesh.fx"
 						};
 						CStaticObject* stStaticObj = new CStaticObject(stParameters);
@@ -615,7 +615,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 				stStaticObj->setDebugEnable(a_bIsDebug, EDebugDrawType::BOX);
 				m_pObjList[nIndex].push_back(stStaticObj);
 			}
-			else if (a_stPacket.m_EObjType == EObjType::URBANDEBRIS)
+			else if (a_stPacket.m_EObjType == EObjType::LOG)
 			{
 				CSpotLightObject** ppSpotLightObj = new CSpotLightObject*[10];
 				CLightObject** ppPointLightObj = new CLightObject*[10];
@@ -624,7 +624,7 @@ void CStage::addObj(OBJPACKET& a_stPacket, D3DXVECTOR3 a_stPosition, bool a_bIsD
 					m_pCameraObj,m_pDirectionLightObj,
 					0,ppSpotLightObj,
 					0,ppPointLightObj,
-					"Resources/Meshes/urbanDebris/urbanDebris.X",
+					"Resources/Meshes/log/log.X",
 					"Resources/Effects/DefaultStaticMesh.fx"
 				};
 				CStaticObject* stStaticObj = new CStaticObject(stParameters);

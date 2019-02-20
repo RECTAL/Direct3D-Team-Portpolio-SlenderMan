@@ -497,6 +497,7 @@ void CMainPlayScene::releaseUI()
 	SAFE_DELETE(m_pScrollBar[1]);
 	SAFE_DELETE(m_pScrollBarButton[0]);
 	SAFE_DELETE(m_pScrollBarButton[1]);
+	SAFE_DELETE(m_pBlackScreen);
 }
 
 void CMainPlayScene::createLabel()
@@ -507,8 +508,11 @@ void CMainPlayScene::createLabel()
 
 void CMainPlayScene::createSpriteDefault()
 {
+	m_pBlackScreen = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/blackCover", "png", GET_WINDOW_SIZE().cx, GET_WINDOW_SIZE().cy, 1);
+	m_pBlackScreen->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
+
 	m_pCamCoderView = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/camCoderView", "png", 1366, 768, 1);
-	m_pCamCoderView->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx/2.0f, GET_WINDOW_SIZE().cy / 2.0f,0.0f));
+	m_pCamCoderView->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
 
 	m_pNoiseImage = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/noise", "png", 1366, 768, 4);
 	m_pNoiseImage->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));

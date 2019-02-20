@@ -97,6 +97,7 @@ void CGameOverScene::updateSprite(void)
 		}
 		if (IS_KEY_DOWN(DIK_RETURN) || m_fCurrentTime > 10.0f)
 		{
+			m_fCurrentTime = 0.0f;
 			GET_SOUND_MANAGER()->stopBackgroundSound();
 			CHANGE_SCENE_DIRECT(GAMESCENE_TITLE, TRUE);
 		}
