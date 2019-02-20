@@ -68,6 +68,7 @@ private:
 
 	void settingPlayer();
 	void settingSlenderMan();
+	void drawFindPage();
 private:
 	LPD3DXMESH m_pSphere = nullptr;
 
@@ -83,6 +84,7 @@ private:
 	CSpriteObject_Default* m_pNoiseImage = nullptr;
 	CSpriteObject_Default* m_pColorNoiseImage = nullptr;
 	CLabelObject*		   m_pPlayTime = nullptr;
+	CLabelObject*		   m_pFindPage = nullptr;
 	CSpriteObject*		   m_pCurrentSpriteHandle = nullptr;
 
 	CSpriteObject_Button* m_pExitButton = nullptr;

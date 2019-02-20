@@ -31,6 +31,7 @@ public:		//getter,setter
 	CSpotLightObject* getLightObj(void) { return lightObj; }
 	CSkinnedObject*	getSkinnedObj(void) { return m_pSkinnedObj; }
 	int &getPlayerState(void) { return playerState; }
+	int getPage() { return m_nPage; }
 
 
 
@@ -88,5 +89,6 @@ private:
 
 	bool isPlay = false;
 	bool isRun = false;
+	int m_nPage;
 
 };

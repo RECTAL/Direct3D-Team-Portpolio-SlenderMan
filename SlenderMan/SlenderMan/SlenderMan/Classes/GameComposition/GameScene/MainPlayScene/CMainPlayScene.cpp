@@ -34,6 +34,7 @@ CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 CMainPlayScene::~CMainPlayScene()
 {
 	SAFE_DELETE(m_pPlayTime);
+	SAFE_DELETE(m_pFindPage);
 	SAFE_DELETE(m_pCamCoderView);
 	SAFE_DELETE(m_pNoiseImage);
 	SAFE_DELETE(m_pColorNoiseImage);
@@ -495,6 +496,9 @@ void CMainPlayScene::createLabel()
 {
 	m_pPlayTime = new CLabelObject("", 20);
 	m_pPlayTime->setPosition(D3DXVECTOR3(1220, 75, 0));
+
+	m_pFindPage = new CLabelObject("", 20);
+	m_pFindPage->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, 60, 0));
 }
 
 void CMainPlayScene::createSpriteDefault()
@@ -545,6 +549,14 @@ void CMainPlayScene::settingSlenderMan()
 	pSlenderMan = new slenderman(stParameters);
 }
 
+void CMainPlayScene::drawFindPage()
+{
+	pPlayer->getPage();
+	m_pStage->getPaperObjList().size();
+	
+	
+}
+
 void CMainPlayScene::createContainer()
 {
 	m_pMenuContainer = new CSpriteObject_Container("Resources/Textures/Scene/MainPlayScene/menuWindow", "png", 500, 500, 1);
@@ -591,10 +603,8 @@ void CMainPlayScene::update(void)
 	}
 	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
 		m_bIsMenu = !m_bIsMenu;
-		m_pMenuContainer->setVisible(!m_pMenuContainer->getVisible());
-		m_pOptionButton->setVisible(false);
-		//ShowCursor(m_pMenuContainer->getVisible());
-		ShowCursor(m_pMenuContainer->getVisible());
+		m_pMenuContainer->setVisible(m_bIsMenu);
+		m_pSoundContainer->setVisible(false);
 		RECT rc;
 		POINT pt = { 0 ,0 };
 		GetClientRect(GET_WINDOW_HANDLE(), &rc);
@@ -603,6 +613,7 @@ void CMainPlayScene::update(void)
 		ClientToScreen(GET_WINDOW_HANDLE(), &pt);
 		SetCursorPos(pt.x, pt.y);
 	}
+	ShowCursor(m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible());
 
 	if (pSlenderMan->getbIsSpawn())
 	{
@@ -676,7 +687,7 @@ void CMainPlayScene::update(void)
 	}
 	if (isCheck)
 	{
-		//m_bIsGameClear = true;
+		m_bIsGameClear = true;
 	}
 	if (m_bIsGameClear)
 	{
@@ -685,7 +696,7 @@ void CMainPlayScene::update(void)
 
 	if (m_fBlackValue>=1.0f)
 	{
-		//CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+		CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
 	}
 }
 
@@ -712,14 +723,17 @@ void CMainPlayScene::draw(void)
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
 
 	m_pCamCoderView->drawUI();
-	char str[100];
+	char cPlayTime[100];
+	char cFindPage[100];
 	int nHour = 0, nMin = 0, nSec = 0;
 	this->calcPlayTime(m_fPlayTime, nHour, nMin, nSec);
 
-	sprintf(str, "%02d:%02d:%02d", nHour, nMin, nSec);
-	m_pPlayTime->setString(str);
+	sprintf(cPlayTime, "%02d:%02d:%02d", nHour, nMin, nSec);
+	m_pPlayTime->setString(cPlayTime);
 	m_pPlayTime->drawUI();
-
+	sprintf(cFindPage, "%02d/%02d",pPlayer->getPage(), m_pStage->getPaperObjList().size());
+	m_pFindPage->setString(cFindPage);
+	m_pFindPage->drawUI();
 
 	FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect->SetMatrix("g_stWorldMatrix",&stWorldMatrix);
 	FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect->SetTexture("g_pTexture",FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTex);

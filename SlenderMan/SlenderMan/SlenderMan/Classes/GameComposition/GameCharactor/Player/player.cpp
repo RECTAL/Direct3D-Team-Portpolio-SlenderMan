@@ -41,6 +41,7 @@ void player::init(void)
 	m_pSkinnedObj->setPosition(this->getPosition());
 	m_pSkinnedObj->setVisible(true);
 	m_pSkinnedObj->setScale(D3DXVECTOR3(0.1f, 0.1f, 0.1f));
+	m_nPage = 0;
 }
 
 void player::update(void)
@@ -412,8 +413,11 @@ void player::checkPaperObj()
 		{
 			if (!iter->getbIsGet()&& iter->getbOutLineDraw())
 			{
+				
+				static int nMaxPage;
 				GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Pick.wav", false);
 				iter->getbIsGet() = true;
+				m_nPage++;
 			}
 		}
 	}
@@ -499,4 +503,3 @@ bool player::checkCollisionTerrain(EDirection a_eDirection)
 	ZeroMemory(&m_stSkinnedRay, sizeof(m_stSkinnedRay));
 	return isCollision;
 }
-
