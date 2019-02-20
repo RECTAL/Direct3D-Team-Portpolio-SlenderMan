@@ -5,6 +5,7 @@
 #include "../../../Utility/Manager/CInputManager.h"
 #include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CSceneManager.h"
+#include "../../../Utility/Manager/CSoundManager.h"
 #include "../../../Utility/Object/CameraObject/CCameraObject.h"
 #include "../../../Utility/Object/LightObject/SpotLightObject/SpotLightObject.h"
 #include "../../../Utility/Object/SkinnedObject/CSkinnedObject.h"
@@ -414,6 +415,7 @@ void player::checkPaperObj()
 		{
 			if (!iter->getbIsGet()&& iter->getbOutLineDraw())
 			{
+				GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Pick.wav", false);
 				iter->getbIsGet() = true;
 			}
 		}
