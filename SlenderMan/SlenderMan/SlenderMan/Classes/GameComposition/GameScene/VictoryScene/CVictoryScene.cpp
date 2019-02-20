@@ -19,7 +19,7 @@ void CVictoryScene::init()
 	CScene::init();
 	if (isFirst)
 	{
-		background = new CSpriteObject_Default("Resources/Textures/Scene/VictoryScene/ending/ending", "png", 1366, 768, 40, false);
+		background = new CSpriteObject_Default("Resources/Textures/Scene/VictoryScene/ending/ending", "png", 1366, 768, 64, false);
 		background->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 		isFirst = false;
 	}
@@ -32,10 +32,10 @@ void CVictoryScene::update(void)
 	static float time = 0.0f;
 
 	time += GET_DELTA_TIME();
-	if (time >= 0.03f)
+	if (time >= 0.05f)
 	{
 		background->update();
-		if (background->getTextureOffset() >= 39)
+		if (background->getTextureOffset() >= 63)
 		{
 			CHANGE_SCENE_DIRECT(GAMESCENE_TITLE, TRUE);
 		}

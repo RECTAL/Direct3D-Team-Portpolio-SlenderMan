@@ -166,7 +166,7 @@ void player::postDraw(void)
 
 void player::mouseSenterPos()
 {
-	static int testInt = 0;
+	static int fixed = 0;
 	RECT rc;
 	POINT pt = { 0 ,0 };
 	GetClientRect(GET_WINDOW_HANDLE(), &rc);
@@ -183,27 +183,24 @@ void player::mouseSenterPos()
 		dPosY = 0;
 		first = false;
 	}
-	testInt += dPosY;
-	if (testInt > 372)
+	fixed += dPosY;
+	if (fixed > 372)
 	{
-		testInt -= dPosY;
+		fixed -= dPosY;
 		dPosY = 0;
 	}
-	else if (testInt < -372)
+	else if (fixed < -372)
 	{
-		testInt -= dPosY;
+		fixed -= dPosY;
 		dPosY = 0;
 	}
 
 	this->rotateByYAxis((float)-dPosX / 5.0f, false);
 	this->rotateByXAxis((float)-dPosY / 5.0f);
 
-
-
 	ClientToScreen(GET_WINDOW_HANDLE(), &pt);
 	SetCursorPos(pt.x, pt.y);
 
-	printf("testInt : %d\n", testInt);
 }
 
 CSkinnedObject * player::createPlayer()

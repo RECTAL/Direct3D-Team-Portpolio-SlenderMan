@@ -26,12 +26,10 @@ CSpotLightObject::CSpotLightObject(int a_nIndex, float a_fRange, float a_fTheta,
 
 	m_stSpotMesh = GET_STATIC_MESH("Resources/Meshes/cone/cone.X");
 	m_pEffect = this->createSpotEffect();
-	m_pTestMesh = this->createTestMesh();
 }
 
 CSpotLightObject::~CSpotLightObject()
 {
-	SAFE_RELEASE(m_pTestMesh);
 }
 
 void CSpotLightObject::update(void)
@@ -160,13 +158,4 @@ LPD3DXEFFECT CSpotLightObject::createSpotEffect()
 	pEffect = GET_EFFECT("Resources/Effects/spotLightRay.fx");
 
 	return pEffect;
-}
-
-LPD3DXMESH CSpotLightObject::createTestMesh()
-{
-	LPD3DXMESH pMesh = nullptr;
-	D3DXCreateBox(GET_DEVICE(), 3.0f, 3.0f, 3.0f, &pMesh, NULL);
-
-
-	return pMesh;
 }

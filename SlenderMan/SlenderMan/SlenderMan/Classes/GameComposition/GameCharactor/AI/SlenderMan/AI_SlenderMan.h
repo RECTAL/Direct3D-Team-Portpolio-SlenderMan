@@ -59,4 +59,5 @@ private:
 
 	bool			m_bIsSpawn = false;
 	float			m_fSpawnTime = 0.0f;
+	bool			reSpwan = true;
 };
