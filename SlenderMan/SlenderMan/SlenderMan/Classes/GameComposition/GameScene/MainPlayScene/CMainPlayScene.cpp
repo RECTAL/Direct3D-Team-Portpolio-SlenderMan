@@ -219,11 +219,9 @@ void CMainPlayScene::setStateSound()
 	if (pPlayer->getPlayerState()&(int)EPlayerState::WALKGRASS)
 	{
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Grass.wav", false);
-		if (m_fRunTime > 8.0f) {
-			GET_SOUND_MANAGER()->setEffectSoundsVolume(1.0f);
-		}
-		else if (m_fRunTime > 6.0f) {
-			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.95f);
+		if (m_fRunTime >= 8.0f) {
+			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Breathe.wav", false);
+			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/HeartBeat.wav", false);
 		}
 	}
 	else if (pPlayer->getPlayerState()&(int)EPlayerState::WALKROCK)
@@ -246,14 +244,7 @@ void CMainPlayScene::setStateSound()
 	}
 	else if (pPlayer->getPlayerState()&(int)EPlayerState::NONE)
 	{
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Breathe.wav", false);
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/HeartBeat.wav", false);
-		if (m_fRunTime <= 1.0f) {
-			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.9f);
-		}
-		else if (m_fRunTime <= 3.0f) {
-			GET_SOUND_MANAGER()->setEffectSoundsVolume(0.95f);
-		}
+		
 	}
 
 }
@@ -344,7 +335,7 @@ void CMainPlayScene::setTimer()
 	if (pPlayer->getPlayerState() != (int)EPlayerState::NONE)
 	{
 		m_fRunTime += GET_DELTA_TIME();
-		if (m_fRunTime >= 20.0f) m_fRunTime = 20.0f;
+		if (m_fRunTime >= 8.0f) m_fRunTime = 8.0f;
 	}
 	else {
 		m_fRunTime -= GET_DELTA_TIME();
@@ -460,7 +451,7 @@ void CMainPlayScene::selectEffectSound()
 
 	for (auto iter : m_pStage->getSoundObjList())
 	{
-		int nIndex = (int)iter->getSoundType() - (int)EPlayingBGM::CRIKET;
+		int nIndex = (int)iter->getSoundType() - (int)EPlayingBGM::WIND;
 		D3DXVECTOR3 deltaVec = pPlayer->getPosition() - iter->getPosition();
 		float deltaLength = D3DXVec3Length(&deltaVec);
 
@@ -603,6 +594,7 @@ void CMainPlayScene::update(void)
 		m_pMenuContainer->setVisible(!m_pMenuContainer->getVisible());
 		m_pOptionButton->setVisible(false);
 		//ShowCursor(m_pMenuContainer->getVisible());
+		ShowCursor(m_pMenuContainer->getVisible());
 		RECT rc;
 		POINT pt = { 0 ,0 };
 		GetClientRect(GET_WINDOW_HANDLE(), &rc);
