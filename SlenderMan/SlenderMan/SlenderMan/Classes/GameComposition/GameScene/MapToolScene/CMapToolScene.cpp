@@ -289,7 +289,6 @@ void CMapToolScene::createButtonUI()
 		m_pSaveButton->setVisible(false);
 		m_pSelectWindowContainer->setVisible(false);
 		m_pCloseButton->setVisible(false);
-		m_pSoundListSquare->setVisible(false);
 	};
 	m_pCloseButton->init(crashFptr, nullptr, nullptr, endFptr);
 
@@ -1130,9 +1129,15 @@ void CMapToolScene::inputKey(void)
 
 		if (IS_KEY_DOWN(DIK_Q)) {
 			m_fScale += 0.1f * GET_DELTA_TIME();
+			if (IS_KEY_DOWN(DIK_LSHIFT)) {
+				m_fScale += 5.0f;
+			}
 		}
 		else if (IS_KEY_DOWN(DIK_E)) {
 			m_fScale -= 0.1f * GET_DELTA_TIME();
+			if (IS_KEY_DOWN(DIK_LSHIFT)) {
+				m_fScale -= 5.0f;
+			}
 		}
 		if (IS_KEY_DOWN(DIK_Z)) {
 			m_fOffesetY += GET_DELTA_TIME() * 10.0f;

@@ -39,6 +39,10 @@ public:			// getter, setter
 
 	bool&			getbOutLineDraw() { return m_bIsOutlineDraw; }
 
+	bool&			getbIsDraw() { return m_bIsDraw; }
+
+	EObjType&		getObjType() { return m_eObjType; }
+	EObjClasses&	getObjClasses() { return m_eClasses; }
 	//! 그리기 여부를 변경한다
 	void setVisible(bool a_bIsVisible);
 
@@ -74,8 +78,11 @@ protected:			// protected 변수
 	bool m_bIsDebugEnable = false;
 	bool m_bIsCollision = false;
 	bool m_bIsOutlineDraw = false;
+	bool m_bIsDraw = false;
 
 	CDebugDraw *m_pDebugDraw = nullptr;
+	EObjType	m_eObjType;
+	EObjClasses m_eClasses;
 
 	STBoundingBox m_stBoundingBox;
 	STBoundingSphere m_stBoundingSphere;

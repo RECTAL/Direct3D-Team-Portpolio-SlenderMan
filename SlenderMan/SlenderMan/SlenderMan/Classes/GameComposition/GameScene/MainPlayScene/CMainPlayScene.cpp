@@ -75,7 +75,7 @@ void CMainPlayScene::init()
 	pSlenderMan->setPlayer(pPlayer);
 	pSlenderMan->setStage(m_pStage);
 	pSlenderMan->addSpotLight(pPlayer->getLightObj());
-	//pSlenderMan->getStaticObj()->getTechniqueName() = "FogStaticMesh";
+	pSlenderMan->getStaticObj()->getTechniqueName() = "FogStaticMesh";
 	pSlenderMan->init();
 
 	ppSpotLightObj = new CSpotLightObject*[10];
@@ -684,7 +684,7 @@ void CMainPlayScene::update(void)
 	}
 	if (isCheck)
 	{
-		m_bIsGameClear = true;
+		//m_bIsGameClear = true;
 	}
 	if (m_bIsGameClear)
 	{
@@ -693,7 +693,7 @@ void CMainPlayScene::update(void)
 
 	if (m_fBlackValue>=1.0f)
 	{
-		CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+		//CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
 	}
 }
 

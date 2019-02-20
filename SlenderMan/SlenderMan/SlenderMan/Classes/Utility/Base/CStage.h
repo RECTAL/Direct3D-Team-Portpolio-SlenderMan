@@ -60,6 +60,7 @@ public:
 	std::vector<CRenderObject*>*	getObjList() { return m_pObjList; }
 	std::vector<CDecorate_SoundObj*> getSoundObjList() { return m_oSoundObjList; }
 	std::vector<CDecorate_BillboardObj*> getPaperObjList() { return m_oPaperObjList;}
+	std::vector<CRenderObject*>			 getRenderObjList() { return m_oRenderObjList; }
 	BOOL&	getbIsMaptool() { return m_bIsMaptool; }
 
 private:
@@ -74,7 +75,7 @@ private:
 	std::vector<CRenderObject*>* m_pObjList = nullptr;
 	std::vector<CDecorate_SoundObj*> m_oSoundObjList;
 	std::vector<CDecorate_BillboardObj*> m_oPaperObjList;
-
+	std::vector<CRenderObject*> m_oRenderObjList;
 
 	BOOL	m_bIsMaptool = false;
 };
