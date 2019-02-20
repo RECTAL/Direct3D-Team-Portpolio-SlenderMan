@@ -146,6 +146,7 @@ void CMainPlayScene::init()
 
 	m_fHardNoiseValue = 0.0f;
 	m_fNoiseValue = 0.0f;
+	m_fBlackValue = 0.0f;
 	m_nNoiseLevel = 0.0f;
 	m_fDeadTime = 0.0f;
 	m_fNoiseTime = 0.0f;
@@ -683,8 +684,12 @@ void CMainPlayScene::update(void)
 	{
 		m_bIsGameClear = true;
 	}
-
 	if (m_bIsGameClear)
+	{
+		m_fBlackValue += 0.2f*GET_DELTA_TIME();
+	}
+
+	if (m_fBlackValue>=1.0f)
 	{
 		CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
 	}
@@ -737,6 +742,7 @@ void CMainPlayScene::draw(void)
 	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pNoiseTexture", m_pColorNoiseImage->getSpriteTexture()[m_pColorNoiseImage->getTextureOffset()]);
 	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue", m_fNoiseValue);
 	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue2", m_fHardNoiseValue);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue3", m_fBlackValue);
 
 
 

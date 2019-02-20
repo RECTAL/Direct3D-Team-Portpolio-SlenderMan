@@ -1248,7 +1248,8 @@ void CStage::draw()
 								if (!m_bIsMaptool)
 									GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
 								pBillboard->getbOutLineDraw() = false;
-								pBillboard->draw();
+								if(!pBillboard->getbIsGet())
+									pBillboard->draw();
 							}
 						}
 					}

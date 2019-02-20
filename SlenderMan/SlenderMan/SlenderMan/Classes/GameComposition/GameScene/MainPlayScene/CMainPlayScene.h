@@ -114,6 +114,7 @@ private:
 	float m_fDeadTime = 0.0f;
 	float m_fNoiseValue = 0.0f;
 	float m_fHardNoiseValue = 0.0f;
+	float m_fBlackValue = 0.0f;
 	float m_fNoiseTime = 0.0f;
 	// 움직인 시간
 	float m_fRunTime = 0.0f;
