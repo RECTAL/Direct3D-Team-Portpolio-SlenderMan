@@ -25,7 +25,6 @@
 #include "../../GameObject/Decorate/CDecorate_SoundObj.h"
 #include "../../GameObject/Decorate/CDecorate_BillboardObj.h"
 #include "../../GameCharactor/AI/SlenderMan/AI_SlenderMan.h"
-#include "../../GameScene/TitleScene/CTitleScene.h"
 
 CMainPlayScene::CMainPlayScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
@@ -48,7 +47,6 @@ CMainPlayScene::~CMainPlayScene()
 void CMainPlayScene::init()
 {	
 	CScene::init();
-	ShowCursor(false);
 	
 	if (m_bIsFirst)
 	{
@@ -60,7 +58,7 @@ void CMainPlayScene::init()
 		this->createWindowUI();
 		this->createRenderTarget();
 		this->settingPlayer();
-
+		this->createContainer();
 		this->createSpriteDefault();
 		this->createLabel();
 
@@ -154,6 +152,7 @@ void CMainPlayScene::init()
 	m_fNoiseTime = 0.0f;
 
 	m_bIsGameClear = false;
+	m_bIsShowCursor = FALSE;
 }
 
 void CMainPlayScene::createWindowUI()
@@ -556,16 +555,42 @@ void CMainPlayScene::createContainer()
 
 void CMainPlayScene::update(void)
 {
-	CScene::update();
-
-	m_pStage->update();
-	m_pCamCoderView->update();
-	m_pNoiseImage->update();
-	m_pColorNoiseImage->update();
+	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
+		m_bIsMenu = !m_bIsMenu;
+		m_pMenuContainer->setVisible(m_bIsMenu);
+		m_pSoundContainer->setVisible(false);
+		RECT rc;
+		POINT pt = { 0 ,0 };
+		GetClientRect(GET_WINDOW_HANDLE(), &rc);
+		pt.x = (rc.right - rc.left) / 2;
+		pt.y = (rc.bottom - rc.top) / 2;
+		ClientToScreen(GET_WINDOW_HANDLE(), &pt);
+		SetCursorPos(pt.x, pt.y);
+	}
 	m_pMenuContainer->update();
 	m_pSoundContainer->update();
-	setTimer();
-	pPlayer->update();
+
+	if (m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible())
+	{
+		m_bIsShowCursor = TRUE;
+	}
+	else
+		m_bIsShowCursor = FALSE;
+
+	ShowCursor(m_bIsShowCursor);
+	GET_DEVICE()->ShowCursor(m_bIsShowCursor);
+
+	if (!m_bIsMenu)
+	{
+		CScene::update();
+
+		m_pStage->update();
+		m_pCamCoderView->update();
+		m_pNoiseImage->update();
+		m_pColorNoiseImage->update();
+
+		setTimer();
+		pPlayer->update();
 
 	pSlenderMan->spawnSlenderMan();
 	pSlenderMan->update();
@@ -609,66 +634,66 @@ void CMainPlayScene::update(void)
 	}
 	ShowCursor(m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible());
 
-	if (pSlenderMan->getbIsSpawn())
-	{
-		D3DXVECTOR3 delta = pSlenderMan->getPosition() - pPlayer->getPosition();
-		float deltaLength = D3DXVec3Length(&delta);
+		if (pSlenderMan->getbIsSpawn())
+		{
+			D3DXVECTOR3 delta = pSlenderMan->getPosition() - pPlayer->getPosition();
+			float deltaLength = D3DXVec3Length(&delta);
 
-		if(deltaLength <=pSlenderMan->getBoundingSphere().m_fRadius)
-			m_nNoiseLevel++;
+			if (deltaLength <= pSlenderMan->getBoundingSphere().m_fRadius)
+				m_nNoiseLevel++;
+			else
+			{
+				m_nNoiseLevel -= 1.5f;
+				m_nNoiseLevel = max(0, m_nNoiseLevel);
+			}
+		}
 		else
 		{
-			m_nNoiseLevel-=1.5f;
+			m_nNoiseLevel -= 2;
 			m_nNoiseLevel = max(0, m_nNoiseLevel);
 		}
-	}
-	else
-	{
-		m_nNoiseLevel -= 2;
-		m_nNoiseLevel = max(0, m_nNoiseLevel);
-	}
-	
-	if (m_nNoiseLevel >= 50)
-	{
-		m_fNoiseValue += 0.5f*GET_DELTA_TIME();
-		if (m_fNoiseValue > 0.7f)m_fNoiseValue = 0.7f;
-	}
-	else
-	{
-		m_fNoiseValue -= GET_DELTA_TIME();
-		if (m_fNoiseValue < 0.0f)m_fNoiseValue = 0.0f;
-	}
 
-	if (m_nNoiseLevel >= 100)
-	{
-		m_fHardNoiseValue += 0.5f*GET_DELTA_TIME();
-		if (m_fHardNoiseValue > 0.7f)
+		if (m_nNoiseLevel >= 50)
 		{
-			m_fDeadTime += GET_DELTA_TIME();
-			m_fHardNoiseValue = 0.7f;
-			if(m_fDeadTime>6.0f)
-				CHANGE_SCENE_DIRECT(GAMESCENE_GAMEOVER, TRUE);
+			m_fNoiseValue += 0.5f*GET_DELTA_TIME();
+			if (m_fNoiseValue > 0.7f)m_fNoiseValue = 0.7f;
 		}
-	}
-	else
-	{
-		m_fHardNoiseValue -= 0.5f*GET_DELTA_TIME();
-		if (m_fHardNoiseValue < 0.0f)m_fHardNoiseValue = 0.0f;
+		else
+		{
+			m_fNoiseValue -= GET_DELTA_TIME();
+			if (m_fNoiseValue < 0.0f)m_fNoiseValue = 0.0f;
+		}
 
-		m_fDeadTime -= GET_DELTA_TIME();
-		if (m_fDeadTime < 0.0f)m_fDeadTime = 0.0f;
-	}
+		if (m_nNoiseLevel >= 100)
+		{
+			m_fHardNoiseValue += 0.5f*GET_DELTA_TIME();
+			if (m_fHardNoiseValue > 0.7f)
+			{
+				m_fDeadTime += GET_DELTA_TIME();
+				m_fHardNoiseValue = 0.7f;
+				if (m_fDeadTime > 6.0f)
+					CHANGE_SCENE_DIRECT(GAMESCENE_GAMEOVER, TRUE);
+			}
+		}
+		else
+		{
+			m_fHardNoiseValue -= 0.5f*GET_DELTA_TIME();
+			if (m_fHardNoiseValue < 0.0f)m_fHardNoiseValue = 0.0f;
 
-	m_fPlayTime += GET_DELTA_TIME();
+			m_fDeadTime -= GET_DELTA_TIME();
+			if (m_fDeadTime < 0.0f)m_fDeadTime = 0.0f;
+		}
 
-	if (m_fNoiseValue >= 0.5f)
-	{
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
-	}
-	if (m_fHardNoiseValue >= 0.5f)
-	{
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
-	}
+		m_fPlayTime += GET_DELTA_TIME();
+
+		if (m_fNoiseValue >= 0.5f)
+		{
+			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
+		}
+		if (m_fHardNoiseValue >= 0.5f)
+		{
+			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
+		}
 
 	bool isCheck = true;
 	for (auto iter : m_pStage->getPaperObjList())
@@ -688,9 +713,10 @@ void CMainPlayScene::update(void)
 		m_fBlackValue += 0.2f*GET_DELTA_TIME();
 	}
 
-	if (m_fBlackValue>=1.0f)
-	{
-		CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+		if (m_fBlackValue >= 1.0f)
+		{
+			CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+		}
 	}
 }
 

@@ -91,7 +91,8 @@ private:
 	int								m_czTerrain;
 
 	D3DXVECTOR3						m_vfScale;
-	LPDIRECT3DTEXTURE9				m_pSplatTexture;
+	LPDIRECT3DTEXTURE9				m_pSplatTexture = nullptr;
+	LPDIRECT3DTEXTURE9				m_pBumpTexture = nullptr;
 	LPDIRECT3DTEXTURE9				m_pTex[CTerrainObject::MAX_TERRAIN_TEX];
 	LPD3DXMESH						m_pTerrainMesh;
 	int								m_nTriangles;
