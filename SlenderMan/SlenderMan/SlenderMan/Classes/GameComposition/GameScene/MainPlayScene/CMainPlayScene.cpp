@@ -595,18 +595,20 @@ void CMainPlayScene::update(void)
 	}
 	m_pMenuContainer->update();
 	m_pSoundContainer->update();
+
+	if (m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible())
+	{
+		m_bIsShowCursor = TRUE;
+	}
+	else
+		m_bIsShowCursor = FALSE;
+
+	ShowCursor(m_bIsShowCursor);
+	GET_DEVICE()->ShowCursor(m_bIsShowCursor);
+
 	if (!m_bIsMenu)
 	{
 		CScene::update();
-		if (m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible())
-		{
-			m_bIsShowCursor = TRUE;
-		}
-		else
-			m_bIsShowCursor = FALSE;
-
-		ShowCursor(m_bIsShowCursor);
-		GET_DEVICE()->ShowCursor(m_bIsShowCursor);
 
 		m_pStage->update();
 		m_pCamCoderView->update();

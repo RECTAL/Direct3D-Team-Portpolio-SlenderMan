@@ -6,6 +6,7 @@
 #include "../../Manager/CResourceManager.h"
 #include "../../Manager/CInputManager.h"
 #include "../../Manager/CWindowManager.h"
+#include "../../Manager/CTimeManager.h"
 #include "../../System/CollisionSystem/CollisionSystem_CQuadSystem.h"
 
 CTerrainObject::CTerrainObject(const STParameters& a_stParameters)
@@ -31,6 +32,7 @@ CTerrainObject::CTerrainObject(const STParameters& a_stParameters)
 
 	m_pHeightMap	= new D3DXVECTOR3[m_cxDIB*m_czDIB];
 	m_pSplatTexture = GET_TEXTURE(a_stParameters.m_oSplatFilepath.c_str(), m_cxDIB-1, m_czDIB-1);
+	m_pBumpTexture = GET_TEXTURE("Resources/Textures/Terrain/NormalMap.png", GOUST_VALUE, GOUST_VALUE);
 	m_pEffect		= GET_EFFECT(a_stParameters.m_oEffectFilepath.c_str());
 
 	for (int i = 0; i < CTerrainObject::MAX_TERRAIN_TEX; i++) m_pTex[i] = NULL;
@@ -381,6 +383,7 @@ HRESULT CTerrainObject::render()
 	// 텍스처를 설정한다
 	// {
 	m_pEffect->SetTexture("g_pSplatTexture", m_pSplatTexture);
+	m_pEffect->SetTexture("g_pBumpTexture", m_pBumpTexture);
 
 	for (int i = 0; i < 4; ++i) {
 		char szVariableName[MAX_PATH] = "";
@@ -391,7 +394,9 @@ HRESULT CTerrainObject::render()
 
 	m_pEffect->SetFloat("g_fFogDensity", 0.55f);
 	m_pEffect->SetFloat("g_fFogEnd", 100.0f);
-
+	m_pEffect->SetFloat("g_fTime", GET_RUNNING_TIME());
+	m_pEffect->SetFloat("bumpiness",0.07f );
+	m_pEffect->SetFloat("flowspeed",0.20f);
 
 	int nNumSpotLight = m_stParameters.m_nNumSpotLight;
 	m_pEffect->SetInt("nNumSpotLight", nNumSpotLight);

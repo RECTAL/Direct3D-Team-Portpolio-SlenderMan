@@ -20,13 +20,31 @@ int nNumPointLight;
 float4	g_stPointLightPosition[10];
 float	g_fPointDistance[10];
 
+float	g_fTime;
 
+float      bumpiness
+<
+	string UIName = "bumpiness";
+	string UIWidget = "Numeric";
+	bool UIVisible = false;
+	float UIMin = -1.00;
+	float UIMax = 1.00;
+> = float(0.07);
+float      flowspeed
+<
+	string UIName = "flowspeed";
+	string UIWidget = "Numeric";
+	bool UIVisible = false;
+	float UIMin = -1.00;
+	float UIMax = 1.00;
+> = float(0.20);
 
 texture g_pTextureA;
 texture g_pTextureB;
 texture g_pTextureC;
 texture g_pTextureD;
 texture g_pSplatTexture;
+texture g_pBumpTexture;
 
 
 struct STInput
@@ -178,6 +196,14 @@ sampler2D g_pSplatSampler = sampler_state
 	MipFilter = LINEAR;
 };
 
+sampler2D g_pBumpSampler = sampler_state
+{
+	Texture	  = g_pBumpTexture;
+	MinFilter = LINEAR;
+	MagFilter = LINEAR;
+	MipFilter = LINEAR;
+};
+
 float4 ps_main(STOutput a_stInput) : COLOR0
 {
 	float2 stUV = a_stInput.m_stUV;
@@ -196,7 +222,13 @@ float4 ps_main(STOutput a_stInput) : COLOR0
 
 
 	float4 stColorA = tex2D(g_pSamplerA, a_stInput.m_stUV);
-	float4 stColorB = tex2D(g_pSamplerB, a_stInput.m_stUV);
+	//float4 stColorB = tex2D(g_pSamplerB, a_stInput.m_stUV);
+	float2 uv = float2(a_stInput.m_stUV.x + g_fTime * flowspeed, a_stInput.m_stUV.y);
+	float3 normal;
+
+	normal = tex2D(g_pBumpSampler, uv);
+	float4 stColorB = tex2D(g_pSamplerB, a_stInput.m_stUV.xy + bumpiness * normal.xy);
+	stColorB.rgb = stColorB.rgb* stColorB.rgb;
 	float4 stColorC = tex2D(g_pSamplerC, a_stInput.m_stUV);
 	float4 stColorD = tex2D(g_pSamplerD, a_stInput.m_stUV);
 	float4 stSplatColor = tex2D(g_pSplatSampler, stUV);
@@ -268,8 +300,16 @@ float4 ps_FogMain(STOutput_fog a_stInput) : COLOR0
 
 
 	float4 stColorA = tex2D(g_pSamplerA, a_stInput.m_stUV);
-	float4 stColorB = tex2D(g_pSamplerB, a_stInput.m_stUV);
+	//float4 stColorB = tex2D(g_pSamplerB, a_stInput.m_stUV);
+	float2 uv = float2(a_stInput.m_stUV.x + g_fTime * flowspeed, a_stInput.m_stUV.y);
+	float3 normal;
+
+	normal = tex2D(g_pBumpSampler, uv);
+	float4 stColorB = tex2D(g_pSamplerB, a_stInput.m_stUV.xy + bumpiness * normal.xy);
+	stColorB.rgb = stColorB.rgb* stColorB.rgb;
 	float4 stColorC = tex2D(g_pSamplerC, a_stInput.m_stUV);
+
+
 	float4 stColorD = tex2D(g_pSamplerD, a_stInput.m_stUV);
 	float4 stSplatColor = tex2D(g_pSplatSampler, stUV);
 
