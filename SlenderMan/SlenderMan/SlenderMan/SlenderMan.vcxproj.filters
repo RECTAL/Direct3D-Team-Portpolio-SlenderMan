@@ -462,9 +462,6 @@
     <ClCompile Include="Classes\GameComposition\GameScene\TitleScene\CTitleScene.cpp">
       <Filter>Classes\GameComposition\GameScene\TitleScene</Filter>
     </ClCompile>
-    <ClCompile Include="Classes\GameComposition\GameScene\MainPlayScene\CMainPlayScene.cpp">
-      <Filter>Classes\GameComposition\GameScene\MainPlayScene</Filter>
-    </ClCompile>
     <ClCompile Include="Classes\GameComposition\GameScene\MapToolScene\CMapToolScene.cpp">
       <Filter>Classes\GameComposition\GameScene\MapToolScene</Filter>
     </ClCompile>
@@ -584,6 +581,9 @@
     </ClCompile>
     <ClCompile Include="Classes\GameComposition\GameCharactor\AI\SlenderMan\AI_SlenderMan.cpp">
       <Filter>Classes\GameComposition\GameCharactor\AI\SlenderMan</Filter>
+    </ClCompile>
+    <ClCompile Include="Classes\GameComposition\GameScene\MainPlayScene\CMainPlayScene.cpp">
+      <Filter>Classes\GameComposition\GameScene\MainPlayScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

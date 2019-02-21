@@ -158,6 +158,7 @@ void CMainPlayScene::init()
 void CMainPlayScene::createWindowUI()
 {
 	this->createButton();
+	this->createContainer();
 }
 
 void CMainPlayScene::createRenderTarget()
@@ -176,42 +177,15 @@ void CMainPlayScene::createStageSound()
 	case EStageSound::START:
 		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_1.wav", true);
 		break;
-	case EStageSound::STAGE_1: 
-		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_1.wav", true);
-		m_ePlayingBGM = EPlayingBGM::CROW; 
-		break;
-	case EStageSound::STAGE_2: 
-		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_1.wav", true);
-		m_ePlayingBGM = EPlayingBGM::OWL;
-		break;
-	case EStageSound::STAGE_3:
-		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_2.wav", true); 
-		break;
-	case EStageSound::STAGE_4:
+	case EStageSound::STAGE_1:
 		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_2.wav", true);
-		m_ePlayingBGM = EPlayingBGM::WIND;
 		break;
-	case EStageSound::STAGE_5: 
-		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_2.wav", true); 
-		m_ePlayingBGM = EPlayingBGM::CRIKET; 
-		break;
-	case EStageSound::STAGE_6: 
-		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_3.wav", true); 
-		break;
-	case EStageSound::STAGE_7: 
+	case EStageSound::STAGE_2:
 		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_3.wav", true);
-		m_ePlayingBGM = EPlayingBGM::RAIN; 
-		break;
-	case EStageSound::STAGE_8: 
-		GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/mainBGM_3.wav", true);
-		m_ePlayingBGM = EPlayingBGM::FIRE; 
-		break;
-	case EStageSound::EXIT:
 		break;
 	case EStageSound::NONE:
 		break;
 	}
-
 }
 
 void CMainPlayScene::setStateSound()
@@ -245,7 +219,10 @@ void CMainPlayScene::setStateSound()
 	}
 	else if (pPlayer->getPlayerState()&(int)EPlayerState::NONE)
 	{
-		
+		if (m_fRunTime > 0.0f) {
+			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Breathe.wav", true);
+			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/HeartBeat.wav", true);
+		}
 	}
 
 }
@@ -349,8 +326,10 @@ void CMainPlayScene::setTimer()
 
 void CMainPlayScene::setVolume()
 {
-	GET_SOUND_MANAGER()->setBackgroundSoundVolume(m_pScrollBar[0]->getSetValue() / 300);
-	GET_SOUND_MANAGER()->setEffectSoundsVolume(m_pScrollBar[1]->getSetValue() / 300);
+	if (m_pSoundContainer->getVisible() == true) {
+		GET_SOUND_MANAGER()->setBackgroundSoundVolume(m_pScrollBar[0]->getSetValue()/100);
+		GET_SOUND_MANAGER()->setEffectSoundsVolume(m_pScrollBar[1]->getSetValue() / 100);
+	}
 }
 
 void CMainPlayScene::setPlayState()
@@ -509,7 +488,6 @@ void CMainPlayScene::createSpriteDefault()
 	m_pNoiseImage = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/noise", "png", 1366, 768, 4);
 	m_pNoiseImage->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
 
-	
 	m_pColorNoiseImage = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/HardNoise", "png", 1366, 768, 4);
 	m_pColorNoiseImage->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
 }
@@ -553,11 +531,7 @@ void CMainPlayScene::drawFindPage()
 {
 	pPlayer->getPage();
 	m_pStage->getPaperObjList().size();
-	
-	
 }
-
-
 
 void CMainPlayScene::createContainer()
 {
@@ -618,18 +592,47 @@ void CMainPlayScene::update(void)
 		setTimer();
 		pPlayer->update();
 
-		pSlenderMan->spawnSlenderMan();
-		pSlenderMan->update();
-		this->setStateSound();
-		this->setBGMSound();
-		this->selectEffectSound();
-		this->setVolume();
-		if (m_bIsBGMPlay)
+	pSlenderMan->spawnSlenderMan();
+	pSlenderMan->update();
+	this->setStateSound();
+	this->setBGMSound();
+	this->selectEffectSound();
+	this->setVolume();
+	
+	if (m_bIsBGMPlay) {
+		
+		this->createStageSound();
+		m_bIsBGMPlay = false;
+	}
+	if (noteCount != pPlayer->getPage())
+	{
+		switch (pPlayer->getPage())
 		{
-			this->createStageSound();
-			m_bIsBGMPlay = false;
+		case 3:
+			m_eStageSound = EStageSound::STAGE_1;
+			break;
+		case 6:
+			m_eStageSound = EStageSound::STAGE_2;
+			break;
+		
 		}
-
+		m_bIsBGMPlay = true;
+		noteCount = pPlayer->getPage();
+	}
+	
+	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
+		m_bIsMenu = !m_bIsMenu;
+		m_pMenuContainer->setVisible(m_bIsMenu);
+		m_pSoundContainer->setVisible(false);
+		RECT rc;
+		POINT pt = { 0 ,0 };
+		GetClientRect(GET_WINDOW_HANDLE(), &rc);
+		pt.x = (rc.right - rc.left) / 2;
+		pt.y = (rc.bottom - rc.top) / 2;
+		ClientToScreen(GET_WINDOW_HANDLE(), &pt);
+		SetCursorPos(pt.x, pt.y);
+	}
+	ShowCursor(m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible());
 
 		if (pSlenderMan->getbIsSpawn())
 		{
@@ -692,23 +695,23 @@ void CMainPlayScene::update(void)
 			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
 		}
 
-		bool isCheck = true;
-		for (auto iter : m_pStage->getPaperObjList())
+	bool isCheck = true;
+	for (auto iter : m_pStage->getPaperObjList())
+	{
+		if (!iter->getbIsGet())
 		{
-			if (!iter->getbIsGet())
-			{
-				isCheck = false;
-				break;
-			}
+			isCheck = false;
+			break;
 		}
-		if (isCheck)
-		{
-			//m_bIsGameClear = true;
-		}
-		if (m_bIsGameClear)
-		{
-			m_fBlackValue += 0.2f*GET_DELTA_TIME();
-		}
+	}
+	if (isCheck)
+	{
+		//m_bIsGameClear = true;
+	}
+	if (m_bIsGameClear)
+	{
+		m_fBlackValue += 0.2f*GET_DELTA_TIME();
+	}
 
 		if (m_fBlackValue >= 1.0f)
 		{

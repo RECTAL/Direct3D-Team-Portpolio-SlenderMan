@@ -68,7 +68,7 @@ void CStage::release()
 
 void CStage::load(CTerrainObject::STParameters a_stParameters, std::string m_oObjPacketListFilePath)
 {
-	release();
+	this->release();
 	a_stParameters.m_pLight = m_pDirectionLightObj;
 	m_pTerrainObj = new CTerrainObject(a_stParameters);
 
@@ -929,13 +929,48 @@ void CStage::delObj(CRenderObject * a_pRenderObj, D3DXVECTOR3 a_stPosition)
 	{
 		if (m_pObjList[nIndex][i] == a_pRenderObj)
 		{
+			if (m_pObjList[nIndex][i]->getObjClasses() == EObjClasses::DECORATE_SOUND){
+				std::vector<CDecorate_SoundObj*>::iterator iter = std::find_if(m_oSoundObjList.begin(), m_oSoundObjList.end(), [=](CDecorate_SoundObj* a_pSoundObj)->bool {
+					if (a_pSoundObj == m_pObjList[nIndex][i])return true;
+					else return false;
+				});
+
+				if (iter != m_oSoundObjList.end())
+				{
+					m_oSoundObjList.erase(iter);
+				}
+			}
+
+			if (m_pObjList[nIndex][i]->getObjClasses() == EObjClasses::DECORATE_BILLBOARD) {
+				std::vector<CDecorate_BillboardObj*>::iterator iter = std::find_if(m_oPaperObjList.begin(), m_oPaperObjList.end(), [=](CDecorate_BillboardObj* a_pBillboardObj)->bool {
+					if (a_pBillboardObj == m_pObjList[nIndex][i])return true;
+					else return false;
+				});
+
+				if (iter != m_oPaperObjList.end())
+				{
+					m_oPaperObjList.erase(iter);
+				}
+			}
+			std::vector<CRenderObject*>::iterator iter = std::find_if(m_oRenderObjList.begin(), m_oRenderObjList.end(), [=](CRenderObject* a_pRenderObj)->bool {
+				if (a_pRenderObj == m_pObjList[nIndex][i])return true;
+				else return false;
+			});
+
+			if (iter != m_oRenderObjList.end())
+			{
+				m_oRenderObjList.erase(iter);
+			}
 			for (int j = i; j < MAX_OBJ_CAPACITY - 1; j++)
 			{
 				m_pObjPacketList[nIndex].m_nObjCapacity[j] = m_pObjPacketList[nIndex].m_nObjCapacity[j + 1];
 				m_pObjPacketList[nIndex].m_stObjPacket[j] = m_pObjPacketList[nIndex].m_stObjPacket[j + 1];
 			}
+			SAFE_DELETE(m_pObjList[nIndex][i]);
 			m_pObjList[nIndex].erase(m_pObjList[nIndex].begin() + i);
 			m_pObjPacketList[nIndex].m_nPivot--;
+
+
 			break;
 		}
 	}

@@ -17,6 +17,7 @@ class CSpotLightObject;
 class CStage;
 class CLabelObject;
 class slenderman;
+class CTitleScene;
 class CMainPlayScene :public CScene
 {
 public:		//constructor , destructor
@@ -60,6 +61,7 @@ private:
 	void createContainer();
 	void createButton();
 	void selectEffectSound();
+	void buttonUpdate();
 	void releaseUI();
 
 	void createLabel();
@@ -87,7 +89,6 @@ private:
 	CSpriteObject_Default* m_pColorNoiseImage = nullptr;
 	CLabelObject*		   m_pPlayTime = nullptr;
 	CLabelObject*		   m_pFindPage = nullptr;
-	CSpriteObject*		   m_pCurrentSpriteHandle = nullptr;
 
 	CSpriteObject_Button* m_pExitButton = nullptr;
 	CSpriteObject_Button* m_pOptionButton = nullptr;
@@ -100,7 +101,7 @@ private:
 	CSpriteObject_ScrollBar* m_pScrollBar[2] = { nullptr };
 
 	EPlayingBGM m_ePlayingBGM = EPlayingBGM::NONE;
-	EStageSound m_eStageSound = EStageSound::STAGE_1;
+	EStageSound m_eStageSound = EStageSound::START;
 
 	FPTR* crashFptr = nullptr;
 	FPTR* beginFptr = nullptr;
@@ -109,6 +110,7 @@ private:
 
 	CSpotLightObject** ppSpotLightObj;
 	CLightObject** ppPointLightObj;
+	CTitleScene* m_pTitleScene = nullptr;
 
 
 

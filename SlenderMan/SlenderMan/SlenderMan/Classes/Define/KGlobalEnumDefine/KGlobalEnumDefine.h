@@ -106,16 +106,9 @@ enum class EPlayingBGM
 
 enum class EStageSound
 {
-	START,			// 시작 지점
-	STAGE_1,		// 첫번째 쪽지 근처
-	STAGE_2,
-	STAGE_3,
-	STAGE_4,
-	STAGE_5,
-	STAGE_6,
-	STAGE_7,
-	STAGE_8,
-	EXIT,			// 탈출 시
+	START,			// 시작 BGM
+	STAGE_1,		// 중간 BGM
+	STAGE_2,		// 최종 BGM
 	NONE
 };
 
