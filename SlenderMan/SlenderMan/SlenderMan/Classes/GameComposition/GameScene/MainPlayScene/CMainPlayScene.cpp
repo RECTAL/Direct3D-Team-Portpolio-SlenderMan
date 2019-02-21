@@ -37,6 +37,7 @@ CMainPlayScene::~CMainPlayScene()
 	SAFE_DELETE(m_pFindPage);
 	SAFE_DELETE(m_pCamCoderView);
 	SAFE_DELETE(m_pNoiseImage);
+	SAFE_DELETE(m_pRedDotImage);
 	SAFE_DELETE(m_pColorNoiseImage);
 	SAFE_DELETE(pPlayer);
 	SAFE_DELETE(pSlenderMan);
@@ -150,7 +151,7 @@ void CMainPlayScene::init()
 	m_nNoiseLevel = 0.0f;
 	m_fDeadTime = 0.0f;
 	m_fNoiseTime = 0.0f;
-
+	m_fRedDotTime = 0.0f;
 	m_bIsGameClear = false;
 	m_bIsShowCursor = FALSE;
 }
@@ -490,6 +491,9 @@ void CMainPlayScene::createSpriteDefault()
 
 	m_pColorNoiseImage = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/HardNoise", "png", 1366, 768, 4);
 	m_pColorNoiseImage->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2.0f, GET_WINDOW_SIZE().cy / 2.0f, 0.0f));
+
+	m_pRedDotImage = new CSpriteObject_Default("Resources/Textures/Scene/MainPlayScene/redDot", "png", 22, 22, 2);
+	m_pRedDotImage->setPosition(D3DXVECTOR3(1200, 65, 0.0f));
 }
 
 void CMainPlayScene::calcPlayTime(float a_fTime, int & a_nHour, int & a_nMin, int & a_nSec)
@@ -589,50 +593,44 @@ void CMainPlayScene::update(void)
 		m_pNoiseImage->update();
 		m_pColorNoiseImage->update();
 
+		m_fRedDotTime += GET_DELTA_TIME();
+		if (m_fRedDotTime>1.0f)
+		{
+			m_fRedDotTime = 0.0f;
+			m_pRedDotImage->update();
+		}
 		setTimer();
 		pPlayer->update();
 
-	pSlenderMan->spawnSlenderMan();
-	pSlenderMan->update();
-	this->setStateSound();
-	this->setBGMSound();
-	this->selectEffectSound();
-	this->setVolume();
-	
-	if (m_bIsBGMPlay) {
+		pSlenderMan->spawnSlenderMan();
+		pSlenderMan->update();
+		this->setStateSound();
+		this->setBGMSound();
+		this->selectEffectSound();
+		this->setVolume();
 		
-		this->createStageSound();
-		m_bIsBGMPlay = false;
-	}
-	if (noteCount != pPlayer->getPage())
-	{
-		switch (pPlayer->getPage())
-		{
-		case 3:
-			m_eStageSound = EStageSound::STAGE_1;
-			break;
-		case 6:
-			m_eStageSound = EStageSound::STAGE_2;
-			break;
-		
+		if (m_bIsBGMPlay) {
+			
+			this->createStageSound();
+			m_bIsBGMPlay = false;
 		}
-		m_bIsBGMPlay = true;
-		noteCount = pPlayer->getPage();
-	}
-	
-	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
-		m_bIsMenu = !m_bIsMenu;
-		m_pMenuContainer->setVisible(m_bIsMenu);
-		m_pSoundContainer->setVisible(false);
-		RECT rc;
-		POINT pt = { 0 ,0 };
-		GetClientRect(GET_WINDOW_HANDLE(), &rc);
-		pt.x = (rc.right - rc.left) / 2;
-		pt.y = (rc.bottom - rc.top) / 2;
-		ClientToScreen(GET_WINDOW_HANDLE(), &pt);
-		SetCursorPos(pt.x, pt.y);
-	}
-	ShowCursor(m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible());
+		if (noteCount != pPlayer->getPage())
+		{
+			switch (pPlayer->getPage())
+			{
+			case 3:
+				m_eStageSound = EStageSound::STAGE_1;
+				break;
+			case 6:
+				m_eStageSound = EStageSound::STAGE_2;
+				break;
+			
+			}
+			m_bIsBGMPlay = true;
+			noteCount = pPlayer->getPage();
+		}
+		
+
 
 		if (pSlenderMan->getbIsSpawn())
 		{
@@ -695,29 +693,29 @@ void CMainPlayScene::update(void)
 			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
 		}
 
-	bool isCheck = true;
-	for (auto iter : m_pStage->getPaperObjList())
-	{
-		if (!iter->getbIsGet())
+		bool isCheck = true;
+		for (auto iter : m_pStage->getPaperObjList())
 		{
-			isCheck = false;
-			break;
+			if (!iter->getbIsGet())
+			{
+				isCheck = false;
+				break;
+			}
 		}
-	}
-	if (isCheck)
-	{
-		//m_bIsGameClear = true;
-	}
-	if (m_bIsGameClear)
-	{
-		m_fBlackValue += 0.2f*GET_DELTA_TIME();
-	}
-
-		if (m_fBlackValue >= 1.0f)
+		if (isCheck)
 		{
-			CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+			//m_bIsGameClear = true;
 		}
-	}
+		if (m_bIsGameClear)
+		{
+			m_fBlackValue += 0.2f*GET_DELTA_TIME();
+		}
+		
+			if (m_fBlackValue >= 1.0f)
+			{
+				CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+			}
+		}
 }
 
 void CMainPlayScene::draw(void)
@@ -743,6 +741,7 @@ void CMainPlayScene::draw(void)
 	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
 
 	m_pCamCoderView->drawUI();
+	m_pRedDotImage->drawUI();
 	char cPlayTime[100];
 	char cFindPage[100];
 	int nHour = 0, nMin = 0, nSec = 0;

@@ -87,6 +87,7 @@ private:
 	CSpriteObject_Default* m_pCamCoderView = nullptr;
 	CSpriteObject_Default* m_pNoiseImage = nullptr;
 	CSpriteObject_Default* m_pColorNoiseImage = nullptr;
+	CSpriteObject_Default* m_pRedDotImage = nullptr;
 	CLabelObject*		   m_pPlayTime = nullptr;
 	CLabelObject*		   m_pFindPage = nullptr;
 
@@ -124,6 +125,8 @@ private:
 	float m_fHardNoiseValue = 0.0f;
 	float m_fBlackValue = 0.0f;
 	float m_fNoiseTime = 0.0f;
+	float m_fRedDotTime = 0.0f;
 	// 움직인 시간
 	float m_fRunTime = 0.0f;
+	int noteCount = 0;
 };
