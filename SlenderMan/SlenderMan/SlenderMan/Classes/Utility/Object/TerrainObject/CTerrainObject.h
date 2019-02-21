@@ -57,7 +57,7 @@ public:
 	float			getCXTerrain() { return m_cxTerrain; }
 	float			getCYTerrain() { return m_cyTerrain; }
 	float			getCZTerrain() { return m_czTerrain; }
-	int				getHeight(D3DXVECTOR3 a_stPosition);
+	float			getHeight(D3DXVECTOR3 a_stPosition);
 	int				findIndex(D3DXVECTOR3 a_stPosition);
 	int				getTriangles() { return m_nTriangles; }
 	D3DXVECTOR3*	getHeightMap() { return m_pHeightMap; }

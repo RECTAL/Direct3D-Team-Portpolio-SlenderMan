@@ -276,7 +276,7 @@ void player::settingSkinnedObj()
 	D3DXVec3Normalize(&m_stSkinnedUpVec3, &m_stSkinnedUpVec3);
 	D3DXVec3Normalize(&m_stSkinnedForwardVec3, &m_stSkinnedForwardVec3);
 
-	m_pSkinnedObj->setPosition(cameraObj->getPosition() + D3DXVECTOR3(0.0f, -3.0f, 0.0f) + m_stSkinnedForwardVec3 * 0.75f);
+	m_pSkinnedObj->setPosition(cameraObj->getPosition() + D3DXVECTOR3(0.0f, -3.0f, 0.0f) + m_stSkinnedForwardVec3 * 1.5f);
 
 	m_pSkinnedObj->setRightDirection(m_stSkinnedRightVec3);
 	m_pSkinnedObj->setUpDirection(m_stSkinnedUpVec3);
@@ -289,7 +289,7 @@ void player::adjustJump()
 	{
 		float fTerrainHeight = m_pStage->getTerrainObj()->getHeight(this->getPosition());
 		float fPlayerHeight = this->getPosition().y;
-		if (fPlayerHeight - fTerrainHeight > 15.0f)
+		if (fPlayerHeight - fTerrainHeight > 8.0f)
 		{
 			m_bIsJump = true;
 			m_fJumpTime = 0.0f;

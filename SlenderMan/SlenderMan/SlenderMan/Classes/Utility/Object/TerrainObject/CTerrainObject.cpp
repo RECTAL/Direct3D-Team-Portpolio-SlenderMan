@@ -300,7 +300,7 @@ bool CTerrainObject::terrainPicking(D3DXVECTOR3& a_stPosition)
 	return isPicking;
 }
 
-int CTerrainObject::getHeight(D3DXVECTOR3 a_stPosition)
+float CTerrainObject::getHeight(D3DXVECTOR3 a_stPosition)
 {
 	float fMapPositionX = ((m_cxTerrain/ 2.0f) + a_stPosition.x) / m_stScale.x;
 	float fMapPositionZ = ((m_czTerrain / 2.0f) - a_stPosition.z) / m_stScale.y;

@@ -134,9 +134,6 @@
     <Filter Include="Classes\GameComposition\GameCharactor\AI">
       <UniqueIdentifier>{40529bb0-f321-4a72-8d0b-226012c0feae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\GameComposition\GameCharactor\AI\SlenderMan">
-      <UniqueIdentifier>{c5d7a1ae-536b-448b-a37a-f81f70657ab3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\GameComposition\GameCharactor\AI\NPC">
       <UniqueIdentifier>{b8cee9c6-639b-4507-a754-eac01e9c92d8}</UniqueIdentifier>
     </Filter>
@@ -208,6 +205,9 @@
     </Filter>
     <Filter Include="Resources\Meshes">
       <UniqueIdentifier>{9e96ce34-4840-4700-b95e-963812290da2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\GameComposition\GameCharactor\AI\SlenderMan">
+      <UniqueIdentifier>{c5d7a1ae-536b-448b-a37a-f81f70657ab3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

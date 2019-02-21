@@ -85,7 +85,7 @@ private:
 	STRay		m_stSkinnedRay;
 
 
-	float		m_fCheckRange = 3.0f;
+	float		m_fCheckRange = 6.0f;
 
 	bool isPlay = false;
 	bool isRun = false;
