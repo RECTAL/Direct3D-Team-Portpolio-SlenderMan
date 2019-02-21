@@ -557,8 +557,6 @@ void CMainPlayScene::drawFindPage()
 	
 }
 
-
-
 void CMainPlayScene::createContainer()
 {
 	m_pMenuContainer = new CSpriteObject_Container("Resources/Textures/Scene/MainPlayScene/menuWindow", "png", 500, 500, 1);
@@ -595,18 +593,18 @@ void CMainPlayScene::update(void)
 	}
 	m_pMenuContainer->update();
 	m_pSoundContainer->update();
+	if (m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible())
+	{
+		m_bIsShowCursor = TRUE;
+	}
+	else
+		m_bIsShowCursor = FALSE;
+	ShowCursor(m_bIsShowCursor);
+	GET_DEVICE()->ShowCursor(m_bIsShowCursor);
 	if (!m_bIsMenu)
 	{
 		CScene::update();
-		if (m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible())
-		{
-			m_bIsShowCursor = TRUE;
-		}
-		else
-			m_bIsShowCursor = FALSE;
-
-		ShowCursor(m_bIsShowCursor);
-		GET_DEVICE()->ShowCursor(m_bIsShowCursor);
+		
 
 		m_pStage->update();
 		m_pCamCoderView->update();
@@ -667,7 +665,13 @@ void CMainPlayScene::update(void)
 				m_fDeadTime += GET_DELTA_TIME();
 				m_fHardNoiseValue = 0.7f;
 				if (m_fDeadTime > 6.0f)
+				{
+					m_bIsShowCursor = TRUE;
+					ShowCursor(m_bIsShowCursor);
+					GET_DEVICE()->ShowCursor(m_bIsShowCursor);
 					CHANGE_SCENE_DIRECT(GAMESCENE_GAMEOVER, TRUE);
+
+				}
 			}
 		}
 		else
@@ -710,6 +714,9 @@ void CMainPlayScene::update(void)
 
 		if (m_fBlackValue >= 1.0f)
 		{
+			m_bIsShowCursor = TRUE;
+			ShowCursor(m_bIsShowCursor);
+			GET_DEVICE()->ShowCursor(m_bIsShowCursor);
 			CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
 		}
 	}
