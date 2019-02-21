@@ -704,7 +704,7 @@ void CMainPlayScene::update(void)
 		}
 		if (isCheck)
 		{
-			//m_bIsGameClear = true;
+			m_bIsGameClear = true;
 		}
 		if (m_bIsGameClear)
 		{

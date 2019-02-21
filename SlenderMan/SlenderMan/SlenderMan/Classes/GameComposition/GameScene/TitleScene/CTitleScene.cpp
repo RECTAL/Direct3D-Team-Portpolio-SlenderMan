@@ -57,7 +57,7 @@ void CTitleScene::init()
 	}
 	GET_SOUND_MANAGER()->stopAllEffectSounds();
 	isStartSound = true;
-	
+	m_bIsShowCursor = TRUE;
 }
 
 void CTitleScene::createWindowUI()
@@ -206,7 +206,8 @@ void CTitleScene::createSound()
 void CTitleScene::update(void)
 {
 	CScene::update();
-	
+	ShowCursor(m_bIsShowCursor);
+	GET_DEVICE()->ShowCursor(m_bIsShowCursor);
 	this->defaultImageUpdate();
 	if (m_pCurrentSpriteHandle == nullptr)
 	{

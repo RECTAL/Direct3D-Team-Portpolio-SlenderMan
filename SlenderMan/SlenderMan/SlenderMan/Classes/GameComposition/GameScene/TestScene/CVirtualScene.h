@@ -23,6 +23,4 @@ public:		//public override function
 	virtual void init()override;					//override	: CScene
 	virtual void createWindowUI()override;
 
-
-
 };

@@ -36,7 +36,7 @@ private:
 
 
 private:
-	CQuadTree*		m_pChild[4];
+	CQuadTree * m_pChild[4] = {nullptr,};
 	int				m_nCenter;
 	int				m_nCorner[4];
 

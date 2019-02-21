@@ -19,8 +19,12 @@ public:		//public override function
 	virtual void init()override;					//override	: CScene
 
 
+public:
+	void createSound(void);
+
 private:
 	CSpriteObject_Default* background = nullptr;
 
 	bool isFirst = true;
+	bool m_bIsStartSound = true;;
 };

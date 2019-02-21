@@ -5,7 +5,7 @@
 #include "../../../../Utility/Manager/CDeviceManager.h"
 #include "../../../GameCharactor/Player/player.h"
 #include "../../../../Utility/Base/CStage.h"
-
+#include "../../../../Utility/Manager/CSoundManager.h"
 slenderman::slenderman(CStaticObject::STParameters a_stParameters)
 {
 	m_pStaticObj = this->createStaticMesh(a_stParameters);
@@ -106,8 +106,9 @@ void slenderman::spawnSlenderMan()
 	{
 		reSpwan = false;
 		m_bIsSpawn = true;
-		m_fSpawnTime = RandomFloatValue(10.0f, 15.0f);
 
+		m_fSpawnTime = RandomFloatValue(10.0f, 15.0f);
+		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Slenderman.wav", false);
 		if (m_pPlayer != nullptr)
 		{
 			D3DXVECTOR3 stPosition = m_pPlayer->getPosition();

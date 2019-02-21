@@ -425,6 +425,8 @@ void CMapToolScene::createLabel()
 void CMapToolScene::update(void)
 {
 	CScene::update();
+	ShowCursor(m_bIsShowCursor);
+	GET_DEVICE()->ShowCursor(m_bIsShowCursor);
 	m_pSelectWindowContainer->update();
 	this->listUpdate();
 	this->buttonUpdate();

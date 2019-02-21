@@ -3,6 +3,7 @@
 #include "../../../Utility/Manager/CTimeManager.h"
 #include "../../../Utility/Manager/CSceneManager.h"
 #include "../../../Utility/Object/SpriteObject/CSpriteObject_Kind/CSpriteObject_Default.h"
+#include "../../../Utility/Manager/CSoundManager.h"
 
 CVictoryScene::CVictoryScene(std::string a_stSceneName)
 	:CScene(a_stSceneName)
@@ -23,7 +24,14 @@ void CVictoryScene::init()
 		background->setPosition(D3DXVECTOR3(GET_WINDOW_SIZE().cx / 2, GET_WINDOW_SIZE().cy / 2, 0));
 		isFirst = false;
 	}
+	m_bIsStartSound = true;
 }
+
+void CVictoryScene::createSound(void)
+{
+	GET_SOUND_MANAGER()->playBackgroundSound("Resources/Sounds/BGMSounds/Victory.wav", false);
+}
+
 
 
 void CVictoryScene::update(void)
@@ -41,6 +49,12 @@ void CVictoryScene::update(void)
 		}
 		time = 0;
 	}
+	if (m_bIsStartSound)
+	{
+		this->createSound();
+		m_bIsStartSound = false;
+	}
+
 }
 
 void CVictoryScene::draw(void)

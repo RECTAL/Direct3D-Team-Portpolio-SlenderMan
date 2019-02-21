@@ -407,7 +407,7 @@ void player::checkPaperObj()
 		}
 	}
 
-	if (IS_KEY_PRESSED(DIK_G))
+	if (IS_MOUSE_BUTTON_PRESSED(EMouseInput::LEFT))
 	{
 		for (auto iter : m_pStage->getPaperObjList())
 		{
