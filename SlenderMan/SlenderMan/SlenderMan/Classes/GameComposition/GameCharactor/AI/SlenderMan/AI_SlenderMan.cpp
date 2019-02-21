@@ -48,9 +48,14 @@ void slenderman::update(void)
 			m_bIsSpawn = false;
 		}
 	}
-	if (m_fSpawnTime < -20.0f)
-	{
-		reSpwan = true;
+	switch (m_pPlayer->getPage()) {
+	case 1: if (m_fSpawnTime < -20.0f) reSpwan = true; break;
+	case 2: if (m_fSpawnTime < -18.0f) reSpwan = true; break;
+	case 3: if (m_fSpawnTime < -16.0f) reSpwan = true; break;
+	case 4: if (m_fSpawnTime < -14.0f) reSpwan = true; break;
+	case 5: if (m_fSpawnTime < -12.0f) reSpwan = true; break;
+	case 6: if (m_fSpawnTime < -10.0f) reSpwan = true; break;
+	case 7: if (m_fSpawnTime < -5.0f)  reSpwan = true; break;
 	}
 }
 
@@ -101,7 +106,7 @@ void slenderman::spawnSlenderMan()
 	{
 		reSpwan = false;
 		m_bIsSpawn = true;
-		m_fSpawnTime = RandomFloatValue(8.0f, 12.0f);
+		m_fSpawnTime = RandomFloatValue(10.0f, 15.0f);
 
 		if (m_pPlayer != nullptr)
 		{
@@ -110,20 +115,52 @@ void slenderman::spawnSlenderMan()
 			int rZVal = RandomIntValue(1, 2);
 			if (rXVal == 1)
 			{
-				stPosition.x += RandomFloatValue(50.0f, 70.0f);
+				if (m_pPlayer->getPage() >= 6) {
+					stPosition.x += RandomFloatValue(30.0f, 50.0f);
+				}
+				else if (m_pPlayer->getPage() >= 4) {
+					stPosition.x += RandomFloatValue(40.0f, 60.0f);
+				}
+				else {
+					stPosition.x += RandomFloatValue(50.0f, 70.0f);
+				}
 			}
 			else
 			{
-				stPosition.x -= RandomFloatValue(50.0f, 70.0f);
+				if (m_pPlayer->getPage() >= 6) {
+					stPosition.x -= RandomFloatValue(30.0f, 50.0f);
+				}
+				else if (m_pPlayer->getPage() >= 4) {
+					stPosition.x -= RandomFloatValue(40.0f, 60.0f);
+				}
+				else {
+					stPosition.x -= RandomFloatValue(50.0f, 70.0f);
+				}
 			}
 			
 			if (rZVal == 1)
 			{
-				stPosition.z += RandomFloatValue(50.0f, 70.0f);
+				if (m_pPlayer->getPage() >= 6) {
+					stPosition.z += RandomFloatValue(30.0f, 50.0f);
+				}
+				else if (m_pPlayer->getPage() >= 4) {
+					stPosition.z += RandomFloatValue(40.0f, 60.0f);
+				}
+				else {
+					stPosition.z += RandomFloatValue(50.0f, 70.0f);
+				}
 			}
 			else
 			{
-				stPosition.z -= RandomFloatValue(50.0f, 70.0f);
+				if (m_pPlayer->getPage() >= 6) {
+					stPosition.z -= RandomFloatValue(30.0f, 50.0f);
+				}
+				else if (m_pPlayer->getPage() >= 4) {
+					stPosition.z -= RandomFloatValue(40.0f, 60.0f);
+				}
+				else {
+					stPosition.z -= RandomFloatValue(50.0f, 70.0f);
+				}
 			}
 			stPosition.y = m_pStage->getTerrainObj()->getHeight(stPosition);
 			this->setPosition(stPosition);

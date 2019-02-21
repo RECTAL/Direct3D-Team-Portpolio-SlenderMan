@@ -34,7 +34,7 @@ public:		//interface
 public:		//public override function
 	virtual void init()override;					//override	: CScene
 	virtual void createWindowUI()override;
-	
+
 private:
 	void createDefaultUI();
 	void createButtonUI();
@@ -67,8 +67,6 @@ private:
 
 	CSpriteObject_ScrollBar* soundScrollBar[2] = { nullptr };
 	CSpriteObject_Button*	 soundScrollBarButton[2] = { nullptr };
-
-
 
 	CSpriteObject*			 m_pCurrentSpriteHandle = nullptr;
 	CLoadingScene*			 m_pLoadingScene = nullptr;

@@ -1061,17 +1061,17 @@ void CMapToolScene::inputKey(void)
 				if (m_pStage->getPickingPosWithTerrain(stPos))
 				{
 					STRay	ray;
-					LPDWORD			pIndices = nullptr;
-					LPDIRECT3DINDEXBUFFER9 pIndexBuffer;
-					m_pStage->getTerrainObj()->getTerrainMesh()->GetIndexBuffer(&pIndexBuffer);
+					//LPDWORD			pIndices = nullptr;
+					//LPDIRECT3DINDEXBUFFER9 pIndexBuffer;
+					//m_pStage->getTerrainObj()->getTerrainMesh()->GetIndexBuffer(&pIndexBuffer);
 
 					ray = CreateRay(GET_MOUSE_POSITION());
 
-					int width = m_pStage->getTerrainObj()->getCXDIB();
+					/*int width = m_pStage->getTerrainObj()->getCXDIB();
 					int height = m_pStage->getTerrainObj()->getCZDIB();
-					int nTriangles = m_pStage->getTerrainObj()->getTriangles();
+					int nTriangles = m_pStage->getTerrainObj()->getTriangles();*/
 
-					if (SUCCEEDED(pIndexBuffer->Lock(0, (width - 1)*(height - 1) * 2 * sizeof(DWORD) * 3, (void**)&pIndices, 0)))
+					/*if (SUCCEEDED(pIndexBuffer->Lock(0, (width - 1)*(height - 1) * 2 * sizeof(DWORD) * 3, (void**)&pIndices, 0)))
 					{
 						float fMinLength = 100000.0f;
 						std::vector<CRenderObject*> oRenderObjList;
@@ -1101,7 +1101,30 @@ void CMapToolScene::inputKey(void)
 							m_pStage->delObj(pRenderObj, pRenderObj->getPosition());
 						oRenderObjList.clear();
 						pIndexBuffer->Unlock();
+					}*/
+					float fMinLength = 100000.0f;
+					std::vector<CRenderObject*> oRenderObjList;
+					CRenderObject* pRenderObj = nullptr;
+					for (auto iter : m_pStage->getRenderObjList())
+					{
+						if (IsIntersectRayBox(ray, iter->getFinalBoundingBox()))
+						{
+							oRenderObjList.push_back(iter);
+						}
 					}
+					for (auto iter : oRenderObjList)
+					{
+						D3DXVECTOR3 vec = iter->getPosition() - ray.m_stOrigin;
+						float flength = D3DXVec3Length(&vec);
+						if (fMinLength > flength)
+						{
+							fMinLength = flength;
+							pRenderObj = iter;
+						}
+					}
+					if (pRenderObj != nullptr)
+						m_pStage->delObj(pRenderObj, pRenderObj->getPosition());
+					oRenderObjList.clear();
 				}
 			}
 			else
