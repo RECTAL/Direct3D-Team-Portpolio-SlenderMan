@@ -82,12 +82,66 @@ void CMapToolScene::init()
 	m_pStage->getbIsMaptool() = TRUE;
 }
 
+void CMapToolScene::update(void)
+{
+	CScene::update();
+	ShowCursor(m_bIsShowCursor);
+	GET_DEVICE()->ShowCursor(m_bIsShowCursor);
+	m_pSelectWindowContainer->update();
+	this->listUpdate();
+	this->buttonUpdate();
+	this->labelUpdate();
+
+	printf("%f\n", m_pUpDownScrollBar->getSetValue());
+	m_pCamera->update();
+	m_pStage->update();
+	this->inputKey();
+
+	m_pSpriteList->getMoveOffset() = D3DXVECTOR3(0, -m_pUpDownScrollBar->getSetValue(), 0);
+
+
+	D3DXVECTOR3 pos;
+	m_stMouseInfo.m_bDraw = false;
+	if (m_pStage->getPickingPosWithTerrain(pos))
+	{
+		m_stMouseInfo.m_bDraw = true;
+		if (m_stMouseInfo.m_pRenderObj != nullptr)m_stMouseInfo.m_pRenderObj->setPosition(pos + D3DXVECTOR3(0, m_fOffesetY, 0));
+		m_stMouseInfo.m_pRenderObj->update();
+	}
+}
+
+void CMapToolScene::draw(void)
+{
+	CScene::draw();
+	m_pStage->draw();
+	if (m_stMouseInfo.m_eObjType != EObjType::NONE && m_stMouseInfo.m_bDraw)
+	{
+		if (m_stMouseInfo.m_eObjClasses != EObjClasses::DECORATE_SOUND)
+			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
+		m_stMouseInfo.m_pRenderObj->draw();
+	}
+}
+
+void CMapToolScene::drawUI(void)
+{
+	CScene::drawUI();
+
+	m_pSelectWindowContainer->drawUI();
+	this->buttonDrawUI();
+	m_pTreeListSquare->drawUI();
+	m_pBuildingListSquare->drawUI();
+	m_pObjectListSquare->drawUI();
+	m_pSoundListSquare->drawUI();
+	m_pPageListSquare->drawUI();
+
+	this->labelDrawUI();
+}
+
 void CMapToolScene::createWindowUI()
 {
 	/***************************************************/
 	//컨테이너 만들기
 	/***************************************************/
-
 	m_pSelectWindowContainer = new CSpriteObject_Container("Resources/Textures/Scene/MapToolScene/blackCover", "png", 150, 500, 1);
 	m_pSelectWindowContainer->setPosition(D3DXVECTOR3(75, GET_WINDOW_SIZE().cy / 2 - 50, 0.0f));
 	m_pSelectWindowContainer->setVisible(false);
@@ -158,8 +212,8 @@ void CMapToolScene::createWindowUI()
 	m_pSpriteListButton[1]->init(nullptr, nullptr, nullptr, endFptr, true);
 	// }
 
-			//오브젝트
-			// {
+	//오브젝트
+	// {
 	m_pSpriteListButton[2] = new CSpriteObject_Button("Resources/Textures/Scene/MapToolScene/ListIcon/object", "png", 100, 80, 1);
 	m_pSpriteListButton[2]->setPosition(m_pSpriteList->getPosition());
 	(*endFptr) = [=](void) -> void
@@ -420,34 +474,6 @@ void CMapToolScene::createLabel()
 	m_pScaleLabel = new CLabelObject("", 20);
 	m_pOffsetLabel = new CLabelObject("", 20);
 	m_pRotateLabel = new CLabelObject("", 20);
-}
-
-void CMapToolScene::update(void)
-{
-	CScene::update();
-	ShowCursor(m_bIsShowCursor);
-	GET_DEVICE()->ShowCursor(m_bIsShowCursor);
-	m_pSelectWindowContainer->update();
-	this->listUpdate();
-	this->buttonUpdate();
-	this->labelUpdate();
-
-	printf("%f\n", m_pUpDownScrollBar->getSetValue());
-	m_pCamera->update();
-	m_pStage->update();
-	this->inputKey();
-
-	m_pSpriteList->getMoveOffset() = D3DXVECTOR3(0, -m_pUpDownScrollBar->getSetValue(), 0);
-
-
-	D3DXVECTOR3 pos;
-	m_stMouseInfo.m_bDraw = false;
-	if (m_pStage->getPickingPosWithTerrain(pos))
-	{
-		m_stMouseInfo.m_bDraw = true;
-		if (m_stMouseInfo.m_pRenderObj != nullptr)m_stMouseInfo.m_pRenderObj->setPosition(pos + D3DXVECTOR3(0, m_fOffesetY, 0));
-		m_stMouseInfo.m_pRenderObj->update();
-	}
 }
 
 void CMapToolScene::buttonUpdate()
@@ -946,33 +972,6 @@ void CMapToolScene::createCheckBoxButton(void)
 
 }
 
-void CMapToolScene::draw(void)
-{
-	CScene::draw();
-	m_pStage->draw();
-	if (m_stMouseInfo.m_eObjType != EObjType::NONE&&m_stMouseInfo.m_bDraw)
-	{
-		if(m_stMouseInfo.m_eObjClasses != EObjClasses::DECORATE_SOUND)
-			m_stMouseInfo.m_pRenderObj->setDebugEnable(m_bIsDebug, EDebugDrawType::BOX);
-		m_stMouseInfo.m_pRenderObj->draw();
-	}
-}
-
-void CMapToolScene::drawUI(void)
-{
-	CScene::drawUI();
-	
-	m_pSelectWindowContainer->drawUI();
-	this->buttonDrawUI();
-	m_pTreeListSquare->drawUI();
-	m_pBuildingListSquare->drawUI();
-	m_pObjectListSquare->drawUI();
-	m_pSoundListSquare->drawUI();
-	m_pPageListSquare->drawUI();
-
-	this->labelDrawUI();
-}
-
 void CMapToolScene::buttonDrawUI()
 {
 	m_pGoTitleButton->drawUI();
@@ -1063,47 +1062,9 @@ void CMapToolScene::inputKey(void)
 				if (m_pStage->getPickingPosWithTerrain(stPos))
 				{
 					STRay	ray;
-					//LPDWORD			pIndices = nullptr;
-					//LPDIRECT3DINDEXBUFFER9 pIndexBuffer;
-					//m_pStage->getTerrainObj()->getTerrainMesh()->GetIndexBuffer(&pIndexBuffer);
 
 					ray = CreateRay(GET_MOUSE_POSITION());
 
-					/*int width = m_pStage->getTerrainObj()->getCXDIB();
-					int height = m_pStage->getTerrainObj()->getCZDIB();
-					int nTriangles = m_pStage->getTerrainObj()->getTriangles();*/
-
-					/*if (SUCCEEDED(pIndexBuffer->Lock(0, (width - 1)*(height - 1) * 2 * sizeof(DWORD) * 3, (void**)&pIndices, 0)))
-					{
-						float fMinLength = 100000.0f;
-						std::vector<CRenderObject*> oRenderObjList;
-						CRenderObject* pRenderObj = nullptr;
-						for (int i = 0; i < nTriangles * 3; i += 3)
-						{
-							for (auto iter : m_pStage->getObjList()[pIndices[i]])
-							{
-								if (IsIntersectRayBox(ray, iter->getFinalBoundingBox()))
-								{
-									oRenderObjList.push_back(iter);
-								}
-							}
-						}
-						for (auto iter : oRenderObjList)
-						{
-							D3DXVECTOR3 vec = iter->getPosition() - ray.m_stOrigin;
-							float flength = D3DXVec3Length(&vec);
-							if (fMinLength > flength)
-							{
-								fMinLength = flength;
-								pRenderObj = iter;
-							}
-						}
-
-						if (pRenderObj != nullptr)
-							m_pStage->delObj(pRenderObj, pRenderObj->getPosition());
-						oRenderObjList.clear();
-						pIndexBuffer->Unlock();
-					}*/
 					float fMinLength = 100000.0f;
 					std::vector<CRenderObject*> oRenderObjList;
 					CRenderObject* pRenderObj = nullptr;
@@ -1179,9 +1140,6 @@ void CMapToolScene::inputKey(void)
 	}
 	m_stMouseInfo.m_pRenderObj->setRotation(D3DXVECTOR3(m_fAngleX, m_fAngleY, m_fAngleZ));
 	m_stMouseInfo.m_pRenderObj->setScale(D3DXVECTOR3(m_fScale, m_fScale, m_fScale));
-
-
-	
 }
 
 void CMapToolScene::removeUI(void)

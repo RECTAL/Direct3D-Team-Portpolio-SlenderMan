@@ -20,7 +20,7 @@ CGameOverScene::~CGameOverScene()
 void CGameOverScene::init()
 {
 	CScene::init();
-	//GET_SOUND_MANAGER()->stopAllEffectSounds();
+
 	if (isFirst)
 	{
 		this->createScene();

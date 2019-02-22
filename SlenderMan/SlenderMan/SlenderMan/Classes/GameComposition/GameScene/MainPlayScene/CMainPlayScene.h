@@ -113,9 +113,6 @@ private:
 	CLightObject** ppPointLightObj;
 	CTitleScene* m_pTitleScene = nullptr;
 
-
-
-
 	player* pPlayer = nullptr;
 	slenderman* pSlenderMan = nullptr;
 
@@ -128,5 +125,6 @@ private:
 	float m_fRedDotTime = 0.0f;
 	// 움직인 시간
 	float m_fRunTime = 0.0f;
-	int noteCount = 0;
+
+	int m_nNoteCount = 0;
 };

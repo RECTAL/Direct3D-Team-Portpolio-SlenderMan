@@ -152,10 +152,256 @@ void CMainPlayScene::init()
 	m_fDeadTime = 0.0f;
 	m_fNoiseTime = 0.0f;
 	m_fRedDotTime = 0.0f;
+	m_fRunTime = 0.0f;
 	m_bIsGameClear = false;
 	m_bIsShowCursor = FALSE;
 }
 
+void CMainPlayScene::update(void)
+{
+	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
+		m_bIsMenu = !m_bIsMenu;
+		m_pMenuContainer->setVisible(m_bIsMenu);
+		m_pSoundContainer->setVisible(false);
+		RECT rc;
+		POINT pt = { 0 ,0 };
+		GetClientRect(GET_WINDOW_HANDLE(), &rc);
+		pt.x = (rc.right - rc.left) / 2;
+		pt.y = (rc.bottom - rc.top) / 2;
+		ClientToScreen(GET_WINDOW_HANDLE(), &pt);
+		SetCursorPos(pt.x, pt.y);
+	}
+	m_pMenuContainer->update();
+	m_pSoundContainer->update();
+
+	if (m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible())
+	{
+		m_bIsShowCursor = TRUE;
+	}
+	else
+		m_bIsShowCursor = FALSE;
+
+	ShowCursor(m_bIsShowCursor);
+	GET_DEVICE()->ShowCursor(m_bIsShowCursor);
+
+	if (!m_bIsMenu)
+	{
+		CScene::update();
+
+		m_pStage->update();
+		m_pCamCoderView->update();
+		m_pNoiseImage->update();
+		m_pColorNoiseImage->update();
+
+		m_fRedDotTime += GET_DELTA_TIME();
+		if (m_fRedDotTime > 1.0f)
+		{
+			m_fRedDotTime = 0.0f;
+			m_pRedDotImage->update();
+		}
+		setTimer();
+		pPlayer->update();
+
+		pSlenderMan->spawnSlenderMan();
+		pSlenderMan->update();
+		this->setStateSound();
+		this->selectEffectSound();
+		this->setVolume();
+
+		//BGM 중복 재생 방지
+		if (m_bIsBGMPlay) {
+
+			this->createStageSound();
+			m_bIsBGMPlay = false;
+		}
+
+		//쪽지 모은 갯수에 따른 BGM 변화
+		if (m_nNoteCount != pPlayer->getPage())
+		{
+			switch (pPlayer->getPage())
+			{
+			case 3:
+				m_eStageSound = EStageSound::STAGE_1;
+				break;
+			case 6:
+				m_eStageSound = EStageSound::STAGE_2;
+				break;
+
+			}
+			m_bIsBGMPlay = true;
+			m_nNoteCount = pPlayer->getPage();
+		}
+
+		if (pSlenderMan->getbIsSpawn())
+		{
+			D3DXVECTOR3 delta = pSlenderMan->getPosition() - pPlayer->getPosition();
+			float deltaLength = D3DXVec3Length(&delta);
+
+			if (deltaLength <= pSlenderMan->getBoundingSphere().m_fRadius)
+				m_nNoiseLevel++;
+			else
+			{
+				m_nNoiseLevel -= 1.5f;
+				m_nNoiseLevel = max(0, m_nNoiseLevel);
+			}
+		}
+		else
+		{
+			m_nNoiseLevel -= 2;
+			m_nNoiseLevel = max(0, m_nNoiseLevel);
+		}
+
+		if (m_nNoiseLevel >= 50)
+		{
+			m_fNoiseValue += 0.5f*GET_DELTA_TIME();
+			if (m_fNoiseValue > 0.7f)m_fNoiseValue = 0.7f;
+		}
+		else
+		{
+			m_fNoiseValue -= GET_DELTA_TIME();
+			if (m_fNoiseValue < 0.0f)m_fNoiseValue = 0.0f;
+		}
+
+		if (m_nNoiseLevel >= 100)
+		{
+			m_fHardNoiseValue += 0.5f*GET_DELTA_TIME();
+			if (m_fHardNoiseValue > 0.7f)
+			{
+				m_fDeadTime += GET_DELTA_TIME();
+				m_fHardNoiseValue = 0.7f;
+				if (m_fDeadTime > 6.0f)
+					CHANGE_SCENE_DIRECT(GAMESCENE_GAMEOVER, TRUE);
+			}
+		}
+		else
+		{
+			m_fHardNoiseValue -= 0.5f*GET_DELTA_TIME();
+			if (m_fHardNoiseValue < 0.0f)m_fHardNoiseValue = 0.0f;
+
+			m_fDeadTime -= GET_DELTA_TIME();
+			if (m_fDeadTime < 0.0f)m_fDeadTime = 0.0f;
+		}
+
+		m_fPlayTime += GET_DELTA_TIME();
+
+		if (m_fNoiseValue >= 0.5f)
+		{
+			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
+		}
+		if (m_fHardNoiseValue >= 0.5f)
+		{
+			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
+		}
+
+		bool isCheck = true;
+		for (auto iter : m_pStage->getPaperObjList())
+		{
+			if (!iter->getbIsGet())
+			{
+				isCheck = false;
+				break;
+			}
+		}
+		if (isCheck)
+		{
+			m_bIsGameClear = true;
+		}
+		if (m_bIsGameClear)
+		{
+			m_fBlackValue += 0.2f*GET_DELTA_TIME();
+		}
+
+		if (m_fBlackValue >= 1.0f)
+		{
+			CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
+		}
+	}
+}
+
+void CMainPlayScene::draw(void)
+{
+	CScene::draw();
+	D3DXMATRIXA16 stWorldMatrix;
+	D3DXMatrixIdentity(&stWorldMatrix);
+
+	/***************************************************/
+	//StageRenderTarget에 draw
+	/***************************************************/
+	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
+	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pDepthStencil);
+	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
+	m_pStage->draw();
+	pPlayer->draw();
+	pSlenderMan->draw();
+	/***************************************************/
+	//CamCoderRenderTarget에 draw
+	/***************************************************/
+	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTexSurf);
+	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pDepthStencil);
+	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
+
+	m_pCamCoderView->drawUI();
+	m_pRedDotImage->drawUI();
+	char cPlayTime[100];
+	char cFindPage[100];
+	int nHour = 0, nMin = 0, nSec = 0;
+	this->calcPlayTime(m_fPlayTime, nHour, nMin, nSec);
+
+	sprintf(cPlayTime, "%02d:%02d:%02d", nHour, nMin, nSec);
+	m_pPlayTime->setString(cPlayTime);
+	m_pPlayTime->drawUI();
+	sprintf(cFindPage, "%02d/%02d", pPlayer->getPage(), m_pStage->getPaperObjList().size());
+	m_pFindPage->setString(cFindPage);
+	m_pFindPage->drawUI();
+
+	FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+	FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect->SetTexture("g_pTexture", FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTex);
+
+	RunEffectLoop(FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
+		FIND_RENDERTARGET("StageRenderTarget")->getPlaneMesh()->DrawSubset(0);
+	});
+
+
+
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pTexture", FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTex);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pBlendTexture", m_pNoiseImage->getSpriteTexture()[m_pNoiseImage->getTextureOffset()]);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pNoiseTexture", m_pColorNoiseImage->getSpriteTexture()[m_pColorNoiseImage->getTextureOffset()]);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue", m_fNoiseValue);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue2", m_fHardNoiseValue);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue3", m_fBlackValue);
+
+
+
+	GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+	RunEffectLoop(FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect, "LerpTexture", [=](int nPassNum)->void {
+		FIND_RENDERTARGET("CamCoderRenderTarget")->getPlaneMesh()->DrawSubset(0);
+	});
+
+	GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
+
+
+	/***************************************************/
+	//Back Buffer로 재설정
+	/***************************************************/
+	GET_RENDERTARGET_MANAGER()->resetRenderTarget();
+
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pCopyEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
+	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pCopyEffect->SetTexture("g_pTexture", FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTex);
+
+	RunEffectLoop(FIND_RENDERTARGET("CamCoderRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
+		FIND_RENDERTARGET("CamCoderRenderTarget")->getPlaneMesh()->DrawSubset(0);
+	});
+
+
+}
+
+void CMainPlayScene::drawUI(void)
+{
+	CScene::drawUI();
+	m_pMenuContainer->drawUI();
+	m_pSoundContainer->drawUI();
+}
 void CMainPlayScene::createWindowUI()
 {
 	this->createButton();
@@ -228,81 +474,36 @@ void CMainPlayScene::setStateSound()
 
 }
 
-void CMainPlayScene::setBGMSound()
-{
-	switch (m_ePlayingBGM)
-	{
-	case EPlayingBGM::WIND:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Wind.wav", false);
-		break;
-	case EPlayingBGM::RAIN:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Rain.wav", false);
-		break;
-	case EPlayingBGM::CRIKET:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Cricket.wav", false);
-		break;
-	case EPlayingBGM::CROW:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Crow.wav", false);
-		break;
-	case EPlayingBGM::FIRE:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Fire.wav", false);
-		break;
-	case EPlayingBGM::OWL:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Owl.wav", false);
-		break;
-	case EPlayingBGM::NOISE_1:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
-		break;
-	case EPlayingBGM::NOISE_2:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
-		break;
-	case EPlayingBGM::NOISE_3:
-		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_3.wav", false);
-		break;
-	case EPlayingBGM::NONE:
-		break;
-	}
-}
-
 void CMainPlayScene::setEffectVolume(EPlayingBGM ePlayBGM, float a_fVolume)
 {
 	switch (ePlayBGM)
 	{
 	case EPlayingBGM::WIND:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Wind.wav", false);
-		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Wind.wav", a_fVolume);
 		break;
 	case EPlayingBGM::RAIN:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Rain.wav", false);
-		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Rain.wav", a_fVolume);
 		break;
 	case EPlayingBGM::CRIKET:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Cricket.wav", false);
-		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Criket.wav", a_fVolume);
 		break;
 	case EPlayingBGM::CROW:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Crow.wav", false);
-		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Crow.wav", a_fVolume);
 		break;
 	case EPlayingBGM::FIRE:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Fire.wav", false);
-		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Fire.wav", a_fVolume);
 		break;
 	case EPlayingBGM::OWL:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Owl.wav", false);
-		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Owl.wav", a_fVolume);
 		break;
 	case EPlayingBGM::NOISE_1:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
-		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Noise_1.wav", a_fVolume);
 		break;
 	case EPlayingBGM::NOISE_2:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
-		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Noise_2.wav", a_fVolume);
 		break;
 	case EPlayingBGM::NOISE_3:
 		GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_3.wav", false);
-		//GET_SOUND_MANAGER()->setEffectSoundVolume("Resources/Sounds/EffectSounds/Noise_3.wav", a_fVolume);
 		break;
 	case EPlayingBGM::NONE:
 		break;
@@ -466,10 +667,12 @@ void CMainPlayScene::releaseUI()
 	SAFE_DELETE(m_pSoundContainer);
 	SAFE_DELETE(m_pBackButton);
 	SAFE_DELETE(m_pOptionButton);
-	SAFE_DELETE(m_pScrollBar[0]);
-	SAFE_DELETE(m_pScrollBar[1]);
-	SAFE_DELETE(m_pScrollBarButton[0]);
-	SAFE_DELETE(m_pScrollBarButton[1]);
+
+	for (int i = 0; i < 2; i++)
+	{
+		SAFE_DELETE(m_pScrollBar[i]);
+		SAFE_DELETE(m_pScrollBarButton[i]);
+	}
 }
 
 void CMainPlayScene::createLabel()
@@ -557,251 +760,6 @@ void CMainPlayScene::createContainer()
 	m_pSoundContainer->addChildSpriteObject("Effect", CWindowType::SCROLLBAR, m_pScrollBar[1]);
 }
 
-void CMainPlayScene::update(void)
-{
-	if (IS_KEY_PRESSED(DIK_ESCAPE)) {
-		m_bIsMenu = !m_bIsMenu;
-		m_pMenuContainer->setVisible(m_bIsMenu);
-		m_pSoundContainer->setVisible(false);
-		RECT rc;
-		POINT pt = { 0 ,0 };
-		GetClientRect(GET_WINDOW_HANDLE(), &rc);
-		pt.x = (rc.right - rc.left) / 2;
-		pt.y = (rc.bottom - rc.top) / 2;
-		ClientToScreen(GET_WINDOW_HANDLE(), &pt);
-		SetCursorPos(pt.x, pt.y);
-	}
-	m_pMenuContainer->update();
-	m_pSoundContainer->update();
-
-	if (m_pMenuContainer->getVisible() || m_pSoundContainer->getVisible())
-	{
-		m_bIsShowCursor = TRUE;
-	}
-	else
-		m_bIsShowCursor = FALSE;
-
-	ShowCursor(m_bIsShowCursor);
-	GET_DEVICE()->ShowCursor(m_bIsShowCursor);
-
-	if (!m_bIsMenu)
-	{
-		CScene::update();
-
-		m_pStage->update();
-		m_pCamCoderView->update();
-		m_pNoiseImage->update();
-		m_pColorNoiseImage->update();
-
-		m_fRedDotTime += GET_DELTA_TIME();
-		if (m_fRedDotTime>1.0f)
-		{
-			m_fRedDotTime = 0.0f;
-			m_pRedDotImage->update();
-		}
-		setTimer();
-		pPlayer->update();
-
-		pSlenderMan->spawnSlenderMan();
-		pSlenderMan->update();
-		this->setStateSound();
-		this->setBGMSound();
-		this->selectEffectSound();
-		this->setVolume();
-		
-		if (m_bIsBGMPlay) {
-			
-			this->createStageSound();
-			m_bIsBGMPlay = false;
-		}
-		if (noteCount != pPlayer->getPage())
-		{
-			switch (pPlayer->getPage())
-			{
-			case 3:
-				m_eStageSound = EStageSound::STAGE_1;
-				break;
-			case 6:
-				m_eStageSound = EStageSound::STAGE_2;
-				break;
-			
-			}
-			m_bIsBGMPlay = true;
-			noteCount = pPlayer->getPage();
-		}
-		
-
-
-		if (pSlenderMan->getbIsSpawn())
-		{
-			D3DXVECTOR3 delta = pSlenderMan->getPosition() - pPlayer->getPosition();
-			float deltaLength = D3DXVec3Length(&delta);
-
-			if (deltaLength <= pSlenderMan->getBoundingSphere().m_fRadius)
-				m_nNoiseLevel++;
-			else
-			{
-				m_nNoiseLevel -= 1.5f;
-				m_nNoiseLevel = max(0, m_nNoiseLevel);
-			}
-		}
-		else
-		{
-			m_nNoiseLevel -= 2;
-			m_nNoiseLevel = max(0, m_nNoiseLevel);
-		}
-
-		if (m_nNoiseLevel >= 50)
-		{
-			m_fNoiseValue += 0.5f*GET_DELTA_TIME();
-			if (m_fNoiseValue > 0.7f)m_fNoiseValue = 0.7f;
-		}
-		else
-		{
-			m_fNoiseValue -= GET_DELTA_TIME();
-			if (m_fNoiseValue < 0.0f)m_fNoiseValue = 0.0f;
-		}
-
-		if (m_nNoiseLevel >= 100)
-		{
-			m_fHardNoiseValue += 0.5f*GET_DELTA_TIME();
-			if (m_fHardNoiseValue > 0.7f)
-			{
-				m_fDeadTime += GET_DELTA_TIME();
-				m_fHardNoiseValue = 0.7f;
-				if (m_fDeadTime > 6.0f)
-					CHANGE_SCENE_DIRECT(GAMESCENE_GAMEOVER, TRUE);
-			}
-		}
-		else
-		{
-			m_fHardNoiseValue -= 0.5f*GET_DELTA_TIME();
-			if (m_fHardNoiseValue < 0.0f)m_fHardNoiseValue = 0.0f;
-
-			m_fDeadTime -= GET_DELTA_TIME();
-			if (m_fDeadTime < 0.0f)m_fDeadTime = 0.0f;
-		}
-
-		m_fPlayTime += GET_DELTA_TIME();
-
-		if (m_fNoiseValue >= 0.5f)
-		{
-			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_1.wav", false);
-		}
-		if (m_fHardNoiseValue >= 0.5f)
-		{
-			GET_SOUND_MANAGER()->playEffectSound("Resources/Sounds/EffectSounds/Noise_2.wav", false);
-		}
-
-		bool isCheck = true;
-		for (auto iter : m_pStage->getPaperObjList())
-		{
-			if (!iter->getbIsGet())
-			{
-				isCheck = false;
-				break;
-			}
-		}
-		if (isCheck)
-		{
-			m_bIsGameClear = true;
-		}
-		if (m_bIsGameClear)
-		{
-			m_fBlackValue += 0.2f*GET_DELTA_TIME();
-		}
-		
-			if (m_fBlackValue >= 1.0f)
-			{
-				CHANGE_SCENE_DIRECT(GAMESCENE_VICTORY, TRUE);
-			}
-		}
-}
-
-void CMainPlayScene::draw(void)
-{
-	CScene::draw();
-	D3DXMATRIXA16 stWorldMatrix;
-	D3DXMatrixIdentity(&stWorldMatrix);
-
-	/***************************************************/
-	//StageRenderTarget에 draw
-	/***************************************************/
-	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTexSurf);
-	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pDepthStencil);
-	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
-	m_pStage->draw();
-	pPlayer->draw();
-	pSlenderMan->draw();
-	/***************************************************/
-	//CamCoderRenderTarget에 draw
-	/***************************************************/
-	GET_DEVICE()->SetRenderTarget(0, FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTexSurf);
-	GET_DEVICE()->SetDepthStencilSurface(FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pDepthStencil);
-	GET_DEVICE()->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DCOLOR_ARGB(0, 0, 0, 0), 1.0f, 0.0f);
-
-	m_pCamCoderView->drawUI();
-	m_pRedDotImage->drawUI();
-	char cPlayTime[100];
-	char cFindPage[100];
-	int nHour = 0, nMin = 0, nSec = 0;
-	this->calcPlayTime(m_fPlayTime, nHour, nMin, nSec);
-
-	sprintf(cPlayTime, "%02d:%02d:%02d", nHour, nMin, nSec);
-	m_pPlayTime->setString(cPlayTime);
-	m_pPlayTime->drawUI();
-	sprintf(cFindPage, "%02d/%02d",pPlayer->getPage(), m_pStage->getPaperObjList().size());
-	m_pFindPage->setString(cFindPage);
-	m_pFindPage->drawUI();
-
-	FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect->SetMatrix("g_stWorldMatrix",&stWorldMatrix);
-	FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect->SetTexture("g_pTexture",FIND_RENDERTARGET("StageRenderTarget")->m_stRenderTarget.m_pTex);
-
-	RunEffectLoop(FIND_RENDERTARGET("StageRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
-		FIND_RENDERTARGET("StageRenderTarget")->getPlaneMesh()->DrawSubset(0);
-	});
-
-
-
-	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
-	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pTexture", FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTex);
-	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pBlendTexture", m_pNoiseImage->getSpriteTexture()[m_pNoiseImage->getTextureOffset()]);
-	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetTexture("g_pNoiseTexture", m_pColorNoiseImage->getSpriteTexture()[m_pColorNoiseImage->getTextureOffset()]);
-	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue", m_fNoiseValue);
-	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue2", m_fHardNoiseValue);
-	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect->SetFloat("g_fBlendValue3", m_fBlackValue);
-
-
-
-	GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
-	RunEffectLoop(FIND_RENDERTARGET("CamCoderRenderTarget")->m_pLerpEffect, "LerpTexture", [=](int nPassNum)->void {
-		FIND_RENDERTARGET("CamCoderRenderTarget")->getPlaneMesh()->DrawSubset(0);
-	});
-
-	GET_DEVICE()->SetRenderState(D3DRS_ZWRITEENABLE, TRUE);
-	
-	
-	/***************************************************/
-	//Back Buffer로 재설정
-	/***************************************************/
-	GET_RENDERTARGET_MANAGER()->resetRenderTarget();
-
-	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pCopyEffect->SetMatrix("g_stWorldMatrix", &stWorldMatrix);
-	FIND_RENDERTARGET("CamCoderRenderTarget")->m_pCopyEffect->SetTexture("g_pTexture", FIND_RENDERTARGET("CamCoderRenderTarget")->m_stRenderTarget.m_pTex);
-
-	RunEffectLoop(FIND_RENDERTARGET("CamCoderRenderTarget")->m_pCopyEffect, "CopyTexture", [=](int nPassNum)->void {
-		FIND_RENDERTARGET("CamCoderRenderTarget")->getPlaneMesh()->DrawSubset(0);
-	});
-
-
-}
-
-void CMainPlayScene::drawUI(void)
-{
-	CScene::drawUI();
-	m_pMenuContainer->drawUI();
-	m_pSoundContainer->drawUI();
-}
 
 LRESULT CMainPlayScene::handleWindowMessage(HWND a_hWindow, UINT a_nMessage, WPARAM a_wParam, LPARAM a_lParam)
 {

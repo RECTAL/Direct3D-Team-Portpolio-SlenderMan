@@ -36,42 +36,54 @@ public:		//public override function
 	virtual void createWindowUI()override;
 
 private:
+	// UI 생성
 	void createDefaultUI();
 	void createButtonUI();
+	void createContainerButtonUI();
+
+	// 컨테이너 생성
+	void createContainer();
+
+	// 사운드 생성
 	void createSound();
 
+	// 이미지 업데이트
 	void defaultImageUpdate();
 	void buttonImageUpdate();
 
+	// 이미지 그리기
 	void defaultImageDrawUI();
 	void buttonImageDrawUI();
 
+	// 볼륨 조절
 	void setVolume();
+
+	// 제거
+	void releaseUI();
+	void releaseImg();
 	
 private:
-	CSpriteObject_Default* m_pSprite_BackGround = nullptr;
-	CSpriteObject_Default* titleImage = nullptr;
-	CSpriteObject_Default* sprite_fire = nullptr;
+	CSpriteObject_Default*		m_pSpriteBackGround = nullptr;
+	CSpriteObject_Default*		m_pTitleImage = nullptr;
+	CSpriteObject_Default*		m_pSpriteFire = nullptr;
 
-	CSpriteObject_Button* playButton = nullptr;
-	CSpriteObject_Button* optionButton = nullptr;
-	CSpriteObject_Button* mapToolButton = nullptr;
-	CSpriteObject_Button* exitButton = nullptr;
+	CSpriteObject_Button*		m_pPlayButton = nullptr;
+	CSpriteObject_Button*		m_pOptionButton = nullptr;
+	CSpriteObject_Button*		m_pMapToolButton = nullptr;
+	CSpriteObject_Button*		m_pExitButton = nullptr;
+	CSpriteObject_Button*		m_pBackButton = nullptr;
+	CSpriteObject_Button*		m_pSoundScrollBarButton[2] = { nullptr };
 
+	CSpriteObject_Container*	m_pOptionWindow = nullptr;
+	CSpriteObject_ScrollBar*	m_pSoundScrollBar[2] = { nullptr };
 
-	CSpriteObject_Container* optionWindow = nullptr;
-	CSpriteObject_Button* backButton = nullptr;
-
-	CSpriteObject_ScrollBar* soundScrollBar[2] = { nullptr };
-	CSpriteObject_Button*	 soundScrollBarButton[2] = { nullptr };
-
-	CSpriteObject*			 m_pCurrentSpriteHandle = nullptr;
+	CSpriteObject*				m_pCurrentSpriteHandle = nullptr;
 
 	FPTR* crashFptr = nullptr;
 	FPTR* beginFptr = nullptr;
 	FPTR* pressFptr = nullptr;
 	FPTR* endFptr = nullptr;
 
-	bool isFirst = true;
-	bool isStartSound = true;
+	bool m_bIsFirst = true;
+	bool m_bIsStartSound = true;
 };
